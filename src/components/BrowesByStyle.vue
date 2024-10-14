@@ -2,25 +2,24 @@
 
 <template>
   <div class="style_wrap">
-    <h1>
-      BROWSE BY <br />
-      DRESS STYLE
-    </h1>
-    <div class="style_item">
-      <h2>Casual</h2>
-      <img src="../assets/img/casual.png" alt="" />
-    </div>
-    <div class="style_item">
-      <h2>Formal</h2>
-      <img src="../assets/img/formal.png" alt="" />
-    </div>
-    <div class="style_item">
-      <h2>Party</h2>
-      <img src="../assets/img/party.png" alt="" />
-    </div>
-    <div class="style_item">
-      <h2>Gym</h2>
-      <img src="../assets/img/gym.png" alt="" />
+    <h1>BROWSE BY DRESS STYLE</h1>
+    <div class="style_items">
+      <div class="style_item">
+        <h2>Casual</h2>
+        <img src="../assets/img/casual.png" alt="" />
+      </div>
+      <div class="style_item">
+        <h2>Formal</h2>
+        <img src="../assets/img/formal.png" alt="" />
+      </div>
+      <div class="style_item">
+        <h2>Party</h2>
+        <img src="../assets/img/party.png" alt="" />
+      </div>
+      <div class="style_item">
+        <h2>Gym</h2>
+        <img src="../assets/img/gym.png" alt="" />
+      </div>
     </div>
   </div>
 </template>
@@ -28,7 +27,7 @@
 <style scoped>
 .style_wrap {
   font-family: 'Satoshi';
-  margin: 50px 16px;
+  /* margin: 50px 16px; */
   background-color: #f0f0f0;
   border-radius: 20px;
   padding: 27px 0;
@@ -55,5 +54,34 @@
   font-size: 24px;
   font-weight: 700;
   padding: 16px 24px;
+}
+
+@media (min-width: 1024px) {
+  .style_items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .style_wrap h1 {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .style_item h2 {
+    font-size: 36px;
+    padding: 25px 36px;
+  }
+  .style_item:nth-child(1) {
+    width: 407px;
+  }
+  .style_item:nth-child(2) {
+    width: 684px;
+  }
+  .style_item:nth-child(3) {
+    width: 684px;
+  }
+  .style_item:nth-child(4) {
+    width: 407px;
+  }
 }
 </style>

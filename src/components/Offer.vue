@@ -28,6 +28,7 @@
   padding: 32px 24px;
 }
 .offer_wrap h1 {
+  font-family: 'IntegralCF';
   font-size: 32px;
   color: white;
   font-weight: 700;
@@ -39,10 +40,25 @@
   margin-bottom: 12px;
 }
 .container {
+  font-family: 'Satoshi';
   border-radius: 20px;
   width: 100vmax;
-  padding:11px 48px;
+  padding: 11px 48px;
   background-color: white;
+}
+@media (min-width: 1024px) {
+  .offer_wrap {
+    display: flex;
+    justify-content: space-between;
+    padding: 43px 64px;
+  }
+  .offer_wrap h1 {
+    font-size: 40px;
 
+  }
+  .offer_wrap form{
+    width: 50%;
+    padding: 0 100px;
+  }
 }
 </style>

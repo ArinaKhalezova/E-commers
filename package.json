@@ -14,11 +14,14 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "flowbite": "^2.5.2",
+    "flowbite-vue": "^0.1.6",
     "pinia": "^2.1.7",
     "v-dropdown-menu": "^2.0.4",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
-    "vue3-carousel": "^0.3.4"
+    "vue3-carousel": "^0.3.4",
+    "vue3-dropdown-navbar": "^0.1.4"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",

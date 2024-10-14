@@ -1,10 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+</script>
 
 <template>
   <header>
-    <div class="wrapper">
-      <nav>
-        <img alt="SHOP.CO logo" class="logo" src="@/assets/img/logo.png" width="126" height="18" />
+    <div class="header">
+      <nav class="header_wrap">
+        
+        <a href="/"
+          ><img alt="SHOP.CO logo" class="logo" src="@/assets/img/logo.png" width="126" height="18"
+        /></a>
+
         <!-- <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/category">Category</RouterLink> -->
       </nav>
@@ -18,11 +24,15 @@
 </template>
 
 <style scoped>
-.wrapper {
+.header {
   background-color: white;
   padding: 24px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.header_wrap{
+  display: flex;
   align-items: center;
 }
 .menu > * {

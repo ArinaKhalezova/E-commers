@@ -6,6 +6,8 @@ import Product6 from '../assets/img/product6.png'
 import Product7 from '../assets/img/product7.png'
 import Product8 from '../assets/img/product8.png'
 
+import Button from './Button.vue'
+
 const slides = [
   { id: '5', product_img: Product5, title: 'Vertical Striped Shirt', rating: '5/5', cost: '$212' },
   { id: '6', product_img: Product6, title: 'Courage Graphic T-shirt', rating: '4/5', cost: '$145' },
@@ -17,7 +19,7 @@ const slides = [
 <template>
   <h1>TOP SELLING</h1>
   <ProductCarousel :slides="slides" />
-  <button class="button">View All</button>
+  <Button></Button>
 </template>
 
 <style scoped>
@@ -29,15 +31,11 @@ h1 {
   display: flex;
   justify-content: center;
 }
-.button {
-  margin: 24px 16px;
-  color: rgb(0, 0, 0);
-  font-size: 16px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 62px;
-  width: 100%;
-  height: 52px;
-  cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 48px;
+    margin: 70px 0 52px;
+  }
 }
 </style>

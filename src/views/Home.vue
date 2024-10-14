@@ -14,7 +14,6 @@ import Footer from '@/components/Footer.vue'
     <NewArrivals />
     <TopSelling />
     <Style></Style>
-    <h1>OUR HAPPY CUSTOMERS</h1>
     <Reviews />
     <Offer />
     <Footer></Footer>
@@ -25,15 +24,6 @@ import Footer from '@/components/Footer.vue'
 .wrapper {
   background-color: #ffffff;
 }
-h1 {
-  font-family: 'IntegralCF';
-  font-size: 32px;
-  font-weight: 900;
-  margin: 50px 0 32px;
-  display: flex;
-  justify-content: center;
-}
-
 
 @media (min-width: 1024px) {
 }

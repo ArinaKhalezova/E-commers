@@ -24,8 +24,8 @@ defineProps<{
 
 <style scoped>
 .product_card {
-  font-family: 'Satoshi'; 
-  margin: 10px;
+  font-family: 'Satoshi';
+  margin: 0 20px;
   text-align: left;
 }
 .product_card img {
@@ -42,7 +42,35 @@ defineProps<{
   display: flex;
   align-items: center;
 }
+
 .product_rating img {
   margin-right: 5px;
+}
+.product_card p {
+  font-size: 20px;
+  font-weight: 900;
+}
+.product_rating p {
+  font-size: 12px;
+  font-weight: 100;
+}
+
+@media (min-width: 1024px) {
+  .product_card img {
+    width: 297px;
+  }
+  .product_rating img {
+    width: 104px;
+  }
+  .product_card h2 {
+    font-size: 20px;
+  }
+  .product_card p {
+    font-size: 24px;
+  }
+  .product_rating p {
+    font-size: 12px;
+    font-weight: 100;
+  }
 }
 </style>

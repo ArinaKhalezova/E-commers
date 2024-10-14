@@ -7,7 +7,7 @@
         <div class="heading-text">
           <h1>FIND CLOTHES THAT MATCHES YOUR STYLE</h1>
           <p>
-            Browse through our diverse range of meticulously crafted garments, designed to bring out
+            Browse through our diverse range of meticulously crafted garments, designed <br> to bring out
             your individuality and cater to your sense of style.
           </p>
           <button class="button">Shop Now</button>
@@ -55,6 +55,7 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
 h1 {
   font-family: 'IntegralCF';
   font-size: 36px;
@@ -93,8 +94,7 @@ h2 {
   cursor: pointer;
 }
 .preview {
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
   max-width: 390px;
 }
 .heading {
@@ -102,6 +102,7 @@ h2 {
 }
 .brands {
   background-color: black;
+  height: 122px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -112,9 +113,16 @@ h2 {
 
 @media (min-width: 1024px) {
   .heading_wrap {
+    background-color: white;
     display: flex;
     justify-content: space-between;
     width: auto;
+  }
+  .heading_info {
+    margin-left: 100px;
+  }
+  .features {
+  margin: 0px 0px;
   }
   .heading-text {
     margin: 40px 16px 20px;
@@ -123,7 +131,7 @@ h2 {
     justify-content: space-between;
   }
   .preview {
-    max-width: 640px;
+    max-width: 727px;
   }
   h1 {
     font-size: 64px;
@@ -138,13 +146,10 @@ h2 {
     font-size: 40px;
     font-weight: 700;
   }
-  .features > * {
-    margin: 14px 32px;
-  }
   .features {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
   }
   .features p {
     padding: 0;
@@ -154,7 +159,7 @@ h2 {
     font-size: 16px;
     background-color: black;
     border-radius: 62px;
-    width: 100%;
+    width: 210px;
     height: 52px;
     cursor: pointer;
   }
@@ -170,9 +175,11 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    justify-content: space-between;
+    padding: 44px 100px;
   }
   .brands > * {
-    margin: 10px 16px;
+    transform: scale(1.5)
   }
 }
 </style>
