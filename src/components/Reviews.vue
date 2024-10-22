@@ -3,6 +3,7 @@ import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
+
 const reviews = [
   {
     id: '1',
@@ -58,9 +59,9 @@ onBeforeUnmount(() => {
         </div>
       </Slide>
 
-      <template #addons>
+      <!-- <template #addons>
         <Navigation />
-      </template>
+      </template> -->
     </Carousel>
   </div>
 </template>

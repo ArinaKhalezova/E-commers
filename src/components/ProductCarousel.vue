@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import { Carousel, Slide } from 'vue3-carousel'
 import ProductCard from './ProductCard.vue'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
@@ -44,18 +44,11 @@ onBeforeUnmount(() => {
     <Slide v-for="slide in slides" :key="slide.id" class="slide">
       <ProductCard :product="slide" />
     </Slide>
-
-    <template #addons>
-      <Navigation />
-    </template>
   </Carousel>
 </template>
 
 <style scoped>
-/* .wrapper {
-  max-width: 100%;
-} */
- .slide {
+.slide {
   margin: 0 15px;
- }
+}
 </style>

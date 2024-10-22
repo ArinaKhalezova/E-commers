@@ -11,21 +11,22 @@ import Menu from './components/Header.vue'
 </template>
 
 <style scoped>
-@media (min-width: 1024px){
-    .wrapper {
-      width: 100vmax;
-    }
+@media (min-width: 1024px) {
+  .wrapper {
+    width: 100vmax;
   }
-   
-   @font-face {
-    font-family: "IntegralCF";
-    src: local("IntegralCF"),
-    url(/src/assets/fonts/IntegralCF/IntegralCF-Regular.ttf) format("truetype");
-   }
-   @font-face {
-    font-family: "Satoshi";
-    src: local("Satoshi"),
-    url(/src/assets/fonts/Satoshi/Satoshi-Regular.ttf) format("truetype");
-   }
-   
+}
+
+@font-face {
+  font-family: 'IntegralCF';
+  src:
+    local('IntegralCF'),
+    url(/src/assets/fonts/IntegralCF/IntegralCF-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Satoshi';
+  src:
+    local('Satoshi'),
+    url(/src/assets/fonts/Satoshi/Satoshi-Regular.ttf) format('truetype');
+}
 </style>

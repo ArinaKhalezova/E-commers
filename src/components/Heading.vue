@@ -7,8 +7,8 @@
         <div class="heading-text">
           <h1>FIND CLOTHES THAT MATCHES YOUR STYLE</h1>
           <p>
-            Browse through our diverse range of meticulously crafted garments, designed <br> to bring out
-            your individuality and cater to your sense of style.
+            Browse through our diverse range of meticulously crafted garments, designed <br />
+            to bring out your individuality and cater to your sense of style.
           </p>
           <button class="button">Shop Now</button>
         </div>
@@ -93,9 +93,18 @@ h2 {
   height: 52px;
   cursor: pointer;
 }
+.heading_img {
+  background-color: #f2f0f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 .preview {
   margin: 0 auto;
-  max-width: 390px;
+  /* max-width: 390px; */
+  width: 70%;
+  display: flex;
+  justify-content: center;
 }
 .heading {
   background-color: #f2f0f1;
@@ -106,6 +115,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 .brands > * {
   margin: 10px 16px;
@@ -114,15 +124,14 @@ h2 {
 @media (min-width: 1024px) {
   .heading_wrap {
     background-color: white;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* display: flex;
     justify-content: space-between;
-    width: auto;
-  }
-  .heading_info {
-    margin-left: 100px;
+    width: auto; */
   }
   .features {
-  margin: 0px 0px;
+    margin: 0px 0px;
   }
   .heading-text {
     margin: 40px 16px 20px;
@@ -131,7 +140,7 @@ h2 {
     justify-content: space-between;
   }
   .preview {
-    max-width: 727px;
+    width: 100%;
   }
   h1 {
     font-size: 64px;
@@ -179,7 +188,7 @@ h2 {
     padding: 44px 100px;
   }
   .brands > * {
-    transform: scale(1.5)
+    transform: scale(1.5);
   }
 }
 </style>
