@@ -71,6 +71,7 @@
   padding-top: 50px;
 }
 .footer h1 {
+  line-height: 1.5;
   font-size: 14px;
   margin: 14px 0 20px;
 }

@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-
+import { ref, computed } from 'vue'
 
 const reviews = [
   {
@@ -22,56 +19,80 @@ const reviews = [
   }
 ]
 
-const itemsToShow = ref(2)
+const slide = ref('1')
+const autoplay = ref(false)
 
-const updateItemsToShow = () => {
-  if (window.innerWidth >= 1024) {
-    itemsToShow.value = 3
-  } else if (window.innerWidth > 768 && window.innerWidth < 1024) {
-    itemsToShow.value = 2
-  } else {
-    itemsToShow.value = 1
-  }
-}
-
-onMounted(() => {
-  updateItemsToShow()
-  window.addEventListener('resize', updateItemsToShow)
+const visibleSlides = computed(() => {
+  return window.innerWidth >= 1024 ? 3 : 1
 })
 
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', updateItemsToShow)
+const transitionPrev = computed(() => {
+  return window.innerWidth >= 1024 ? 'slide-right' : 'slide-left'
+})
+
+const transitionNext = computed(() => {
+  return window.innerWidth >= 1024 ? 'slide-left' : 'slide-right'
 })
 </script>
 
 <template>
   <div class="reviews_wrap">
     <h1>OUR HAPPY CUSTOMERS</h1>
-    <Carousel
-      :items-to-show="itemsToShow"
-      :items-to-scroll="1"
-    >
-      <Slide v-for="review in reviews" :key="review.id" class="slide">
-        <div class="reviews_card">
-          <img src="../assets/img/stars.png" alt="" width="138px" />
-          <h2>{{ review.title }}</h2>
-          <p>{{ review.text }}</p>
-        </div>
-      </Slide>
-
-      <!-- <template #addons>
-        <Navigation />
-      </template> -->
-    </Carousel>
+    <div class="carousel-container">
+      <q-carousel
+        swipeable
+        animated
+        v-model="slide"
+        ref="carousel"
+        infinite
+        :visible-slides="visibleSlides"
+        :transition-prev="transitionPrev"
+        :transition-next="transitionNext"
+        :autoplay="autoplay"
+        :arrows="true"
+        :navigation="true"
+      >
+        <template v-slot:control>
+          <q-carousel-control position="top-right" :offset="[12, 10]" class="q-gutter-xs">
+            <div class="carousel-controls">
+              <q-btn
+                flat
+                text-color="black"
+                icon="arrow_back"
+                @click="$refs.carousel.previous()"
+              ></q-btn>
+              <q-btn
+                flat
+                text-color="black"
+                icon="arrow_forward"
+                @click="$refs.carousel.next()"
+              ></q-btn>
+            </div>
+          </q-carousel-control>
+        </template>
+        <q-carousel-slide v-for="review in reviews" :key="review.id" :name="review.id">
+          <div class="slide">
+            <div class="reviews_card">
+              <h2>{{ review.title }}</h2>
+              <p>{{ review.text }}</p>
+            </div>
+          </div>
+        </q-carousel-slide>
+      </q-carousel>
+    </div>
   </div>
 </template>
 
 <style scoped>
-h1 {
+.reviews_wrap h1 {
+  z-index: 1;
+  position: relative;
+  transform: translate(0, 55px);
   font-family: 'IntegralCF';
   font-size: 32px;
+  line-height: 1;
   font-weight: 900;
-  margin: 50px 0 32px;
+  margin: 0 0 32px;
   display: flex;
   justify-content: center;
 }
@@ -80,18 +101,31 @@ h1 {
   font-family: 'Satoshi';
   margin: 24px 16px;
 }
+
 .slide {
   border: 1px solid #0000000f;
   border-radius: 20px;
-  margin: 0 5px;
+  margin: 55px 0px;
 }
+
 .reviews_card h2 {
   font-size: 16px;
   font-weight: 900;
   margin: 12px 0 8px;
 }
+
 .reviews_card p {
   font-size: 14px;
+}
+
+.q-carousel__slide,
+.q-carousel .q-carousel--padding {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  overflow: hidden;
+  padding: 0;
 }
 .reviews_card {
   padding: 28px 32px;
@@ -100,25 +134,38 @@ h1 {
   align-items: flex-start;
   text-align: left;
 }
+.carousel-controls {
+  z-index: 5;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  padding: 0 10px;
+}
+
 @media (min-width: 1024px) {
   h1 {
     font-size: 48px;
     justify-content: flex-start;
     margin-left: 200px;
   }
+
   .reviews_card {
     width: 400px;
     height: 240px;
   }
+
   .reviews_card h2 {
     font-size: 20px;
     font-weight: 900;
     margin: 15px 0 12px;
   }
+
   .reviews_card p {
     font-size: 16px;
-
   }
+
   .slide {
     margin: 0 20px;
   }

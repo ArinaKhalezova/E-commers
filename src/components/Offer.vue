@@ -24,12 +24,13 @@
 .offer_wrap {
   background-color: black;
   border-radius: 20px;
-  margin: 50px 16px;
+  margin: 0 16px 50px 16px;
   padding: 32px 24px;
 }
 .offer_wrap h1 {
   font-family: 'IntegralCF';
   font-size: 32px;
+  line-height: 1.2;
   color: white;
   font-weight: 700;
   padding-bottom: 32px;

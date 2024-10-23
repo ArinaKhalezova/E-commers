@@ -49,6 +49,10 @@
 </template>
 
 <style scoped>
+.heading_wrap {
+  display: grid;
+  background-color: white;
+}
 .heading-text {
   padding: 40px 16px 20px;
   display: flex;
@@ -123,9 +127,8 @@ h2 {
 
 @media (min-width: 1024px) {
   .heading_wrap {
-    background-color: white;
-    display: grid;
     grid-template-columns: 1fr 1fr;
+    align-self: center;
     /* display: flex;
     justify-content: space-between;
     width: auto; */
@@ -189,6 +192,12 @@ h2 {
   }
   .brands > * {
     transform: scale(1.5);
+  }
+}
+
+@media (min-width: 1460px) {
+  .heading_wrap {
+    grid-template-columns: 1.5fr 1fr;
   }
 }
 </style>
