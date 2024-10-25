@@ -1,30 +1,30 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="style_wrap">
+  <div :class="$style.style_wrap">
     <h1>BROWSE BY DRESS STYLE</h1>
-    <div class="style_items">
-      <div class="style_item">
-        <h2>Casual</h2>
-        <img src="../assets/img/casual.png" alt="" />
-      </div>
-      <div class="style_item">
-        <h2>Formal</h2>
-        <img src="../assets/img/formal.png" alt="" />
-      </div>
-      <div class="style_item">
-        <h2>Party</h2>
-        <img src="../assets/img/party.png" alt="" />
-      </div>
-      <div class="style_item">
-        <h2>Gym</h2>
-        <img src="../assets/img/gym.png" alt="" />
-      </div>
+    <div :class="$style.style_items">
+      <a href="/category" :class="$style.style_item">
+          <h2>Casual</h2>
+          <img src="../assets/img/casual.png" alt="" />
+      </a>
+      <a href="/category" :class="$style.style_item">
+          <h2>Formal</h2>
+          <img src="../assets/img/formal.png" alt="" />
+      </a>
+      <a href="/category" :class="$style.style_item">
+          <h2>Party</h2>
+          <img src="../assets/img/party.png" alt="" />
+      </a>
+      <a href="/category" :class="$style.style_item">
+          <h2>Gym</h2>
+          <img src="../assets/img/gym.png" alt="" />
+      </a>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style module>
 .style_wrap {
   font-family: 'Satoshi';
   /* margin: 50px 16px; */

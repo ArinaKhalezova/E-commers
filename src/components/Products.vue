@@ -45,7 +45,7 @@ const topSellingSlides = [
   </div>
 </template>
 
-<style scoped>
+<style module>
 h1 {
   font-family: 'IntegralCF';
   font-size: 32px;

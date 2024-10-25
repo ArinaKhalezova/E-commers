@@ -3,10 +3,10 @@
 </script>
 
 <template>
-  <button class="button">View All</button>
+  <a href="/category"><button :class="$style.button">View All</button></a>
 </template>
 
-<style scoped>
+<style module>
 .button {
   margin: 24px 16px;
   color: rgb(0, 0, 0);

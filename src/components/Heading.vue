@@ -1,42 +1,42 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="heading">
-    <div class="heading_wrap">
-      <div class="heading_info">
-        <div class="heading-text">
+  <div :class="$style.heading">
+    <div :class="$style.heading_wrap">
+      <div :class="$style.heading_info">
+        <div :class="$style.heading_text">
           <h1>FIND CLOTHES THAT MATCHES YOUR STYLE</h1>
           <p>
             Browse through our diverse range of meticulously crafted garments, designed <br />
             to bring out your individuality and cater to your sense of style.
           </p>
-          <button class="button">Shop Now</button>
+          <a href="/category"><button :class="$style.button">Shop Now</button></a>
         </div>
-        <div class="features">
-          <div class="feature_one">
+        <div :class="$style.features">
+          <div :class="$style.feature_one">
             <h2>200+</h2>
             <p>International Brands</p>
           </div>
-          <div class="feature_two">
+          <div :class="$style.feature_two">
             <h2>2,000+</h2>
             <p>High-Quality Products</p>
           </div>
-          <div class="feature_three">
+          <div :class="$style.feature_three">
             <h2>30,000+</h2>
             <p>Happy Customers</p>
           </div>
         </div>
       </div>
-      <div class="heading_img">
-        <img src="../assets/img/Preview.png" alt="" class="preview" />
+      <div :class="$style.heading_img">
+        <img src="../assets/img/Preview.png" alt="" :class="$style.preview" />
       </div>
     </div>
 
-    <div class="brands">
-      <img src="../assets/img/versace.png" alt="" width="116.74" height="23.25" class="brand_one" />
-      <img src="../assets/img/zara.png" alt="" width="63.81" height="26.65" class="brand_two" />
-      <img src="../assets/img/gucci.png" alt="" width="109.39" height="25.24" class="brand_three" />
-      <img src="../assets/img/prada.png" alt="" width="127" height="21" class="brand_four" />
+    <div :class="$style.brands">
+      <img src="../assets/img/versace.png" alt="" width="116.74" height="23.25" :class="$style.brand_one" />
+      <img src="../assets/img/zara.png" alt="" width="63.81" height="26.65" :class="$style.brand_two" />
+      <img src="../assets/img/gucci.png" alt="" width="109.39" height="25.24" :class="$style.brand_three" />
+      <img src="../assets/img/prada.png" alt="" width="127" height="21" :class="$style.brand_four" />
       <img
         src="../assets/img/calvin_klein.png"
         alt=""
@@ -48,37 +48,35 @@
   </div>
 </template>
 
-<style scoped>
+<style module>
 .heading_wrap {
   display: grid;
   background-color: white;
 }
-.heading-text {
-  padding: 40px 16px 20px;
+.heading_text {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-h1 {
+.heading_text h1 {
   font-family: 'IntegralCF';
   font-size: 36px;
   font-weight: 900;
   line-height: 1;
 }
-p {
+.heading_text p {
   font-family: 'Satoshi';
-  padding: 20px 0px 29px;
   font-size: 14px;
   font-weight: 200;
 }
-h2 {
+.features h2 {
   font-family: 'Satoshi';
   font-size: 24px;
   font-weight: 900;
 }
 .features > * {
-  margin: 14px 27px;
+  margin: 14px 27px 14px 0;
 }
 .features {
   display: flex;
@@ -120,6 +118,7 @@ h2 {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 .brands > * {
   margin: 10px 16px;
@@ -133,11 +132,7 @@ h2 {
     justify-content: space-between;
     width: auto; */
   }
-  .features {
-    margin: 0px 0px;
-  }
-  .heading-text {
-    margin: 40px 16px 20px;
+  .heading_text {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -145,16 +140,16 @@ h2 {
   .preview {
     width: 100%;
   }
-  h1 {
+  .heading_text h1 {
     font-size: 64px;
     font-weight: 900;
   }
-  p {
-    padding: 32px 0px 37px;
+  .heading_text p {
+
     font-size: 16px;
     font-weight: 200;
   }
-  h2 {
+  .features h2 {
     font-size: 40px;
     font-weight: 700;
   }
@@ -167,6 +162,7 @@ h2 {
     padding: 0;
   }
   .button {
+    margin: 37px 0 48px;
     color: white;
     font-size: 16px;
     background-color: black;
@@ -189,6 +185,7 @@ h2 {
     justify-content: center;
     justify-content: space-between;
     padding: 44px 100px;
+    min-width: 1440px;
   }
   .brands > * {
     transform: scale(1.5);

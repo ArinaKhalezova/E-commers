@@ -1,5 +1,5 @@
 <template>
-  <div class="category">
+  <div class="category"  id="category">
     <h1>This is a Category page</h1>
   </div>
 </template>

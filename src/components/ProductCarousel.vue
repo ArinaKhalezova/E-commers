@@ -17,12 +17,20 @@ defineProps<{
 const itemsToShow = ref(2)
 
 const updateItemsToShow = () => {
-  if (window.innerWidth >= 1024) {
+  if (window.innerWidth >= 1260) {
     itemsToShow.value = 4
-  } else if (window.innerWidth > 768 && window.innerWidth < 1024) {
+  } 
+  else if (window.innerWidth >= 1024 && window.innerWidth < 1260) {
     itemsToShow.value = 3
-  } else {
+  }
+  else if (window.innerWidth >= 620 && window.innerWidth < 1024) {
+    itemsToShow.value = 3
+  } 
+  else if (window.innerWidth > 460 && window.innerWidth < 620) {
     itemsToShow.value = 2
+  }
+  else {
+    itemsToShow.value = 1
   }
 }
 
@@ -47,8 +55,15 @@ onBeforeUnmount(() => {
   </Carousel>
 </template>
 
-<style scoped>
+<style module>
 .slide {
   margin: 0 15px;
+}
+
+@media (min-width: 1024px) {
+  element.style {
+    width: 50%;
+  }
+  
 }
 </style>

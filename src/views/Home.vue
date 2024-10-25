@@ -1,14 +1,14 @@
 <script setup lang="ts">
+import Header from '@/components/Header.vue'
 import Heading from '@/components/Heading.vue'
 import Products from '@/components/Products.vue'
-import TopSelling from '@/components/Products.vue'
 import Style from '@/components/BrowesByStyle.vue'
 import Reviews from '@/components/Reviews.vue'
 import Offer from '@/components/Offer.vue'
-import Footer from '@/components/Footer.vue'
 
 
 import { ref } from 'vue'
+
 
 const ratingModel = ref(3)
 </script>
@@ -16,22 +16,10 @@ const ratingModel = ref(3)
 <template>
   <div class="wrapper">
     <Heading />
-    <Products/>
+    <Products id="products"/>
     <Style></Style>
-    <Reviews />
-    <Offer />
-    <Footer></Footer>
-  </div>
-  <div class="q-pa-md">
-    <div class="q-gutter-y-md column">
-      <q-rating
-        v-model="ratingModel"
-        size="3.5em"
-        color="green-5"
-        icon="star_border"
-        icon-selected="star"
-      />
-    </div>
+    <Reviews id="reviews"/>
+    <Offer id="offer"/>
   </div>
 </template>
 
@@ -39,8 +27,13 @@ const ratingModel = ref(3)
 .wrapper {
   background-color: #ffffff;
   line-height: 1.5;
+
 }
 
 @media (min-width: 1024px) {
+  .wrapper {
+    padding: 0 100px;
+  }
+
 }
 </style>

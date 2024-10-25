@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const reviews = [
   {
@@ -16,83 +18,71 @@ const reviews = [
     id: '3',
     title: 'Sarah M.',
     text: '"I`m blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I`ve bought has exceeded my expectations.”'
+  },
+  {
+    id: '4',
+    title: 'Sarah M.',
+    text: '"I`m blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I`ve bought has exceeded my expectations.”'
   }
 ]
 
-const slide = ref('1')
-const autoplay = ref(false)
+const itemsToShow = ref(2)
+const carouselRef = ref<any>(null)
 
-const visibleSlides = computed(() => {
-  return window.innerWidth >= 1024 ? 3 : 1
+const updateItemsToShow = () => {
+  if (window.innerWidth >= 1024) {
+    itemsToShow.value = 3
+  } else if (window.innerWidth > 768 && window.innerWidth < 1024) {
+    itemsToShow.value = 2
+  } else {
+    itemsToShow.value = 1
+  }
+}
+
+onMounted(() => {
+  updateItemsToShow()
+  window.addEventListener('resize', updateItemsToShow)
 })
 
-const transitionPrev = computed(() => {
-  return window.innerWidth >= 1024 ? 'slide-right' : 'slide-left'
-})
-
-const transitionNext = computed(() => {
-  return window.innerWidth >= 1024 ? 'slide-left' : 'slide-right'
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateItemsToShow)
 })
 </script>
 
 <template>
-  <div class="reviews_wrap">
-    <h1>OUR HAPPY CUSTOMERS</h1>
-    <div class="carousel-container">
-      <q-carousel
-        swipeable
-        animated
-        v-model="slide"
-        ref="carousel"
-        infinite
-        :visible-slides="visibleSlides"
-        :transition-prev="transitionPrev"
-        :transition-next="transitionNext"
-        :autoplay="autoplay"
-        :arrows="true"
-        :navigation="true"
-      >
-        <template v-slot:control>
-          <q-carousel-control position="top-right" :offset="[12, 10]" class="q-gutter-xs">
-            <div class="carousel-controls">
-              <q-btn
-                flat
-                text-color="black"
-                icon="arrow_back"
-                @click="$refs.carousel.previous()"
-              ></q-btn>
-              <q-btn
-                flat
-                text-color="black"
-                icon="arrow_forward"
-                @click="$refs.carousel.next()"
-              ></q-btn>
-            </div>
-          </q-carousel-control>
-        </template>
-        <q-carousel-slide v-for="review in reviews" :key="review.id" :name="review.id">
-          <div class="slide">
-            <div class="reviews_card">
-              <h2>{{ review.title }}</h2>
-              <p>{{ review.text }}</p>
-            </div>
+  <div :class="$style.reviews_wrap">
+    <div :class="$style.carousel_container">
+      <div :class="$style.carousel_controls">
+        <h1>OUR HAPPY CUSTOMERS</h1>
+        <div :class="$style.carousel_controls_item">
+          <button @click="carouselRef.prev()">
+            <img src="../assets/img/arrow_left.png" alt="Previous" />
+          </button>
+          <button @click="carouselRef.next()">
+            <img src="../assets/img/arrow_right.png" alt="Next" />
+          </button>
+        </div>
+      </div>
+      <Carousel ref="carouselRef" :items-to-show="itemsToShow" :items-to-scroll="1">
+        <Slide v-for="review in reviews" :key="review.id" :class="$style.slide">
+          <div :class="$style.reviews_card">
+            <img src="../assets/img/stars.png" alt="" width="138px" />
+            <h2>{{ review.title }}</h2>
+            <p>{{ review.text }}</p>
           </div>
-        </q-carousel-slide>
-      </q-carousel>
+        </Slide>
+      </Carousel>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style module>
 .reviews_wrap h1 {
-  z-index: 1;
-  position: relative;
-  transform: translate(0, 55px);
+  line-height: 1;
   font-family: 'IntegralCF';
   font-size: 32px;
-  line-height: 1;
   font-weight: 900;
-  margin: 0 0 32px;
+  margin: 50px 0 32px;
   display: flex;
   justify-content: center;
 }
@@ -105,61 +95,72 @@ const transitionNext = computed(() => {
 .slide {
   border: 1px solid #0000000f;
   border-radius: 20px;
-  margin: 55px 0px;
+  margin: 0 10px;
 }
 
 .reviews_card h2 {
+  line-height: 1;
   font-size: 16px;
   font-weight: 900;
-  margin: 12px 0 8px;
+  padding: 12px 0 8px;
+
 }
 
 .reviews_card p {
   font-size: 14px;
+  margin: 0;
 }
 
-.q-carousel__slide,
-.q-carousel .q-carousel--padding {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 1200px;
-  overflow: hidden;
-  padding: 0;
-}
 .reviews_card {
-  padding: 28px 32px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
 }
-.carousel-controls {
-  z-index: 5;
-  left: 0;
+
+.carousel_container {
+  position: relative;
+}
+
+.carousel_controls {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+}
+
+.carousel_controls_item {
+  position: absolute;
+  top: 1;
   right: 0;
   display: flex;
-  justify-content: space-between;
-  transform: translateY(-50%);
-  padding: 0 10px;
+  gap: 10px;
+  z-index: 10;
+}
+
+.carousel_controls_item button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.carousel_controls_item img {
+  width: 16px;
 }
 
 @media (min-width: 1024px) {
-  h1 {
+  .reviews_wrap h1 {
     font-size: 48px;
     justify-content: flex-start;
-    margin-left: 200px;
   }
 
   .reviews_card {
-    width: 400px;
-    height: 240px;
+    padding: 28px 32px;
   }
 
   .reviews_card h2 {
     font-size: 20px;
     font-weight: 900;
-    margin: 15px 0 12px;
+    padding: 15px 0 12px;
   }
 
   .reviews_card p {
@@ -167,7 +168,8 @@ const transitionNext = computed(() => {
   }
 
   .slide {
-    margin: 0 20px;
+    margin: 0 auto;
+    max-width: 400px;
   }
 }
 </style>

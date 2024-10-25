@@ -11,10 +11,10 @@ defineProps<{
 </script>
 
 <template>
-  <div class="product_card">
+  <div :class="$style.product_card">
     <img :src="product.product_img" alt="Product Image" />
     <h2>{{ product.title }}</h2>
-    <div class="product_rating">
+    <div :class="$style.product_rating">
       <img src="../assets/img/stars.png" alt="Rating Stars" />
       <p>{{ product.rating }}</p>
     </div>
@@ -22,7 +22,10 @@ defineProps<{
   </div>
 </template>
 
-<style scoped>
+<style module>
+.product_rating p {
+  margin: 0;
+}
 .product_card {
   font-family: 'Satoshi';
   margin: 0 20px;
@@ -32,13 +35,16 @@ defineProps<{
   width: 198px;
 }
 .product_card h2 {
+  line-height: 1;
   font-size: 16px;
   font-weight: 800;
+  padding-top: 10px;
 }
 .product_rating img {
   width: 87px;
 }
 .product_rating {
+  padding: 4px 0;
   display: flex;
   align-items: center;
 }
@@ -53,6 +59,7 @@ defineProps<{
 .product_rating p {
   font-size: 12px;
   font-weight: 100;
+  padding: 0;
 }
 
 @media (min-width: 1024px) {

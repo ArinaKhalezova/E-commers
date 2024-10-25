@@ -13,6 +13,9 @@ import 'quasar/dist/quasar.css'
 import App from './App.vue';
 import router from './router';
 
+import VueScrollTo from 'vue-scrollto'
+
+
 const app = createApp(App);
 
 const quasarOptions: QuasarPluginOptions = {
@@ -23,5 +26,7 @@ app.use(createPinia());
 app.use(router);
 
 app.use(Quasar, quasarOptions);
+
+app.use(VueScrollTo)
 
 app.mount('#app');
