@@ -13,7 +13,9 @@ import 'quasar/dist/quasar.css'
 import App from './App.vue';
 import router from './router';
 
-import VueScrollTo from 'vue-scrollto'
+import VueScrollTo from 'vue-scrollto';
+
+import './assets/base.css';
 
 
 const app = createApp(App);

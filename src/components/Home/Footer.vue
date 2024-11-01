@@ -3,22 +3,22 @@
 <template>
   <div :class="$style.footer">
     <div :class="$style.footer_media">
-      <img src="../assets/img/logo.png" alt="" />
-      <h1>
+      <img src="/src/assets/img/logo.png" alt="" />
+      <h2>
         We have clothes that suits your style and which you’re proud to wear. From women to men.
-      </h1>
+      </h2>
       <div :class="$style.media">
         <a href="/" :class="$style.media">
-          <img src="../assets/img/twitter.png" alt="" />
+          <img src="/src/assets/img/twitter.png" alt="" />
         </a>
         <a href="/" :class="$style.media">
-          <img src="../assets/img/facebook.png" alt="" />
+          <img src="/src/assets/img/facebook.png" alt="" />
         </a>
         <a href="/" :class="$style.media">
-          <img src="../assets/img/instagram.png" alt="" />
+          <img src="/src/assets/img/instagram.png" alt="" />
         </a>
         <a href="/" :class="$style.media">
-          <img src="../assets/img/github.png" alt="" />
+          <img src="/src/assets/img/github.png" alt="" />
         </a>
       </div>
     </div>
@@ -67,18 +67,20 @@
 .footer {
   padding: 18px;
   font-family: 'Satoshi';
-  background-color: #f0f0f0;
+  background-color: var(--light-background-color);
   padding-top: 50px;
 }
-.footer h1 {
-  line-height: 1.5;
-  font-size: 14px;
-  margin: 14px 0 20px;
-}
+
 .footer h2 {
+  color: var(--subtitle-color);
   font-size: 14px;
   font-weight: 500;
   padding-bottom: 5px;
+  line-height: 1.5;
+}
+.footer_menu_item h2 {
+  color: var(--title-color);
+  font-weight: 700;
 }
 .media {
   margin: 20px 0 24px;
@@ -100,7 +102,10 @@ li {
 }
 a {
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--subtitle-color);
+}
+a:hover{
+  color: var(--warning-color);
 }
 
 @media (min-width: 1024px) {

@@ -1,16 +1,10 @@
 <script setup lang="ts">
-import Header from '@/components/Header.vue'
-import Heading from '@/components/Heading.vue'
-import Products from '@/components/Products.vue'
-import Style from '@/components/BrowesByStyle.vue'
-import Reviews from '@/components/Reviews.vue'
-import Offer from '@/components/Offer.vue'
+import Heading from '@/components/Home/Heading.vue'
+import Products from '@/components/Home/Products.vue'
+import Style from '@/components/Home/BrowesByStyle.vue'
+import Reviews from '@/components/Home/Reviews.vue'
+import Offer from '@/components/Home/Offer.vue'
 
-
-import { ref } from 'vue'
-
-
-const ratingModel = ref(3)
 </script>
 
 <template>

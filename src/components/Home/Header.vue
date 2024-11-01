@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import SearchBar from './SearchBar.vue'
-import Navigation from './Navigation.vue'
 
 const leftDrawerOpen = ref(false)
 
@@ -27,22 +26,22 @@ const toggleLeftDrawer = () => {
       <a href="#">
         <q-btn flat label="Shop" :class="$style.navigation_item">
           <q-icon name="keyboard_arrow_right" />
-          <q-menu>
-            <q-list dense style="min-width: 100px">
-              <q-item clickable v-close-popup>
-                <a href="/category"><q-item-section>Casual</q-item-section></a>
+          <q-menu flat>
+            <q-list dense style="min-width: 100px" flat>
+              <q-item clickable v-close-popup flat>
+                <a href="/assortment"><q-item-section flat>Casual</q-item-section></a>
+              </q-item>
+              <q-separator />
+              <q-item clickable v-close-popup flat>
+                <a href="/assortment"><q-item-section flat>Formal</q-item-section></a>
               </q-item>
               <q-separator />
               <q-item clickable v-close-popup>
-                <a href="/category"><q-item-section>Formal</q-item-section></a>
+                <a href="/assortment"><q-item-section>Party</q-item-section></a>
               </q-item>
               <q-separator />
-              <q-item clickable v-close-popup>
-                <a href="/category"><q-item-section>Party</q-item-section></a>
-              </q-item>
-              <q-separator />
-              <q-item clickable v-close-popup>
-                <a href="/category"><q-item-section>Gym</q-item-section></a>
+              <q-item clickable v-close-popup flat>
+                <a href="/assortment"><q-item-section>Gym</q-item-section></a>
               </q-item>
             </q-list>
           </q-menu>
@@ -62,10 +61,10 @@ const toggleLeftDrawer = () => {
       <SearchBar />
     </div>
     <div :class="$style.menu">
-      <a href="/category">
+      <a href="/assortment">
         <img alt="Search button" src="@/assets/img/cart.png" width="24" height="24" />
       </a>
-      <a href="/category">
+      <a href="/assortment">
         <img alt="Search button" src="@/assets/img/account.png" width="24" height="24" />
       </a>
     </div>
@@ -79,19 +78,19 @@ const toggleLeftDrawer = () => {
               <q-menu>
                 <q-list dense style="min-width: 100px">
                   <q-item clickable v-close-popup>
-                    <a href="/category"><q-item-section>Casual</q-item-section></a>
+                    <a href="/assortment"><q-item-section>Casual</q-item-section></a>
                   </q-item>
                   <q-separator />
                   <q-item clickable v-close-popup>
-                    <a href="/category"><q-item-section>Formal</q-item-section></a>
+                    <a href="/assortment"><q-item-section>Formal</q-item-section></a>
                   </q-item>
                   <q-separator />
                   <q-item clickable v-close-popup>
-                    <a href="/category"><q-item-section>Party</q-item-section></a>
+                    <a href="/assortment"><q-item-section>Party</q-item-section></a>
                   </q-item>
                   <q-separator />
                   <q-item clickable v-close-popup>
-                    <a href="/category"><q-item-section>Gym</q-item-section></a>
+                    <a href="/assortment"><q-item-section>Gym</q-item-section></a>
                   </q-item>
                 </q-list>
               </q-menu>
@@ -115,9 +114,9 @@ const toggleLeftDrawer = () => {
 <style module>
 .header {
   padding: 24px 100px;
-  background-color: white;
+  background-color: var(--base-background-color);
   display: grid;
-  grid-template-columns: 1fr 3fr 4fr 0.4fr;
+  grid-template-columns: 1fr 3fr 4fr 0.5fr;
   align-items: center;
   gap: 40px;
   position: relative;
@@ -132,13 +131,13 @@ const toggleLeftDrawer = () => {
   text-transform: none;
   font-size: 16px;
   font-family: 'Satoshi';
-  color: black;
+  color: var(--title-color);
   background-color: transparent;
   padding: 8px 12px;
 }
 
 .navigation_item:hover {
-  color: rgb(6, 37, 78);
+  color: var(--warning-color);
   background-color: transparent;
 }
 
@@ -177,7 +176,7 @@ const toggleLeftDrawer = () => {
 }
 @media (max-width: 466px) {
   .header {
-    grid-template-columns: 9fr 2fr 0fr;
+    grid-template-columns: 9fr 2.6fr 0fr;
   }
 }
 </style>

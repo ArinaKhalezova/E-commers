@@ -6,8 +6,10 @@ defineProps<{
     title: string
     rating: string
     cost: string
+    ratingModel: number
   }
 }>()
+
 </script>
 
 <template>
@@ -15,7 +17,15 @@ defineProps<{
     <img :src="product.product_img" alt="Product Image" />
     <h2>{{ product.title }}</h2>
     <div :class="$style.product_rating">
-      <img src="../assets/img/stars.png" alt="Rating Stars" />
+      <div :class="$style.product_rating">
+          <q-rating
+            v-model="product.ratingModel"
+            size="25px"
+            color='yellow-8'
+            readonly
+          />
+      </div>
+      <!-- <img src="/src/assets/img/stars.png" alt="Rating Stars" /> -->
       <p>{{ product.rating }}</p>
     </div>
     <p>{{ product.cost }}</p>
@@ -24,15 +34,15 @@ defineProps<{
 
 <style module>
 .product_rating p {
-  margin: 0;
+  margin: 10px;
 }
 .product_card {
   font-family: 'Satoshi';
-  margin: 0 20px;
+  margin: 0 5px;
   text-align: left;
 }
 .product_card img {
-  width: 198px;
+  max-width: 198px;
 }
 .product_card h2 {
   line-height: 1;
@@ -67,7 +77,7 @@ defineProps<{
     width: 297px;
   }
   .product_rating img {
-    width: 104px;
+    max-width: 104px;
   }
   .product_card h2 {
     font-size: 20px;

@@ -23,10 +23,21 @@ const reviews = [
     id: '4',
     title: 'Sarah M.',
     text: '"I`m blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I`ve bought has exceeded my expectations.”'
-  }
+  },
+  {
+    id: '5',
+    title: 'Sarah M.',
+    text: '"I`m blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I`ve bought has exceeded my expectations.”'
+  },
+  {
+    id: '6',
+    title: 'James L.',
+    text: '"As someone who`s always on the lookout for unique fashion pieces, I`m thrilled to have stumbled upon Shop.co. The selection of clothes is not only diverse but also on-point with the latest trends.”'
+  },
 ]
 
-const itemsToShow = ref(2)
+const ratingModel = ref(5)
+const itemsToShow = ref(1)
 const carouselRef = ref<any>(null)
 
 const updateItemsToShow = () => {
@@ -56,17 +67,25 @@ onBeforeUnmount(() => {
         <h1>OUR HAPPY CUSTOMERS</h1>
         <div :class="$style.carousel_controls_item">
           <button @click="carouselRef.prev()">
-            <img src="../assets/img/arrow_left.png" alt="Previous" />
+            <img src="/src/assets/img/arrow_left.png" alt="Previous" />
           </button>
           <button @click="carouselRef.next()">
-            <img src="../assets/img/arrow_right.png" alt="Next" />
+            <img src="/src/assets/img/arrow_right.png" alt="Next" />
           </button>
         </div>
       </div>
       <Carousel ref="carouselRef" :items-to-show="itemsToShow" :items-to-scroll="1">
         <Slide v-for="review in reviews" :key="review.id" :class="$style.slide">
           <div :class="$style.reviews_card">
-            <img src="../assets/img/stars.png" alt="" width="138px" />
+            <div :class="$style.product_rating">
+          <q-rating
+            v-model="ratingModel"
+            size="25px"
+            color='yellow-8'
+            readonly
+          />
+      </div>
+            <!-- <img src="/src/assets/img/stars.png" alt="" width="138px" /> -->
             <h2>{{ review.title }}</h2>
             <p>{{ review.text }}</p>
           </div>
@@ -168,7 +187,6 @@ onBeforeUnmount(() => {
   }
 
   .slide {
-    margin: 0 auto;
     max-width: 400px;
   }
 }

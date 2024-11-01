@@ -22,7 +22,7 @@
 
 <style module>
 .offer_wrap {
-  background-color: black;
+  background-color: var(--dark-background-color);
   border-radius: 20px;
   margin: 0 0px 50px 0px;
   padding: 32px 24px;
@@ -31,7 +31,7 @@
   font-family: 'IntegralCF';
   font-size: 32px;
   line-height: 1.2;
-  color: white;
+  color: var(--text-on-dark-button-color);
   font-weight: 700;
   padding-bottom: 32px;
 }
@@ -45,7 +45,7 @@
   border-radius: 20px;
   width: 100vmax;
   padding: 11px 48px;
-  background-color: white;
+  background-color: var(--base-background-color);
 }
 @media (min-width: 1024px) {
   .offer_wrap {

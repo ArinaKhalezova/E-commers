@@ -43,8 +43,8 @@ const filteredList = computed(() => {
 .search_bar {
   width: 100%;
   outline: none;
-  background-color: #F0F0F0;
-  color: rgba(0, 0, 0, 0.4);
+  background-color: var(--light-background-color);
+  color: var(--subtitle-color);
   border: 0 solid;
   border-radius: 25px;
   padding: 12px 18px;
@@ -55,7 +55,7 @@ const filteredList = computed(() => {
   top: 100%;
   left: 0;
   width: 100%;
-  background-color: #F0F0F0;
+  background-color: var(--light-background-color);
   border: 1px solid #e6e3e3;
   border-radius: 25px;
   padding: 12px 18px;
