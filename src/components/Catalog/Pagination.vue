@@ -15,7 +15,7 @@ interface Product {
 
 // Определение props
 const props = defineProps<{
-  listData: Product[]
+  products: Product[]
   size?: number
 }>()
 
@@ -31,7 +31,7 @@ const scrollToTop = () => {
 
 // Вычисляемые свойства
 const pageCount = computed(() => {
-  let l = props.listData.length,
+  let l = props.products.length,
     s = props.size ?? 10 // Используем значение по умолчанию, если size не передан
   return Math.ceil(l / s)
 })
@@ -39,7 +39,7 @@ const pageCount = computed(() => {
 const paginatedData = computed(() => {
   const start = (pageNumber.value - 1) * (props.size ?? 10),
     end = start + (props.size ?? 10)
-  return props.listData.slice(start, end)
+  return props.products.slice(start, end)
 })
 </script>
 
@@ -56,7 +56,7 @@ const paginatedData = computed(() => {
       <div id="q-app" :class="$style.navigation">
         <div class="q-pa-lg">
           <div class="q-gutter-md">
-            <q-pagination
+            <q-pagination 
               v-model="pageNumber"
               color="black"
               :max="pageCount"
@@ -95,12 +95,22 @@ const paginatedData = computed(() => {
   justify-content: center;
 }
 
+.customProductCard img {
+  width: 172px; 
+}
+
 @media (min-width: 680px) {
+  .customProductCard img {
+  width: 210px; 
+}
   .product_list {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 @media (min-width: 1024px) {
+  .customProductCard img {
+  width: 295px; 
+}
   .container {
   display: grid;
   grid-template-columns: 1fr 6fr;
@@ -116,8 +126,5 @@ const paginatedData = computed(() => {
   }
 }
 
-/* Переопределение ширины изображения только для этого компонента */
-.customProductCard img {
-  max-width: 295px; /* Новая ширина изображения */
-}
+
 </style>

@@ -59,7 +59,8 @@ onMounted(() => {
 
 .heading_wrap {
   display: grid;
-  background-color: var(--base-background-color);
+  background-color: var(--light-background-color);
+  margin: 0 16px;
 }
 .heading_text {
   display: flex;

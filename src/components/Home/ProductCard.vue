@@ -1,5 +1,7 @@
 <script setup lang="ts">
-defineProps<{
+import { useRouter } from 'vue-router'
+
+const props = defineProps<{
   product: {
     id: string
     product_img: string
@@ -10,22 +12,19 @@ defineProps<{
   }
 }>()
 
+const router = useRouter()
+
+const goToProduct = (id: string) => {
+  router.push({ name: 'productCard', params: { id } })
+}
 </script>
 
 <template>
-  <div :class="$style.product_card">
+  <div :class="$style.product_card" @click="goToProduct(product.id)">
     <img :src="product.product_img" alt="Product Image" />
     <h2>{{ product.title }}</h2>
     <div :class="$style.product_rating">
-      <div :class="$style.product_rating">
-          <q-rating
-            v-model="product.ratingModel"
-            size="25px"
-            color='yellow-8'
-            readonly
-          />
-      </div>
-      <!-- <img src="/src/assets/img/stars.png" alt="Rating Stars" /> -->
+      <q-rating v-model="product.ratingModel" size="18px" color="yellow-8" readonly />
       <p>{{ product.rating }}</p>
     </div>
     <p>{{ product.cost }}</p>
@@ -40,9 +39,10 @@ defineProps<{
   font-family: 'Satoshi';
   margin: 0 5px;
   text-align: left;
+  cursor: pointer;
 }
 .product_card img {
-  max-width: 198px;
+  width: 198px;
 }
 .product_card h2 {
   line-height: 1;
@@ -74,7 +74,7 @@ defineProps<{
 
 @media (min-width: 1024px) {
   .product_card img {
-    width: 297px;
+    width: 295px;
   }
   .product_rating img {
     max-width: 104px;
@@ -83,7 +83,7 @@ defineProps<{
     font-size: 20px;
   }
   .product_card p {
-    font-size: 24px;
+    font-size: 22px;
   }
   .product_rating p {
     font-size: 12px;

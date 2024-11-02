@@ -1,20 +1,10 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-
+import { nameOfProducts } from "@/data/Products";
 const input = ref<string>("");
-const products = [
-  "T-shirt with Tape Details",
-  "Skinny Fit Jeans",
-  "Checkered Shirt",
-  "Sleeve Striped T-Shirt",
-  "Vertical Striped Shirt",
-  "Courage Graphic T-shirt",
-  "Loose Fit Bermuda Shorts",
-  "Faded Skinny Jeans"
-];
 
 const filteredList = computed(() => {
-  return products.filter((product) =>
+  return nameOfProducts.filter((product) =>
     product.toLowerCase().includes(input.value.toLowerCase())
   );
 });
