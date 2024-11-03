@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import Breadcrumbs from './Breadcrumbs.vue'
 import { products } from '@/data/Products'
-import { generateBreadcrumbs } from '@/data/breadcrumbs'
+import { generateBreadcrumbs } from '@/data/Breadcrumbs'
 
 const route = useRoute()
 const productId = computed(() => route.params.id as string)
@@ -31,7 +31,7 @@ const desert = ref({
 
 const selection = computed(() => {
   return Object.keys(desert.value)
-    .filter(type => desert.value[type] === true)
+    .filter((type) => desert.value[type] === true)
     .join(', ')
 })
 </script>
@@ -104,32 +104,16 @@ const selection = computed(() => {
         <div :class="$style.product_add">
           <div :class="$style.product_add">
             <div class="q-gutter-xs">
-              <q-chip
-                v-model:selected="desert.Small"
-                color="gray"
-                text-color="black"
-              >
+              <q-chip v-model:selected="desert.Small" color="gray" text-color="black">
                 Small
               </q-chip>
-              <q-chip
-                v-model:selected="desert.Medium"
-                color="gray"
-                text-color="black"
-              >
+              <q-chip v-model:selected="desert.Medium" color="gray" text-color="black">
                 Medium
               </q-chip>
-              <q-chip
-                v-model:selected="desert.Large"
-                color="gray"
-                text-color="black"
-              >
+              <q-chip v-model:selected="desert.Large" color="gray" text-color="black">
                 Large
               </q-chip>
-              <q-chip
-                v-model:selected="desert.X_Large"
-                color="gray"
-                text-color="black"
-              >
+              <q-chip v-model:selected="desert.X_Large" color="gray" text-color="black">
                 X-Large
               </q-chip>
             </div>
@@ -193,17 +177,17 @@ const selection = computed(() => {
 @media (min-width: 1024px) {
   .product_container {
     margin: 0 100px;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-}
-.product_info h1 {
-  font-size: 40px;
-}
-.product_info h2 {
-  font-size: 32px;
-}
-.product_info p {
-  font-size: 16px;
-}
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .product_info h1 {
+    font-size: 40px;
+  }
+  .product_info h2 {
+    font-size: 32px;
+  }
+  .product_info p {
+    font-size: 16px;
+  }
 }
 </style>

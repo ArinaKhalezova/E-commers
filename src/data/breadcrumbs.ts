@@ -22,8 +22,8 @@ export function generateBreadcrumbs(route: RouteLocationNormalizedLoaded): Bread
   if (productId) {
     const product = products.find(p => p.id === productId)
     if (product) {
-      breadcrumbs.push({ label: product.gender, to: `/assortment/${product.gender.toLowerCase()}` })
-      breadcrumbs.push({ label: product.category, to: `/assortment/${product.gender.toLowerCase()}/${product.category.toLowerCase()}` })
+      breadcrumbs.push({ label: product.gender, to: `/assortment` })
+      breadcrumbs.push({ label: product.category, to: `/assortment` })
       breadcrumbs.push({ label: product.title, to: `/productCard/${productId}` })
     }
   }

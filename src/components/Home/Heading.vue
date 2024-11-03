@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted } from 'vue'
 
 onMounted(() => {
-  console.log(getComputedStyle(document.documentElement).getPropertyValue('--text-on-light-button-color'));
-  console.log(getComputedStyle(document.documentElement).getPropertyValue('--light-button-color'));
-});
+  console.log(
+    getComputedStyle(document.documentElement).getPropertyValue('--text-on-light-button-color')
+  )
+  console.log(getComputedStyle(document.documentElement).getPropertyValue('--light-button-color'))
+})
 </script>
 
 <template>
@@ -40,10 +42,34 @@ onMounted(() => {
     </div>
 
     <div :class="$style.brands">
-      <img src="/src/assets/img/versace.png" alt="" width="116.74" height="23.25" :class="$style.brand_one" />
-      <img src="/src/assets/img/zara.png" alt="" width="63.81" height="26.65" :class="$style.brand_two" />
-      <img src="/src/assets/img/gucci.png" alt="" width="109.39" height="25.24" :class="$style.brand_three" />
-      <img src="/src/assets/img/prada.png" alt="" width="127" height="21" :class="$style.brand_four" />
+      <img
+        src="/src/assets/img/versace.png"
+        alt=""
+        width="116.74"
+        height="23.25"
+        :class="$style.brand_one"
+      />
+      <img
+        src="/src/assets/img/zara.png"
+        alt=""
+        width="63.81"
+        height="26.65"
+        :class="$style.brand_two"
+      />
+      <img
+        src="/src/assets/img/gucci.png"
+        alt=""
+        width="109.39"
+        height="25.24"
+        :class="$style.brand_three"
+      />
+      <img
+        src="/src/assets/img/prada.png"
+        alt=""
+        width="127"
+        height="21"
+        :class="$style.brand_four"
+      />
       <img
         src="/src/assets/img/calvin_klein.png"
         alt=""
@@ -56,7 +82,6 @@ onMounted(() => {
 </template>
 
 <style module>
-
 .heading_wrap {
   display: grid;
   background-color: var(--light-background-color);
@@ -69,17 +94,20 @@ onMounted(() => {
 }
 
 .heading_text h1 {
+  margin: 0;
   color: var(--title-color);
   font-family: 'IntegralCF';
   font-size: 36px;
   font-weight: 900;
   line-height: 1;
+  padding-top: 40px;
 }
 .heading_text p {
   color: var(--subtitle-color);
   font-family: 'Satoshi';
   font-size: 14px;
   font-weight: 200;
+  padding: 20px 0 29px;
 }
 .features h2 {
   color: var(--title-color);
@@ -139,28 +167,31 @@ onMounted(() => {
   margin: 10px 16px;
 }
 
-@media (min-width: 1023px) {
+@media (min-width: 1024px) {
   .heading_wrap {
     grid-template-columns: 1fr 1fr;
     align-self: center;
+    background-color: var(--base-background-color);
     /* display: flex;
     justify-content: space-between;
     width: auto; */
   }
+  .heading {
+  background-color: var(--base-background-color);
+}
   .heading_text {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
   .preview {
-    width: 100%;
+    width: 527px;
   }
   .heading_text h1 {
     font-size: 64px;
     font-weight: 900;
   }
   .heading_text p {
-
     font-size: 16px;
     font-weight: 200;
   }
@@ -169,6 +200,7 @@ onMounted(() => {
     font-weight: 700;
   }
   .features {
+    padding-bottom: 116px;
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
@@ -205,6 +237,9 @@ onMounted(() => {
 @media (min-width: 1460px) {
   .heading_wrap {
     grid-template-columns: 1.5fr 1fr;
+  }
+    .preview {
+    width: 727px;
   }
 }
 </style>

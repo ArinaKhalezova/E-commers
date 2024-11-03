@@ -45,7 +45,6 @@ const paginatedData = computed(() => {
 
 <template>
   <div :class="$style.container">
-    <div :class="$style.filters_container">filters</div>
     <div :class="$style.pagination_container">
       <div :class="$style.product_list">
         <div v-for="product in paginatedData" :key="product.id" class="product-item">
@@ -110,11 +109,6 @@ const paginatedData = computed(() => {
 @media (min-width: 1024px) {
   .customProductCard img {
   width: 295px; 
-}
-  .container {
-  display: grid;
-  grid-template-columns: 1fr 6fr;
-  margin: 0 auto
 }
   .filters_container {
     display: block;

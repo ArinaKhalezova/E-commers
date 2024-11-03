@@ -3,7 +3,7 @@ import Pagination from './Pagination.vue'
 import { products } from '@/data/Products'
 
 
-const pageSize = 6
+const pageSize = 12
 </script>
 
 <template>
