@@ -3,7 +3,6 @@ import Heading from '@/components/Home/Heading.vue'
 import Products from '@/components/Home/Products.vue'
 import Style from '@/components/Home/BrowesByStyle.vue'
 import Reviews from '@/components/Home/Reviews.vue'
-import Offer from '@/components/Home/Offer.vue'
 
 </script>
 
@@ -13,7 +12,6 @@ import Offer from '@/components/Home/Offer.vue'
     <Products id="products"/>
     <Style></Style>
     <Reviews id="reviews"/>
-    <Offer id="offer"/>
   </div>
 </template>
 
@@ -25,9 +23,9 @@ import Offer from '@/components/Home/Offer.vue'
 }
 
 @media (min-width: 1024px) {
-  .wrapper {
+  /* .wrapper {
     padding: 0 100px;
-  }
+  } */
 
 }
 </style>

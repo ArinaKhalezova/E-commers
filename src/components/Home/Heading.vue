@@ -42,41 +42,11 @@ onMounted(() => {
     </div>
 
     <div :class="$style.brands">
-      <img
-        src="/src/assets/img/versace.png"
-        alt=""
-        width="116.74"
-        height="23.25"
-        :class="$style.brand_one"
-      />
-      <img
-        src="/src/assets/img/zara.png"
-        alt=""
-        width="63.81"
-        height="26.65"
-        :class="$style.brand_two"
-      />
-      <img
-        src="/src/assets/img/gucci.png"
-        alt=""
-        width="109.39"
-        height="25.24"
-        :class="$style.brand_three"
-      />
-      <img
-        src="/src/assets/img/prada.png"
-        alt=""
-        width="127"
-        height="21"
-        :class="$style.brand_four"
-      />
-      <img
-        src="/src/assets/img/calvin_klein.png"
-        alt=""
-        width="134.84"
-        height="21.75"
-        class="brand_five"
-      />
+      <img src="/src/assets/img/versace.png" alt="" width="116.74" height="23.25" :class="$style.brand_one" />
+      <img src="/src/assets/img/zara.png" alt="" width="63.81" height="26.65" :class="$style.brand_two" />
+      <img src="/src/assets/img/gucci.png" alt="" width="109.39" height="25.24" :class="$style.brand_three" />
+      <img src="/src/assets/img/prada.png" alt="" width="127" height="21" :class="$style.brand_four" />
+      <img src="/src/assets/img/calvin_klein.png" alt="" width="134.84" height="21.75" class="brand_five" />
     </div>
   </div>
 </template>
@@ -87,6 +57,7 @@ onMounted(() => {
   background-color: var(--light-background-color);
   margin: 0 16px;
 }
+
 .heading_text {
   display: flex;
   flex-direction: column;
@@ -102,6 +73,7 @@ onMounted(() => {
   line-height: 1;
   padding-top: 40px;
 }
+
 .heading_text p {
   color: var(--subtitle-color);
   font-family: 'Satoshi';
@@ -109,24 +81,29 @@ onMounted(() => {
   font-weight: 200;
   padding: 20px 0 29px;
 }
+
 .features h2 {
   color: var(--title-color);
   font-family: 'Satoshi';
   font-size: 24px;
   font-weight: 900;
 }
-.features > * {
+
+.features>* {
   color: var(--subtitle-color);
   margin: 14px 27px 14px 0;
 }
+
 .features {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .features p {
   padding: 0;
 }
+
 .button {
   color: var(--text-on-dark-button-color);
   font-size: 16px;
@@ -138,12 +115,14 @@ onMounted(() => {
   text-align: center;
   padding: 15px;
 }
+
 .heading_img {
   background-color: var(--light-background-color);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
+
 .preview {
   margin: 0 auto;
   /* max-width: 390px; */
@@ -151,9 +130,11 @@ onMounted(() => {
   display: flex;
   justify-content: center;
 }
+
 .heading {
   background-color: var(--light-background-color);
 }
+
 .brands {
   background-color: var(--dark-background-color);
   height: 122px;
@@ -163,7 +144,8 @@ onMounted(() => {
   align-items: center;
   width: 100%;
 }
-.brands > * {
+
+.brands>* {
   margin: 10px 16px;
 }
 
@@ -172,42 +154,50 @@ onMounted(() => {
     grid-template-columns: 1fr 1fr;
     align-self: center;
     background-color: var(--base-background-color);
-    /* display: flex;
-    justify-content: space-between;
-    width: auto; */
+    gap: 10px;
+    margin: 0 0 0 100px;
   }
+
   .heading {
-  background-color: var(--base-background-color);
-}
+    background-color: var(--base-background-color);
+  }
+
   .heading_text {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .preview {
     width: 527px;
   }
+
   .heading_text h1 {
     font-size: 64px;
     font-weight: 900;
   }
+
   .heading_text p {
     font-size: 16px;
     font-weight: 200;
   }
+
   .features h2 {
     font-size: 40px;
     font-weight: 700;
   }
+
   .features {
     padding-bottom: 116px;
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
   }
+
   .features p {
     padding: 0;
   }
+
   .button {
     margin: 37px 0 48px;
     font-size: 16px;
@@ -216,10 +206,12 @@ onMounted(() => {
     cursor: pointer;
     padding: 15px 67px;
   }
+
   .preview {
     margin: 0;
     padding: 0;
   }
+
   .brands {
     display: flex;
     flex-wrap: wrap;
@@ -227,9 +219,11 @@ onMounted(() => {
     justify-content: space-between;
     padding: 44px 100px;
     width: 100vw;
-    margin-left: calc(-50vw + 50%); /* Центрирование относительно родительского элемента */
+    margin-left: calc(-50vw + 50%);
+    /* Центрирование относительно родительского элемента */
   }
-  .brands > * {
+
+  .brands>* {
     transform: scale(1.5);
   }
 }
@@ -238,7 +232,8 @@ onMounted(() => {
   .heading_wrap {
     grid-template-columns: 1.5fr 1fr;
   }
-    .preview {
+
+  .preview {
     width: 727px;
   }
 }

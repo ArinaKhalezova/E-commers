@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import Breadcrumbs from './Breadcrumbs.vue'
+import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
 import { products } from '@/data/Products'
 import { generateBreadcrumbs } from '@/data/Breadcrumbs'
 
@@ -22,17 +22,24 @@ const breadcrumbs = computed(() => {
 })
 
 // Используем реактивные свойства и вычисляемые свойства внутри <script setup>
-const desert = ref({
+const size = ref({
   Small: false,
   Medium: false,
   Large: false,
   X_Large: false
 })
 
-const selection = computed(() => {
-  return Object.keys(desert.value)
-    .filter((type) => desert.value[type] === true)
-    .join(', ')
+const color = ref({
+  Green: false,
+  Red: false,
+  Yellow: false,
+  Orange: false,
+  Blue_light: false,
+  Blue: false,
+  Purple: false,
+  Pink: false,
+  White: false,
+  Black: false
 })
 </script>
 
@@ -97,6 +104,24 @@ const selection = computed(() => {
         </div>
         <div :class="$style.product_color">
           <p>Select color</p>
+          <div id="q-app">
+            <div class="q-pa-md">
+              <div class="q-gutter-xs" :class="$style.colors_items">
+                <q-chip v-model:selected="color.Green" color="green" text-color="white"> </q-chip>
+                <q-chip v-model:selected="color.Red" color="red" text-color="white"> </q-chip>
+                <q-chip v-model:selected="color.Yellow" color="yellow" text-color="white"> </q-chip>
+                <q-chip v-model:selected="color.Orange" color="orange" text-color="white"> </q-chip>
+                <q-chip v-model:selected="color.Blue_light" color="blue-4" text-color="white">
+                </q-chip>
+                <q-chip v-model:selected="color.Blue" color="blue-9" text-color="white"> </q-chip>
+                <q-chip v-model:selected="color.Purple" color="purple" text-color="white"> </q-chip>
+                <q-chip v-model:selected="color.Pink" color="pink" text-color="white"> </q-chip>
+                <q-chip v-model:selected="color.White" outline color="grey" text-color="white">
+                </q-chip>
+                <q-chip v-model:selected="color.Black" color="black" text-color="white"> </q-chip>
+              </div>
+            </div>
+          </div>
         </div>
         <div :class="$style.product_syze">
           <p>Choose Size</p>
@@ -104,21 +129,15 @@ const selection = computed(() => {
         <div :class="$style.product_add">
           <div :class="$style.product_add">
             <div class="q-gutter-xs">
-              <q-chip v-model:selected="desert.Small" color="gray" text-color="black">
-                Small
-              </q-chip>
-              <q-chip v-model:selected="desert.Medium" color="gray" text-color="black">
+              <q-chip v-model:selected="size.Small" color="gray" text-color="black"> Small </q-chip>
+              <q-chip v-model:selected="size.Medium" color="gray" text-color="black">
                 Medium
               </q-chip>
-              <q-chip v-model:selected="desert.Large" color="gray" text-color="black">
-                Large
-              </q-chip>
-              <q-chip v-model:selected="desert.X_Large" color="gray" text-color="black">
+              <q-chip v-model:selected="size.Large" color="gray" text-color="black"> Large </q-chip>
+              <q-chip v-model:selected="size.X_Large" color="gray" text-color="black">
                 X-Large
               </q-chip>
             </div>
-
-            <div class="q-mt-sm">Your pick: {{ selection }}</div>
           </div>
         </div>
       </div>
@@ -133,15 +152,18 @@ const selection = computed(() => {
   grid-template-rows: 1fr;
   gap: 20px;
 }
+
 .product_rating {
   display: flex;
   align-items: center;
   padding: 12px 0;
 }
+
 .product_info .product_rating p {
   margin: 0;
   padding: 0 0 0 10px;
 }
+
 .product_info h1 {
   line-height: 1;
   font-size: 24px;
@@ -150,42 +172,51 @@ const selection = computed(() => {
   display: flex;
   justify-content: start;
 }
+
 .product_info h2 {
   font-family: 'Satoshi';
   font-size: 24px;
   font-weight: 900;
   line-height: 1;
 }
+
 .product_info p {
   padding: 20px 0 25px;
   margin: 0;
   color: var(--subtitle-color);
 }
+
 .product_color p {
   font-size: 14px;
   color: var(--subtitle-color);
   font-family: 'Satoshi';
 }
+
 .product_syze p {
   font-size: 14px;
   color: var(--subtitle-color);
   font-family: 'Satoshi';
 }
+
 .product_add {
   padding: 0;
 }
+
 @media (min-width: 1024px) {
   .product_container {
     margin: 0 100px;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
   }
+
   .product_info h1 {
     font-size: 40px;
   }
+
   .product_info h2 {
     font-size: 32px;
   }
+
   .product_info p {
     font-size: 16px;
   }

@@ -113,12 +113,12 @@ const toggleLeftDrawer = () => {
 
 <style module>
 .header {
-  padding: 24px 100px;
+  margin: 24px 100px;
   background-color: var(--base-background-color);
   display: grid;
   grid-template-columns: 1fr 3fr 4fr 0.5fr;
   align-items: center;
-  gap: 40px;
+  column-gap: 40px;
   position: relative;
 }
 
@@ -146,6 +146,7 @@ const toggleLeftDrawer = () => {
 }
 
 @media (max-width: 1024px) {
+
   .header_navigation {
     display: none;
   }
@@ -155,6 +156,7 @@ const toggleLeftDrawer = () => {
   }
 
   .header {
+    margin: 0px;
     padding: 20px 16px;
     grid-template-columns: 1fr 5fr 1fr 1fr;
     gap: 10px;

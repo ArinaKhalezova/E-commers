@@ -2,6 +2,7 @@
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import ReviewsCard from '../ProductPage/ReviewsCard.vue';
 
 const reviews = [
   {
@@ -36,7 +37,6 @@ const reviews = [
   },
 ]
 
-const ratingModel = ref(5)
 const itemsToShow = ref(1)
 const carouselRef = ref<any>(null)
 
@@ -75,20 +75,8 @@ onBeforeUnmount(() => {
         </div>
       </div>
       <Carousel ref="carouselRef" :items-to-show="itemsToShow" :items-to-scroll="1">
-        <Slide v-for="review in reviews" :key="review.id" :class="$style.slide">
-          <div :class="$style.reviews_card">
-            <div :class="$style.product_rating">
-          <q-rating
-            v-model="ratingModel"
-            size="25px"
-            color='yellow-8'
-            readonly
-          />
-      </div>
-            <!-- <img src="/src/assets/img/stars.png" alt="" width="138px" /> -->
-            <h2>{{ review.title }}</h2>
-            <p>{{ review.text }}</p>
-          </div>
+        <Slide v-for="review in reviews" :key="review.id">
+          <ReviewsCard :review="review"/>
         </Slide>
       </Carousel>
     </div>
@@ -109,33 +97,6 @@ onBeforeUnmount(() => {
 .reviews_wrap {
   font-family: 'Satoshi';
   margin: 24px 16px;
-}
-
-.slide {
-  border: 1px solid #0000000f;
-  border-radius: 20px;
-  margin: 0 10px;
-}
-
-.reviews_card h2 {
-  line-height: 1;
-  font-size: 16px;
-  font-weight: 900;
-  padding: 12px 0 8px;
-
-}
-
-.reviews_card p {
-  font-size: 14px;
-  margin: 0;
-}
-
-.reviews_card {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
 }
 
 .carousel_container {
@@ -171,19 +132,8 @@ onBeforeUnmount(() => {
     font-size: 48px;
     justify-content: flex-start;
   }
-
-  .reviews_card {
-    padding: 28px 32px;
-  }
-
-  .reviews_card h2 {
-    font-size: 20px;
-    font-weight: 900;
-    padding: 15px 0 12px;
-  }
-
-  .reviews_card p {
-    font-size: 16px;
+  .reviews_wrap {
+    margin: 0 100px;
   }
 
   .slide {

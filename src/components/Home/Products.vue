@@ -5,7 +5,7 @@ import Button from './Button.vue'
 </script>
 
 <template>
-  <div>
+  <div :class="$style.products_wrap">
     <h1>NEW ARRIVALS</h1>
     <ProductCarousel :slides="newArrivalsSlides" />
     <Button></Button>
@@ -27,6 +27,9 @@ h1 {
 }
 
 @media (min-width: 1024px) {
+  .products_wrap {
+    margin: 0 100px;
+  }
   h1 {
     font-size: 48px;
     margin: 70px 0 52px;

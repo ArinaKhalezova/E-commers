@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Assortment from '@/views/Assortment.vue'
-import ProductCard from '@/components/Catalog/LargeProductCard.vue'
+import ProductPage from '@/components/ProductPage/ProductPage.vue'
 
 
 const router = createRouter({
@@ -18,9 +18,9 @@ const router = createRouter({
       component: Assortment
     },
     {
-      path: '/productCard/:id',
-      name: 'productCard',
-      component: ProductCard
+      path: '/productPage/:id',
+      name: 'productPage',
+      component: ProductPage
     },
   ]
 })

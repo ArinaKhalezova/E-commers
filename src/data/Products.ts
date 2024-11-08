@@ -158,38 +158,38 @@ export const products = [
   },
   {
     id: '13',
-    product_img: Product1,
-    title: 'T-shirt with Tape Details',
+    product_img: Product10,
+    title: 'Polo with Tipping Details',
     rating: '4.5/5',
-    cost: '$120',
+    cost: '$180',
     ratingModel: 4,
+    description:
+      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
+    category: 'Polo',
+    gender: 'Men'
+  },
+  {
+    id: '14',
+    product_img: Product11,
+    title: 'Black Striped T-shirt',
+    rating: '5.0/5',
+    cost: '$120',
+    ratingModel: 5,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'T-shirt',
     gender: 'Men'
   },
   {
-    id: '14',
-    product_img: Product2,
-    title: 'Skinny Fit Jeans',
-    rating: '3.5/5',
-    cost: '$240',
-    ratingModel: 3,
-    description:
-      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'Jeans',
-    gender: 'Men'
-  },
-  {
     id: '15',
-    product_img: Product3,
-    title: 'Checkered Shirt',
+    product_img: Product12,
+    title: 'One Life Graphic T-shirt',
     rating: '4.5/5',
-    cost: '$180',
+    cost: '$260',
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'Shirt',
+    category: 'T-shirt',
     gender: 'Men'
   },
   {
@@ -242,6 +242,42 @@ export const products = [
   },
   {
     id: '20',
+    product_img: Product1,
+    title: 'T-shirt with Tape Details',
+    rating: '4.5/5',
+    cost: '$120',
+    ratingModel: 4,
+    description:
+      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
+    category: 'T-shirt',
+    gender: 'Men'
+  },
+  {
+    id: '21',
+    product_img: Product2,
+    title: 'Skinny Fit Jeans',
+    rating: '3.5/5',
+    cost: '$240',
+    ratingModel: 3,
+    description:
+      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
+    category: 'Jeans',
+    gender: 'Men'
+  },
+  {
+    id: '22',
+    product_img: Product3,
+    title: 'Checkered Shirt',
+    rating: '4.5/5',
+    cost: '$180',
+    ratingModel: 4,
+    description:
+      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
+    category: 'Shirt',
+    gender: 'Men'
+  },
+  {
+    id: '23',
     product_img: Product8,
     title: 'Faded Skinny Jeans',
     rating: '4.5/5',
@@ -253,7 +289,7 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '21',
+    id: '24',
     product_img: Product9,
     title: 'Gradient Graphic T-shirt',
     rating: '3.5/5',
@@ -264,42 +300,6 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men'
   },
-  {
-    id: '22',
-    product_img: Product10,
-    title: 'Polo with Tipping Details',
-    rating: '4.5/5',
-    cost: '$180',
-    ratingModel: 4,
-    description:
-      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'Polo',
-    gender: 'Men'
-  },
-  {
-    id: '23',
-    product_img: Product11,
-    title: 'Black Striped T-shirt',
-    rating: '5.0/5',
-    cost: '$120',
-    ratingModel: 5,
-    description:
-      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'T-shirt',
-    gender: 'Men'
-  },
-  {
-    id: '24',
-    product_img: Product12,
-    title: 'One Life Graphic T-shirt',
-    rating: '4.5/5',
-    cost: '$260',
-    ratingModel: 4,
-    description:
-      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'T-shirt',
-    gender: 'Men'
-  }
 ]
 
 export const newArrivalsSlides = [

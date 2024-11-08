@@ -49,18 +49,23 @@
 }
 @media (min-width: 1024px) {
   .offer_wrap {
+    max-height: 200px;
     display: flex;
     justify-content: space-between;
     padding: 43px 64px;
     align-items: center;
+    margin: 80px 100px -100px;
+    position: relative;
   }
   .offer_wrap h1 {
     font-size: 40px;
-
   }
   .offer_wrap form{
     width: 50%;
     padding: 0 100px;
+  }
+  .container {
+  width: 100%;
   }
 }
 </style>

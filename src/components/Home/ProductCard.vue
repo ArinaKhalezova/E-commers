@@ -15,7 +15,7 @@ const props = defineProps<{
 const router = useRouter()
 
 const goToProduct = (id: string) => {
-  router.push({ name: 'productCard', params: { id } })
+  router.push({ name: 'productPage', params: { id } })
 }
 </script>
 
