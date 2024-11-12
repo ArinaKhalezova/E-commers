@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ReviewsCard from './ReviewsCard.vue'
+import ReviewsCard from '../Home/ReviewsCard.vue'
 import { reviewsData } from '@/data/Reviews' // Исправлен импорт
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
@@ -43,14 +43,19 @@ const ratingModel = ref(5)
 
 <style module>
 .reviews_container {
-  display: grid;
-  gap: 16px;
+ margin: 0 100px
 }
 
-.slide {
+.slide > * {
   border: 1px solid #0000000f;
   border-radius: 20px;
   margin: 0 10px;
+}
+
+.slide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 .reviews_card h2 {

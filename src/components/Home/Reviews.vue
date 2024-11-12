@@ -2,7 +2,7 @@
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import ReviewsCard from '../ProductPage/ReviewsCard.vue';
+import ReviewsCard from './ReviewsCard.vue'
 
 const reviews = [
   {
@@ -34,7 +34,7 @@ const reviews = [
     id: '6',
     title: 'James L.',
     text: '"As someone who`s always on the lookout for unique fashion pieces, I`m thrilled to have stumbled upon Shop.co. The selection of clothes is not only diverse but also on-point with the latest trends.”'
-  },
+  }
 ]
 
 const itemsToShow = ref(1)
@@ -76,7 +76,7 @@ onBeforeUnmount(() => {
       </div>
       <Carousel ref="carouselRef" :items-to-show="itemsToShow" :items-to-scroll="1">
         <Slide v-for="review in reviews" :key="review.id">
-          <ReviewsCard :review="review"/>
+          <ReviewsCard :review="review" />
         </Slide>
       </Carousel>
     </div>

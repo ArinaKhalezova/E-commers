@@ -29,7 +29,6 @@
   font-family: 'Satoshi';
   /* margin: 50px 16px; */
   background-color: var(--light-background-color);
-  border-radius: 20px;
   padding: 27px 0;
 }
 .style_wrap h1 {

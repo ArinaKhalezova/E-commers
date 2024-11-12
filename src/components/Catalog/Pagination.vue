@@ -11,12 +11,23 @@ interface Product {
   rating: string
   cost: string
   ratingModel: number
+  category: string
+  color: string
+  size: string
+  style: string
 }
 
 // Определение props
 const props = defineProps<{
   products: Product[]
   size?: number
+  filters: {
+    price: { min: number, max: number }
+    colors: string[]
+    categories: string[]
+    sizes: string[]
+    styles: string[]
+  }
 }>()
 
 // Состояние

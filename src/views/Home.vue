@@ -19,7 +19,7 @@ import Reviews from '@/components/Home/Reviews.vue'
 .wrapper {
   background-color: #ffffff;
   line-height: 1.5;
-
+  width: auto;
 }
 
 @media (min-width: 1024px) {

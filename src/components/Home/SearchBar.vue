@@ -1,21 +1,26 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { nameOfProducts } from "@/data/Products";
+import { products } from "@/data/products"; // Убедитесь, что путь к файлу с массивом products правильный
+import { useRoute } from 'vue-router';
+
 const input = ref<string>("");
+const route = useRoute();
 
 const filteredList = computed(() => {
-  return nameOfProducts.filter((product) =>
-    product.toLowerCase().includes(input.value.toLowerCase())
+  return products.filter((product) =>
+    product.title.toLowerCase().includes(input.value.toLowerCase())
   );
 });
+
+const productId = route.params.id as string | undefined;
 </script>
 
 <template>
   <div :class="$style.search_container">
     <input type="text" v-model="input" placeholder="Search for products..." :class="$style.search_bar"/>
     <div v-if="input" :class="$style.search_items">
-      <div class="item product" v-for="product in filteredList" :key="product">
-        <a href="/category">{{ product }}</a>
+      <div class="item product" v-for="product in filteredList" :key="product.id">
+        <router-link :to="`/productPage/${product.id}`">{{ product.title }}</router-link>
       </div>
       <div class="item error" v-if="input && !filteredList.length">
         <p>No results found!</p>

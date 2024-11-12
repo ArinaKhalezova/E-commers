@@ -24,7 +24,7 @@ export function generateBreadcrumbs(route: RouteLocationNormalizedLoaded): Bread
     if (product) {
       breadcrumbs.push({ label: product.gender, to: `/assortment` })
       breadcrumbs.push({ label: product.category, to: `/assortment` })
-      breadcrumbs.push({ label: product.title, to: `/productCard/${productId}` })
+      breadcrumbs.push({ label: product.title, to: `/productPage/${productId}` })
     }
   }
 
