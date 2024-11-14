@@ -1,15 +1,22 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
 import { products } from '@/data/Products'
 import { generateBreadcrumbs } from '@/data/Breadcrumbs'
 
 const route = useRoute()
+const router = useRouter()
 const productId = computed(() => route.params.id as string)
 
 const product = computed(() => {
   return products.find((p) => p.id === productId.value)
+})
+
+watch(product,  (prod) => {
+  if (!prod) {
+    router.push('/404')
+  }
 })
 
 const ratingModel = ref(product.value ? product.value.ratingModel : 3)
@@ -54,13 +61,12 @@ const color = ref({
               <!-- style="height: 250px" -->
               <template v-slot:before>
                 <q-tabs v-model="tab" vertical class="text-teal">
-                  <q-tab name="first">
-                    <q-img :src="product.product_img"></q-img>
-                  </q-tab>
-                  <q-tab name="second">
-                    <q-img :src="product.product_img"></q-img>
-                  </q-tab>
-                  <q-tab name="third">
+                  <q-tab 
+                    v-for="name in ['first', 'second', 'third']"
+                    :key="name"
+                    :name="name"
+                    :content-class="$style.thumnail_tab"
+                  >
                     <q-img :src="product.product_img"></q-img>
                   </q-tab>
                 </q-tabs>
@@ -75,15 +81,12 @@ const color = ref({
                   transition-prev="jump-up"
                   transition-next="jump-up"
                 >
-                  <q-tab-panel name="first">
-                    <q-img :src="product.product_img"></q-img>
-                  </q-tab-panel>
 
-                  <q-tab-panel name="second">
-                    <q-img :src="product.product_img"></q-img>
-                  </q-tab-panel>
-
-                  <q-tab-panel name="third">
+                  <q-tab-panel
+                    v-for="name in ['first', 'second', 'third']"
+                    :key="name"
+                    :name="name"
+                  >
                     <q-img :src="product.product_img"></q-img>
                   </q-tab-panel>
                 </q-tab-panels>
@@ -200,6 +203,10 @@ const color = ref({
 
 .product_add {
   padding: 0;
+}
+
+.thumnail_tab {
+  width: 100%;
 }
 
 @media (min-width: 1024px) {
