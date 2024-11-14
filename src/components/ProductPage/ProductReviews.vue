@@ -43,7 +43,7 @@ const ratingModel = ref(5)
 
 <style module>
 .reviews_container {
- margin: 0 100px
+ margin: 0 16px
 }
 
 .slide > * {
@@ -54,8 +54,8 @@ const ratingModel = ref(5)
 
 .slide {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 
 .reviews_card h2 {
@@ -80,22 +80,28 @@ const ratingModel = ref(5)
 }
 
 @media (min-width: 1024px) {
-  .reviews_container {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  .reviews_card {
-    padding: 28px 32px;
-  }
+.reviews_container {
+ margin: 0 100px
+}
 
-  .reviews_card h2 {
-    font-size: 20px;
-    font-weight: 900;
-    padding: 15px 0 12px;
-  }
+.slide {
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
 
-  .reviews_card p {
-    font-size: 16px;
-  }
+.reviews_card h2 {
+  font-size: 16px;
+  padding: 12px 0 8px;
+}
+
+.reviews_card p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.reviews_card {
+  padding: 24px;
+}
+
 }
 </style>

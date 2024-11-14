@@ -34,7 +34,7 @@
 
 <style module>
 .details_container {
-  margin: 0 100px;
+  margin: 0 16px;
 }
 .details_items {
   display: grid;
@@ -52,5 +52,17 @@
 }
 .details_description {
   border-radius: 0px 20px 20px 0px;
+}
+@media (min-width: 1024px) {
+  .details_container {
+    margin: 0 100px;
+  }
+  .details_items {
+    gap: 5px;
+  }
+  .details_items > * {
+    font-size: 16px;
+    padding: 20px;
+  }
 }
 </style>

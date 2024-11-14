@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import SearchBar from './SearchBar.vue'
-
+import BurgerMenu from './BurgerMenu.vue'
 const leftDrawerOpen = ref(false)
 
 const toggleLeftDrawer = () => {
@@ -11,6 +11,9 @@ const toggleLeftDrawer = () => {
 
 <template>
   <div :class="$style.header">
+    <div :class="$style.burger_menu">
+      <BurgerMenu />
+    </div>
     <div :class="$style.header_logo">
       <a href="/">
         <img
@@ -68,46 +71,6 @@ const toggleLeftDrawer = () => {
         <img alt="Search button" src="@/assets/img/account.png" width="24" height="24" />
       </a>
     </div>
-    <div>
-      <q-btn flat :class="$style.burger_menu">
-        <q-icon name="menu" />
-        <q-menu>
-          <a href="#">
-            <q-btn flat label="Shop" :class="$style.navigation_item">
-              <q-icon name="keyboard_arrow_right" />
-              <q-menu>
-                <q-list dense style="min-width: 100px">
-                  <q-item clickable v-close-popup>
-                    <a href="/assortment"><q-item-section>Casual</q-item-section></a>
-                  </q-item>
-                  <q-separator />
-                  <q-item clickable v-close-popup>
-                    <a href="/assortment"><q-item-section>Formal</q-item-section></a>
-                  </q-item>
-                  <q-separator />
-                  <q-item clickable v-close-popup>
-                    <a href="/assortment"><q-item-section>Party</q-item-section></a>
-                  </q-item>
-                  <q-separator />
-                  <q-item clickable v-close-popup>
-                    <a href="/assortment"><q-item-section>Gym</q-item-section></a>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-btn>
-          </a>
-          <a href="#" v-scroll-to="'#products'">
-            <q-btn flat label="New Arrivals" :class="$style.navigation_item" />
-          </a>
-          <a href="#" v-scroll-to="'#reviews'">
-            <q-btn flat label="Reviews" :class="$style.navigation_item" />
-          </a>
-          <a href="#" v-scroll-to="'#offer'">
-            <q-btn flat label="Offer" :class="$style.navigation_item" />
-          </a>
-        </q-menu>
-      </q-btn>
-    </div>
   </div>
 </template>
 
@@ -146,7 +109,6 @@ const toggleLeftDrawer = () => {
 }
 
 @media (max-width: 1024px) {
-
   .header_navigation {
     display: none;
   }
@@ -158,9 +120,9 @@ const toggleLeftDrawer = () => {
   .header {
     margin: 0px;
     padding: 20px 16px;
-    grid-template-columns: 1fr 5fr 1fr 1fr;
-    gap: 10px;
-    justify-items: center;
+    grid-template-columns: 0fr 2fr 4fr 1fr;
+    gap: 20px;
+    justify-items: left;
   }
   .header_search {
     width: 100%;
@@ -168,7 +130,7 @@ const toggleLeftDrawer = () => {
 }
 @media (max-width: 630px) {
   .header {
-    grid-template-columns: 5fr 1fr 0fr;
+    grid-template-columns: 1fr 6fr 1fr;
     gap: 10px;
     justify-items: left;
   }
@@ -178,7 +140,7 @@ const toggleLeftDrawer = () => {
 }
 @media (max-width: 466px) {
   .header {
-    grid-template-columns: 9fr 2.6fr 0fr;
+    grid-template-columns: 1fr 6fr 2fr;
   }
 }
 </style>

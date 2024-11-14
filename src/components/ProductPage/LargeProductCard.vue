@@ -99,7 +99,7 @@ const color = ref({
             <q-rating v-model="ratingModel" size="18px" color="yellow-8" readonly />
             <p>{{ product.rating }}</p>
           </div>
-          <h2>{{ product.cost }}</h2>
+          <h2>{{ '$' + product.cost }}</h2>
           <p>{{ product.description }}</p>
         </div>
         <div :class="$style.product_color">

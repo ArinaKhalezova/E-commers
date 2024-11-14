@@ -218,9 +218,7 @@ onMounted(() => {
     justify-content: center;
     justify-content: space-between;
     padding: 44px 100px;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    /* Центрирование относительно родительского элемента */
+    width: 100%;
   }
 
   .brands>* {
