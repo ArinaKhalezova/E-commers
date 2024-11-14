@@ -65,6 +65,7 @@ const color = ref({
                     v-for="name in ['first', 'second', 'third']"
                     :key="name"
                     :name="name"
+                    :content-class="$style.thumnail_tab"
                   >
                     <q-img :src="product.product_img"></q-img>
                   </q-tab>
@@ -202,6 +203,10 @@ const color = ref({
 
 .product_add {
   padding: 0;
+}
+
+.thumnail_tab {
+  width: 100%;
 }
 
 @media (min-width: 1024px) {
