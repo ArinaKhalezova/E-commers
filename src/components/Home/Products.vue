@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ProductCarousel from './ProductCarousel.vue'
-import { newArrivalsSlides,topSellingSlides } from '@/data/Products'
+import { newArrivalsSlides, topSellingSlides } from '@/data/products'
 import Button from './Button.vue'
 </script>
 
@@ -9,7 +9,7 @@ import Button from './Button.vue'
     <h1>NEW ARRIVALS</h1>
     <ProductCarousel :slides="newArrivalsSlides" />
     <Button></Button>
-    
+
     <h1>TOP SELLING</h1>
     <ProductCarousel :slides="topSellingSlides" />
     <Button></Button>

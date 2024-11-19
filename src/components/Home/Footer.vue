@@ -3,7 +3,7 @@ import Offer from './Offer.vue';
 </script>
 
 <template>
-<Offer />
+<Offer id="offer"/>
   <div :class="$style.footer">
     <div :class="$style.footer_media">
       <img src="/src/assets/img/logo.png" alt="" />

@@ -11,13 +11,22 @@ import Product10 from '/src/assets/img/product10.png'
 import Product11 from '/src/assets/img/product11.png'
 import Product12 from '/src/assets/img/product12.png'
 
+export type TProduct = {
+  id: number
+  product_img: string
+  title: string
+  rating: number
+  cost: number
+  ratingModel: number
+}
+
 export const products = [
   {
-    id: '1',
+    id: 1,
     product_img: Product1,
     title: 'T-shirt with Tape Details',
-    rating: '4.5/5',
-    cost: '120',
+    rating: 4.5,
+    cost: 120,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -25,11 +34,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '2',
+    id: 2,
     product_img: Product2,
     title: 'Skinny Fit Jeans',
-    rating: '3.5/5',
-    cost: '240',
+    rating: 3.5,
+    cost: 240,
     ratingModel: 3,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -37,11 +46,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '3',
+    id: 3,
     product_img: Product3,
     title: 'Checkered Shirt',
-    rating: '4.5/5',
-    cost: '180',
+    rating: 4.5,
+    cost: 180,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -49,11 +58,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '4',
+    id: 4,
     product_img: Product4,
     title: 'Sleeve Striped T-Shirt',
-    rating: '4.5/5',
-    cost: '130',
+    rating: 4.5,
+    cost: 130,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -61,11 +70,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '5',
+    id: 5,
     product_img: Product5,
     title: 'Vertical Striped Shirt',
-    rating: '5/5',
-    cost: '212',
+    rating: 5,
+    cost: 212,
     ratingModel: 5,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -73,11 +82,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '6',
+    id: 6,
     product_img: Product6,
     title: 'Courage Graphic T-shirt',
-    rating: '4/5',
-    cost: '145',
+    rating: 4,
+    cost: 145,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -85,11 +94,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '7',
+    id: 7,
     product_img: Product7,
     title: 'Loose Fit Bermuda Shorts',
-    rating: '3/5',
-    cost: '80',
+    rating: 3,
+    cost: 80,
     ratingModel: 3,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -97,11 +106,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '8',
+    id: 8,
     product_img: Product8,
     title: 'Faded Skinny Jeans',
-    rating: '4.5/5',
-    cost: '210',
+    rating: 4.5,
+    cost: 210,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -109,11 +118,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '9',
+    id: 9,
     product_img: Product9,
     title: 'Gradient Graphic T-shirt',
-    rating: '3.5/5',
-    cost: '145',
+    rating: 3.5,
+    cost: 145,
     ratingModel: 3,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -121,11 +130,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '10',
+    id: 10,
     product_img: Product10,
     title: 'Polo with Tipping Details',
-    rating: '4.5/5',
-    cost: '180',
+    rating: 4.5,
+    cost: 180,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -133,11 +142,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '11',
+    id: 11,
     product_img: Product11,
     title: 'Black Striped T-shirt',
-    rating: '5.0/5',
-    cost: '120',
+    rating: 5.0,
+    cost: 120,
     ratingModel: 5,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -145,11 +154,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '12',
+    id: 12,
     product_img: Product12,
     title: 'One Life Graphic T-shirt',
-    rating: '4.5/5',
-    cost: '260',
+    rating: 4.5,
+    cost: 260,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -157,11 +166,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '13',
+    id: 13,
     product_img: Product10,
     title: 'Polo with Tipping Details',
-    rating: '4.5/5',
-    cost: '180',
+    rating: 4.5,
+    cost: 180,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -169,11 +178,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '14',
+    id: 14,
     product_img: Product11,
     title: 'Black Striped T-shirt',
-    rating: '5.0/5',
-    cost: '120',
+    rating: 5.0,
+    cost: 120,
     ratingModel: 5,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -181,11 +190,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '15',
+    id: 15,
     product_img: Product12,
     title: 'One Life Graphic T-shirt',
-    rating: '4.5/5',
-    cost: '260',
+    rating: 4.5,
+    cost: 260,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -193,11 +202,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '16',
+    id: 16,
     product_img: Product4,
     title: 'Sleeve Striped T-Shirt',
-    rating: '4.5/5',
-    cost: '130',
+    rating: 4.5,
+    cost: 130,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -205,11 +214,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '17',
+    id: 17,
     product_img: Product5,
     title: 'Vertical Striped Shirt',
-    rating: '5/5',
-    cost: '212',
+    rating: 5,
+    cost: 212,
     ratingModel: 5,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -217,11 +226,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '18',
+    id: 18,
     product_img: Product6,
     title: 'Courage Graphic T-shirt',
-    rating: '4/5',
-    cost: '145',
+    rating: 4,
+    cost: 145,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -229,11 +238,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '19',
+    id: 19,
     product_img: Product7,
     title: 'Loose Fit Bermuda Shorts',
-    rating: '3/5',
-    cost: '80',
+    rating: 3,
+    cost: 80,
     ratingModel: 3,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -241,11 +250,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '20',
+    id: 20,
     product_img: Product1,
     title: 'T-shirt with Tape Details',
-    rating: '4.5/5',
-    cost: '120',
+    rating: 4.5,
+    cost: 120,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -253,11 +262,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '21',
+    id: 21,
     product_img: Product2,
     title: 'Skinny Fit Jeans',
-    rating: '3.5/5',
-    cost: '240',
+    rating: 3.5,
+    cost: 240,
     ratingModel: 3,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -265,11 +274,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '22',
+    id: 22,
     product_img: Product3,
     title: 'Checkered Shirt',
-    rating: '4.5/5',
-    cost: '180',
+    rating: 4.5,
+    cost: 180,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -277,11 +286,11 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '23',
+    id: 23,
     product_img: Product8,
     title: 'Faded Skinny Jeans',
-    rating: '4.5/5',
-    cost: '210',
+    rating: 4.5,
+    cost: 210,
     ratingModel: 4,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
@@ -289,85 +298,85 @@ export const products = [
     gender: 'Men'
   },
   {
-    id: '24',
+    id: 24,
     product_img: Product9,
     title: 'Gradient Graphic T-shirt',
-    rating: '3.5/5',
-    cost: '145',
+    rating: 3.5,
+    cost: 145,
     ratingModel: 3,
     description:
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'T-shirt',
     gender: 'Men'
-  },
+  }
 ]
 
 export const newArrivalsSlides = [
   {
-    id: '1',
+    id: 1,
     product_img: Product1,
     title: 'T-shirt with Tape Details',
-    rating: '4.5/5',
-    cost: '120',
+    rating: 4.5,
+    cost: 120,
     ratingModel: 4
   },
   {
-    id: '2',
+    id: 2,
     product_img: Product2,
     title: 'Skinny Fit Jeans',
-    rating: '3.5/5',
-    cost: '240',
+    rating: 3.5,
+    cost: 240,
     ratingModel: 3
   },
   {
-    id: '3',
+    id: 3,
     product_img: Product3,
     title: 'Checkered Shirt',
-    rating: '4.5/5',
-    cost: '180',
+    rating: 4.5,
+    cost: 180,
     ratingModel: 4
   },
   {
-    id: '4',
+    id: 4,
     product_img: Product4,
     title: 'Sleeve Striped T-Shirt',
-    rating: '4.5/5',
-    cost: '130',
+    rating: 4.5,
+    cost: 130,
     ratingModel: 4
   }
 ]
 
 export const topSellingSlides = [
   {
-    id: '5',
+    id: 5,
     product_img: Product5,
     title: 'Vertical Striped Shirt',
-    rating: '5/5',
-    cost: '212',
+    rating: 5,
+    cost: 212,
     ratingModel: 5
   },
   {
-    id: '6',
+    id: 6,
     product_img: Product6,
     title: 'Courage Graphic T-shirt',
-    rating: '4/5',
-    cost: '145',
+    rating: 4,
+    cost: 145,
     ratingModel: 4
   },
   {
-    id: '7',
+    id: 7,
     product_img: Product7,
     title: 'Loose Fit Bermuda Shorts',
-    rating: '3/5',
-    cost: '80',
+    rating: 3,
+    cost: 80,
     ratingModel: 3
   },
   {
-    id: '8',
+    id: 8,
     product_img: Product8,
     title: 'Faded Skinny Jeans',
-    rating: '4.5/5',
-    cost: '210',
+    rating: 4.5,
+    cost: 210,
     ratingModel: 4
   }
 ]

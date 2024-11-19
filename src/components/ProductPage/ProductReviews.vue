@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ReviewsCard from '../Home/ReviewsCard.vue'
-import { reviewsData } from '@/data/Reviews' // Исправлен импорт
+import { reviewsData } from '@/data/reviews' // Исправлен импорт
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 

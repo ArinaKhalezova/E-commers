@@ -1,6 +1,6 @@
 <script setup>
 import ProductCarousel from '../Home/ProductCarousel.vue'
-import { newArrivalsSlides } from '@/data/Products'
+import { newArrivalsSlides } from '@/data/products'
 import Button from '../Home/Button.vue'
 </script>
 

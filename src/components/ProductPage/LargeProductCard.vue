@@ -2,8 +2,8 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
-import { products } from '@/data/Products'
-import { generateBreadcrumbs } from '@/data/Breadcrumbs'
+import { products } from '@/data/products'
+import { generateBreadcrumbs } from '@/data/breadcrumbs'
 
 const route = useRoute()
 const router = useRouter()
@@ -13,7 +13,7 @@ const product = computed(() => {
   return products.find((p) => p.id === productId.value)
 })
 
-watch(product,  (prod) => {
+watch(product, (prod) => {
   if (!prod) {
     router.push('/404')
   }
@@ -61,7 +61,7 @@ const color = ref({
               <!-- style="height: 250px" -->
               <template v-slot:before>
                 <q-tabs v-model="tab" vertical class="text-teal">
-                  <q-tab 
+                  <q-tab
                     v-for="name in ['first', 'second', 'third']"
                     :key="name"
                     :name="name"
@@ -81,7 +81,6 @@ const color = ref({
                   transition-prev="jump-up"
                   transition-next="jump-up"
                 >
-
                   <q-tab-panel
                     v-for="name in ['first', 'second', 'third']"
                     :key="name"
@@ -100,7 +99,7 @@ const color = ref({
           <h1>{{ product.title }}</h1>
           <div :class="$style.product_rating">
             <q-rating v-model="ratingModel" size="18px" color="yellow-8" readonly />
-            <p>{{ product.rating }}</p>
+            <p>{{ product.rating + '/5'}}</p>
           </div>
           <h2>{{ '$' + product.cost }}</h2>
           <p>{{ product.description }}</p>

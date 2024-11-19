@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import { useRouter } from 'vue-router'
+import type { TProduct } from '@/data/products';
 
 const props = defineProps<{
-  product: {
-    id: number
-    product_img: any
-    title: string
-    rating: string
-    cost: number
-    ratingModel: number
-  }
+  product: TProduct
 }>()
 
 const router = useRouter()
@@ -26,7 +20,7 @@ const goToProduct = (id: string) => {
     <h2>{{ product.title }}</h2>
     <div :class="$style.product_rating">
       <q-rating v-model="product.ratingModel" size="18px" color="yellow-8" readonly />
-      <p>{{ product.rating }}</p>
+      <p>{{ product.rating + '/5'}}</p>
     </div>
     <p>{{ '$' + product.cost }}</p>
   </div>
