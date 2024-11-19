@@ -64,7 +64,7 @@ const toggleLeftDrawer = () => {
       <SearchBar />
     </div>
     <div :class="$style.menu">
-      <a href="/assortment">
+      <a href="/cart">
         <img alt="Search button" src="@/assets/img/cart.png" width="24" height="24" />
       </a>
       <a href="/assortment">

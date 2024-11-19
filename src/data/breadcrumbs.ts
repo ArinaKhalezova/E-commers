@@ -18,7 +18,7 @@ export function generateBreadcrumbs(route: RouteLocationNormalizedLoaded): Bread
   breadcrumbs.push({ label: 'Assortment', to: '/assortment' })
 
   // Если текущий маршрут содержит id товара, добавляем характеристики товара в хлебные крошки
-  const productId = route.params.id as string
+  const productId = Number(route.params.id)
   if (productId) {
     const product = products.find(p => p.id === productId)
     if (product) {

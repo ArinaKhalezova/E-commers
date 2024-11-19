@@ -9,7 +9,7 @@ const props = defineProps<{
 
 const router = useRouter()
 
-const goToProduct = (id: string) => {
+const goToProduct = (id: number) => {
   router.push({ name: 'productPage', params: { id } })
 }
 </script>

@@ -3,15 +3,10 @@ import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide } from 'vue3-carousel'
 import ProductCard from './ProductCard.vue'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import type { TProduct } from '@/data/products'
 
 defineProps<{
-  slides: {
-    id: string
-    product_img: string
-    title: string
-    rating: string
-    cost: string
-  }[]
+  slides: TProduct[]
 }>()
 
 const itemsToShow = ref(2)
