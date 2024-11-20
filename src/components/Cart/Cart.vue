@@ -1,17 +1,8 @@
 <template>
   <div :class="$style.cart_items">
     <div :class="$style.cart_product">
-      <div v-for="product in topSellingSlides" :key="product.id">
+      <div v-for="product in topSellingSlides" :key="product.id" :class="$style.product_item">
         <ProductCardCart :product="product" />
-      </div>
-    </div>
-
-    <div :class="$style.cart_actions">
-      <div :class="$style.actions_delete">
-        <button></button>
-      </div>
-      <div>
-        <button></button>
       </div>
     </div>
   </div>
@@ -24,10 +15,16 @@ import { topSellingSlides } from '@/data/products'
 
 <style module>
 .cart_items {
-  display: grid;
+  width: 100%;
+  margin: 0 20px;
 }
+
 .cart_product {
   border: 1px solid var(--light-background-color);
   border-radius: 20px;
+}
+
+.product_item {
+  display: flex;
 }
 </style>

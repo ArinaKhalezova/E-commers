@@ -1,26 +1,38 @@
 <template>
   <div :class="$style.product_container" @click="goToProduct(product.id)">
-    <div :class="$style.product_img">
-      <img :src="product.product_img" alt="Product Image" />
-    </div>
-    <div :class="$style.product_info">
-      <h2>{{ product.title }}</h2>
-      <div :class="$style.product_characteristics">
-        <p>Size: Medium</p>
-        <p>Color: White</p>
-        <!-- <p>{{ 'Size:' + product.size }}</p>
-        <p>{{ 'Color:' + product.color }}</p> -->
+    <div :class="$style.product">
+      <div :class="$style.product_img">
+        <img :src="product.product_img" alt="Product Image" />
       </div>
-      <h3>{{ '$' + product.cost }}</h3>
+      <div :class="$style.product_info">
+        <h2>{{ product.title }}</h2>
+        <div :class="$style.product_characteristics">
+          <p>Size: Medium</p>
+          <p>Color: White</p>
+          <!-- <p>{{ 'Size:' + product.size }}</p>
+        <p>{{ 'Color:' + product.color }}</p> -->
+        </div>
+        <h3>{{ '$' + product.cost }}</h3>
+      </div>
+      <div :class="$style.cart_actions">
+        <div :class="$style.actions_delete">
+          <img src="/src/assets/img/delete.png" alt="" />
+        </div>
+        <div :class="$style.actions_add">
+          <Counter />
+        </div>
+      </div>
     </div>
+    <hr :class="$style.product_line" />
   </div>
-  <hr :class="$style.product_line" />
+  
 </template>
 
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import { useRouter } from 'vue-router'
 import type { TProduct } from '@/data/products'
+import Counter from '../ProductPage/Counter.vue'
 
 const props = defineProps<{
   product: TProduct
@@ -34,9 +46,10 @@ const goToProduct = (id: number) => {
 </script>
 
 <style module>
-.product_container {
+.product {
+  cursor: pointer;
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 5fr 0fr;
   gap: 14px;
   padding: 14px;
 }
@@ -61,5 +74,18 @@ const goToProduct = (id: number) => {
   width: 330px;
   margin: auto;
   border: 1px solid var(--light-background-color);
+}
+.cart_actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: end;
+  padding-right: 16px;
+}
+.actions_delete img {
+  width: 24px;
+}
+.actions_add {
+  width: 155px;
 }
 </style>

@@ -4,6 +4,8 @@ import { useRoute } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
 import { products } from '@/data/products'
 import { generateBreadcrumbs } from '@/data/Breadcrumbs'
+import AddButton from './AddButton.vue'
+import Counter from './Counter.vue'
 
 const route = useRoute()
 const productId = computed(() => Number(route.params.id))
@@ -125,10 +127,7 @@ const color = ref({
         </div>
         <div :class="$style.product_syze">
           <p>Choose Size</p>
-        </div>
-        <div :class="$style.product_add">
-          <div :class="$style.product_add">
-            <div class="q-gutter-xs">
+          <div class="q-gutter-xs">
               <q-chip v-model:selected="size.Small" color="gray" text-color="black"> Small </q-chip>
               <q-chip v-model:selected="size.Medium" color="gray" text-color="black">
                 Medium
@@ -138,7 +137,10 @@ const color = ref({
                 X-Large
               </q-chip>
             </div>
-          </div>
+        </div>
+        <div :class="$style.product_add">
+          <Counter />
+          <AddButton />
         </div>
       </div>
     </div>
@@ -199,7 +201,11 @@ const color = ref({
 }
 
 .product_add {
-  padding: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 38px 0;
+  gap: 20px;
 }
 
 @media (min-width: 1024px) {
@@ -220,5 +226,13 @@ const color = ref({
   .product_info p {
     font-size: 16px;
   }
+
+  .product_add {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 38px 0;
+  gap: 20px;
+}
 }
 </style>

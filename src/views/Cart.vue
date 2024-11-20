@@ -29,7 +29,7 @@ import OrderSummary from '@/components/Cart/OrderSummary.vue'
   .cart_items {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 20px;
+    gap: 40px;
   }
 }
 </style>
