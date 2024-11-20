@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { TReview } from '@/data/reviews.types';
 
 
 const ratingModel = ref(5)
 
 const props = defineProps<{
-  review: {
-    id: string
-    title: string
-    text: string
-  }
+  review: TReview
 }>()
 </script>
 

@@ -1,4 +1,6 @@
-export const reviewsData = [
+import type { TCardReview } from "./reviews.types";
+
+export const reviewsData: TCardReview[] = [
   {
     id_product: '1',
     review: [
