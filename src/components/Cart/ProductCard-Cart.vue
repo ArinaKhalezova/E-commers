@@ -1,31 +1,32 @@
 <template>
-  <div :class="$style.product_container" @click="goToProduct(product.id)">
+  <div :class="$style.product_container">
     <div :class="$style.product">
-      <div :class="$style.product_img">
-        <img :src="product.product_img" alt="Product Image" />
-      </div>
-      <div :class="$style.product_info">
-        <h2>{{ product.title }}</h2>
-        <div :class="$style.product_characteristics">
-          <p>Size: Medium</p>
-          <p>Color: White</p>
-          <!-- <p>{{ 'Size:' + product.size }}</p>
-        <p>{{ 'Color:' + product.color }}</p> -->
+      <div @click="goToProduct(product.id)" :class="$style.product_content">
+        <div :class="$style.product_img">
+          <img :src="product.product_img" alt="Product Image" />
         </div>
-        <h3>{{ '$' + product.cost }}</h3>
+        <div :class="$style.product_info">
+          <h2>{{ product.title }}</h2>
+          <div :class="$style.product_characteristics">
+            <p>Size: Medium</p>
+            <p>Color: White</p>
+            <!-- <p>{{ 'Size:' + product.size }}</p>
+        <p>{{ 'Color:' + product.color }}</p> -->
+          </div>
+          <h3>{{ '$' + product.cost }}</h3>
+        </div>
       </div>
       <div :class="$style.cart_actions">
         <div :class="$style.actions_delete">
           <img src="/src/assets/img/delete.png" alt="" />
         </div>
         <div :class="$style.actions_add">
-          <Counter />
+          <Counter :class="$style.actions_counter"/>
         </div>
       </div>
     </div>
     <hr :class="$style.product_line" />
   </div>
-  
 </template>
 
 <script setup lang="ts">
@@ -48,10 +49,14 @@ const goToProduct = (id: number) => {
 <style module>
 .product {
   cursor: pointer;
-  display: grid;
-  grid-template-columns: 1fr 5fr 0fr;
+  display: flex;
   gap: 14px;
   padding: 14px;
+}
+.product_content {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
 }
 .product_img img {
   width: 99px;
@@ -82,10 +87,20 @@ const goToProduct = (id: number) => {
   align-items: end;
   padding-right: 16px;
 }
+
+.actions_counter {
+  padding: 2.5px 13px;
+}
+.actions_counter p {
+  padding: 7px 13px;
+  font-size: 14px;
+}
+.actions_counter img {
+  width: 12.5px;
+}
+
 .actions_delete img {
   width: 24px;
 }
-.actions_add {
-  width: 155px;
-}
+
 </style>

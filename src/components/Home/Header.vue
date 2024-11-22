@@ -67,7 +67,7 @@ const toggleLeftDrawer = () => {
       <a href="/cart">
         <img alt="Search button" src="@/assets/img/cart.png" width="24" height="24" />
       </a>
-      <a href="/assortment">
+      <a href="/account">
         <img alt="Search button" src="@/assets/img/account.png" width="24" height="24" />
       </a>
     </div>

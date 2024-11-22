@@ -15,15 +15,17 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.16.12",
-    "flowbite": "^2.5.2",
     "flowbite-vue": "^0.1.6",
     "pinia": "^2.1.7",
     "quasar": "^2.17.1",
     "v-dropdown-menu": "^2.0.4",
     "vue": "^3.4.29",
+    "vue-cookies": "^1.8.4",
+    "vue-cookies-ts": "^1.5.19",
     "vue-router": "^4.3.3",
     "vue-scrollto": "^2.20.0",
     "vue3-carousel": "^0.3.4",
+    "vue3-cookies": "^1.0.6",
     "vue3-dropdown-navbar": "^0.1.4"
   },
   "devDependencies": {

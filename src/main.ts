@@ -1,22 +1,17 @@
 import './assets/main.css';
+import './assets/base.css';
+
+import '@quasar/extras/material-icons/material-icons.css';
+import 'quasar/dist/quasar.css'
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { Quasar, type QuasarPluginOptions } from 'quasar';
 
-// Import icon libraries
-import '@quasar/extras/material-icons/material-icons.css';
-
-// Import Quasar css
-import 'quasar/dist/quasar.css'
-
 import App from './App.vue';
 import router from './router';
-
 import VueScrollTo from 'vue-scrollto';
-
-import './assets/base.css';
-
+import VueCookies from 'vue-cookies';
 
 const app = createApp(App);
 
@@ -29,6 +24,8 @@ app.use(router);
 
 app.use(Quasar, quasarOptions);
 
-app.use(VueScrollTo)
+app.use(VueScrollTo);
+
+app.use(VueCookies);
 
 app.mount('#app');

@@ -7,6 +7,7 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import Cart from '@/components/Cart/Cart.vue'
 import OrderSummary from '@/components/Cart/OrderSummary.vue'
