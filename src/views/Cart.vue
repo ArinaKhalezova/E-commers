@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import Cart from '@/components/Cart/Cart.vue'
+import Cart from '@/components/Cart/CartItems.vue'
 import OrderSummary from '@/components/Cart/OrderSummary.vue'
 </script>
 

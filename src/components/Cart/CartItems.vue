@@ -15,8 +15,6 @@ import { topSellingSlides } from '@/data/products'
 
 <style module>
 .cart_items {
-  width: 100%;
-  margin: 0 20px;
 }
 
 .cart_product {

@@ -1,31 +1,35 @@
 <template>
   <div :class="$style.product_container">
-    <div :class="$style.product">
-      <div @click="goToProduct(product.id)" :class="$style.product_content">
-        <div :class="$style.product_img">
-          <img :src="product.product_img" alt="Product Image" />
-        </div>
-        <div :class="$style.product_info">
-          <h2>{{ product.title }}</h2>
-          <div :class="$style.product_characteristics">
-            <p>Size: Medium</p>
-            <p>Color: White</p>
-            <!-- <p>{{ 'Size:' + product.size }}</p>
-        <p>{{ 'Color:' + product.color }}</p> -->
+    <div :class="$style.product_content">
+      <div :class="$style.product_img" @click="goToProduct(product.id)">
+        <img :src="product.product_img" alt="Product Image" />
+      </div>
+      <div :class="$style.product_info">
+        <div :class="$style.product_header">
+          <div :class="$style.product_name">
+            <h2>{{ product.title }}</h2>
           </div>
-          <h3>{{ '$' + product.cost }}</h3>
+          <div :class="$style.product_delete">
+            <img src="/src/assets/img/delete.png" alt="delete" />
+          </div>
+        </div>
+        <div :class="$style.product_characteristics">
+          <p>Size: Medium</p>
+          <p>Color: White</p>
+          <!-- <p>{{ 'Size:' + product.size }}</p>
+        <p>{{ 'Color:' + product.color }}</p> -->
+        </div>
+        <div :class="$style.product_footer">
+          <div :class="$style.product_price">
+            <h3>{{ '$' + product.cost }}</h3>
+          </div>
+          <div :class="$style.product_counter">
+            <Counter :class="$style.actions_counter"/>
+          </div>
         </div>
       </div>
-      <div :class="$style.cart_actions">
-        <div :class="$style.actions_delete">
-          <img src="/src/assets/img/delete.png" alt="" />
-        </div>
-        <div :class="$style.actions_add">
-          <Counter :class="$style.actions_counter"/>
-        </div>
-      </div>
+  
     </div>
-    <hr :class="$style.product_line" />
   </div>
 </template>
 
@@ -47,49 +51,53 @@ const goToProduct = (id: number) => {
 </script>
 
 <style module>
-.product {
-  cursor: pointer;
-  display: flex;
-  gap: 14px;
+.product_container {
+  border-radius: 30px;
   padding: 14px;
 }
 .product_content {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 2fr;
+  gap: 14px;
   align-items: center;
+  line-height: 0;
 }
 .product_img img {
   width: 99px;
 }
-.product_info h2 {
-  font-size: 16px;
+.product_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product_name h2 {
   font-family: 'Satoshi';
+  font-size: 16px;
   font-weight: 900;
 }
-.product_info h3 {
-  font-size: 20px;
-  font-family: 'Satoshi';
-  font-weight: 900;
+.product_delete img {
+  width: 20px;
 }
 .product_characteristics {
+  justify-content: start;
   font-family: 'Satoshi';
   font-size: 12px;
 }
-.product_line {
-  width: 330px;
-  margin: auto;
-  border: 1px solid var(--light-background-color);
+.product_footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 67px;
+  align-items: center;
 }
-.cart_actions {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: end;
-  padding-right: 16px;
+.product_price h3 {
+  font-family: 'Satoshi';
+  font-size: 20px;
+  font-weight: 900;
 }
-
 .actions_counter {
-  padding: 2.5px 13px;
+  width: 105px;
+  gap: 0px;
+  padding: 7.5px 13.5px;
 }
 .actions_counter p {
   padding: 7px 13px;
@@ -98,9 +106,13 @@ const goToProduct = (id: number) => {
 .actions_counter img {
   width: 12.5px;
 }
-
-.actions_delete img {
-  width: 24px;
+.product_line {
+  width: 330px;
+  margin: auto;
+  border: 1px solid var(--light-background-color);
 }
+
+
+
 
 </style>
