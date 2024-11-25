@@ -1,20 +1,23 @@
 <script setup lang="ts">
-
+const props = defineProps<{
+  text: string
+  link: string
+}>()
 </script>
 
 <template>
-  <a href="/assortment" :class="$style.button">View All</a>
+  <a :href="link" :class="$style.button_dark">{{ text }}</a>
 </template>
 
 <style module>
-.button {
+.button_dark {
+  line-height: normal;
+  font-family: 'Satoshi';
   display: flex;
-  margin: 30px auto 54px;
-  color: var(--text-on-light-button-color);
+  color: var(--text-on-dark-button-color);
   font-size: 14px;
-  background-color: var(--light-button-color);
+  background-color: var(--dark-button-color);
   border-radius: 62px;
-  width: calc(100% - 32px);
   height: 52px;
   cursor: pointer;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -23,13 +26,11 @@
 }
 
 @media (min-width: 1024px) {
-  .button {
+  .button_dark {
     font-size: 16px;
-    display: block;
+    /* display: block; */
     width: 218px;
-    margin: 30px auto 54px;
     padding: 15px 80px;
   }
 }
-
 </style>

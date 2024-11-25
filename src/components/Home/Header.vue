@@ -130,10 +130,11 @@ const toggleLeftDrawer = () => {
 }
 @media (max-width: 630px) {
   .header {
-    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-columns: 1fr 6fr 1.3fr;
     gap: 10px;
     justify-items: left;
   }
+
   .header_search {
     display: none;
   }
@@ -141,6 +142,9 @@ const toggleLeftDrawer = () => {
 @media (max-width: 466px) {
   .header {
     grid-template-columns: 1fr 6fr 2fr;
+  }
+  .header :last-child {
+    justify-items: right;
   }
 }
 </style>

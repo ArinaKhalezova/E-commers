@@ -24,11 +24,10 @@
             <h3>{{ '$' + product.cost }}</h3>
           </div>
           <div :class="$style.product_counter">
-            <Counter :class="$style.actions_counter"/>
+            <Counter :class="$style.actions_counter" />
           </div>
         </div>
       </div>
-  
     </div>
   </div>
 </template>
@@ -57,10 +56,10 @@ const goToProduct = (id: number) => {
 }
 .product_content {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 4fr;
   gap: 14px;
   align-items: center;
-  line-height: 0;
+  line-height: 1;
 }
 .product_img img {
   width: 99px;
@@ -82,11 +81,11 @@ const goToProduct = (id: number) => {
   justify-content: start;
   font-family: 'Satoshi';
   font-size: 12px;
+  padding: 4px 0;
 }
 .product_footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 67px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 .product_price h3 {
@@ -111,8 +110,4 @@ const goToProduct = (id: number) => {
   margin: auto;
   border: 1px solid var(--light-background-color);
 }
-
-
-
-
 </style>

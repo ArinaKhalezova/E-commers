@@ -14,15 +14,8 @@ import { topSellingSlides } from '@/data/products'
 </script>
 
 <style module>
-.cart_items {
-}
-
 .cart_product {
   border: 1px solid var(--light-background-color);
   border-radius: 20px;
-}
-
-.product_item {
-  display: flex;
 }
 </style>

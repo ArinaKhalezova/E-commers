@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-
+import ButtonDark from './ButtonDark.vue'
 onMounted(() => {
   console.log(
     getComputedStyle(document.documentElement).getPropertyValue('--text-on-light-button-color')
@@ -19,7 +19,7 @@ onMounted(() => {
             Browse through our diverse range of meticulously crafted garments, designed <br />
             to bring out your individuality and cater to your sense of style.
           </p>
-          <a href="/assortment" :class="$style.button">Shop Now</a>
+          <ButtonDark link="/assortment" text="Shop Now" :class="$style.button"></ButtonDark>
         </div>
         <div :class="$style.features">
           <div :class="$style.feature_one">
@@ -42,11 +42,41 @@ onMounted(() => {
     </div>
 
     <div :class="$style.brands">
-      <img src="/src/assets/img/versace.png" alt="" width="116.74" height="23.25" :class="$style.brand_one" />
-      <img src="/src/assets/img/zara.png" alt="" width="63.81" height="26.65" :class="$style.brand_two" />
-      <img src="/src/assets/img/gucci.png" alt="" width="109.39" height="25.24" :class="$style.brand_three" />
-      <img src="/src/assets/img/prada.png" alt="" width="127" height="21" :class="$style.brand_four" />
-      <img src="/src/assets/img/calvin_klein.png" alt="" width="134.84" height="21.75" class="brand_five" />
+      <img
+        src="/src/assets/img/versace.png"
+        alt=""
+        width="116.74"
+        height="23.25"
+        :class="$style.brand_one"
+      />
+      <img
+        src="/src/assets/img/zara.png"
+        alt=""
+        width="63.81"
+        height="26.65"
+        :class="$style.brand_two"
+      />
+      <img
+        src="/src/assets/img/gucci.png"
+        alt=""
+        width="109.39"
+        height="25.24"
+        :class="$style.brand_three"
+      />
+      <img
+        src="/src/assets/img/prada.png"
+        alt=""
+        width="127"
+        height="21"
+        :class="$style.brand_four"
+      />
+      <img
+        src="/src/assets/img/calvin_klein.png"
+        alt=""
+        width="134.84"
+        height="21.75"
+        class="brand_five"
+      />
     </div>
   </div>
 </template>
@@ -89,7 +119,7 @@ onMounted(() => {
   font-weight: 900;
 }
 
-.features>* {
+.features > * {
   color: var(--subtitle-color);
   margin: 14px 27px 14px 0;
 }
@@ -105,15 +135,10 @@ onMounted(() => {
 }
 
 .button {
-  color: var(--text-on-dark-button-color);
   font-size: 16px;
-  background-color: var(--dark-button-color);
-  border-radius: 62px;
   width: 100%;
   height: 52px;
-  cursor: pointer;
-  text-align: center;
-  padding: 15px;
+  padding: 10px;
 }
 
 .heading_img {
@@ -145,7 +170,7 @@ onMounted(() => {
   width: 100%;
 }
 
-.brands>* {
+.brands > * {
   margin: 10px 16px;
 }
 
@@ -221,7 +246,7 @@ onMounted(() => {
     width: 100%;
   }
 
-  .brands>* {
+  .brands > * {
     transform: scale(1.5);
   }
 }

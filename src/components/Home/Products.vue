@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import ProductCarousel from './ProductCarousel.vue'
 import { newArrivalsSlides, topSellingSlides } from '@/data/products'
-import Button from './Button.vue'
+import ButtonLight from './ButtonLight.vue';
 </script>
 
 <template>
   <div :class="$style.products_wrap">
     <h1>NEW ARRIVALS</h1>
     <ProductCarousel :slides="newArrivalsSlides" />
-    <Button></Button>
+    <ButtonLight link="/assortment" text="View All" :class="$style.products_btn"></ButtonLight>
 
     <h1>TOP SELLING</h1>
     <ProductCarousel :slides="topSellingSlides" />
-    <Button></Button>
+    <ButtonLight link="/assortment" text="View All" :class="$style.products_btn"></ButtonLight>
   </div>
 </template>
 
@@ -25,7 +25,10 @@ h1 {
   display: flex;
   justify-content: center;
 }
-
+.products_btn {
+  margin: 30px auto 54px;
+  width: calc(100% - 32px);
+}
 @media (min-width: 1024px) {
   .products_wrap {
     margin: 0 100px;
@@ -33,6 +36,10 @@ h1 {
   h1 {
     font-size: 48px;
     margin: 70px 0 52px;
+  }
+  .products_btn {
+    margin: 30px auto 54px;
+    width: 218px;
   }
 }
 </style>

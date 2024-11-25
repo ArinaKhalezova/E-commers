@@ -3,19 +3,31 @@
     <h1>STAY UPTO DATE ABOUT OUR LATEST OFFERS</h1>
     <form action="" @submit="handleSubmit">
       <div :class="$style.offer_input">
-        <input type="text" placeholder="Enter your email address" name="mail" required @blur="isEmailTouched = true"
-          :class="$style.container" v-model="email"/>
+        <input
+          type="text"
+          placeholder="Enter your email address"
+          name="mail"
+          required
+          @blur="isEmailTouched = true"
+          :class="$style.container"
+          v-model="email"
+        />
       </div>
       <div :class="$style.offer_input">
-        <input type="submit" value="Subscribe to Newsletter" :class="$style.container" @click="getCookie"/>
+        <input
+          type="submit"
+          value="Subscribe to Newsletter"
+          :class="$style.container"
+          @click="getCookie"
+        />
+      </div>
+      <div v-if="showSuccessPopup" style="color: lightgreen; margin-top: 10px">
+        Успешно! Вы подписаны на рассылку.
+      </div>
+      <div v-if="showErrorPopup" style="color: lightcoral; margin-top: 10px">
+        Ошибка! Пожалуйста, проверьте правильность введенного email.
       </div>
     </form>
-    <div v-if="showSuccessPopup" style="color: green; margin-top: 10px;">
-      Успешно! Вы подписаны на рассылку.
-    </div>
-    <div v-if="showErrorPopup" style="color: lightcoral; margin-top: 10px;">
-      Ошибка! Пожалуйста, проверьте правильность введенного email.
-    </div>
   </div>
 </template>
 
@@ -25,7 +37,7 @@ import { useCookies } from 'vue3-cookies'
 
 const { cookies } = useCookies()
 
-const emailCheckRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const emailCheckRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
 const email = ref<string>('')
 const isEmailValid = computed(() => {
@@ -54,19 +66,18 @@ const handleSubmit = (event: Event) => {
 const setEmailCookies = (emailValue: string) => {
   const existingEmails = cookies.get('emails') || ''
   const newEmails = existingEmails ? `${existingEmails},${emailValue}` : emailValue
-  cookies.set('emails', newEmails, { expires: 7 });
+  cookies.set('emails', newEmails, { expires: 7 })
 }
 
 const getCookie = () => {
-  const emailCookie = cookies.get("emails")
+  const emailCookie = cookies.get('emails')
   if (emailCookie) {
     console.log(emailCookie)
   } else {
-    console.log("No email cookie found")
+    console.log('No email cookie found')
   }
 }
 </script>
-
 
 <style module>
 .offer_wrap {
@@ -97,6 +108,7 @@ const getCookie = () => {
   width: 100vmax;
   padding: 11px 48px;
   background-color: var(--base-background-color);
+  outline: none;
 }
 
 @media (min-width: 1024px) {

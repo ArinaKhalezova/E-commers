@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import Button from '../Home/Button.vue'
+import Button from '../Home/ButtonDark.vue'
 const step = ref({
   min: 10,
   max: 300
@@ -45,8 +45,8 @@ const color = ref({
 
 <template>
   <div :class="$style.filters_container">
-    <div class="q-pa-md" style="width: 295px; border-radius: 50px;">
-      <q-list bordered style="border-radius: 20px;">
+    <div class="q-pa-md" style="width: 295px; border-radius: 50px">
+      <q-list bordered style="border-radius: 20px">
         <h2 :class="$style.filter_header">Filters</h2>
         <div class="q-pa-md" :class="$style.filters_category">
           <div class="q-gutter-sm" :class="$style.category_items">
@@ -184,7 +184,7 @@ const color = ref({
   flex-direction: column;
 }
 
-.colors_items > *{
+.colors_items > * {
   margin-right: 9px;
   width: 37px;
   height: 37px;

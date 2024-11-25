@@ -4,8 +4,8 @@ import { useRoute } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
 import { products } from '@/data/products'
 import { generateBreadcrumbs } from '@/data/Breadcrumbs'
-import AddButton from './AddButton.vue'
 import Counter from './Counter.vue'
+import ButtonDark from '../Home/ButtonDark.vue'
 
 const route = useRoute()
 const productId = computed(() => Number(route.params.id))
@@ -99,7 +99,7 @@ const color = ref({
           <h1>{{ product.title }}</h1>
           <div :class="$style.product_rating">
             <q-rating v-model="ratingModel" size="18px" color="yellow-8" readonly />
-            <p>{{ product.rating + '/5'}}</p>
+            <p>{{ product.rating + '/5' }}</p>
           </div>
           <h2>{{ '$' + product.cost }}</h2>
           <p>{{ product.description }}</p>
@@ -128,19 +128,17 @@ const color = ref({
         <div :class="$style.product_syze">
           <p>Choose Size</p>
           <div class="q-gutter-xs">
-              <q-chip v-model:selected="size.Small" color="gray" text-color="black"> Small </q-chip>
-              <q-chip v-model:selected="size.Medium" color="gray" text-color="black">
-                Medium
-              </q-chip>
-              <q-chip v-model:selected="size.Large" color="gray" text-color="black"> Large </q-chip>
-              <q-chip v-model:selected="size.X_Large" color="gray" text-color="black">
-                X-Large
-              </q-chip>
-            </div>
+            <q-chip v-model:selected="size.Small" color="gray" text-color="black"> Small </q-chip>
+            <q-chip v-model:selected="size.Medium" color="gray" text-color="black"> Medium </q-chip>
+            <q-chip v-model:selected="size.Large" color="gray" text-color="black"> Large </q-chip>
+            <q-chip v-model:selected="size.X_Large" color="gray" text-color="black">
+              X-Large
+            </q-chip>
+          </div>
         </div>
         <div :class="$style.product_add">
           <Counter />
-          <AddButton />
+          <ButtonDark link="/cart" text="Add to Cart" :class="$style.button" />
         </div>
       </div>
     </div>
@@ -208,6 +206,13 @@ const color = ref({
   gap: 20px;
 }
 
+.button {
+  display: flex;
+  width: calc(100% - 32px);
+  height: 52px;
+  padding: 14px;
+}
+
 @media (min-width: 1024px) {
   .product_container {
     margin: 0 100px;
@@ -228,11 +233,14 @@ const color = ref({
   }
 
   .product_add {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  margin: 38px 0;
-  gap: 20px;
-}
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin: 38px 0;
+    gap: 20px;
+  }
+  .button {
+    max-width: 400px;
+  }
 }
 </style>

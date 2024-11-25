@@ -17,6 +17,10 @@ import OrderSummary from '@/components/Cart/OrderSummary.vue'
 .cart_container {
   margin: 0 16px 50px;
 }
+.cart_items {
+  display: grid;
+  gap: 20px;
+}
 .cart_container h1 {
   font-size: 32px;
   display: flex;
@@ -28,7 +32,6 @@ import OrderSummary from '@/components/Cart/OrderSummary.vue'
     margin: 0 100px;
   }
   .cart_items {
-    display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 40px;
   }
