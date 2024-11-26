@@ -1,9 +1,3 @@
-<script setup>
-import ProductCarousel from '../Home/ProductCarousel.vue'
-import { newArrivalsSlides } from '@/data/products'
-import Button from '../Home/ButtonDark.vue'
-</script>
-
 <template>
   <div :class="$style.products_wrap">
     <h1>YOU MIGHT ALSO LIKE</h1>
@@ -11,6 +5,12 @@ import Button from '../Home/ButtonDark.vue'
     <!-- <Button></Button> -->
   </div>
 </template>
+
+<script setup>
+import ProductCarousel from '../Home/ProductCarousel.vue'
+import { newArrivalsSlides } from '@/data/products'
+import Button from '../Home/ButtonDark.vue'
+</script>
 
 <style module>
 h1 {

@@ -5,6 +5,6 @@ export type TReview = {
 }
 
 export type TCardReview = {
-  id_product: string;
-  review: TReview[];
+  id_product: string
+  review: TReview[]
 }

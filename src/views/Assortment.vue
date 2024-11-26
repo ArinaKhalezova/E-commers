@@ -1,3 +1,13 @@
+<template>
+  <div :class="$style.assortment_container">
+    <Breadcrumbs :breadcrumbs="breadcrumbs" />
+    <div :class="$style.assortment">
+      <Filters :class="$style.assortment_filters" />
+      <Assortment />
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import Breadcrumbs from '@/components/Catalog/Breadcrumbs.vue'
 import Assortment from '@/components/Catalog/Assortment.vue'
@@ -10,16 +20,6 @@ const breadcrumbs = computed(() => {
   return generateBreadcrumbs(route)
 })
 </script>
-
-<template>
-  <div :class="$style.assortment_container">
-    <Breadcrumbs :breadcrumbs="breadcrumbs" />
-    <div :class="$style.assortment">
-      <Filters :class="$style.assortment_filters" />
-      <Assortment />
-    </div>
-  </div>
-</template>
 
 <style module>
 .assortment_filters {

@@ -1,14 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-import SearchBar from './SearchBar.vue'
-import BurgerMenu from './BurgerMenu.vue'
-const leftDrawerOpen = ref(false)
-
-const toggleLeftDrawer = () => {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
-</script>
-
 <template>
   <div :class="$style.header">
     <div :class="$style.burger_menu">
@@ -73,6 +62,17 @@ const toggleLeftDrawer = () => {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import SearchBar from './SearchBar.vue'
+import BurgerMenu from './BurgerMenu.vue'
+const leftDrawerOpen = ref(false)
+
+const toggleLeftDrawer = () => {
+  leftDrawerOpen.value = !leftDrawerOpen.value
+}
+</script>
 
 <style module>
 .header {

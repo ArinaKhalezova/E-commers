@@ -1,13 +1,13 @@
+<template>
+  <a :href="link" :class="$style.button_light">{{ text }}</a>
+</template>
+
 <script setup lang="ts">
 const props = defineProps<{
   text: string
   link: string
 }>()
 </script>
-
-<template>
-  <a :href="link" :class="$style.button_light">{{ text }}</a>
-</template>
 
 <style module>
 .button_light {

@@ -1,14 +1,3 @@
-<script setup lang="ts">
-import { onMounted } from 'vue'
-import ButtonDark from './ButtonDark.vue'
-onMounted(() => {
-  console.log(
-    getComputedStyle(document.documentElement).getPropertyValue('--text-on-light-button-color')
-  )
-  console.log(getComputedStyle(document.documentElement).getPropertyValue('--light-button-color'))
-})
-</script>
-
 <template>
   <div :class="$style.heading">
     <div :class="$style.heading_wrap">
@@ -80,6 +69,17 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import ButtonDark from './ButtonDark.vue'
+onMounted(() => {
+  console.log(
+    getComputedStyle(document.documentElement).getPropertyValue('--text-on-light-button-color')
+  )
+  console.log(getComputedStyle(document.documentElement).getPropertyValue('--light-button-color'))
+})
+</script>
 
 <style module>
 .heading_wrap {

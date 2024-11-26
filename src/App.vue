@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-import Header from './components/Home/Header.vue'
-import Footer from './components/Home/Footer.vue'
-</script>
-
 <template>
   <div>
     <Header />
@@ -11,6 +5,12 @@ import Footer from './components/Home/Footer.vue'
     <Footer />
   </div>
 </template>
+
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+import Header from './components/Home/Header.vue'
+import Footer from './components/Home/Footer.vue'
+</script>
 
 <style scoped>
 @media (min-width: 1024px) {

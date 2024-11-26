@@ -1,3 +1,14 @@
+<template>
+  <Carousel
+    :items-to-show="itemsToShow"
+    :items-to-scroll="2"
+  >
+    <Slide v-for="slide in slides" :key="slide.id" class="slide">
+      <ProductCard :product="slide" />
+    </Slide>
+  </Carousel>
+</template>
+
 <script setup lang="ts">
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide } from 'vue3-carousel'
@@ -38,17 +49,6 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', updateItemsToShow)
 })
 </script>
-
-<template>
-  <Carousel
-    :items-to-show="itemsToShow"
-    :items-to-scroll="2"
-  >
-    <Slide v-for="slide in slides" :key="slide.id" class="slide">
-      <ProductCard :product="slide" />
-    </Slide>
-  </Carousel>
-</template>
 
 <style module>
 .slide {

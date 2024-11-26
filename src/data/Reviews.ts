@@ -1,4 +1,4 @@
-import type { TCardReview } from "./reviews.types";
+import type { TCardReview } from './reviews.types'
 
 export const reviewsData: TCardReview[] = [
   {

@@ -1,3 +1,26 @@
+<template>
+  <div :class="$style.reviews_wrap">
+    <div :class="$style.carousel_container">
+      <div :class="$style.carousel_controls">
+        <h1>OUR HAPPY CUSTOMERS</h1>
+        <div :class="$style.carousel_controls_item">
+          <button @click="carouselRef.prev()">
+            <img src="/src/assets/img/arrow_left.png" alt="Previous" />
+          </button>
+          <button @click="carouselRef.next()">
+            <img src="/src/assets/img/arrow_right.png" alt="Next" />
+          </button>
+        </div>
+      </div>
+      <Carousel ref="carouselRef" :items-to-show="itemsToShow" :items-to-scroll="1">
+        <Slide v-for="review in reviews" :key="review.id">
+          <ReviewsCard :review="review" />
+        </Slide>
+      </Carousel>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
@@ -33,29 +56,6 @@ export default {
  name: "HomeReviews"
 }
 </script>
-
-<template>
-  <div :class="$style.reviews_wrap">
-    <div :class="$style.carousel_container">
-      <div :class="$style.carousel_controls">
-        <h1>OUR HAPPY CUSTOMERS</h1>
-        <div :class="$style.carousel_controls_item">
-          <button @click="carouselRef.prev()">
-            <img src="/src/assets/img/arrow_left.png" alt="Previous" />
-          </button>
-          <button @click="carouselRef.next()">
-            <img src="/src/assets/img/arrow_right.png" alt="Next" />
-          </button>
-        </div>
-      </div>
-      <Carousel ref="carouselRef" :items-to-show="itemsToShow" :items-to-scroll="1">
-        <Slide v-for="review in reviews" :key="review.id">
-          <ReviewsCard :review="review" />
-        </Slide>
-      </Carousel>
-    </div>
-  </div>
-</template>
 
 <style module>
 .reviews_wrap h1 {

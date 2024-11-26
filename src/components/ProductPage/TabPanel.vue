@@ -1,11 +1,3 @@
-<script setup>
-import { ref } from 'vue'
-import ProductReviews from './ProductReviews.vue';
-import ProductDetails from './ProductDetails.vue';
-
-const tab = ref('Rating & Reviews');
-</script>
-
 <template>
   <div class="q-pa-md">
     <div>
@@ -44,3 +36,11 @@ const tab = ref('Rating & Reviews');
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import ProductReviews from './ProductReviews.vue';
+import ProductDetails from './ProductDetails.vue';
+
+const tab = ref('Rating & Reviews');
+</script>

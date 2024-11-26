@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <div :class="$style.style_wrap">
     <h1>BROWSE BY DRESS STYLE</h1>
@@ -23,6 +21,8 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts"></script>
 
 <style module>
 .style_wrap {

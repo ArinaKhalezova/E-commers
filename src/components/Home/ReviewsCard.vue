@@ -1,3 +1,16 @@
+<template>
+  <div :class="$style.slide">
+    <div :class="$style.reviews_card">
+      <div :class="$style.product_rating">
+        <q-rating v-model="ratingModel" size="25px" color="yellow-8" readonly />
+      </div>
+      <!-- <img src="/src/assets/img/stars.png" alt="" width="138px" /> -->
+      <h2>{{ review.title }}</h2>
+      <p>{{ review.text }}</p>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { TReview } from '@/data/reviews.types';
@@ -10,19 +23,6 @@ const props = defineProps<{
 }>()
 </script>
 
-<template>
-  <div :class="$style.slide">
-    <div :class="$style.reviews_card">
-      <div :class="$style.product_rating">
-        <q-rating v-model="ratingModel" size="25px" color="yellow-8" readonly />
-      </div>
-      <!-- <img src="/src/assets/img/stars.png" alt="" width="138px" /> -->
-      <h2>{{ review.title }}</h2>
-      <p>{{ review.text }}</p>
-    </div>
-  </div>
-
-</template>
 
 <style module>
 .slide {

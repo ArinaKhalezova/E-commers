@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <div>
     <q-btn flat>
@@ -42,6 +40,8 @@
     </q-btn>
   </div>
 </template>
+
+<script setup lang="ts"></script>
 
 <style module>
 .navigation_container {

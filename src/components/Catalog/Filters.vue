@@ -1,48 +1,3 @@
-<script setup lang="ts">
-import { computed, ref } from 'vue'
-import Button from '../Home/ButtonDark.vue'
-const step = ref({
-  min: 10,
-  max: 300
-})
-
-const syze = ref({
-  XX_Small: false,
-  X_Small: false,
-  Small: false,
-  Medium: false,
-  Large: false,
-  X_Large: false,
-  XX_Large: false,
-  XXX_Large: false,
-  XXXX_Large: false
-})
-
-const t_shirts = ref(false)
-const shorts = ref(false)
-const shirts = ref(false)
-const hoodie = ref(false)
-const jeans = ref(false)
-
-const casual = ref(false)
-const formal = ref(false)
-const party = ref(false)
-const gym = ref(false)
-
-const color = ref({
-  Green: false,
-  Red: false,
-  Yellow: false,
-  Orange: false,
-  Blue_light: false,
-  Blue: false,
-  Purple: false,
-  Pink: false,
-  White: false,
-  Black: false
-})
-</script>
-
 <template>
   <div :class="$style.filters_container">
     <div class="q-pa-md" style="width: 295px; border-radius: 50px">
@@ -170,6 +125,52 @@ const color = ref({
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import Button from '../Home/ButtonDark.vue'
+const step = ref({
+  min: 10,
+  max: 300
+})
+
+const syze = ref({
+  XX_Small: false,
+  X_Small: false,
+  Small: false,
+  Medium: false,
+  Large: false,
+  X_Large: false,
+  XX_Large: false,
+  XXX_Large: false,
+  XXXX_Large: false
+})
+
+const t_shirts = ref(false)
+const shorts = ref(false)
+const shirts = ref(false)
+const hoodie = ref(false)
+const jeans = ref(false)
+
+const casual = ref(false)
+const formal = ref(false)
+const party = ref(false)
+const gym = ref(false)
+
+const color = ref({
+  Green: false,
+  Red: false,
+  Yellow: false,
+  Orange: false,
+  Blue_light: false,
+  Blue: false,
+  Purple: false,
+  Pink: false,
+  White: false,
+  Black: false
+})
+</script>
+
 
 <style module>
 .filter_header {

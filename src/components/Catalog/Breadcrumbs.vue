@@ -1,12 +1,3 @@
-<script setup lang="ts">
-const props = defineProps({
-  breadcrumbs: {
-    type: Array as () => { label: string; to: string }[],
-    required: true
-  }
-})
-</script>
-
 <template>
   <div :class="$style.breadcrumbs_container">
     <q-breadcrumbs class="text-black" active-color="grey-6">
@@ -22,6 +13,15 @@ const props = defineProps({
     </q-breadcrumbs>
   </div>
 </template>
+
+<script setup lang="ts">
+const props = defineProps({
+  breadcrumbs: {
+    type: Array as () => { label: string; to: string }[],
+    required: true
+  }
+})
+</script>
 
 <style module>
   .breadcrumbs_container {

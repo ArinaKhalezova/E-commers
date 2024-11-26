@@ -1,9 +1,5 @@
-<script setup lang="ts">
-import Offer from './Offer.vue';
-</script>
-
 <template>
-<Offer id="offer"/>
+  <Offer id="offer" />
   <div :class="$style.footer">
     <div :class="$style.footer_media">
       <img src="/src/assets/img/logo.png" alt="" />
@@ -66,6 +62,10 @@ import Offer from './Offer.vue';
   </div>
 </template>
 
+<script setup lang="ts">
+import Offer from './Offer.vue'
+</script>
+
 <style module>
 .footer {
   padding: 18px;
@@ -107,7 +107,7 @@ a {
   font-size: 14px;
   color: var(--subtitle-color);
 }
-a:hover{
+a:hover {
   color: var(--warning-color);
 }
 

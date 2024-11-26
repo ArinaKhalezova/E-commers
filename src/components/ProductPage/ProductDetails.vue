@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <div :class="$style.details_container">
     <div :class="$style.details_items">
@@ -31,6 +29,8 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts"></script>
 
 <style module>
 .details_container {

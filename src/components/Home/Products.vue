@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import ProductCarousel from './ProductCarousel.vue'
-import { newArrivalsSlides, topSellingSlides } from '@/data/products'
-import ButtonLight from './ButtonLight.vue';
-</script>
-
 <template>
   <div :class="$style.products_wrap">
     <h1>NEW ARRIVALS</h1>
@@ -15,6 +9,12 @@ import ButtonLight from './ButtonLight.vue';
     <ButtonLight link="/assortment" text="View All" :class="$style.products_btn"></ButtonLight>
   </div>
 </template>
+
+<script setup lang="ts">
+import ProductCarousel from './ProductCarousel.vue'
+import { newArrivalsSlides, topSellingSlides } from '@/data/products'
+import ButtonLight from './ButtonLight.vue';
+</script>
 
 <style module>
 h1 {

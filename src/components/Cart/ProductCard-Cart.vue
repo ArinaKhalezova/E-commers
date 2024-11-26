@@ -82,6 +82,9 @@ const goToProduct = (id: number) => {
   font-size: 16px;
   font-weight: 900;
 }
+.product_delete {
+  cursor: pointer;
+}
 .product_delete img {
   width: 20px;
 }

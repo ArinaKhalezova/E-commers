@@ -1,3 +1,21 @@
+<template>
+  <div :class="$style.reviews_container">
+    <div :class="$style.slide">
+      <div :class="$style.reviews_card" v-for="review in productReviews" :key="review.id">
+        <div :class="$style.product_rating">
+          <q-rating v-model="ratingModel" size="25px" color="yellow-8" readonly />
+        </div>
+
+        <h2>{{ review.title }}</h2>
+        <p>{{ review.text }}</p>
+      </div>
+    </div>
+    <!-- <div v-for="review in reviews" :key="review.id" :class="$style.reviews_item">
+        <ReviewsCard :review="review"/>
+    </div> -->
+  </div>
+</template>
+
 <script setup lang="ts">
 import ReviewsCard from '../Home/ReviewsCard.vue'
 import { reviewsData } from '@/data/reviews' // Исправлен импорт
@@ -23,23 +41,6 @@ const productReviews = computed(() => {
 const ratingModel = ref(5)
 </script>
 
-<template>
-  <div :class="$style.reviews_container">
-    <div :class="$style.slide">
-      <div :class="$style.reviews_card" v-for="review in productReviews" :key="review.id">
-        <div :class="$style.product_rating">
-          <q-rating v-model="ratingModel" size="25px" color="yellow-8" readonly />
-        </div>
-
-        <h2>{{ review.title }}</h2>
-        <p>{{ review.text }}</p>
-      </div>
-    </div>
-    <!-- <div v-for="review in reviews" :key="review.id" :class="$style.reviews_item">
-        <ReviewsCard :review="review"/>
-    </div> -->
-  </div>
-</template>
 
 <style module>
 .reviews_container {

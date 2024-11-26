@@ -1,3 +1,15 @@
+<template>
+  <div :class="$style.product_card" @click="goToProduct(product.id)">
+    <img :src="product.product_img" alt="Product Image" />
+    <h2>{{ product.title }}</h2>
+    <div :class="$style.product_rating">
+      <q-rating v-model="product.ratingModel" size="18px" color="yellow-8" readonly />
+      <p>{{ product.rating + '/5'}}</p>
+    </div>
+    <p>{{ '$' + product.cost }}</p>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import { useRouter } from 'vue-router'
@@ -13,18 +25,6 @@ const goToProduct = (id: number) => {
   router.push({ name: 'productPage', params: { id } })
 }
 </script>
-
-<template>
-  <div :class="$style.product_card" @click="goToProduct(product.id)">
-    <img :src="product.product_img" alt="Product Image" />
-    <h2>{{ product.title }}</h2>
-    <div :class="$style.product_rating">
-      <q-rating v-model="product.ratingModel" size="18px" color="yellow-8" readonly />
-      <p>{{ product.rating + '/5'}}</p>
-    </div>
-    <p>{{ '$' + product.cost }}</p>
-  </div>
-</template>
 
 <style module>
 .product_rating p {

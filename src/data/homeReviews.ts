@@ -1,4 +1,4 @@
-import type { TReview } from "./reviews.types";
+import type { TReview } from './reviews.types'
 
 export const homeReviews: TReview[] = [
   {

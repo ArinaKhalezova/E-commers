@@ -8,8 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import AccountEmails from '@/components/Account/AccountEmails.vue';
-
+import AccountEmails from '@/components/Account/AccountEmails.vue'
 </script>
 
 <style module>
