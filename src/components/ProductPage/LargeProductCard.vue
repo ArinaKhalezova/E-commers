@@ -1,50 +1,3 @@
-<script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
-import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
-import { products } from '@/data/products'
-import { generateBreadcrumbs } from '@/data/Breadcrumbs'
-import Counter from './Counter.vue'
-import ButtonDark from '../Home/ButtonDark.vue'
-
-const route = useRoute()
-const productId = computed(() => Number(route.params.id))
-
-const product = computed(() => {
-  return products.find((p) => p.id === productId.value)
-})
-
-const ratingModel = ref(product.value ? product.value.ratingModel : 3)
-
-const tab = ref('first')
-const splitterModel = ref(20)
-
-const breadcrumbs = computed(() => {
-  return generateBreadcrumbs(route)
-})
-
-// Используем реактивные свойства и вычисляемые свойства внутри <script setup>
-const size = ref({
-  Small: false,
-  Medium: false,
-  Large: false,
-  X_Large: false
-})
-
-const color = ref({
-  Green: false,
-  Red: false,
-  Yellow: false,
-  Orange: false,
-  Blue_light: false,
-  Blue: false,
-  Purple: false,
-  Pink: false,
-  White: false,
-  Black: false
-})
-</script>
-
 <template>
   <div>
     <Breadcrumbs :breadcrumbs="breadcrumbs" />
@@ -138,12 +91,62 @@ const color = ref({
         </div>
         <div :class="$style.product_add">
           <Counter />
-          <ButtonDark link="/cart" text="Add to Cart" :class="$style.button" />
+          <ButtonDark link="#" text="Add to Cart" :class="$style.button" @click="productStore.addProduct(product)" />
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
+import { products } from '@/data/products'
+import { generateBreadcrumbs } from '@/data/Breadcrumbs'
+import Counter from './Counter.vue'
+import ButtonDark from '../Home/ButtonDark.vue'
+import { useProductStore } from '@/stores/productStore'
+
+const productStore = useProductStore();
+
+const route = useRoute()
+const productId = computed(() => Number(route.params.id))
+
+const product = computed(() => {
+  return products.find((p) => p.id === productId.value)
+})
+
+const ratingModel = ref(product.value ? product.value.ratingModel : 3)
+
+const tab = ref('first')
+const splitterModel = ref(20)
+
+const breadcrumbs = computed(() => {
+  return generateBreadcrumbs(route)
+})
+
+// Используем реактивные свойства и вычисляемые свойства внутри <script setup>
+const size = ref({
+  Small: false,
+  Medium: false,
+  Large: false,
+  X_Large: false
+})
+
+const color = ref({
+  Green: false,
+  Red: false,
+  Yellow: false,
+  Orange: false,
+  Blue_light: false,
+  Blue: false,
+  Purple: false,
+  Pink: false,
+  White: false,
+  Black: false
+})
+</script>
 
 <style module>
 .product_container {

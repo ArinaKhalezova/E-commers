@@ -2,22 +2,23 @@
   <div :class="$style.product_container">
     <div :class="$style.product_content">
       <div :class="$style.product_img" @click="goToProduct(product.id)">
-        <img :src="product.product_img" alt="Product Image" />
+        <img :src="product.product_img" :alt="product.title" />
+        <!-- <img :src="product.product_img" alt="Product Image" /> -->
       </div>
       <div :class="$style.product_info">
         <div :class="$style.product_header">
           <div :class="$style.product_name">
             <h2>{{ product.title }}</h2>
           </div>
-          <div :class="$style.product_delete">
+          <div :class="$style.product_delete" @click="productStore.deleteProduct(product.id)">
             <img src="/src/assets/img/delete.png" alt="delete" />
           </div>
         </div>
         <div :class="$style.product_characteristics">
-          <p>Size: Medium</p>
-          <p>Color: White</p>
-          <!-- <p>{{ 'Size:' + product.size }}</p>
-        <p>{{ 'Color:' + product.color }}</p> -->
+          <p>{{ 'Size:' + product.size }}</p>
+          <p>{{ 'Color:' + product.color }}</p>
+          <!-- <p>Size: Medium</p>
+          <p>Color: White</p> -->
         </div>
         <div :class="$style.product_footer">
           <div :class="$style.product_price">
@@ -37,10 +38,17 @@ import { defineProps } from 'vue'
 import { useRouter } from 'vue-router'
 import type { TProduct } from '@/data/products'
 import Counter from '../ProductPage/Counter.vue'
+import { useProductStore } from '@/stores/productStore'
 
-const props = defineProps<{
-  product: TProduct
-}>()
+const productStore = useProductStore();
+
+const props = defineProps({
+  product: {
+    type: Object,
+    required: true,
+    default: () => {}
+  }
+})
 
 const router = useRouter()
 
