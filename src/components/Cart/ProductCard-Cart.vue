@@ -25,12 +25,17 @@
             <h3>{{ '$' + product.cost }}</h3>
           </div>
           <div :class="$style.product_counter">
-            <Counter :class="$style.actions_counter" />
+            <Counter
+              :count="product.quantity"
+              @update:count="updateQuantity"
+              :class="$style.actions_counter"
+            />
           </div>
         </div>
       </div>
     </div>
   </div>
+  <hr :class="$style.product_line" />
 </template>
 
 <script setup lang="ts">
@@ -40,16 +45,15 @@ import type { TProduct } from '@/data/products'
 import Counter from '../ProductPage/Counter.vue'
 import { useProductStore } from '@/stores/productStore'
 
-const productStore = useProductStore();
+const productStore = useProductStore()
 
-const props = defineProps({
-  product: {
-    type: Object,
-    required: true,
-    default: () => {}
-  }
-})
+const props = defineProps<{
+  product: TProduct
+}>()
 
+const updateQuantity = (quantity: number) => {
+  productStore.updateProductQuantity(props.product.id, quantity)
+}
 const router = useRouter()
 
 const goToProduct = (id: number) => {
@@ -68,6 +72,10 @@ const goToProduct = (id: number) => {
   gap: 14px;
   align-items: center;
   line-height: 1;
+}
+.product_img {
+  cursor: pointer;
+  margin: auto;
 }
 .product_img img {
   width: 99px;
@@ -94,6 +102,9 @@ const goToProduct = (id: number) => {
   font-size: 12px;
   padding: 4px 0;
 }
+.product_characteristics > * {
+  padding: 2px 0;
+}
 .product_footer {
   display: flex;
   justify-content: space-between;
@@ -117,7 +128,7 @@ const goToProduct = (id: number) => {
   width: 12.5px;
 }
 .product_line {
-  width: 330px;
+  width: auto;
   margin: auto;
   border: 1px solid var(--light-background-color);
 }

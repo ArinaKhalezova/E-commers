@@ -15,9 +15,15 @@ export type TProduct = {
   id: number
   product_img: string
   title: string
-  rating: number
+  rating?: number
   cost: number
-  ratingModel: number
+  ratingModel?: number
+  description?: string
+  category?: string
+  gender?: string
+  size?: string
+  color?: string
+  quantity: number
 }
 
 export const products = [
@@ -33,7 +39,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'Black'
+    color: 'Black',
+    quantity: 1
   },
   {
     id: 2,
@@ -47,7 +54,8 @@ export const products = [
     category: 'Jeans',
     gender: 'Men',
     size: 'Small',
-    color: 'Blue'
+    color: 'Blue',
+    quantity: 1
   },
   {
     id: 3,
@@ -61,7 +69,8 @@ export const products = [
     category: 'Shirt',
     gender: 'Men',
     size: 'Large',
-    color: 'Red'
+    color: 'Red',
+    quantity: 1
   },
   {
     id: 4,
@@ -75,7 +84,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'X-Large',
-    color: 'Orange'
+    color: 'Orange',
+    quantity: 1
   },
   {
     id: 5,
@@ -89,7 +99,8 @@ export const products = [
     category: 'Shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'Green'
+    color: 'Green',
+    quantity: 1
   },
   {
     id: 6,
@@ -103,7 +114,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'Small',
-    color: 'Orange'
+    color: 'Orange',
+    quantity: 1
   },
   {
     id: 7,
@@ -117,7 +129,8 @@ export const products = [
     category: 'Shorts',
     gender: 'Men',
     size: 'Medium',
-    color: 'Black'
+    color: 'Black',
+    quantity: 1
   },
   {
     id: 8,
@@ -131,7 +144,8 @@ export const products = [
     category: 'Jeans',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 9,
@@ -145,7 +159,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 10,
@@ -159,7 +174,8 @@ export const products = [
     category: 'Polo',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 11,
@@ -173,7 +189,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 12,
@@ -187,7 +204,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 13,
@@ -201,7 +219,8 @@ export const products = [
     category: 'Polo',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 14,
@@ -215,7 +234,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 15,
@@ -229,7 +249,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 16,
@@ -243,7 +264,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 17,
@@ -257,7 +279,8 @@ export const products = [
     category: 'Shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 18,
@@ -271,7 +294,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 19,
@@ -285,7 +309,8 @@ export const products = [
     category: 'Shorts',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 20,
@@ -299,7 +324,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 21,
@@ -313,7 +339,8 @@ export const products = [
     category: 'Jeans',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 22,
@@ -327,7 +354,8 @@ export const products = [
     category: 'Shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 23,
@@ -341,7 +369,8 @@ export const products = [
     category: 'Jeans',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   },
   {
     id: 24,
@@ -355,7 +384,8 @@ export const products = [
     category: 'T-shirt',
     gender: 'Men',
     size: 'Medium',
-    color: 'White'
+    color: 'White',
+    quantity: 1
   }
 ]
 

@@ -8,7 +8,7 @@
             <q-checkbox dense v-model="t_shirts" label="T-shirts" color="black" />
             <q-checkbox dense v-model="shorts" label="Shorts" color="black" />
             <q-checkbox dense v-model="shirts" label="Shirts" color="black" />
-            <q-checkbox dense v-model="hoodie" label="Hoodie" color="black" />
+            <q-checkbox dense v-model="hoodie" label="Polo" color="black" />
             <q-checkbox dense v-model="jeans" label="Jeans" color="black" />
           </div>
         </div>
@@ -118,17 +118,15 @@
           </q-card>
         </q-expansion-item>
 
-        <div :class="$style.filters_button">
-          <Button></Button>
-        </div>
+        <ButtonDark text="Apply" :class="$style.filters_button" />
       </q-list>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import Button from '../Home/ButtonDark.vue'
+import { ref } from 'vue'
+import ButtonDark from '../Home/ButtonDark.vue'
 const step = ref({
   min: 10,
   max: 300
@@ -171,7 +169,6 @@ const color = ref({
 })
 </script>
 
-
 <style module>
 .filter_header {
   padding: 24px;
@@ -208,5 +205,9 @@ const color = ref({
 .style_items {
   display: flex;
   flex-direction: column;
+}
+.filters_button {
+  margin: 10px auto;
+  line-height: 1;
 }
 </style>

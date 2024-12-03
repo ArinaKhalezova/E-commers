@@ -4,25 +4,21 @@
     <div :class="$style.order_summary">
       <div :class="$style.summary_subtotal">
         <h2>Subtotal</h2>
-        <p>$565</p>
-        <!-- <p>{{ '$' + price }}</p> -->
+        <p>{{ '$' + productStore.subtotalCostProducts }}</p>
       </div>
       <div :class="$style.summary_discount">
-        <h2>Discount (-20%)</h2>
-        <p>-$113</p>
-        <!-- <p>{{ '-$' + price }}</p> -->
+        <h2>{{ 'Discount (' + productStore.discount + '%)' }}</h2>
+        <p>{{ '-' + productStore.saleCost + '$' }}</p>
       </div>
       <div :class="$style.summary_delivery">
         <h2>Delivery Fee</h2>
-        <p>$15</p>
-        <!-- <p>{{ '$' + price }}</p> -->
+        <p>{{ '$' + productStore.deliveryCostProducts }}</p>
       </div>
     </div>
     <hr :class="$style.line" />
     <div :class="$style.order_total">
       <h2>Total</h2>
-      <p>$467</p>
-      <!-- <p>{{ '$' + price }}</p> -->
+      <p>{{ '$' + productStore.totalCostProducts }}</p>
     </div>
     <div :class="$style.order_promocode">
       <input
@@ -30,17 +26,23 @@
         placeholder="Add promo code"
         name="promocode"
         required
+        v-model="productStore.promo"
         :class="$style.promocode_input"
       />
-      <ButtonDark text="Apply" :class="$style.promocode_btn" />
+      <ButtonDark text="Apply" :class="$style.promocode_btn" light @click="productStore.applyPromoCode"/>
     </div>
     <ButtonDark text="Go to Checkout" :class="$style.order_btn" />
   </div>
 </template>
 
 <script setup lang="ts">
-import ButtonDark from '../Home/ButtonDark.vue';
+import { ref } from 'vue'
+import ButtonDark from '../Home/ButtonDark.vue'
+import { useProductStore } from '@/stores/productStore'
+
+const productStore = useProductStore()
 </script>
+
 <style module>
 .order_container {
   padding: 20px;

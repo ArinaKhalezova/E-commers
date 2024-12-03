@@ -1,24 +1,38 @@
 <template>
   <div :class="$style.counter_container">
-    <button @click="increment" :class="$style.counter_button"><img src="/src/assets/img/minus.png" alt="plus"></button>
-    <p :class="$style.counter_count">{{ count }}</p>
-    <button @click="decrement" :class="$style.counter_button"><img src="/src/assets/img/plus.png" alt="plus"></button>
+    <button @click="decrement" :class="$style.counter_button"><img src="/src/assets/img/minus.png" alt="minus"></button>
+    <p :class="$style.counter_count"> {{ count }} </p>
+    <button @click="increment" :class="$style.counter_button"><img src="/src/assets/img/plus.png" alt="plus"></button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { defineProps, defineEmits, ref, watch } from 'vue'
 
-const count = ref(1)
+const props = defineProps<{
+  count: number
+}>()
+
+const emit = defineEmits<{
+  (e: 'update:count', value: number): void
+}>()
+
+const count = ref(props.count !== undefined ? props.count : 1)
+
+watch(() => props.count, (newCount) => {
+  count.value = newCount
+})
+
 function decrement() {
-  count.value++
+  if (count.value > 1) {
+    count.value--
+    emit('update:count', count.value)
+  }
 }
 
 function increment() {
-  count.value--
-  if (count.value < 1) {
-    count.value = 1
-  }
+  count.value++
+  emit('update:count', count.value)
 }
 </script>
 
