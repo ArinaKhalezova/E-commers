@@ -90,8 +90,12 @@
           </div>
         </div>
         <div :class="$style.product_add">
-          <Counter />
-          <ButtonDark link="#" text="Add to Cart" :class="$style.button" @click="productStore.addProduct(product)" />
+          <Counter
+            v-if="currentProductInCart"
+            :count="currentProductInCart.quantity"
+            @update:count="updateProductQuantity"
+          />
+          <ButtonDark :text="`${!currentProductInCart ? 'Add' : 'Go'} to Cart`" :class="$style.button" @click="onAddProduct" />
         </div>
       </div>
     </div>
@@ -100,7 +104,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
 import { products } from '@/data/products'
 import { generateBreadcrumbs } from '@/data/Breadcrumbs'
@@ -111,6 +115,7 @@ import { useProductStore } from '@/stores/productStore'
 const productStore = useProductStore();
 
 const route = useRoute()
+const router = useRouter()
 const productId = computed(() => Number(route.params.id))
 
 const product = computed(() => {
@@ -125,6 +130,23 @@ const splitterModel = ref(20)
 const breadcrumbs = computed(() => {
   return generateBreadcrumbs(route)
 })
+
+const currentProductInCart = computed(() => productStore.products.find((p) => p.id === productId.value))
+
+const onAddProduct = (event: Event) => {
+  if (!currentProductInCart.value) {
+    event.preventDefault()
+    productStore.addProduct(product.value)
+  } else {
+    router.push('/cart')
+  }
+}
+
+const updateProductQuantity = (quantity: number) => {
+  if (currentProductInCart.value) {
+    productStore.updateProductQuantity(currentProductInCart.value.id, quantity)
+  }
+}
 
 // Используем реактивные свойства и вычисляемые свойства внутри <script setup>
 const size = ref({

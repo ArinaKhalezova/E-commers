@@ -17,22 +17,22 @@ const emit = defineEmits<{
   (e: 'update:count', value: number): void
 }>()
 
-const count = ref(props.count !== undefined ? props.count : 1)
+// const count = ref(props.count !== undefined ? props.count : 1)
 
-watch(() => props.count, (newCount) => {
-  count.value = newCount
-})
+// watch(() => props.count, (newCount) => {
+//   count.value = newCount
+// })
 
 function decrement() {
-  if (count.value > 1) {
-    count.value--
-    emit('update:count', count.value)
-  }
+  // if (count.value > 1) {
+    // count.value--
+    emit('update:count', props.count - 1)
+  // }
 }
 
 function increment() {
-  count.value++
-  emit('update:count', count.value)
+  // count.value++
+  emit('update:count', props.count + 1)
 }
 </script>
 

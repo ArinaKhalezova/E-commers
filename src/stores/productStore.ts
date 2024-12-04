@@ -2,10 +2,21 @@ import type { TProduct } from '@/data/products'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
-// Composition API
-export const useProductStore = defineStore('productStore', () => {
-  const products = ref<TProduct[]>(JSON.parse(localStorage.getItem('products') || '[]'))
 
+const PROMOCODES: Record<string, number> = {
+  newYear: 10,
+  sale: 20
+}
+
+// Composition API
+// ToDo: Use `cart` instead `product`
+export const useProductStore = defineStore('productStore', () => {
+  // State
+  const products = ref<TProduct[]>(JSON.parse(localStorage.getItem('products') || '[]'))
+  const promo = ref('')
+  const discount = ref(0)
+
+  // Getters
   const totalCountProducts = computed(() => products.value.length)
 
   const subtotalCostProducts = computed(() => {
@@ -15,22 +26,6 @@ export const useProductStore = defineStore('productStore', () => {
     saveProducts()
     return subtotal
   })
-
-  const promo = ref('')
-  const discount = ref(0)
-
-  const getSale = (code: string) => {
-    const codes = {
-      newYear: 10,
-      sale: 20
-    }
-
-    return codes[code] != undefined ? codes[code] : 0
-  }
-
-  const applyPromoCode = () => {
-    discount.value = getSale(promo.value)
-  }
 
   const saleCost = computed(() => {
     return (subtotalCostProducts.value * discount.value) / 100
@@ -52,12 +47,26 @@ export const useProductStore = defineStore('productStore', () => {
   })
 
   const totalCostProducts = computed(() => {
-    let price = subtotalCostProducts.value + deliveryCostProducts.value - saleCost.value
+    const price = subtotalCostProducts.value + deliveryCostProducts.value - saleCost.value
     return price
   })
 
+  // Actions
+  const getSale = (code: string): number => {
+    return PROMOCODES[code] ?? 0
+  }
+
+  const applyPromoCode = () => {
+    discount.value = getSale(promo.value)
+  }
+
+  const getProductById = (productId: number) => {
+
+    return products.value.find((product) => product.id === productId)
+  }
+
   const addProduct = (newProduct: TProduct) => {
-    const existingProduct = products.value.find((product) => product.id === newProduct.id)
+    const existingProduct = getProductById(newProduct.id)
 
     if (existingProduct) {
       existingProduct.quantity += 1
@@ -77,9 +86,14 @@ export const useProductStore = defineStore('productStore', () => {
 
   const updateProductQuantity = (id: number, newQuantity: number) => {
     const product = products.value.find((el: any) => el.id === id)
+
     if (product) {
-      product.quantity = newQuantity
-      saveProducts()
+      if (newQuantity > 0) {
+        product.quantity = newQuantity
+        saveProducts()
+      } else {
+        deleteProduct(id)
+      }
     }
   }
 
@@ -91,6 +105,7 @@ export const useProductStore = defineStore('productStore', () => {
     products,
     totalCountProducts,
     addProduct,
+    getProductById,
     deleteProduct,
     updateProductQuantity,
     saveProducts,
