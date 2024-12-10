@@ -30,5 +30,6 @@ import Footer from './components/Home/Footer.vue'
   src:
     local('Satoshi'),
     url(/src/assets/fonts/Satoshi/Satoshi-Regular.ttf) format('truetype');
+
 }
 </style>

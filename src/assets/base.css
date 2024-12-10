@@ -1,6 +1,5 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
-
   --primary: #000000;
   --on-primary: #FFFFFF;
   --secondary: rgba(0, 0, 0, 0.6);
@@ -10,6 +9,9 @@
   --accent-color: #FF3333;
   --accent-color-container: #ff333310;
   --success: #01AB31;
+
+  --vt-c-black-soft: #222222;
+  --vt-c-black-mute: #282828;
 
 }
 
@@ -63,12 +65,14 @@ body {
   transition:
     color 0.5s,
     background-color 0.5s;
+
   /* line-height: 1.6; */
   font-family:
   'IntegralCF',
   'Satoshi',
     Inter,;
   font-size: 14px;
+
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
