@@ -1,35 +1,34 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="style_wrap">
+  <div :class="$style.style_wrap">
     <h1>BROWSE BY DRESS STYLE</h1>
-    <div class="style_items">
-      <div class="style_item">
-        <h2>Casual</h2>
-        <img src="../assets/img/casual.png" alt="" />
-      </div>
-      <div class="style_item">
-        <h2>Formal</h2>
-        <img src="../assets/img/formal.png" alt="" />
-      </div>
-      <div class="style_item">
-        <h2>Party</h2>
-        <img src="../assets/img/party.png" alt="" />
-      </div>
-      <div class="style_item">
-        <h2>Gym</h2>
-        <img src="../assets/img/gym.png" alt="" />
-      </div>
+    <div :class="$style.style_items">
+      <a href="/assortment" :class="$style.style_item">
+          <h2>Casual</h2>
+          <img src="/src/assets/img/casual.png" alt="" />
+      </a>
+      <a href="/assortment" :class="$style.style_item">
+          <h2>Formal</h2>
+          <img src="/src/assets/img/formal.png" alt="" />
+      </a>
+      <a href="/assortment" :class="$style.style_item">
+          <h2>Party</h2>
+          <img src="/src/assets/img/party.png" alt="" />
+      </a>
+      <a href="/assortment" :class="$style.style_item">
+          <h2>Gym</h2>
+          <img src="/src/assets/img/gym.png" alt="" />
+      </a>
     </div>
   </div>
 </template>
 
-<style scoped>
+<script setup lang="ts"></script>
+
+<style module>
 .style_wrap {
   font-family: 'Satoshi';
   /* margin: 50px 16px; */
-  background-color: #f0f0f0;
-  border-radius: 20px;
+  background-color: var(--light-background-color);
   padding: 27px 0;
 }
 .style_wrap h1 {
@@ -39,21 +38,26 @@
   text-align: center;
   margin-bottom: 28px;
   line-height: 1;
+  color: var(--title-color);
 }
 .style_item {
   display: flex;
   justify-content: space-between;
   margin: 16px 24px;
-  background-color: #ffffff;
+  background-color: var(--base-background-color);
   border-radius: 20px;
 }
 .style_item img {
   border-radius: 20px;
 }
 .style_item h2 {
+  color: var(--title-color);
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 900;
   padding: 16px 24px;
+}
+.style_item h2:hover{
+  color: var(--link-color);
 }
 
 @media (min-width: 1024px) {

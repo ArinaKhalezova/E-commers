@@ -1,15 +1,16 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-
-import Menu from './components/Header.vue'
-</script>
-
 <template>
   <div>
-    <Menu></Menu>
+    <Header />
     <RouterView />
+    <Footer />
   </div>
 </template>
+
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+import Header from './components/Home/Header.vue'
+import Footer from './components/Home/Footer.vue'
+</script>
 
 <style scoped>
 @media (min-width: 1024px) {

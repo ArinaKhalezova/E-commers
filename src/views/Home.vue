@@ -1,32 +1,29 @@
-<script setup lang="ts">
-import Heading from '@/components/Heading.vue'
-import Products from '@/components/Products.vue'
-import TopSelling from '@/components/Products.vue'
-import Style from '@/components/BrowesByStyle.vue'
-import Reviews from '@/components/Reviews.vue'
-import Offer from '@/components/Offer.vue'
-import Footer from '@/components/Footer.vue'
-import RatingStars from '@/components/RatingStars.vue'
-</script>
-
 <template>
   <div class="wrapper">
     <Heading />
-    <Products/>
-    <TopSelling />
+    <Products id="products" />
     <Style></Style>
-    <Reviews />
-    <Offer />
-    <RatingStars />
-    <Footer></Footer>
+    <Reviews id="reviews" />
   </div>
 </template>
+
+<script setup lang="ts">
+import Heading from '@/components/Home/Heading.vue'
+import Products from '@/components/Home/Products.vue'
+import Style from '@/components/Home/BrowesByStyle.vue'
+import Reviews from '@/components/Home/Reviews.vue'
+</script>
 
 <style scoped>
 .wrapper {
   background-color: #ffffff;
+  line-height: 1.5;
+  width: auto;
 }
 
 @media (min-width: 1024px) {
+  /* .wrapper {
+    padding: 0 100px;
+  } */
 }
 </style>

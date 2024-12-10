@@ -1,29 +1,28 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="footer">
-    <div class="footer_media">
-      <img src="../assets/img/logo.png" alt="" />
-      <h1>
+  <Offer id="offer" />
+  <div :class="$style.footer">
+    <div :class="$style.footer_media">
+      <img src="/src/assets/img/logo.png" alt="" />
+      <h2>
         We have clothes that suits your style and which you’re proud to wear. From women to men.
-      </h1>
-      <div class="media">
-        <a href="/" class="media">
-          <img src="../assets/img/twitter.png" alt="" />
+      </h2>
+      <div :class="$style.media">
+        <a href="/" :class="$style.media">
+          <img src="/src/assets/img/twitter.png" alt="" />
         </a>
-        <a href="/" class="media">
-          <img src="../assets/img/facebook.png" alt="" />
+        <a href="/" :class="$style.media">
+          <img src="/src/assets/img/facebook.png" alt="" />
         </a>
-        <a href="/" class="media">
-          <img src="../assets/img/instagram.png" alt="" />
+        <a href="/" :class="$style.media">
+          <img src="/src/assets/img/instagram.png" alt="" />
         </a>
-        <a href="/" class="media">
-          <img src="../assets/img/github.png" alt="" />
+        <a href="/" :class="$style.media">
+          <img src="/src/assets/img/github.png" alt="" />
         </a>
       </div>
     </div>
-    <div class="footer_menu">
-      <div class="footer_menu-item">
+    <div :class="$style.footer_menu">
+      <div :class="$style.footer_menu_item">
         <h2>COMPANY</h2>
         <ul>
           <li><a href="">About</a></li>
@@ -32,7 +31,7 @@
           <li><a href="">Career</a></li>
         </ul>
       </div>
-      <div class="footer_menu-item">
+      <div :class="$style.footer_menu_item">
         <h2>HELP</h2>
         <ul>
           <li><a href="">Customer Support</a></li>
@@ -41,7 +40,7 @@
           <li><a href="">Privacy Policy</a></li>
         </ul>
       </div>
-      <div class="footer_menu-item">
+      <div :class="$style.footer_menu_item">
         <h2>FAQ</h2>
         <ul>
           <li><a href="">Account</a></li>
@@ -50,7 +49,7 @@
           <li><a href="">Payment</a></li>
         </ul>
       </div>
-      <div class="footer_menu-item">
+      <div :class="$style.footer_menu_item">
         <h2>RESOURCES</h2>
         <ul>
           <li><a href="">Free eBook</a></li>
@@ -63,21 +62,28 @@
   </div>
 </template>
 
-<style scoped>
+<script setup lang="ts">
+import Offer from './Offer.vue'
+</script>
+
+<style module>
 .footer {
   padding: 18px;
   font-family: 'Satoshi';
-  background-color: #f0f0f0;
+  background-color: var(--light-background-color);
   padding-top: 50px;
 }
-.footer h1 {
-  font-size: 14px;
-  margin: 14px 0 20px;
-}
+
 .footer h2 {
+  color: var(--subtitle-color);
   font-size: 14px;
   font-weight: 500;
   padding-bottom: 5px;
+  line-height: 1.5;
+}
+.footer_menu_item h2 {
+  color: var(--title-color);
+  font-weight: 700;
 }
 .media {
   margin: 20px 0 24px;
@@ -99,29 +105,23 @@ li {
 }
 a {
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--subtitle-color);
+}
+a:hover {
+  color: var(--warning-color);
 }
 
 @media (min-width: 1024px) {
   .footer {
+    padding: 150px 100px 20px;
     display: grid;
     grid-template-columns: 1fr 3fr;
+    column-gap: 100px;
   }
   .footer_menu {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-}
-
-@media (min-width: 1024px) {
-  .footer {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-  }
-  .footer_menu {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 150px 100px;
+    height: 200px;
   }
 }
 </style>

@@ -4,11 +4,16 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
-// https://vitejs.dev/config/
+import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
+
+
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: { transformAssetUrls }
+    }),
     vueDevTools(),
+    quasar()
   ],
   resolve: {
     alias: {
