@@ -1,10 +1,11 @@
 export type TReview = {
-  id: string
+  id: number
   title: string
   text: string
+  ratingModel: number
 }
 
 export type TCardReview = {
-  id_product: string
+  id_product: number
   review: TReview[]
 }

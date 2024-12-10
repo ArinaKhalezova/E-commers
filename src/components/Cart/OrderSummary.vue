@@ -31,7 +31,7 @@
       />
       <ButtonDark text="Apply" :class="$style.promocode_btn" light @click="productStore.applyPromoCode"/>
     </div>
-    <ButtonDark text="Go to Checkout" :class="$style.order_btn" />
+    <ButtonDark link="/ordering" text="Go to Checkout" :class="$style.order_btn" />
   </div>
 </template>
 

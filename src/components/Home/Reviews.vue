@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import { Carousel, Slide } from 'vue3-carousel'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import ReviewsCard from './ReviewsCard.vue'
 import { homeReviews as reviews } from '@/data/homeReviews'
