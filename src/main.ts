@@ -16,7 +16,7 @@ import VueCookies from 'vue-cookies'
 const app = createApp(App)
 
 const quasarOptions: QuasarPluginOptions = {
-  plugins: {} 
+  plugins: {}
 }
 
 app.use(createPinia())
@@ -28,4 +28,15 @@ app.use(VueScrollTo)
 
 app.use(VueCookies)
 
-app.mount('#app')
+async function prepareApp() {
+  if (import.meta.env.MODE === 'development' || import.meta.env.MODE === 'test') {
+    const { worker } = await import('./mocks/browser')
+    return worker.start()
+  }
+
+  return Promise.resolve()
+}
+
+prepareApp().then(() => {
+  app.mount('#app')
+})
