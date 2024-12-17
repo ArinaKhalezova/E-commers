@@ -9,14 +9,24 @@
         <h1>Method of obtaining</h1>
         <div :class="$style.obtaining_items">
           <PlaceholderItem
+
             title="Pick-up points and post offices"
             text="The pick-up points is not selected, free of charge"
+            @click="selectDeliveryMethod('pickup')"
+            :selection="selectedMethod === 'pickup'"
           />
-          <PlaceholderItem title="By courier to the door" text="We will deliver today, from 2$" />
+          <PlaceholderItem
+
+            title="By courier to the door"
+            text="We will deliver today, from 2$"
+            @click="selectDeliveryMethod('courier')"
+            :selection="selectedMethod === 'courier'"
+          />
         </div>
       </div>
       <div :class="$style.delivery_obtaining">
-        <DeliveryOffices />
+        <DeliveryOffices v-if="selectedMethod === 'pickup'" />
+        <DeliveryCourier v-else />
       </div>
     </div>
   </div>
@@ -25,6 +35,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import DeliveryOffices from './DeliveryOffices.vue'
+import DeliveryCourier from './DeliveryCourier.vue'
 import PlaceholderItem from './PlaceholderItem.vue'
 
 const model = ref<string | null>('Samara')
@@ -38,6 +49,13 @@ const options = [
   'Nizhny Novgorod',
   'Chelyabinsk'
 ]
+
+const selectedMethod = ref<'pickup' | 'courier'>('pickup')
+
+const selectDeliveryMethod = (method: 'pickup' | 'courier') => {
+  selectedMethod.value = method
+}
+
 </script>
 
 <style module>
