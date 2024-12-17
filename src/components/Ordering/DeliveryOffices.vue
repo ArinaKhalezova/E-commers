@@ -53,18 +53,14 @@
       <h1>Payment method</h1>
       <div :class="$style.payment_items">
         <PlaceholderItem
-          title="Fast payment system"
-          text="Payment trough the bank application connected to the SBP"
+          title="Payment in cash"
+          text="Upon receipt of the goods, payment will be made in cash"
         />
         <PlaceholderItem
-          title="Installment without overpayment"
-          text="Installment is available for orders from 35$ to 2000$"
+          title="Payment by card or SBP"
+          text="Upon receipt of the goods, payment will be made by card or quick payment system"
         />
-        <PlaceholderItem title="New card online" text="We accept Visa, Mastercard and Mir" />
-        <PlaceholderItem
-          title="Payment In “Shares”"
-          text="25% now - the rest in three payments every two weeks. Service fee is possibleP"
-        />
+        <p>At the moment, payment is available only upon receipt of the order</p>
       </div>
     </div>
     <div></div>
@@ -102,7 +98,7 @@ import PlaceholderItem from './PlaceholderItem.vue'
 }
 .payment_items {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 10px;
 }
 </style>

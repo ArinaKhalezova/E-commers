@@ -2,14 +2,14 @@
   <div :class="$style.ordering_container">
     <h1 :class="$style.ordering_title">Ordering</h1>
     <div :class="$style.ordering_items">
-      <OrderingInfo />
-      <OrderSummary />
+      <OrderingInfo :class="$style.ordering_item_1"/>
+      <OrderCost />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import OrderSummary from '@/components/Cart/OrderSummary.vue';
+import OrderCost from '@/components/Ordering/OrderCost.vue';
 import OrderingInfo from '@/components/Ordering/OrderingInfo.vue'
 </script>
 
@@ -22,6 +22,9 @@ import OrderingInfo from '@/components/Ordering/OrderingInfo.vue'
 }
 .ordering_title {
   margin: 20px 0;
+}
+.ordering_item_1 order_promocode{
+  display: none;
 }
 @media (min-width: 1024px) {
   .ordering_container {
