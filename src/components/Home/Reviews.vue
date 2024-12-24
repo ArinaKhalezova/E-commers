@@ -41,9 +41,19 @@ const updateItemsToShow = () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   updateItemsToShow()
   window.addEventListener('resize', updateItemsToShow)
+
+  try {
+    const response = await fetch('http://localhost:5173/home')
+    if (!response.ok) {
+      throw new Error('Failed to fetch products')
+    }
+    reviews.values = await response.json()
+  } catch (error) {
+    console.error('Error fetching products:', error)
+  }
 })
 
 onBeforeUnmount(() => {
@@ -53,7 +63,7 @@ onBeforeUnmount(() => {
 
 <script lang="ts">
 export default {
- name: "HomeReviews"
+  name: 'HomeReviews'
 }
 </script>
 

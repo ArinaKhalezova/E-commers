@@ -2,14 +2,12 @@
   <div :class="$style.products_wrap">
     <h1>YOU MIGHT ALSO LIKE</h1>
     <ProductCarousel :slides="newArrivalsSlides" />
-    <!-- <Button></Button> -->
   </div>
 </template>
 
 <script setup>
 import ProductCarousel from '../Home/ProductCarousel.vue'
 import { newArrivalsSlides } from '@/data/products'
-import Button from '../Home/ButtonDark.vue'
 </script>
 
 <style module>

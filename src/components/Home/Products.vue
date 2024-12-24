@@ -11,9 +11,24 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import ProductCarousel from './ProductCarousel.vue'
 import { newArrivalsSlides, topSellingSlides } from '@/data/products'
 import ButtonLight from './ButtonLight.vue';
+
+onMounted(async () => {
+  try {
+    const response = await fetch('http://localhost:5173/home')
+    if (!response.ok) {
+      throw new Error('Failed to fetch products')
+    }
+    const data = await response.json()
+    newArrivalsSlides.value = data.newArrivalsSlides
+    topSellingSlides.value = data.topSellingSlides
+  } catch (error) {
+    console.error('Error fetching products:', error)
+  }
+})
 </script>
 
 <style module>

@@ -12,8 +12,7 @@
               name="street"
               required
               :class="$style.recipient_input"
-              @blur="isStreetTouched = true"
-              v-model="orderingStore.street"
+              v-model="street"
             />
           </div>
           <div :class="$style.address_item_2">
@@ -23,7 +22,7 @@
               name="apartament"
               required
               :class="$style.recipient_input"
-               v-model="orderingStore.apartament"
+              v-model="apartament"
             />
             <input
               type="text"
@@ -31,7 +30,7 @@
               name="entrance"
               required
               :class="$style.recipient_input"
-              v-model="orderingStore.entace"
+              v-model="entrance"
             />
           </div>
           <div :class="$style.address_item_3">
@@ -41,7 +40,7 @@
               name="floor"
               required
               :class="$style.recipient_input"
-              v-model="orderingStore.floor"
+              v-model="floor"
             />
             <input
               type="text"
@@ -49,7 +48,7 @@
               name="apartment number"
               required
               :class="$style.recipient_input"
-              v-model="orderingStore.apartament"
+              v-model="apartament"
             />
           </div>
           <div :class="$style.address_item_4">
@@ -59,7 +58,7 @@
               name="comment"
               required
               :class="$style.recipient_input"
-              v-model="orderingStore.comment"
+              v-model="comment"
             />
           </div>
         </div>
@@ -171,7 +170,7 @@
 <script setup lang="ts">
 import { useOrderingStore } from '@/stores/OrderingStore'
 import PlaceholderItem from './PlaceholderItem.vue'
-import ButtonDark from '../Home/ButtonDark.vue';
+import ButtonDark from '../Home/ButtonDark.vue'
 import { ref } from 'vue'
 
 const date = ref('2025/12/20')
@@ -179,33 +178,50 @@ const date = ref('2025/12/20')
 const model = ref<string | null>('9:00 - 13:00')
 const options = ['9:00 - 13:00', '11:00 - 15:00', '13:00 - 17:00', '15:00 - 19:00', '17:00 - 21:00']
 
+const street = ref('')
+const apartament = ref('')
+const entrance = ref('')
+const floor = ref('')
+const comment = ref('')
+
 const orderingStore = useOrderingStore()
 
-const dialog = ref(false);
-const backdropFilter = ref('blur(5px)');
-const countdown = ref(10);
-let intervalId: number | null = null;
+const dialog = ref(false)
+const backdropFilter = ref('blur(5px)')
+const countdown = ref(10)
+let intervalId: number | null = null
 
 const handleOrderClick = (event: Event) => {
-  console.log('Before adding address:', orderingStore.deliveryAddress); // Проверка текущего состояния
-  console.log('After adding address:', orderingStore.deliveryAddress); // Проверка, добавился ли адрес
-  
+
+  const newAddress = {
+    street: street.value,
+    apartament: Number(apartament.value), 
+    entace: Number(entrance.value),
+    floor: Number(floor.value),
+    comment: comment.value
+  }
+
+  orderingStore.saveAddress(newAddress);
+
+  console.log('Before adding address:', orderingStore.deliveryAddress) 
+  console.log('After adding address:', orderingStore.deliveryAddress) 
+
   event.preventDefault()
 
-  dialog.value = true;
+  dialog.value = true
 
-  console.log('Order button clicked');
+  console.log('Order button clicked')
 
-  countdown.value = 10;
+  countdown.value = 10
   intervalId = setInterval(() => {
-    countdown.value--;
+    countdown.value--
 
     if (countdown.value <= 0) {
-      clearInterval(intervalId!);
-      window.location.href = 'successPage';
+      clearInterval(intervalId!)
+      window.location.href = 'successPage'
     }
-  }, 1000);
-};
+  }, 1000)
+}
 </script>
 
 <style module>

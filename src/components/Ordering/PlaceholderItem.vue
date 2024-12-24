@@ -21,7 +21,7 @@ import { ref, watch } from 'vue'
 const props = defineProps<{
   title: string
   text: string
-  selection: boolean
+  selection?: boolean
 }>()
 
 const emit = defineEmits<{

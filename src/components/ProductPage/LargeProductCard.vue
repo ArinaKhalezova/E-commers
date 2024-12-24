@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="product">
     <Breadcrumbs :breadcrumbs="breadcrumbs" />
     <div :class="$style.product_container">
       <div :class="$style.product_img">
@@ -95,15 +95,22 @@
             :count="currentProductInCart.quantity"
             @update:count="updateProductQuantity"
           />
-          <ButtonDark :text="`${!currentProductInCart ? 'Add' : 'Go'} to Cart`" :class="$style.button" @click="onAddProduct" />
+          <ButtonDark
+            :text="`${!currentProductInCart ? 'Add' : 'Go'} to Cart`"
+            :class="$style.button"
+            @click="onAddProduct"
+          />
         </div>
       </div>
     </div>
   </div>
+  <div v-else>
+    <p>Loading...</p>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
 import { products } from '@/data/products'
@@ -112,7 +119,7 @@ import Counter from './Counter.vue'
 import ButtonDark from '../Home/ButtonDark.vue'
 import { useProductStore } from '@/stores/productStore'
 
-const productStore = useProductStore();
+const productStore = useProductStore()
 
 const route = useRoute()
 const router = useRouter()
@@ -131,7 +138,9 @@ const breadcrumbs = computed(() => {
   return generateBreadcrumbs(route)
 })
 
-const currentProductInCart = computed(() => productStore.products.find((p) => p.id === productId.value))
+const currentProductInCart = computed(() =>
+  productStore.products.find((p) => p.id === productId.value)
+)
 
 const onAddProduct = (event: Event) => {
   if (!currentProductInCart.value) {
@@ -148,7 +157,6 @@ const updateProductQuantity = (quantity: number) => {
   }
 }
 
-// Используем реактивные свойства и вычисляемые свойства внутри <script setup>
 const size = ref({
   Small: false,
   Medium: false,
@@ -167,6 +175,24 @@ const color = ref({
   Pink: false,
   White: false,
   Black: false
+})
+
+onMounted(async () => {
+  try {
+    console.log('Fetching product with ID:', productId) // Логируем productId
+    const response = await fetch(`http://localhost:5173/productPage/${productId}`)
+    if (!response.ok) {
+      throw new Error('Failed to fetch product data')
+    }
+    const data = await response.json()
+
+    const productIndex = products.findIndex((p) => p.id === productId.value)
+    if (productIndex !== -1) {
+      products[productIndex] = data.product
+    }
+  } catch (error) {
+    console.error('Error fetching products:', error)
+  }
 })
 </script>
 
