@@ -15,11 +15,13 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.16.12",
+    "@vee-validate/rules": "^4.15.0",
     "flowbite-vue": "^0.1.6",
     "pinia": "^2.1.7",
     "quasar": "^2.17.1",
     "uuid": "^11.0.3",
     "v-dropdown-menu": "^2.0.4",
+    "vee-validate": "^4.15.0",
     "vue": "^3.4.29",
     "vue-cookies": "^1.8.4",
     "vue-cookies-ts": "^1.5.19",

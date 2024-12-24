@@ -8,19 +8,18 @@
       <div :class="$style.delivery_obtaining">
         <h1>Method of obtaining</h1>
         <div :class="$style.obtaining_items">
+          <!-- Bind selection to a reactive variable -->
           <PlaceholderItem
-
             title="Pick-up points and post offices"
             text="The pick-up points is not selected, free of charge"
+            v-model:selection="pickupSelection"
             @click="selectDeliveryMethod('pickup')"
-            :selection="selectedMethod === 'pickup'"
           />
           <PlaceholderItem
-
             title="By courier to the door"
             text="We will deliver today, from 2$"
+            v-model:selection="courierSelection"
             @click="selectDeliveryMethod('courier')"
-            :selection="selectedMethod === 'courier'"
           />
         </div>
       </div>
@@ -33,11 +32,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import DeliveryOffices from './DeliveryOffices.vue'
 import DeliveryCourier from './DeliveryCourier.vue'
 import PlaceholderItem from './PlaceholderItem.vue'
 
+// State for the selected city
 const model = ref<string | null>('Samara')
 const options = [
   'Samara',
@@ -52,10 +52,20 @@ const options = [
 
 const selectedMethod = ref<'pickup' | 'courier'>('pickup')
 
+const pickupSelection = ref(true)
+const courierSelection = ref(false)
+
 const selectDeliveryMethod = (method: 'pickup' | 'courier') => {
   selectedMethod.value = method
-}
 
+  if (method === 'pickup') {
+    pickupSelection.value = true
+    courierSelection.value = false
+  } else if (method === 'courier') {
+    pickupSelection.value = false
+    courierSelection.value = true
+  }
+}
 </script>
 
 <style module>

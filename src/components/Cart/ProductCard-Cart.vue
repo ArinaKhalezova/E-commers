@@ -15,8 +15,8 @@
           </div>
         </div>
         <div :class="$style.product_characteristics">
-          <p>{{ 'Size:' + product.size }}</p>
-          <p>{{ 'Color:' + product.color }}</p>
+          <p>{{ 'Size: ' + product.size }}</p>
+          <p>{{ 'Color: ' + product.color }}</p>
           <!-- <p>Size: Medium</p>
           <p>Color: White</p> -->
         </div>

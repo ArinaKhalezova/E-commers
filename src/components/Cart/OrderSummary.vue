@@ -36,7 +36,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import ButtonDark from '../Home/ButtonDark.vue'
 import { useProductStore } from '@/stores/productStore'
 

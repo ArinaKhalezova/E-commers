@@ -21,28 +21,27 @@ import { ref, watch } from 'vue'
 const props = defineProps<{
   title: string
   text: string
-
-  selection?: boolean
+  selection: boolean
 }>()
 
-const emit = defineEmits(['update:selection'])
+const emit = defineEmits<{
+  (e: 'update:selection', value: boolean): void
+}>()
 
-const localSelection = ref(props.selection || false)
+const localSelection = ref(props.selection)
 
-watch(localSelection, (newVal) => {
-  emit('update:selection', newVal)
+watch(localSelection, (newValue) => {
+  emit('update:selection', newValue)
 })
 
-watch(
-  () => props.selection,
-  (newVal) => {
-    localSelection.value = newVal || false
-  }
-)
+watch(() => props.selection, (newValue) => {
+  localSelection.value = newValue
+})
 </script>
 
 <style module>
 .placeholder_wrap {
+  cursor: pointer;
   font-family: 'Satoshi';
   border: 2px solid var(--placeholder-color);
   border-radius: 20px;
@@ -50,7 +49,7 @@ watch(
 }
 .placeholder_item {
   align-items: center;
-  width: 100%;
+  width: auto;
   border-radius: 20px;
 }
 .placeholder_title {

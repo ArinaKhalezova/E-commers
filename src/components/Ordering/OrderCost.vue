@@ -20,20 +20,49 @@
       <h2>Total</h2>
       <p>{{ '$' + productStore.totalCostProducts }}</p>
     </div>
-    <ButtonDark link="#" text="Create an order" :class="$style.order_btn" @click="showSuccessAlert"/>
+    <ButtonDark link="#" text="Create an order" :class="$style.order_btn" @click="handleOrderClick" />
+
+    <!-- Диалоговое окно -->
+    <q-dialog v-model="dialog" :backdrop-filter="backdropFilter">
+      <q-card>
+        <q-card-section class="row items-center q-pb-none text-h6">
+          Thanks for the order!
+        </q-card-section>
+        <q-card-section>
+          You will be redirected to the order information page in {{ countdown }} seconds...
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import ButtonDark from '../Home/ButtonDark.vue'
-import { useProductStore } from '@/stores/productStore'
+import { ref } from 'vue';
+import ButtonDark from '../Home/ButtonDark.vue';
+import { useProductStore } from '@/stores/productStore';
 
-const productStore = useProductStore()
+const productStore = useProductStore();
 
-const showSuccessAlert = () => {
-  alert('Thanks for the order\!\ You will receive an order notification by email')
-}
+const dialog = ref(false);
+const backdropFilter = ref('blur(5px)');
+const countdown = ref(5);
+let intervalId: number | null = null;
+
+const handleOrderClick = () => {
+  dialog.value = true;
+
+  console.log('Order button clicked');
+
+  countdown.value = 5;
+  intervalId = setInterval(() => {
+    countdown.value--;
+
+    if (countdown.value <= 0) {
+      clearInterval(intervalId!);
+      window.location.href = 'successPage';
+    }
+  }, 1000);
+};
 </script>
 
 <style module>
@@ -44,6 +73,7 @@ const showSuccessAlert = () => {
   border: 1px solid var(--light-background-color);
   border-radius: 20px;
 }
+
 .order_container h1 {
   font-family: 'Satoshi';
   font-size: 20px;
@@ -51,42 +81,51 @@ const showSuccessAlert = () => {
   justify-content: left;
   margin: 0;
 }
+
 .order_summary {
   display: grid;
   gap: 20px;
 }
-.order_summary > * {
+
+.order_summary>* {
   display: flex;
   justify-content: space-between;
 }
+
 .order_summary h2 {
   color: var(--subtitle-color);
   font-family: 'Satoshi';
   font-size: 16px;
   font-weight: 100;
 }
+
 .order_summary p {
   font-family: 'Satoshi';
   font-size: 16px;
   font-weight: 900;
 }
+
 .line {
   width: 100%;
   margin: 20px auto;
   border: 1px solid var(--light-background-color);
 }
+
 .order_total {
   margin-bottom: 16px;
 }
+
 .order_total h2 {
   font-family: 'Satoshi';
   font-size: 20px;
 }
+
 .order_total p {
   font-family: 'Satoshi';
   font-size: 20px;
   font-weight: 900;
 }
+
 .order_total {
   display: flex;
   justify-content: space-between;
@@ -100,6 +139,7 @@ const showSuccessAlert = () => {
   border: none;
   outline: none;
 }
+
 .order_promocode {
   display: grid;
   grid-template-columns: 2fr 1fr;

@@ -12,15 +12,18 @@
               name="street"
               required
               :class="$style.recipient_input"
+              @blur="isStreetTouched = true"
+              v-model="orderingStore.street"
             />
           </div>
           <div :class="$style.address_item_2">
             <input
               type="text"
               placeholder="Enter your apartment/office"
-              name="apartment"
+              name="apartament"
               required
               :class="$style.recipient_input"
+               v-model="orderingStore.apartament"
             />
             <input
               type="text"
@@ -28,6 +31,7 @@
               name="entrance"
               required
               :class="$style.recipient_input"
+              v-model="orderingStore.entace"
             />
           </div>
           <div :class="$style.address_item_3">
@@ -37,6 +41,7 @@
               name="floor"
               required
               :class="$style.recipient_input"
+              v-model="orderingStore.floor"
             />
             <input
               type="text"
@@ -44,6 +49,7 @@
               name="apartment number"
               required
               :class="$style.recipient_input"
+              v-model="orderingStore.apartament"
             />
           </div>
           <div :class="$style.address_item_4">
@@ -53,6 +59,7 @@
               name="comment"
               required
               :class="$style.recipient_input"
+              v-model="orderingStore.comment"
             />
           </div>
         </div>
@@ -65,9 +72,9 @@
             <q-input rounded outlined v-model="date" mask="date" :rules="['date']">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy  cover transition-show="scale" transition-hide="scale">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
                     <q-date v-model="date">
-                      <div class="row items-center justify-end" >
+                      <div class="row items-center justify-end">
                         <q-btn v-close-popup label="Save" color="black" flat />
                       </div>
                     </q-date>
@@ -85,7 +92,7 @@
       <input
         type="text"
         placeholder="Enter your surname"
-        name="surname"
+        name="name"
         required
         :class="$style.recipient_input"
       />
@@ -138,19 +145,67 @@
         <p>At the moment, payment is available only upon receipt of the order</p>
       </div>
     </div>
-    <div></div>
+    <div>
+      <ButtonDark
+        link="#"
+        text="Create an order"
+        :class="$style.order_btn"
+        @click="handleOrderClick"
+      />
+
+      <!-- Диалоговое окно -->
+      <q-dialog v-model="dialog" :backdrop-filter="backdropFilter">
+        <q-card>
+          <q-card-section class="row items-center q-pb-none text-h6">
+            Thanks for the order!
+          </q-card-section>
+          <q-card-section>
+            You will be redirected to the order information page in {{ countdown }} seconds...
+          </q-card-section>
+        </q-card>
+      </q-dialog>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import ButtonDark from '../Home/ButtonDark.vue'
+import { useOrderingStore } from '@/stores/OrderingStore'
 import PlaceholderItem from './PlaceholderItem.vue'
+import ButtonDark from '../Home/ButtonDark.vue';
 import { ref } from 'vue'
 
 const date = ref('2025/12/20')
 
 const model = ref<string | null>('9:00 - 13:00')
 const options = ['9:00 - 13:00', '11:00 - 15:00', '13:00 - 17:00', '15:00 - 19:00', '17:00 - 21:00']
+
+const orderingStore = useOrderingStore()
+
+const dialog = ref(false);
+const backdropFilter = ref('blur(5px)');
+const countdown = ref(10);
+let intervalId: number | null = null;
+
+const handleOrderClick = (event: Event) => {
+  console.log('Before adding address:', orderingStore.deliveryAddress); // Проверка текущего состояния
+  console.log('After adding address:', orderingStore.deliveryAddress); // Проверка, добавился ли адрес
+  
+  event.preventDefault()
+
+  dialog.value = true;
+
+  console.log('Order button clicked');
+
+  countdown.value = 10;
+  intervalId = setInterval(() => {
+    countdown.value--;
+
+    if (countdown.value <= 0) {
+      clearInterval(intervalId!);
+      window.location.href = 'successPage';
+    }
+  }, 1000);
+};
 </script>
 
 <style module>
@@ -199,10 +254,15 @@ const options = ['9:00 - 13:00', '11:00 - 15:00', '13:00 - 17:00', '15:00 - 19:0
   gap: 10px;
 }
 
+.order_btn {
+  margin-top: 16px;
+  width: auto;
+}
+
 @media (min-width: 1024px) {
   .delivery_date {
     grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr;
+    grid-template-rows: 1fr;
     gap: 20px;
   }
 }
