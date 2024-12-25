@@ -136,10 +136,14 @@
         <PlaceholderItem
           title="Payment in cash"
           text="Upon receipt of the goods, payment will be made in cash"
+          :selected="selectedMethod === 'cash'"
+          @click="selectedPaymentMethod('cash')"
         />
         <PlaceholderItem
           title="Payment by card or SBP"
           text="Upon receipt of the goods, payment will be made by card or quick payment system"
+          :selected="selectedMethod === 'card'"
+          @click="selectedPaymentMethod('card')"
         />
         <p>At the moment, payment is available only upon receipt of the order</p>
       </div>
@@ -184,6 +188,12 @@ const entrance = ref('')
 const floor = ref('')
 const comment = ref('')
 
+const selectedMethod = ref<'cash' | 'card'>('cash')
+
+const selectedPaymentMethod = (method: 'cash' | 'card') => {
+  selectedMethod.value = method
+}
+
 const orderingStore = useOrderingStore()
 
 const dialog = ref(false)
@@ -192,19 +202,18 @@ const countdown = ref(10)
 let intervalId: number | null = null
 
 const handleOrderClick = (event: Event) => {
-
   const newAddress = {
     street: street.value,
-    apartament: Number(apartament.value), 
+    apartament: Number(apartament.value),
     entace: Number(entrance.value),
     floor: Number(floor.value),
     comment: comment.value
   }
 
-  orderingStore.saveAddress(newAddress);
+  orderingStore.saveAddress(newAddress)
 
-  console.log('Before adding address:', orderingStore.deliveryAddress) 
-  console.log('After adding address:', orderingStore.deliveryAddress) 
+  console.log('Before adding address:', orderingStore.deliveryAddress)
+  console.log('After adding address:', orderingStore.deliveryAddress)
 
   event.preventDefault()
 

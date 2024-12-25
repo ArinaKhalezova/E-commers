@@ -3,7 +3,7 @@
     <div :class="$style.delivery_address">
       <h1>Delivery address</h1>
       <p>Select the receiving address - we will show the date and cost of delivery</p>
-      <ButtonDark text="To choose" style="width: 100%;"/>
+      <ButtonDark text="To choose" style="width: 100%" />
     </div>
     <div :class="$style.delivery_recipient">
       <h1>Recipient of the order</h1>
@@ -55,10 +55,14 @@
         <PlaceholderItem
           title="Payment in cash"
           text="Upon receipt of the goods, payment will be made in cash"
+          :selected="selectedMethod === 'cash'"
+          @click="selectedPaymentMethod('cash')"
         />
         <PlaceholderItem
           title="Payment by card or SBP"
           text="Upon receipt of the goods, payment will be made by card or quick payment system"
+          :selected="selectedMethod === 'card'"
+          @click="selectedPaymentMethod('card')"
         />
         <p>At the moment, payment is available only upon receipt of the order</p>
       </div>
@@ -68,8 +72,15 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import ButtonDark from '../Home/ButtonDark.vue'
 import PlaceholderItem from './PlaceholderItem.vue'
+
+const selectedMethod = ref<'cash' | 'card'>('cash')
+
+const selectedPaymentMethod = (method: 'cash' | 'card') => {
+  selectedMethod.value = method
+}
 </script>
 
 <style module>

@@ -1,8 +1,8 @@
 <template>
-  <div :class="$style.placeholder_wrap">
+  <div :class="$style.placeholder_wrap" @click="handleClick">
     <q-item tag="label" v-ripple :class="$style.placeholder_item">
       <q-item-section side center>
-        <q-checkbox v-model="localSelection" color="black"></q-checkbox>
+        <q-checkbox :model-value="selected" color="black"></q-checkbox>
       </q-item-section>
 
       <q-item-section>
@@ -21,22 +21,16 @@ import { ref, watch } from 'vue'
 const props = defineProps<{
   title: string
   text: string
-  selection?: boolean
+  selected: boolean
 }>()
 
 const emit = defineEmits<{
-  (e: 'update:selection', value: boolean): void
+  (e: 'click'): void
 }>()
 
-const localSelection = ref(props.selection)
-
-watch(localSelection, (newValue) => {
-  emit('update:selection', newValue)
-})
-
-watch(() => props.selection, (newValue) => {
-  localSelection.value = newValue
-})
+const handleClick = () => {
+  emit('click')
+}
 </script>
 
 <style module>
@@ -49,7 +43,7 @@ watch(() => props.selection, (newValue) => {
 }
 .placeholder_item {
   align-items: center;
-  width: auto;
+  width: 100%;
   border-radius: 20px;
 }
 .placeholder_title {

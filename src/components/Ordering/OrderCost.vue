@@ -20,9 +20,8 @@
       <h2>Total</h2>
       <p>{{ '$' + productStore.totalCostProducts }}</p>
     </div>
-    <ButtonDark link="#" text="Create an order" :class="$style.order_btn" @click="handleOrderClick" />
+    <!-- <ButtonDark link="#" text="Create an order" :class="$style.order_btn" @click="handleOrderClick" />
 
-    <!-- Диалоговое окно -->
     <q-dialog v-model="dialog" :backdrop-filter="backdropFilter">
       <q-card>
         <q-card-section class="row items-center q-pb-none text-h6">
@@ -32,7 +31,7 @@
           You will be redirected to the order information page in {{ countdown }} seconds...
         </q-card-section>
       </q-card>
-    </q-dialog>
+    </q-dialog> -->
   </div>
 </template>
 
