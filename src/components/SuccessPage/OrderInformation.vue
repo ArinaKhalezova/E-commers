@@ -21,10 +21,9 @@
         </div>
       </div>
     </div>
-    <div>
+    <div :class="$style.order_address">
       <h2>Your adress</h2>
-      <div v-if="orderingStore.deliveryAddress">
-        <h3>Saved Address:</h3>
+      <div v-if="orderingStore.deliveryAddress" :class="$style.address_items">
         <p>Street: {{ orderingStore.deliveryAddress.street }}</p>
         <p>Apartament: {{ orderingStore.deliveryAddress.apartament }}</p>
         <p>Entrance: {{ orderingStore.deliveryAddress.entace }}</p>
@@ -86,13 +85,23 @@ const props = defineProps<{
   border-radius: 20px;
   padding: 20px;
   margin: 20px;
+  min-width: 400px;
 }
 .products_items img {
   width: 100px;
 }
-.products_info h2{
-font-family: 'Satoshi';
-font-size: 20px;
-margin-bottom: 10px;
+.products_info h2 {
+  font-family: 'Satoshi';
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.order_address {
+  font-family: 'Satoshi';
+}
+.address_items {
+  background-color: var(--placeholder-color);
+  border-radius: 20px;
+  padding: 20px;
+  min-width: 400px;
 }
 </style>
