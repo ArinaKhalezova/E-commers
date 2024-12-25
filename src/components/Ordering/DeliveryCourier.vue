@@ -172,7 +172,8 @@
 </template>
 
 <script setup lang="ts">
-import { useOrderingStore } from '@/stores/OrderingStore'
+import { useOrderingStore } from '@/stores/orderingStore'
+// import { useRouter } from 'vue-router'
 import PlaceholderItem from './PlaceholderItem.vue'
 import ButtonDark from '../Home/ButtonDark.vue'
 import { ref } from 'vue'
@@ -201,6 +202,8 @@ const backdropFilter = ref('blur(5px)')
 const countdown = ref(10)
 let intervalId: number | null = null
 
+// const router = useRouter()
+
 const handleOrderClick = (event: Event) => {
   const newAddress = {
     street: street.value,
@@ -212,21 +215,16 @@ const handleOrderClick = (event: Event) => {
 
   orderingStore.saveAddress(newAddress)
 
-  console.log('Before adding address:', orderingStore.deliveryAddress)
-  console.log('After adding address:', orderingStore.deliveryAddress)
+  console.log('Saved address:', orderingStore.deliveryAddress)
 
   event.preventDefault()
-
   dialog.value = true
-
-  console.log('Order button clicked')
-
   countdown.value = 10
   intervalId = setInterval(() => {
     countdown.value--
-
     if (countdown.value <= 0) {
       clearInterval(intervalId!)
+      // router.push('/successPage')
       window.location.href = 'successPage'
     }
   }, 1000)

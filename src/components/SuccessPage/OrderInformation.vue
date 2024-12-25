@@ -41,12 +41,12 @@
 <script setup lang="ts">
 import type { TProduct } from '@/data/products'
 import { useProductStore } from '@/stores/productStore'
-import { useOrderingStore } from '@/stores/OrderingStore'
+import { useOrderingStore } from '@/stores/orderingStore'
 
 const productStore = useProductStore()
 const orderingStore = useOrderingStore()
 
-console.log('Address:', orderingStore.deliveryAddress)
+console.log('Address from store:', orderingStore.deliveryAddress)
 
 const props = defineProps<{
   product: TProduct

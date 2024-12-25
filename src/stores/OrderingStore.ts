@@ -14,6 +14,12 @@ export const useOrderingStore = defineStore('orderingStore', () => {
 
   const saveAddress = (newAddress: DeliveryAddress) => {
     deliveryAddress.value = newAddress
+    localStorage.setItem('deliveryAddress', JSON.stringify(newAddress))
+  }
+
+  const storedAddress = localStorage.getItem('deliveryAddress')
+  if (storedAddress) {
+    deliveryAddress.value = JSON.parse(storedAddress)
   }
 
   return {
