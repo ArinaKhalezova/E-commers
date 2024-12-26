@@ -13,6 +13,9 @@
         </div>
       </div>
       <Carousel ref="carouselRef" :items-to-show="itemsToShow" :items-to-scroll="1">
+        <Slide v-if="loading">
+          <QSpinner />
+        </Slide>
         <Slide v-for="review in reviews" :key="review.id">
           <ReviewsCard :review="review" />
         </Slide>
@@ -26,10 +29,12 @@ import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide } from 'vue3-carousel'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import ReviewsCard from './ReviewsCard.vue'
-import { homeReviews as reviews } from '@/data/homeReviews'
+// import { homeReviews as reviews } from '@/data/homeReviews'
 
 const itemsToShow = ref(1)
 const carouselRef = ref<any>(null)
+const reviews = ref([])
+const loading = ref(false)
 
 const updateItemsToShow = () => {
   if (window.innerWidth >= 1024) {
@@ -46,13 +51,17 @@ onMounted(async () => {
   window.addEventListener('resize', updateItemsToShow)
 
   try {
-    const response = await fetch('http://localhost:5173/home')
+    loading.value = true
+    const response = await fetch('http://localhost:5173/api/homeReviews')
     if (!response.ok) {
       throw new Error('Failed to fetch products')
     }
-    reviews.values = await response.json()
+    const data = await response.json()
+    reviews.value = data.reviews
   } catch (error) {
     console.error('Error fetching products:', error)
+  } finally {
+    loading.value = false
   }
 })
 

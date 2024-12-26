@@ -1,15 +1,15 @@
-import Product1 from '/src/assets/img/product1.png'
-import Product2 from '/src/assets/img/product2.png'
-import Product3 from '/src/assets/img/product3.png'
-import Product4 from '/src/assets/img/product4.png'
-import Product5 from '/src/assets/img/product5.png'
-import Product6 from '/src/assets/img/product6.png'
-import Product7 from '/src/assets/img/product7.png'
-import Product8 from '/src/assets/img/product8.png'
-import Product9 from '/src/assets/img/product9.png'
-import Product10 from '/src/assets/img/product10.png'
-import Product11 from '/src/assets/img/product11.png'
-import Product12 from '/src/assets/img/product12.png'
+const product1 = '/assets/images/product1.png'
+const product2 = '/assets/images/product2.png'
+const product3 = '/assets/images/product3.png'
+const product4 = '/assets/images/product4.png'
+const product5 = '/assets/images/product5.png'
+const product6 = '/assets/images/product6.png'
+const product7 = '/assets/images/product7.png'
+const product8 = '/assets/images/product8.png'
+const product9 = '/assets/images/product9.png'
+const product10 = '/assets/images/product10.png'
+const product11 = '/assets/images/product11.png'
+const product12 = '/assets/images/product12.png'
 
 export type TProduct = {
   id: number
@@ -29,7 +29,7 @@ export type TProduct = {
 export const products = [
   {
     id: 1,
-    product_img: Product1,
+    product_img: product1,
     title: 'T-shirt with Tape Details',
     rating: 4.5,
     cost: 120,
@@ -44,7 +44,7 @@ export const products = [
   },
   {
     id: 2,
-    product_img: Product2,
+    product_img: product2,
     title: 'Skinny Fit Jeans',
     rating: 3.5,
     cost: 240,
@@ -59,7 +59,7 @@ export const products = [
   },
   {
     id: 3,
-    product_img: Product3,
+    product_img: product3,
     title: 'Checkered Shirt',
     rating: 4.5,
     cost: 180,
@@ -74,7 +74,7 @@ export const products = [
   },
   {
     id: 4,
-    product_img: Product4,
+    product_img: product4,
     title: 'Sleeve Striped T-Shirt',
     rating: 4.5,
     cost: 130,
@@ -89,7 +89,7 @@ export const products = [
   },
   {
     id: 5,
-    product_img: Product5,
+    product_img: product5,
     title: 'Vertical Striped Shirt',
     rating: 5,
     cost: 212,
@@ -104,7 +104,7 @@ export const products = [
   },
   {
     id: 6,
-    product_img: Product6,
+    product_img: product6,
     title: 'Courage Graphic T-shirt',
     rating: 4,
     cost: 145,
@@ -119,7 +119,7 @@ export const products = [
   },
   {
     id: 7,
-    product_img: Product7,
+    product_img: product7,
     title: 'Loose Fit Bermuda Shorts',
     rating: 3,
     cost: 80,
@@ -134,7 +134,7 @@ export const products = [
   },
   {
     id: 8,
-    product_img: Product8,
+    product_img: product8,
     title: 'Faded Skinny Jeans',
     rating: 4.5,
     cost: 210,
@@ -149,7 +149,7 @@ export const products = [
   },
   {
     id: 9,
-    product_img: Product9,
+    product_img: product9,
     title: 'Gradient Graphic T-shirt',
     rating: 3.5,
     cost: 145,
@@ -164,7 +164,7 @@ export const products = [
   },
   {
     id: 10,
-    product_img: Product10,
+    product_img: product10,
     title: 'Polo with Tipping Details',
     rating: 4.5,
     cost: 180,
@@ -179,7 +179,7 @@ export const products = [
   },
   {
     id: 11,
-    product_img: Product11,
+    product_img: product11,
     title: 'Black Striped T-shirt',
     rating: 5.0,
     cost: 120,
@@ -194,7 +194,7 @@ export const products = [
   },
   {
     id: 12,
-    product_img: Product12,
+    product_img: product12,
     title: 'One Life Graphic T-shirt',
     rating: 4.5,
     cost: 260,
@@ -209,7 +209,7 @@ export const products = [
   },
   {
     id: 13,
-    product_img: Product10,
+    product_img: product10,
     title: 'Polo with Tipping Details',
     rating: 4.5,
     cost: 180,
@@ -224,7 +224,7 @@ export const products = [
   },
   {
     id: 14,
-    product_img: Product11,
+    product_img: product11,
     title: 'Black Striped T-shirt',
     rating: 5.0,
     cost: 120,
@@ -239,7 +239,7 @@ export const products = [
   },
   {
     id: 15,
-    product_img: Product12,
+    product_img: product12,
     title: 'One Life Graphic T-shirt',
     rating: 4.5,
     cost: 260,
@@ -254,7 +254,7 @@ export const products = [
   },
   {
     id: 16,
-    product_img: Product4,
+    product_img: product4,
     title: 'Sleeve Striped T-Shirt',
     rating: 4.5,
     cost: 130,
@@ -269,7 +269,7 @@ export const products = [
   },
   {
     id: 17,
-    product_img: Product5,
+    product_img: product5,
     title: 'Vertical Striped Shirt',
     rating: 5,
     cost: 212,
@@ -284,7 +284,7 @@ export const products = [
   },
   {
     id: 18,
-    product_img: Product6,
+    product_img: product6,
     title: 'Courage Graphic T-shirt',
     rating: 4,
     cost: 145,
@@ -299,7 +299,7 @@ export const products = [
   },
   {
     id: 19,
-    product_img: Product7,
+    product_img: product7,
     title: 'Loose Fit Bermuda Shorts',
     rating: 3,
     cost: 80,
@@ -314,7 +314,7 @@ export const products = [
   },
   {
     id: 20,
-    product_img: Product1,
+    product_img: product1,
     title: 'T-shirt with Tape Details',
     rating: 4.5,
     cost: 120,
@@ -329,7 +329,7 @@ export const products = [
   },
   {
     id: 21,
-    product_img: Product2,
+    product_img: product2,
     title: 'Skinny Fit Jeans',
     rating: 3.5,
     cost: 240,
@@ -344,7 +344,7 @@ export const products = [
   },
   {
     id: 22,
-    product_img: Product3,
+    product_img: product3,
     title: 'Checkered Shirt',
     rating: 4.5,
     cost: 180,
@@ -359,7 +359,7 @@ export const products = [
   },
   {
     id: 23,
-    product_img: Product8,
+    product_img: product8,
     title: 'Faded Skinny Jeans',
     rating: 4.5,
     cost: 210,
@@ -374,7 +374,7 @@ export const products = [
   },
   {
     id: 24,
-    product_img: Product9,
+    product_img: product9,
     title: 'Gradient Graphic T-shirt',
     rating: 3.5,
     cost: 145,
@@ -392,7 +392,7 @@ export const products = [
 export const newArrivalsSlides = [
   {
     id: 1,
-    product_img: Product1,
+    product_img: product1,
     title: 'T-shirt with Tape Details',
     rating: 4.5,
     cost: 120,
@@ -400,7 +400,7 @@ export const newArrivalsSlides = [
   },
   {
     id: 2,
-    product_img: Product2,
+    product_img: product2,
     title: 'Skinny Fit Jeans',
     rating: 3.5,
     cost: 240,
@@ -408,7 +408,7 @@ export const newArrivalsSlides = [
   },
   {
     id: 3,
-    product_img: Product3,
+    product_img: product3,
     title: 'Checkered Shirt',
     rating: 4.5,
     cost: 180,
@@ -416,7 +416,7 @@ export const newArrivalsSlides = [
   },
   {
     id: 4,
-    product_img: Product4,
+    product_img: product4,
     title: 'Sleeve Striped T-Shirt',
     rating: 4.5,
     cost: 130,
@@ -427,7 +427,7 @@ export const newArrivalsSlides = [
 export const topSellingSlides = [
   {
     id: 5,
-    product_img: Product5,
+    product_img: product5,
     title: 'Vertical Striped Shirt',
     rating: 5,
     cost: 212,
@@ -435,7 +435,7 @@ export const topSellingSlides = [
   },
   {
     id: 6,
-    product_img: Product6,
+    product_img: product6,
     title: 'Courage Graphic T-shirt',
     rating: 4,
     cost: 145,
@@ -443,7 +443,7 @@ export const topSellingSlides = [
   },
   {
     id: 7,
-    product_img: Product7,
+    product_img: product7,
     title: 'Loose Fit Bermuda Shorts',
     rating: 3,
     cost: 80,
@@ -451,7 +451,7 @@ export const topSellingSlides = [
   },
   {
     id: 8,
-    product_img: Product8,
+    product_img: product8,
     title: 'Faded Skinny Jeans',
     rating: 4.5,
     cost: 210,

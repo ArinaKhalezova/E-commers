@@ -113,7 +113,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
-import { products } from '@/data/products'
+import { products } from '@/data/products' // TODO: remove
 import { generateBreadcrumbs } from '@/data/Breadcrumbs'
 import Counter from './Counter.vue'
 import ButtonDark from '../Home/ButtonDark.vue'
@@ -125,9 +125,11 @@ const route = useRoute()
 const router = useRouter()
 const productId = computed(() => Number(route.params.id))
 
+// TODO: ref instead of computed
 const product = computed(() => {
   return products.find((p) => p.id === productId.value)
 })
+// TODO: add ref about product loading: QSpinner
 
 const ratingModel = ref(product.value ? product.value.ratingModel : 3)
 
@@ -179,8 +181,8 @@ const color = ref({
 
 onMounted(async () => {
   try {
-    console.log('Fetching product with ID:', productId) // Логируем productId
-    const response = await fetch(`http://localhost:5173/productPage/${productId}`)
+    console.log('Fetching product with ID:', productId.value) // Логируем productId
+    const response = await fetch(`http://localhost:5173/api/productPage/${productId.value}`)
     if (!response.ok) {
       throw new Error('Failed to fetch product data')
     }
