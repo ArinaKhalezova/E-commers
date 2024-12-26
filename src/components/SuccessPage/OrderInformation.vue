@@ -1,6 +1,10 @@
 <template>
   <div :class="$style.order_wrapper">
     <h1>Your tracking number: 0039762F</h1>
+    <div>
+      <h2>Please remember the tracking number, as this page will be unavailable soon.</h2>
+      <h2>Contact email: e-commers@mail.com</h2>
+    </div>
     <div :class="$style.order_information">
       <h2>Your order information</h2>
       <div :class="$style.order_products">
@@ -20,6 +24,7 @@
           </div>
         </div>
       </div>
+      <h2>Total cost: {{ '$' + productStore.totalCostProducts }}</h2>
     </div>
     <div :class="$style.order_address">
       <h2>Your adress</h2>
@@ -34,6 +39,18 @@
         <p>No address saved yet.</p>
       </div>
     </div>
+    <div :class="$style.order_recipient">
+      <h2>Your details</h2>
+      <div v-if="orderingStore.deliveryRecipient" :class="$style.recipient_items">
+        <p>Surname: {{ orderingStore.deliveryRecipient.surname }}</p>
+        <p>Name: {{ orderingStore.deliveryRecipient.name }}</p>
+        <p>Phone: {{ orderingStore.deliveryRecipient.phone }}</p>
+        <p>Email: {{ orderingStore.deliveryRecipient.email }}</p>
+      </div>
+      <div v-else>
+        <p>No details saved yet.</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -46,6 +63,7 @@ const productStore = useProductStore()
 const orderingStore = useOrderingStore()
 
 console.log('Address from store:', orderingStore.deliveryAddress)
+console.log('Recipient from store:', orderingStore.deliveryRecipient)
 
 const props = defineProps<{
   product: TProduct
@@ -95,10 +113,12 @@ const props = defineProps<{
   font-size: 20px;
   margin-bottom: 10px;
 }
-.order_address {
+.order_address,
+.order_recipient {
   font-family: 'Satoshi';
 }
-.address_items {
+.address_items,
+.recipient_items {
   background-color: var(--placeholder-color);
   border-radius: 20px;
   padding: 20px;

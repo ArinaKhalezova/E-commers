@@ -9,12 +9,25 @@ interface DeliveryAddress {
   comment: string
 }
 
+interface DeliveryRecipient {
+  surname: string
+  name: string
+  phone: number
+  email: string
+}
+
 export const useOrderingStore = defineStore('orderingStore', () => {
   const deliveryAddress = ref<DeliveryAddress | null>(null)
+  const deliveryRecipient = ref<DeliveryRecipient | null>(null)
 
   const saveAddress = (newAddress: DeliveryAddress) => {
     deliveryAddress.value = newAddress
     localStorage.setItem('deliveryAddress', JSON.stringify(newAddress))
+  }
+
+  const saveRecipient = (newRecipient: DeliveryRecipient) => {
+    deliveryRecipient.value = newRecipient
+    localStorage.setItem('deliveryRecipient', JSON.stringify(newRecipient))
   }
 
   const storedAddress = localStorage.getItem('deliveryAddress')
@@ -22,8 +35,15 @@ export const useOrderingStore = defineStore('orderingStore', () => {
     deliveryAddress.value = JSON.parse(storedAddress)
   }
 
+  const storedRecipient = localStorage.getItem('deliveryRecipient')
+  if (storedRecipient) {
+    deliveryRecipient.value = JSON.parse(storedRecipient)
+  }
+
   return {
     deliveryAddress,
-    saveAddress
+    deliveryRecipient,
+    saveAddress,
+    saveRecipient
   }
 })

@@ -94,6 +94,7 @@
         name="name"
         required
         :class="$style.recipient_input"
+        v-model="surname"
       />
       <input
         type="text"
@@ -101,6 +102,7 @@
         name="name"
         required
         :class="$style.recipient_input"
+        v-model="name"
       />
     </div>
     <div>
@@ -115,6 +117,7 @@
         name="phone"
         required
         :class="$style.recipient_input"
+        v-model="phone"
       />
       <input
         type="text"
@@ -122,6 +125,7 @@
         name="email"
         required
         :class="$style.recipient_input"
+        v-model="email"
       />
     </div>
     <div>
@@ -188,6 +192,10 @@ const apartament = ref('')
 const entrance = ref('')
 const floor = ref('')
 const comment = ref('')
+const surname = ref('')
+const name = ref('')
+const phone = ref('')
+const email = ref('')
 
 const selectedMethod = ref<'cash' | 'card'>('cash')
 
@@ -213,9 +221,18 @@ const handleOrderClick = (event: Event) => {
     comment: comment.value
   }
 
+  const newRecipient = {
+    surname: surname.value,
+    name: name.value,
+    phone: Number(phone.value),
+    email: email.value
+  }
+
   orderingStore.saveAddress(newAddress)
+  orderingStore.saveRecipient(newRecipient)
 
   console.log('Saved address:', orderingStore.deliveryAddress)
+  console.log('Saved recipient:', orderingStore.deliveryRecipient)
 
   event.preventDefault()
   dialog.value = true
