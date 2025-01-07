@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.products_wrap">
+  <div v-if="!loading" :class="$style.products_wrap">
     <h1>NEW ARRIVALS</h1>
     <ProductCarousel :slides="newArrivalsSlides" />
     <ButtonLight link="/assortment" text="View All" :class="$style.products_btn"></ButtonLight>
@@ -8,25 +8,39 @@
     <ProductCarousel :slides="topSellingSlides" />
     <ButtonLight link="/assortment" text="View All" :class="$style.products_btn"></ButtonLight>
   </div>
+  <QSpinner v-else />
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import ProductCarousel from './ProductCarousel.vue'
-import { newArrivalsSlides, topSellingSlides } from '@/data/products'
+// import { newArrivalsSlides, topSellingSlides } from '@/data/products'
 import ButtonLight from './ButtonLight.vue';
 
+const newArrivalsSlides = ref()
+const topSellingSlides = ref()
+const loading = ref(true)
 onMounted(async () => {
   try {
-    const response = await fetch('http://localhost:5173/home')
-    if (!response.ok) {
+    loading.value = true
+    const newArrivalsSlidesResponse = await fetch('http://localhost:5173/api/newArrivalsSlides')
+    if (!newArrivalsSlidesResponse.ok) {
       throw new Error('Failed to fetch products')
     }
-    const data = await response.json()
-    newArrivalsSlides.value = data.newArrivalsSlides
-    topSellingSlides.value = data.topSellingSlides
+    const newArrivalsSlidesData = await newArrivalsSlidesResponse.json()
+    newArrivalsSlides.value = newArrivalsSlidesData.newArrivalsSlides
+
+    const topSellingSlidesResponse = await fetch('http://localhost:5173/api/topSellingSlides')
+    if (!topSellingSlidesResponse.ok) {
+      throw new Error('Failed to fetch products')
+    }
+    const topSellingSlidesData = await topSellingSlidesResponse.json()
+    topSellingSlides.value = topSellingSlidesData.topSellingSlides
   } catch (error) {
     console.error('Error fetching products:', error)
+  }
+  finally {
+    loading.value = false
   }
 })
 </script>
