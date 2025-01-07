@@ -11,7 +11,7 @@
             <h2>{{ product.title }}</h2>
           </div>
           <div :class="$style.product_delete" @click="productStore.deleteProduct(product.id)">
-            <img src="/src/assets/img/delete.png" alt="delete" />
+            <img src="/public/assets/images/delete.png" alt="delete" />
           </div>
         </div>
         <div :class="$style.product_characteristics">

@@ -8,7 +8,7 @@
         <img
           alt="SHOP.CO logo"
           :class="$style.logo"
-          src="@/assets/img/logo.png"
+          src="/public/assets/images/logo.png"
           width="126"
           height="18"
         />
@@ -54,10 +54,10 @@
     </div>
     <div :class="$style.menu">
       <a href="/cart">
-        <img alt="Search button" src="@/assets/img/cart.png" width="24" height="24" />
+        <img alt="Search button" src="/public/assets/images/cart.png" width="24" height="24" />
       </a>
       <a href="/account">
-        <img alt="Search button" src="@/assets/img/account.png" width="24" height="24" />
+        <img alt="Search button" src="/public/assets/images/account.png" width="24" height="24" />
       </a>
     </div>
   </div>

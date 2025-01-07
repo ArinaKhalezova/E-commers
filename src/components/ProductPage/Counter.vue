@@ -1,8 +1,8 @@
 <template>
   <div :class="$style.counter_container">
-    <button @click="decrement" :class="$style.counter_button"><img src="/src/assets/img/minus.png" alt="minus"></button>
+    <button @click="decrement" :class="$style.counter_button"><img src="/public/assets/images/minus.png" alt="minus"></button>
     <p :class="$style.counter_count"> {{ count }} </p>
-    <button @click="increment" :class="$style.counter_button"><img src="/src/assets/img/plus.png" alt="plus"></button>
+    <button @click="increment" :class="$style.counter_button"><img src="/public/assets/images/plus.png" alt="plus"></button>
   </div>
 </template>
 

@@ -4,19 +4,19 @@
     <div :class="$style.style_items">
       <a href="/assortment" :class="$style.style_item">
           <h2>Casual</h2>
-          <img src="/src/assets/img/casual.png" alt="" />
+          <img src="/public/assets/images/casual.png" alt="" />
       </a>
       <a href="/assortment" :class="$style.style_item">
           <h2>Formal</h2>
-          <img src="/src/assets/img/formal.png" alt="" />
+          <img src="/public/assets/images/formal.png" alt="" />
       </a>
       <a href="/assortment" :class="$style.style_item">
           <h2>Party</h2>
-          <img src="/src/assets/img/party.png" alt="" />
+          <img src="/public/assets/images/party.png" alt="" />
       </a>
       <a href="/assortment" :class="$style.style_item">
           <h2>Gym</h2>
-          <img src="/src/assets/img/gym.png" alt="" />
+          <img src="/public/assets/images/gym.png" alt="" />
       </a>
     </div>
   </div>

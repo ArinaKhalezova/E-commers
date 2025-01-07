@@ -5,10 +5,10 @@
         <h1>OUR HAPPY CUSTOMERS</h1>
         <div :class="$style.carousel_controls_item">
           <button @click="carouselRef.prev()">
-            <img src="/src/assets/img/arrow_left.png" alt="Previous" />
+            <img src="/public/assets/images/arrow_left.png" alt="Previous" />
           </button>
           <button @click="carouselRef.next()">
-            <img src="/src/assets/img/arrow_right.png" alt="Next" />
+            <img src="/public/assets/images/arrow_right.png" alt="Next" />
           </button>
         </div>
       </div>

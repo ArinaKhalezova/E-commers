@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { products } from '@/data/products' // Убедитесь, что путь к файлу с массивом products правильный
+import { products } from '@/data/products' 
 import { useRoute } from 'vue-router'
 
 const input = ref<string>('')
