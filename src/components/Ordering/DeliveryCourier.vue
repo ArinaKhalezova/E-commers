@@ -236,7 +236,7 @@ const handleOrderClick = (event: Event) => {
 
   event.preventDefault()
   dialog.value = true
-  countdown.value = 10
+  countdown.value = 5
   intervalId = setInterval(() => {
     countdown.value--
     if (countdown.value <= 0) {

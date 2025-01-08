@@ -1,12 +1,19 @@
 <template>
   <div :class="$style.order_wrapper">
-    <h1>Your tracking number: 0039762F</h1>
-    <div>
-      <h2>Please remember the tracking number, as this page will be unavailable soon.</h2>
-      <h2>Contact email: e-commers@mail.com</h2>
-    </div>
+    <h1>Thank you for your order!</h1>
+    <h2 :class="$style.order_wrapper_text">
+      Contact email: <span style="color: green">e-commers@mail.com</span>
+    </h2>
+
     <div :class="$style.order_information">
-      <h2>Your order information</h2>
+      <h1 style="font-size: 40px">Your order information</h1>
+      <div>
+        <h2>Your tracking number: <span style="color: green; font-weight: 900">0039762F</span></h2>
+        <p>
+          <span style="color: red">Please remember</span> the
+          <span style="color: red">tracking number</span>, as this page will be unavailable soon.
+        </p>
+      </div>
       <div :class="$style.order_products">
         <div
           v-for="product in productStore.products"
@@ -24,32 +31,38 @@
           </div>
         </div>
       </div>
-      <h2>Total cost: {{ '$' + productStore.totalCostProducts }}</h2>
-    </div>
-    <div :class="$style.order_address">
-      <h2>Your adress</h2>
-      <div v-if="orderingStore.deliveryAddress" :class="$style.address_items">
-        <p>Street: {{ orderingStore.deliveryAddress.street }}</p>
-        <p>Apartament: {{ orderingStore.deliveryAddress.apartament }}</p>
-        <p>Entrance: {{ orderingStore.deliveryAddress.entace }}</p>
-        <p>Floor: {{ orderingStore.deliveryAddress.floor }}</p>
-        <p>Comment: {{ orderingStore.deliveryAddress.comment }}</p>
+      <div :class="$style.order_address">
+        <h2>Your adress</h2>
+        <div v-if="orderingStore.deliveryAddress" :class="$style.address_items">
+          <p>Street: {{ orderingStore.deliveryAddress.street }}</p>
+          <p>Apartament: {{ orderingStore.deliveryAddress.apartament }}</p>
+          <p>Entrance: {{ orderingStore.deliveryAddress.entace }}</p>
+          <p>Floor: {{ orderingStore.deliveryAddress.floor }}</p>
+          <p>Comment: {{ orderingStore.deliveryAddress.comment }}</p>
+        </div>
+        <div v-else>
+          <p>No address saved yet.</p>
+        </div>
       </div>
-      <div v-else>
-        <p>No address saved yet.</p>
+      <div :class="$style.order_recipient">
+        <h2>Your details</h2>
+        <div v-if="orderingStore.deliveryRecipient" :class="$style.recipient_items">
+          <p>Surname: {{ orderingStore.deliveryRecipient.surname }}</p>
+          <p>Name: {{ orderingStore.deliveryRecipient.name }}</p>
+          <p>Phone: {{ orderingStore.deliveryRecipient.phone }}</p>
+          <p>Email: {{ orderingStore.deliveryRecipient.email }}</p>
+        </div>
+        <div v-else>
+          <p>No details saved yet.</p>
+        </div>
       </div>
-    </div>
-    <div :class="$style.order_recipient">
-      <h2>Your details</h2>
-      <div v-if="orderingStore.deliveryRecipient" :class="$style.recipient_items">
-        <p>Surname: {{ orderingStore.deliveryRecipient.surname }}</p>
-        <p>Name: {{ orderingStore.deliveryRecipient.name }}</p>
-        <p>Phone: {{ orderingStore.deliveryRecipient.phone }}</p>
-        <p>Email: {{ orderingStore.deliveryRecipient.email }}</p>
-      </div>
-      <div v-else>
-        <p>No details saved yet.</p>
-      </div>
+      <br />
+      <h2>
+        Total cost:
+        <span style="color: green; font-weight: 900">{{
+          '$' + productStore.totalCostProducts
+        }}</span>
+      </h2>
     </div>
   </div>
 </template>
@@ -74,7 +87,12 @@ const props = defineProps<{
 .order_wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
+  margin: 0 20px;
+}
+.order_wrapper_text {
+  margin: 0 auto;
+  font-size: 16px;
 }
 .order_number {
   font-family: 'IntegralCF';
