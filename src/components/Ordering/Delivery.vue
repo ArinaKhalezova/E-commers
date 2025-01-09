@@ -2,87 +2,93 @@
   <div :class="$style.delivery_wrap">
     <div :class="$style.delivery_address">
       <h1>Delivery address</h1>
-      <p>Select the delivery address and we'll show you the date and cost of delivery</p>
-      <div :class="$style.address_recipient">
-        <div :class="$style.address_items">
-          <div :class="$style.address_item_1">
-            <input
-              type="text"
-              placeholder="Enter your street, house"
-              name="street"
-              required
-              :class="$style.recipient_input"
-              v-model="street"
-            />
+      <div v-if="deliveryMethod === 'pickup'">
+        <p>Select the receiving address - we will show the date and cost of delivery</p>
+        <ButtonDark text="To choose" style="width: 100%" />
+      </div>
+      <div v-else>
+        <p>Select the delivery address and we'll show you the date and cost of delivery</p>
+        <div :class="$style.address_recipient">
+          <div :class="$style.address_items">
+            <div :class="$style.address_item_1">
+              <input
+                type="text"
+                placeholder="Enter your street, house"
+                name="street"
+                required
+                :class="$style.recipient_input"
+                v-model="street"
+              />
+            </div>
+            <div :class="$style.address_item_2">
+              <input
+                type="text"
+                placeholder="Enter your apartment/office"
+                name="apartament"
+                required
+                :class="$style.recipient_input"
+                v-model="apartament"
+              />
+              <input
+                type="text"
+                placeholder="Enter your entrance"
+                name="entrance"
+                required
+                :class="$style.recipient_input"
+                v-model="entrance"
+              />
+            </div>
+            <div :class="$style.address_item_3">
+              <input
+                type="text"
+                placeholder="Enter your floor"
+                name="floor"
+                required
+                :class="$style.recipient_input"
+                v-model="floor"
+              />
+              <input
+                type="text"
+                placeholder="Enter your the apartment number"
+                name="apartment number"
+                required
+                :class="$style.recipient_input"
+                v-model="apartament"
+              />
+            </div>
+            <div :class="$style.address_item_4">
+              <input
+                type="text"
+                placeholder="Enter your comment"
+                name="comment"
+                required
+                :class="$style.recipient_input"
+                v-model="comment"
+              />
+            </div>
           </div>
-          <div :class="$style.address_item_2">
-            <input
-              type="text"
-              placeholder="Enter your apartment/office"
-              name="apartament"
-              required
-              :class="$style.recipient_input"
-              v-model="apartament"
-            />
-            <input
-              type="text"
-              placeholder="Enter your entrance"
-              name="entrance"
-              required
-              :class="$style.recipient_input"
-              v-model="entrance"
-            />
+          <div>
+            <p>For example, where exactly to bring the order, the nearest address or landmark</p>
           </div>
-          <div :class="$style.address_item_3">
-            <input
-              type="text"
-              placeholder="Enter your floor"
-              name="floor"
-              required
-              :class="$style.recipient_input"
-              v-model="floor"
-            />
-            <input
-              type="text"
-              placeholder="Enter your the apartment number"
-              name="apartment number"
-              required
-              :class="$style.recipient_input"
-              v-model="apartament"
-            />
+          <h1>Delivery date and time</h1>
+          <div :class="$style.delivery_date">
+            <div class="q-pa-md">
+              <q-input rounded outlined v-model="date" mask="date" :rules="['date']">
+                <template v-slot:append>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                      <q-date v-model="date">
+                        <div class="row items-center justify-end">
+                          <q-btn v-close-popup label="Save" color="black" flat />
+                        </div>
+                      </q-date>
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+            </div>
+            <q-select rounded outlined v-model="model" :options="options" />
           </div>
-          <div :class="$style.address_item_4">
-            <input
-              type="text"
-              placeholder="Enter your comment"
-              name="comment"
-              required
-              :class="$style.recipient_input"
-              v-model="comment"
-            />
-          </div>
-        </div>
-        <div>
-          <p>For example, where exactly to bring the order, the nearest address or landmark</p>
-        </div>
-        <h1>Delivery date and time</h1>
-        <div :class="$style.delivery_date">
-          <div class="q-pa-md">
-            <q-input rounded outlined v-model="date" mask="date" :rules="['date']">
-              <template v-slot:append>
-                <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                    <q-date v-model="date">
-                      <div class="row items-center justify-end">
-                        <q-btn v-close-popup label="Save" color="black" flat />
-                      </div>
-                    </q-date>
-                  </q-popup-proxy>
-                </q-icon>
-              </template>
-            </q-input>
-          </div>
-          <q-select rounded outlined v-model="model" :options="options" />
         </div>
       </div>
     </div>
@@ -181,6 +187,10 @@ import { useOrderingStore } from '@/stores/orderingStore'
 import PlaceholderItem from './PlaceholderItem.vue'
 import ButtonDark from '../Home/ButtonDark.vue'
 import { ref } from 'vue'
+
+const props = defineProps<{
+  deliveryMethod: 'pickup' | 'courier';
+}>();
 
 const date = ref('2025/12/20')
 

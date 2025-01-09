@@ -24,8 +24,7 @@
         </div>
       </div>
       <div :class="$style.delivery_obtaining">
-        <DeliveryOffices v-if="selectedMethod === 'pickup'" />
-        <DeliveryCourier v-else />
+        <DeliveryCourier :deliveryMethod="selectedMethod" />
       </div>
     </div>
   </div>
@@ -33,11 +32,9 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import DeliveryOffices from './DeliveryOffices.vue'
-import DeliveryCourier from './DeliveryCourier.vue'
+import DeliveryCourier from './Delivery.vue'
 import PlaceholderItem from './PlaceholderItem.vue'
 
-// State for the selected city
 const model = ref<string | null>('Samara')
 const options = [
   'Samara',
