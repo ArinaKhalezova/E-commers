@@ -9,17 +9,24 @@ export const productPage = [
     const { id } = req.params
     const productId = Number(id)
     console.log('Mock received ID:', productId)
-    const product = products.find(pr => pr.id === productId)
+    const product = products.find((pr) => pr.id === productId)
     if (product) {
       const responseData = {
-        product: product,
-        reviews: reviewsData[productId],
-        newArrivals: newArrivalsSlides
+        product: product
       }
 
       return HttpResponse.json(responseData)
     } else {
       return HttpResponse.json({ message: 'Product not found' }, { status: 404 })
     }
+  }),
+  http.get('/api/reviews:id', (req) => {
+    const { id } = req.params
+    const productId = Number(id)
+    const reviews = reviewsData[productId] || []
+    return HttpResponse.json({ reviews })
+  }),
+  http.get('/api/newArrivalsSlides', () => {
+    return HttpResponse.json({ newArrivalsSlides })
   })
 ]

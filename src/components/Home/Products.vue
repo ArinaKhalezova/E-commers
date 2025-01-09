@@ -20,6 +20,7 @@ import ButtonLight from './ButtonLight.vue';
 const newArrivalsSlides = ref()
 const topSellingSlides = ref()
 const loading = ref(true)
+
 onMounted(async () => {
   try {
     loading.value = true

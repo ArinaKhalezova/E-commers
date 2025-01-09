@@ -22,14 +22,8 @@
               </template>
 
               <template v-slot:after>
-                <q-tab-panels
-                  v-model="tab"
-                  animated
-                  swipeable
-                  vertical
-                  transition-prev="jump-up"
-                  transition-next="jump-up"
-                >
+                <q-tab-panels v-model="tab" animated swipeable vertical transition-prev="jump-up"
+                  transition-next="jump-up">
                   <q-tab-panel name="first">
                     <q-img :src="product.product_img"></q-img>
                   </q-tab-panel>
@@ -90,16 +84,10 @@
           </div>
         </div>
         <div :class="$style.product_add">
-          <Counter
-            v-if="currentProductInCart"
-            :count="currentProductInCart.quantity"
-            @update:count="updateProductQuantity"
-          />
-          <ButtonDark
-            :text="`${!currentProductInCart ? 'Add' : 'Go'} to Cart`"
-            :class="$style.button"
-            @click="onAddProduct"
-          />
+          <Counter v-if="currentProductInCart" :count="currentProductInCart.quantity"
+            @update:count="updateProductQuantity" />
+          <ButtonDark :text="`${!currentProductInCart ? 'Add' : 'Go'} to Cart`" :class="$style.button"
+            @click="onAddProduct" />
         </div>
       </div>
     </div>
@@ -113,51 +101,23 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
-import { products } from '@/data/products' // TODO: remove
+import { useProductStore } from '@/stores/productStore'
+import type { TProduct } from '@/data/products.types'
+// import { products } from '@/data/products'
 import { generateBreadcrumbs } from '@/data/Breadcrumbs'
 import Counter from './Counter.vue'
 import ButtonDark from '../Home/ButtonDark.vue'
-import { useProductStore } from '@/stores/productStore'
+
 
 const productStore = useProductStore()
-
 const route = useRoute()
 const router = useRouter()
+
+const products = ref(<TProduct[]>([]))
 const productId = computed(() => Number(route.params.id))
-
-// TODO: ref instead of computed
-const product = computed(() => {
-  return products.find((p) => p.id === productId.value)
-})
-// TODO: add ref about product loading: QSpinner
-
-const ratingModel = ref(product.value ? product.value.ratingModel : 3)
 
 const tab = ref('first')
 const splitterModel = ref(20)
-
-const breadcrumbs = computed(() => {
-  return generateBreadcrumbs(route)
-})
-
-const currentProductInCart = computed(() =>
-  productStore.products.find((p) => p.id === productId.value)
-)
-
-const onAddProduct = (event: Event) => {
-  if (!currentProductInCart.value) {
-    event.preventDefault()
-    productStore.addProduct(product.value)
-  } else {
-    router.push('/cart')
-  }
-}
-
-const updateProductQuantity = (quantity: number) => {
-  if (currentProductInCart.value) {
-    productStore.updateProductQuantity(currentProductInCart.value.id, quantity)
-  }
-}
 
 const size = ref({
   Small: false,
@@ -179,18 +139,51 @@ const color = ref({
   Black: false
 })
 
+const product = computed(() => {
+  return products.value.find((p) => p.id === productId.value)
+})
+
+const ratingModel = ref(product.value ? product.value.ratingModel : 3)
+
+
+const breadcrumbs = computed(() => {
+  return generateBreadcrumbs(route)
+})
+
+const currentProductInCart = computed(() =>
+  productStore.products.find((p) => p.id === productId.value)
+)
+
+//методы
+const onAddProduct = (event: Event) => {
+  if (!currentProductInCart.value && product.value) {
+    event.preventDefault()
+    productStore.addProduct(product.value)
+  } else {
+    router.push('/cart')
+  }
+}
+
+const updateProductQuantity = (quantity: number) => {
+  if (currentProductInCart.value) {
+    productStore.updateProductQuantity(currentProductInCart.value.id, quantity)
+  }
+}
+
 onMounted(async () => {
   try {
-    console.log('Fetching product with ID:', productId.value) // Логируем productId
-    const response = await fetch(`http://localhost:5173/api/productPage/${productId.value}`)
-    if (!response.ok) {
+    console.log('Fetching product with ID:', productId.value)
+    const productsResponce = await fetch(`http://localhost:5173/api/productPage/${productId.value}`)
+    if (!productsResponce.ok) {
       throw new Error('Failed to fetch product data')
     }
-    const data = await response.json()
+    const productsData = await productsResponce.json()
 
-    const productIndex = products.findIndex((p) => p.id === productId.value)
+    const productIndex = products.value.findIndex((p) => p.id === productId.value)
     if (productIndex !== -1) {
-      products[productIndex] = data.product
+      products.value[productIndex] = productsData.product
+    } else {
+      products.value.push(productsData.product)
     }
   } catch (error) {
     console.error('Error fetching products:', error)
@@ -292,6 +285,7 @@ onMounted(async () => {
     margin: 38px 0;
     gap: 20px;
   }
+
   .button {
     max-width: 400px;
   }

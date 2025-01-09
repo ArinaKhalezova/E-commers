@@ -13,10 +13,12 @@
 </template>
 
 <script setup lang="ts">
+// import { mockedStore } from '@/mocks/cart';
 import ProductCardCart from './ProductCard-Cart.vue'
 import { useProductStore } from '@/stores/productStore'
 
 const productStore = useProductStore()
+// const productStore = mockedStore(useProductStore)
 </script>
 
 <style module>

@@ -48,19 +48,33 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { reviewsData } from '@/data/reviews'
+// import { reviewsData } from '@/data/reviews'
 import ProductDetails from './ProductDetails.vue'
+import type { TCardReview } from '@/data/reviews.types'
 
 const tab = ref('Rating & Reviews')
-
 const route = useRoute()
-const reviewId = computed(() => route.params.id as string)
+const reviewId = computed(() => Number(route.params.id))
+const reviewsData = ref(<TCardReview[]>([]))
 
 const productReviews = computed(() => {
-  const product = reviewsData.find((p) => p.id_product === Number(reviewId.value))
-  return product ? product.review : []
+  return reviewsData.value.filter((p) => p.id_product === reviewId.value)
+})
+
+onMounted(async () => {
+  try {
+    const reviewsResponce = await fetch(`/api/reviews/${reviewId.value}`)
+    if (!reviewsResponce.ok) {
+      throw new Error('Failed to fetch product data')
+    }
+    const data  = await reviewsResponce.json()
+    reviewsData.value = data.reviews
+
+  } catch (error) {
+    console.error('Error fetching products:', error)
+  }
 })
 </script>
 

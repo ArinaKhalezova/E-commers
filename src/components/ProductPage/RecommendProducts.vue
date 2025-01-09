@@ -6,8 +6,24 @@
 </template>
 
 <script setup>
+import { ref, onMounted, } from 'vue'
 import ProductCarousel from '../Home/ProductCarousel.vue'
-import { newArrivalsSlides } from '@/data/products'
+
+// Состояние компонента
+const newArrivalsSlides = ref([])
+
+onMounted(async () => {
+  try {
+    const newArrivalsResponse = await fetch('/api/newArrivalsSlides')
+    if (!newArrivalsResponse.ok) {
+      throw new Error('Failed to fetch new arrivals data')
+    }
+    const newArrivalsData = await newArrivalsResponse.json()
+    newArrivalsSlides.value = newArrivalsData.newArrivalsSlides
+  } catch (error) {
+    console.error('Error fetching data:', error)
+  }
+})
 </script>
 
 <style module>
@@ -24,6 +40,7 @@ h1 {
   .products_wrap {
     margin: 0 100px;
   }
+
   h1 {
     font-size: 48px;
     margin: 70px 0 52px;
