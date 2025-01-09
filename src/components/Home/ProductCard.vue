@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import { useRouter } from 'vue-router'
-import type { TProduct } from '@/data/products';
+import type { TProduct } from '@/data/products.types';
 
 const props = defineProps<{
   product: TProduct

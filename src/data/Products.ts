@@ -11,21 +11,6 @@ const product10 = '/assets/images/product10.png'
 const product11 = '/assets/images/product11.png'
 const product12 = '/assets/images/product12.png'
 
-export type TProduct = {
-  id: number
-  product_img: string
-  title: string
-  rating?: number
-  cost: number
-  ratingModel?: number
-  description?: string
-  category?: string
-  gender?: string
-  size?: string
-  color?: string
-  quantity: number
-}
-
 export const products = [
   {
     id: 1,

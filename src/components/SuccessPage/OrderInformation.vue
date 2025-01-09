@@ -68,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TProduct } from '@/data/products'
+import type { TProduct } from '@/data/products.types'
 import { useProductStore } from '@/stores/productStore'
 import { useOrderingStore } from '@/stores/orderingStore'
 

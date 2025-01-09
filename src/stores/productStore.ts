@@ -1,4 +1,4 @@
-import type { TProduct } from '@/data/products'
+import type { TProduct } from '@/data/products.types'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 

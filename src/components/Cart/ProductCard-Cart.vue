@@ -41,7 +41,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import { useRouter } from 'vue-router'
-import type { TProduct } from '@/data/products'
+import type { TProduct } from '@/data/products.types'
 import Counter from '../ProductPage/Counter.vue'
 import { useProductStore } from '@/stores/productStore'
 
