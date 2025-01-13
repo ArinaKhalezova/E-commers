@@ -2,15 +2,7 @@
   <div class="q-pa-md">
     <div>
       <q-card flat>
-        <q-tabs
-          v-model="tab"
-          dense
-          class="text-grey"
-          active-color="black"
-          indicator-color="black"
-          align="justify"
-          narrow-indicator
-        >
+        <q-tabs v-model="tab" dense class="text-grey" active-color="black" indicator-color="black" narrow-indicator>
           <q-tab name="Product Details" label="Product Details" />
           <q-tab name="Rating & Reviews" label="Rating & Reviews" />
           <q-tab name="FAQs" label="FAQs" />
@@ -26,12 +18,14 @@
           <q-tab-panel name="Rating & Reviews">
             <div :class="$style.reviews_container">
               <div :class="$style.slide">
-                <div :class="$style.reviews_card" v-for="review in productReviews" :key="review.id">
-                  <div :class="$style.product_rating">
-                    <q-rating v-model="review.ratingModel" size="25px" color="yellow-8" readonly />
+                <div :class="$style.reviews_card" v-for="productReview in reviews" :key="productReview.id_product">
+                  <div v-for="review in productReview.review" :key="review.id">
+                    <div :class="$style.product_rating">
+                      <q-rating v-model="review.ratingModel" size="25px" color="yellow-8" readonly />
+                    </div>
+                    <h2>{{ review.title }}</h2>
+                    <p>{{ review.text }}</p>
                   </div>
-                  <h2>{{ review.title }}</h2>
-                  <p>{{ review.text }}</p>
                 </div>
               </div>
             </div>
@@ -56,22 +50,20 @@ import type { TCardReview } from '@/data/reviews.types'
 
 const tab = ref('Rating & Reviews')
 const route = useRoute()
-const reviewId = computed(() => Number(route.params.id))
-const reviewsData = ref(<TCardReview[]>([]))
 
-const productReviews = computed(() => {
-  return reviewsData.value.filter((p) => p.id_product === reviewId.value)
-})
+const reviews = ref(<TCardReview[]>([]))
+const reviewId = computed(() => Number(route.params.id))
 
 onMounted(async () => {
   try {
-    const reviewsResponce = await fetch(`/api/reviews/${reviewId.value}`)
-    if (!reviewsResponce.ok) {
+    console.log('Fetching review with ID:', reviewId.value)
+    const reviewsResponse = await fetch(`/api/reviews/${reviewId.value}`)
+    if (!reviewsResponse.ok) {
       throw new Error('Failed to fetch product data')
     }
-    const data  = await reviewsResponce.json()
-    reviewsData.value = data.reviews
-
+    const data = await reviewsResponse.json()
+    reviews.value = data.reviews
+    console.log('Reviews after update:', reviews.value); 
   } catch (error) {
     console.error('Error fetching products:', error)
   }
@@ -83,7 +75,7 @@ onMounted(async () => {
   margin: 0 16px;
 }
 
-.slide > * {
+.slide>* {
   border: 1px solid #0000000f;
   border-radius: 20px;
   margin: 0 10px;

@@ -173,17 +173,16 @@ const updateProductQuantity = (quantity: number) => {
 onMounted(async () => {
   try {
     console.log('Fetching product with ID:', productId.value)
-    const productsResponce = await fetch(`http://localhost:5173/api/productPage/${productId.value}`)
+    const productsResponce = await fetch(`/api/productPage/${productId.value}`)
     if (!productsResponce.ok) {
       throw new Error('Failed to fetch product data')
     }
-    const productsData = await productsResponce.json()
-
+    const data = await productsResponce.json()
     const productIndex = products.value.findIndex((p) => p.id === productId.value)
     if (productIndex !== -1) {
-      products.value[productIndex] = productsData.product
+      products.value[productIndex] = data.product
     } else {
-      products.value.push(productsData.product)
+      products.value.push(data.product)
     }
   } catch (error) {
     console.error('Error fetching products:', error)
