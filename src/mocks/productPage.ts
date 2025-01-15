@@ -31,13 +31,6 @@ export const productPage = [
       return HttpResponse.json({ message: 'Reviews not found' }, { status: 404 });
     }
 
-    // const reviewsId = productId
-    // console.log('Mock received reviews ID:', reviewsId)
-    // const reviews = reviews.find((pr) => pr.id === reviewsId)
-    // // const reviews = reviewsData[productId] || []
-    // console.log('dfffffffffffffffffffffffffffffffffffff')
-    // console.log('reviews', reviews)
-    // return HttpResponse.json({ reviews })
   }),
   http.get('/api/newArrivalsSlides', () => {
     return HttpResponse.json({ newArrivalsSlides })

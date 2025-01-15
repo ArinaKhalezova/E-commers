@@ -1,4 +1,5 @@
 <template>
+
   <div class="q-pa-md">
     <div>
       <q-card flat>
@@ -18,14 +19,12 @@
           <q-tab-panel name="Rating & Reviews">
             <div :class="$style.reviews_container">
               <div :class="$style.slide">
-                <div :class="$style.reviews_card" v-for="productReview in reviews" :key="productReview.id_product">
-                  <div v-for="review in productReview.review" :key="review.id">
-                    <div :class="$style.product_rating">
-                      <q-rating v-model="review.ratingModel" size="25px" color="yellow-8" readonly />
-                    </div>
-                    <h2>{{ review.title }}</h2>
-                    <p>{{ review.text }}</p>
+                <div :class="$style.reviews_card" v-for="review in reviews" :key="review.id_product">
+                  <div :class="$style.product_rating">
+                    <q-rating v-model="review.ratingModel" size="25px" color="yellow-8" readonly />
                   </div>
+                  <h2>{{ review.title }}</h2>
+                  <p>{{ review.text }}</p>
                 </div>
               </div>
             </div>
@@ -63,7 +62,7 @@ onMounted(async () => {
     }
     const data = await reviewsResponse.json()
     reviews.value = data.reviews
-    console.log('Reviews after update:', reviews.value); 
+    console.log('Reviews after update:', reviews.value);
   } catch (error) {
     console.error('Error fetching products:', error)
   }
