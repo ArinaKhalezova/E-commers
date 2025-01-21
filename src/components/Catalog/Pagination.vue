@@ -97,9 +97,10 @@ const paginatedData = computed(() => {
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
+
   @media (min-width: 1024px) {
     .customProductCard img {
-      width: 295px;
+      width: 20vw;
     }
     .filters_container {
       display: block;

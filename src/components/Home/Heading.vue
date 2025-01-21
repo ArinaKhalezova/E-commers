@@ -194,7 +194,7 @@ onMounted(() => {
   }
 
   .preview {
-    width: 527px;
+    width: auto;
   }
 
   .heading_text h1 {

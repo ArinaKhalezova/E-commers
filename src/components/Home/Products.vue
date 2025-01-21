@@ -12,10 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue'
 import ProductCarousel from './ProductCarousel.vue'
 // import { newArrivalsSlides, topSellingSlides } from '@/data/products'
-import ButtonLight from './ButtonLight.vue';
+import ButtonLight from './ButtonLight.vue'
 
 const newArrivalsSlides = ref()
 const topSellingSlides = ref()
@@ -39,14 +39,16 @@ onMounted(async () => {
     topSellingSlides.value = topSellingSlidesData.topSellingSlides
   } catch (error) {
     console.error('Error fetching products:', error)
-  }
-  finally {
+  } finally {
     loading.value = false
   }
 })
 </script>
 
 <style module>
+.products_wrap {
+  margin: auto;
+}
 h1 {
   font-family: 'IntegralCF';
   font-size: 32px;
@@ -60,9 +62,9 @@ h1 {
   width: calc(100% - 32px);
 }
 @media (min-width: 1024px) {
-  .products_wrap {
+  /* .products_wrap {
     margin: 0 100px;
-  }
+  } */
   h1 {
     font-size: 48px;
     margin: 70px 0 52px;

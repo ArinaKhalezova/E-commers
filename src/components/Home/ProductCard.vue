@@ -37,7 +37,7 @@ const goToProduct = (id: number) => {
   cursor: pointer;
 }
 .product_card img {
-  width: 198px;
+  width: 20vw;
 }
 .product_card h2 {
   line-height: 1;
@@ -68,9 +68,9 @@ const goToProduct = (id: number) => {
 }
 
 @media (min-width: 1024px) {
-  .product_card img {
-    width: 295px;
-  }
+  /* .product_card img {
+    width: 17vw;
+  } */
   .product_rating img {
     max-width: 104px;
   }

@@ -37,9 +37,9 @@ const reviews = ref([])
 const loading = ref(false)
 
 const updateItemsToShow = () => {
-  if (window.innerWidth >= 1024) {
+  if (window.innerWidth >= 1124) {
     itemsToShow.value = 3
-  } else if (window.innerWidth > 768 && window.innerWidth < 1024) {
+  } else if (window.innerWidth > 768 && window.innerWidth < 1124) {
     itemsToShow.value = 2
   } else {
     itemsToShow.value = 1

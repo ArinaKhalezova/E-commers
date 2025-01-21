@@ -26,12 +26,9 @@ const updateItemsToShow = () => {
   if (window.innerWidth >= 1260) {
     itemsToShow.value = 4
   } 
-  else if (window.innerWidth >= 1024 && window.innerWidth < 1260) {
+  else if (window.innerWidth >= 620 && window.innerWidth < 1260) {
     itemsToShow.value = 3
   }
-  else if (window.innerWidth >= 620 && window.innerWidth < 1024) {
-    itemsToShow.value = 3
-  } 
   else if (window.innerWidth > 460 && window.innerWidth < 620) {
     itemsToShow.value = 2
   }
@@ -52,7 +49,7 @@ onBeforeUnmount(() => {
 
 <style module>
 .slide {
-  margin: 0 15px;
+  margin: auto;
 }
 
 @media (min-width: 1024px) {
