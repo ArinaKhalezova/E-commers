@@ -10,7 +10,7 @@
           <div :class="$style.product_name">
             <h2>{{ product.title }}</h2>
           </div>
-          <div :class="$style.product_delete" @click="productStore.deleteProduct(product.id)">
+          <div :class="$style.product_delete" @click="deleteProduct">
             <img src="/public/assets/images/delete.png" alt="delete" />
           </div>
         </div>
@@ -43,18 +43,23 @@ import { defineProps } from 'vue'
 import { useRouter } from 'vue-router'
 import type { TProduct } from '@/data/products.types'
 import Counter from '../ProductPage/Counter.vue'
-import { useProductStore } from '@/stores/productStore'
+import { useCartStore } from '@/stores/cartStore'
 
-const productStore = useProductStore()
+const cartStore = useCartStore()
 
 const props = defineProps<{
   product: TProduct
 }>()
 
-const updateQuantity = (quantity: number) => {
-  productStore.updateProductQuantity(props.product.id, quantity)
+const updateQuantity = async (quantity: number) => {
+   await cartStore.updateProductQuantity(props.product.id, quantity)
+  // cartStore.updateProductQuantity(props.product.id, quantity)
 }
 const router = useRouter()
+
+const deleteProduct = async () => {
+  await cartStore.deleteProduct(props.product.id)
+}
 
 const goToProduct = (id: number) => {
   router.push({ name: 'productPage', params: { id } })

@@ -15,11 +15,7 @@
         </p>
       </div>
       <div :class="$style.order_products">
-        <div
-          v-for="product in productStore.products"
-          :key="product.id"
-          :class="$style.products_items"
-        >
+        <div v-for="product in cartStore.products" :key="product.id" :class="$style.products_items">
           <div :class="$style.products_img">
             <img :src="product.product_img" :alt="product.title" />
           </div>
@@ -59,9 +55,7 @@
       <br />
       <h2>
         Total cost:
-        <span style="color: green; font-weight: 900">{{
-          '$' + productStore.totalCostProducts
-        }}</span>
+        <span style="color: green; font-weight: 900">{{ '$' + cartStore.totalCostProducts }}</span>
       </h2>
     </div>
   </div>
@@ -69,10 +63,10 @@
 
 <script setup lang="ts">
 import type { TProduct } from '@/data/products.types'
-import { useProductStore } from '@/stores/productStore'
+import { useCartStore } from '@/stores/cartStore'
 import { useOrderingStore } from '@/stores/orderingStore'
 
-const productStore = useProductStore()
+const cartStore = useCartStore()
 const orderingStore = useOrderingStore()
 
 console.log('Address from store:', orderingStore.deliveryAddress)

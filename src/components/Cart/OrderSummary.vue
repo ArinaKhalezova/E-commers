@@ -4,21 +4,21 @@
     <div :class="$style.order_summary">
       <div :class="$style.summary_subtotal">
         <h2>Subtotal</h2>
-        <p>{{ '$' + productStore.subtotalCostProducts }}</p>
+        <p>{{ '$' + cartStore.subtotalCostProducts }}</p>
       </div>
       <div :class="$style.summary_discount">
-        <h2>{{ 'Discount (' + productStore.discount + '%)' }}</h2>
-        <p>{{ '-' + productStore.saleCost + '$' }}</p>
+        <h2>{{ 'Discount (' + cartStore.discount + '%)' }}</h2>
+        <p>{{ '-' + cartStore.saleCost + '$' }}</p>
       </div>
       <div :class="$style.summary_delivery">
         <h2>Delivery Fee</h2>
-        <p>{{ '$' + productStore.deliveryCostProducts }}</p>
+        <p>{{ '$' + cartStore.deliveryCostProducts }}</p>
       </div>
     </div>
     <hr :class="$style.line" />
     <div :class="$style.order_total">
       <h2>Total</h2>
-      <p>{{ '$' + productStore.totalCostProducts }}</p>
+      <p>{{ '$' + cartStore.totalCostProducts }}</p>
     </div>
     <div :class="$style.order_promocode">
       <input
@@ -26,10 +26,15 @@
         placeholder="Add promo code"
         name="promocode"
         required
-        v-model="productStore.promo"
+        v-model="cartStore.promo"
         :class="$style.promocode_input"
       />
-      <ButtonDark text="Apply" :class="$style.promocode_btn" light @click="productStore.applyPromoCode"/>
+      <ButtonDark
+        text="Apply"
+        :class="$style.promocode_btn"
+        light
+        @click="cartStore.applyPromoCode"
+      />
     </div>
     <ButtonDark link="/ordering" text="Go to Checkout" :class="$style.order_btn" />
   </div>
@@ -37,9 +42,9 @@
 
 <script setup lang="ts">
 import ButtonDark from '../Home/ButtonDark.vue'
-import { useProductStore } from '@/stores/productStore'
+import { useCartStore } from '@/stores/cartStore'
 
-const productStore = useProductStore()
+const cartStore = useCartStore()
 </script>
 
 <style module>

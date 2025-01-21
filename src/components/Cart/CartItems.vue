@@ -2,12 +2,12 @@
   <div :class="$style.cart_items">
     <div :class="$style.cart_product">
       <ProductCardCart
-        v-for="product in productStore.products"
+        v-for="product in cartStore.products"
         :key="product.id"
         :product="product"
       />
       <!-- {{ productStore.products }} -->
-      <p :class="$style.cart_total_products">Total products: {{ productStore.totalCountProducts }}</p>
+      <p :class="$style.cart_total_products">Total products: {{ cartStore.totalCountProducts }}</p>
     </div>
   </div>
 </template>
@@ -15,9 +15,9 @@
 <script setup lang="ts">
 // import { mockedStore } from '@/mocks/cart';
 import ProductCardCart from './ProductCard-Cart.vue'
-import { useProductStore } from '@/stores/productStore'
+import { useCartStore } from '@/stores/cartStore'
 
-const productStore = useProductStore()
+const cartStore = useCartStore()
 // const productStore = mockedStore(useProductStore)
 </script>
 

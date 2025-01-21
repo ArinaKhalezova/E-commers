@@ -4,21 +4,21 @@
     <div :class="$style.order_summary">
       <div :class="$style.summary_subtotal">
         <h2>Subtotal</h2>
-        <p>{{ '$' + productStore.subtotalCostProducts }}</p>
+        <p>{{ '$' + cartStore.subtotalCostProducts }}</p>
       </div>
       <div :class="$style.summary_discount">
-        <h2>{{ 'Discount (' + productStore.discount + '%)' }}</h2>
-        <p>{{ '-' + productStore.saleCost + '$' }}</p>
+        <h2>{{ 'Discount (' + cartStore.discount + '%)' }}</h2>
+        <p>{{ '-' + cartStore.saleCost + '$' }}</p>
       </div>
       <div :class="$style.summary_delivery">
         <h2>Delivery Fee</h2>
-        <p>{{ '$' + productStore.deliveryCostProducts }}</p>
+        <p>{{ '$' + cartStore.deliveryCostProducts }}</p>
       </div>
     </div>
     <hr :class="$style.line" />
     <div :class="$style.order_total">
       <h2>Total</h2>
-      <p>{{ '$' + productStore.totalCostProducts }}</p>
+      <p>{{ '$' + cartStore.totalCostProducts }}</p>
     </div>
     <!-- <ButtonDark link="#" text="Create an order" :class="$style.order_btn" @click="handleOrderClick" />
 
@@ -36,32 +36,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import ButtonDark from '../Home/ButtonDark.vue';
-import { useProductStore } from '@/stores/productStore';
+import { ref } from 'vue'
+import ButtonDark from '../Home/ButtonDark.vue'
+import { useCartStore } from '@/stores/cartStore'
 
-const productStore = useProductStore();
+const cartStore = useCartStore()
 
-const dialog = ref(false);
-const backdropFilter = ref('blur(5px)');
-const countdown = ref(5);
-let intervalId: number | null = null;
+const dialog = ref(false)
+const backdropFilter = ref('blur(5px)')
+const countdown = ref(5)
+let intervalId: number | null = null
 
 const handleOrderClick = () => {
-  dialog.value = true;
+  dialog.value = true
 
-  console.log('Order button clicked');
+  console.log('Order button clicked')
 
-  countdown.value = 5;
+  countdown.value = 5
   intervalId = setInterval(() => {
-    countdown.value--;
+    countdown.value--
 
     if (countdown.value <= 0) {
-      clearInterval(intervalId!);
-      window.location.href = 'successPage';
+      clearInterval(intervalId!)
+      window.location.href = 'successPage'
     }
-  }, 1000);
-};
+  }, 1000)
+}
 </script>
 
 <style module>
@@ -86,7 +86,7 @@ const handleOrderClick = () => {
   gap: 20px;
 }
 
-.order_summary>* {
+.order_summary > * {
   display: flex;
   justify-content: space-between;
 }

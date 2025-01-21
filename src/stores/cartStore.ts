@@ -2,17 +2,15 @@ import type { TProduct } from '@/data/products.types'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
-
 const PROMOCODES: Record<string, number> = {
   newYear: 10,
   sale: 20
 }
 
 // Composition API
-// ToDo: Use `cart` instead `product`
-export const useProductStore = defineStore('productStore', () => {
+export const useCartStore = defineStore('cartStore', () => {
   // State
-  const products = ref<TProduct[]>(JSON.parse(localStorage.getItem('products') || '[]'))
+  const products = ref<TProduct[]>([])
   const promo = ref('')
   const discount = ref(0)
 
@@ -23,7 +21,6 @@ export const useProductStore = defineStore('productStore', () => {
     const subtotal = products.value.reduce((sum: number, product: any) => {
       return sum + product.cost * product.quantity
     }, 0)
-    saveProducts()
     return subtotal
   })
 
@@ -52,6 +49,11 @@ export const useProductStore = defineStore('productStore', () => {
   })
 
   // Actions
+  const fetchProducts = async () => {
+    const response = await fetch('/api/products')
+    products.value = await response.json()
+  }
+
   const getSale = (code: string): number => {
     return PROMOCODES[code] ?? 0
   }
@@ -61,44 +63,30 @@ export const useProductStore = defineStore('productStore', () => {
   }
 
   const getProductById = (productId: number) => {
-
     return products.value.find((product) => product.id === productId)
   }
 
-  const addProduct = (newProduct: TProduct) => {
-    const existingProduct = getProductById(newProduct.id)
-
-    if (existingProduct) {
-      existingProduct.quantity += 1
-    } else {
-      products.value.push({ ...newProduct, quantity: 1 })
-    }
-
-    saveProducts()
-    console.log('Товар добавлен:', newProduct)
-    console.log('Все товары в корзине:', products.value)
+  const addProduct = async (product: Omit<TProduct, 'quantity'>) => {
+    await fetch('/api/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(product)
+    })
+    await fetchProducts()
   }
 
-  const deleteProduct = (id: number) => {
-    products.value = products.value.filter((el: any) => el.id !== id)
-    saveProducts()
+  const deleteProduct = async (id: number) => {
+    await fetch(`/api/products/${id}`, { method: 'DELETE' })
+    await fetchProducts()
   }
 
-  const updateProductQuantity = (id: number, newQuantity: number) => {
-    const product = products.value.find((el: any) => el.id === id)
-
-    if (product) {
-      if (newQuantity > 0) {
-        product.quantity = newQuantity
-        saveProducts()
-      } else {
-        deleteProduct(id)
-      }
-    }
-  }
-
-  const saveProducts = () => {
-    localStorage.setItem('products', JSON.stringify(products.value))
+  const updateProductQuantity = async (id: number, quantity: number) => {
+    await fetch(`/api/products/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quantity })
+    })
+    await fetchProducts()
   }
 
   return {
@@ -108,7 +96,6 @@ export const useProductStore = defineStore('productStore', () => {
     getProductById,
     deleteProduct,
     updateProductQuantity,
-    saveProducts,
     subtotalCostProducts,
     deliveryCostProducts,
     totalCostProducts,
@@ -121,7 +108,7 @@ export const useProductStore = defineStore('productStore', () => {
 })
 
 // Options API
-// export const useProductStore = defineStore('productStore', {
+// export const useCartStore = defineStore('cartStore', {
 //   state: () => ({
 //     products: JSON.parse(localStorage.getItem('products') || '[]')
 //   }),

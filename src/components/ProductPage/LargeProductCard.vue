@@ -101,15 +101,15 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
-import { useProductStore } from '@/stores/productStore'
+import { useCartStore } from '@/stores/cartStore'
 import type { TProduct } from '@/data/products.types'
 // import { products } from '@/data/products'
-import { generateBreadcrumbs } from '@/data/Breadcrumbs'
+import { generateBreadcrumbs } from '@/data/breadcrumbs'
 import Counter from './Counter.vue'
 import ButtonDark from '../Home/ButtonDark.vue'
 
 
-const productStore = useProductStore()
+const cartStore = useCartStore()
 const route = useRoute()
 const router = useRouter()
 
@@ -151,14 +151,14 @@ const breadcrumbs = computed(() => {
 })
 
 const currentProductInCart = computed(() =>
-  productStore.products.find((p) => p.id === productId.value)
+  cartStore.products.find((p) => p.id === productId.value)
 )
 
 //методы
 const onAddProduct = (event: Event) => {
   if (!currentProductInCart.value && product.value) {
     event.preventDefault()
-    productStore.addProduct(product.value)
+    cartStore.addProduct(product.value)
   } else {
     router.push('/cart')
   }
@@ -166,7 +166,7 @@ const onAddProduct = (event: Event) => {
 
 const updateProductQuantity = (quantity: number) => {
   if (currentProductInCart.value) {
-    productStore.updateProductQuantity(currentProductInCart.value.id, quantity)
+    cartStore.updateProductQuantity(currentProductInCart.value.id, quantity)
   }
 }
 
