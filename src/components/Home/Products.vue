@@ -62,9 +62,9 @@ h1 {
   width: calc(100% - 32px);
 }
 @media (min-width: 1024px) {
-  /* .products_wrap {
+  .products_wrap {
     margin: 0 100px;
-  } */
+  }
   h1 {
     font-size: 48px;
     margin: 70px 0 52px;
