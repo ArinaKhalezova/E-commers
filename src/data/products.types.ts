@@ -1,3 +1,9 @@
+export type Variant = {
+  [color: string]: {
+    sizes: string;
+  };
+};
+
 export type TProduct = {
   id: number
   product_img: string
@@ -11,4 +17,5 @@ export type TProduct = {
   size?: string
   color?: string
   quantity: number
+  variants: Variant[]
 }

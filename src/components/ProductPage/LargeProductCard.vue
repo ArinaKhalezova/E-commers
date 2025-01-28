@@ -22,8 +22,14 @@
               </template>
 
               <template v-slot:after>
-                <q-tab-panels v-model="tab" animated swipeable vertical transition-prev="jump-up"
-                  transition-next="jump-up">
+                <q-tab-panels
+                  v-model="tab"
+                  animated
+                  swipeable
+                  vertical
+                  transition-prev="jump-up"
+                  transition-next="jump-up"
+                >
                   <q-tab-panel name="first">
                     <q-img :src="product.product_img"></q-img>
                   </q-tab-panel>
@@ -56,7 +62,13 @@
           <div id="q-app">
             <div class="q-pa-md">
               <div class="q-gutter-xs" :class="$style.colors_items">
-                <q-chip v-model:selected="color.Green" color="green" text-color="white"> </q-chip>
+                <q-chip
+                  v-if="productVariants[0]"
+                  v-model:selected="color.Green"
+                  color="green"
+                  text-color="white"
+                >
+                </q-chip>
                 <q-chip v-model:selected="color.Red" color="red" text-color="white"> </q-chip>
                 <q-chip v-model:selected="color.Yellow" color="yellow" text-color="white"> </q-chip>
                 <q-chip v-model:selected="color.Orange" color="orange" text-color="white"> </q-chip>
@@ -84,10 +96,16 @@
           </div>
         </div>
         <div :class="$style.product_add">
-          <Counter v-if="currentProductInCart" :count="currentProductInCart.quantity"
-            @update:count="updateProductQuantity" />
-          <ButtonDark :text="`${!currentProductInCart ? 'Add' : 'Go'} to Cart`" :class="$style.button"
-            @click="onAddProduct" />
+          <Counter
+            v-if="currentProductInCart"
+            :count="currentProductInCart.quantity"
+            @update:count="updateProductQuantity"
+          />
+          <ButtonDark
+            :text="`${!currentProductInCart ? 'Add' : 'Go'} to Cart`"
+            :class="$style.button"
+            @click="onAddProduct"
+          />
         </div>
       </div>
     </div>
@@ -102,18 +120,18 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
 import { useCartStore } from '@/stores/cartStore'
-import type { TProduct } from '@/data/products.types'
+import type { TProduct, Variant } from '@/data/products.types'
 // import { products } from '@/data/products'
 import { generateBreadcrumbs } from '@/data/breadcrumbs'
 import Counter from './Counter.vue'
 import ButtonDark from '../Home/ButtonDark.vue'
 
-
 const cartStore = useCartStore()
 const route = useRoute()
 const router = useRouter()
 
-const products = ref(<TProduct[]>([]))
+const productVariants = ref<Variant[]>([])
+const products = ref(<TProduct[]>[])
 const productId = computed(() => Number(route.params.id))
 
 const tab = ref('first')
@@ -139,12 +157,12 @@ const color = ref({
   Black: false
 })
 
+
 const product = computed(() => {
   return products.value.find((p) => p.id === productId.value)
 })
 
 const ratingModel = ref(product.value ? product.value.ratingModel : 3)
-
 
 const breadcrumbs = computed(() => {
   return generateBreadcrumbs(route)
@@ -153,6 +171,12 @@ const breadcrumbs = computed(() => {
 const currentProductInCart = computed(() =>
   cartStore.products.find((p) => p.id === productId.value)
 )
+
+const isRed = computed(() => {
+  return productVariants.value[0] === red;
+});
+
+console.log('result' + isRed.value); 
 
 //методы
 const onAddProduct = (event: Event) => {
@@ -179,15 +203,28 @@ onMounted(async () => {
     }
     const data = await productsResponce.json()
     const productIndex = products.value.findIndex((p) => p.id === productId.value)
+
+    if (data.product && data.product.variants) {
+      productVariants.value = data.product.variants
+    } else {
+      console.error('Variants missing in response')
+    }
+
     if (productIndex !== -1) {
       products.value[productIndex] = data.product
     } else {
       products.value.push(data.product)
     }
+
+    console.log('Product:', product.value)
+    console.log('Variants:', product.value?.variants)
+    console.log('END:', productVariants.value)
   } catch (error) {
     console.error('Error fetching products:', error)
   }
 })
+
+console.log('!!!!!!!!!END:', productVariants.value)
 </script>
 
 <style module>
