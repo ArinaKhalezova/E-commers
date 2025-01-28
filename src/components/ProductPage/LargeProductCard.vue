@@ -5,6 +5,10 @@
       <div :class="$style.product_img">
         <div id="q-app">
           <div>
+            <h4>{{ productVariants }}</h4>
+            <p>{{ JSON.stringify(productVariants).indexOf('red') }}</p>
+            <hr />
+            <br />
             <q-splitter v-model="splitterModel">
               <!-- style="height: 250px" -->
               <template v-slot:before>
@@ -63,23 +67,76 @@
             <div class="q-pa-md">
               <div class="q-gutter-xs" :class="$style.colors_items">
                 <q-chip
-                  v-if="productVariants[0]"
+                  v-if="checkColors.hasGreen"
                   v-model:selected="color.Green"
                   color="green"
                   text-color="white"
                 >
                 </q-chip>
-                <q-chip v-model:selected="color.Red" color="red" text-color="white"> </q-chip>
-                <q-chip v-model:selected="color.Yellow" color="yellow" text-color="white"> </q-chip>
-                <q-chip v-model:selected="color.Orange" color="orange" text-color="white"> </q-chip>
-                <q-chip v-model:selected="color.Blue_light" color="blue-4" text-color="white">
+                <q-chip
+                  v-if="checkColors.hasRed"
+                  v-model:selected="color.Red"
+                  color="red"
+                  text-color="white"
+                >
                 </q-chip>
-                <q-chip v-model:selected="color.Blue" color="blue-9" text-color="white"> </q-chip>
-                <q-chip v-model:selected="color.Purple" color="purple" text-color="white"> </q-chip>
-                <q-chip v-model:selected="color.Pink" color="pink" text-color="white"> </q-chip>
-                <q-chip v-model:selected="color.White" outline color="grey" text-color="white">
+                <q-chip
+                  v-if="checkColors.hasYellow"
+                  v-model:selected="color.Yellow"
+                  color="yellow"
+                  text-color="white"
+                >
                 </q-chip>
-                <q-chip v-model:selected="color.Black" color="black" text-color="white"> </q-chip>
+                <q-chip
+                  v-if="checkColors.hasOrange"
+                  v-model:selected="color.Orange"
+                  color="orange"
+                  text-color="white"
+                >
+                </q-chip>
+                <q-chip
+                  v-if="checkColors.hasLightBlue"
+                  v-model:selected="color.Blue_light"
+                  color="blue-4"
+                  text-color="white"
+                >
+                </q-chip>
+                <q-chip
+                  v-if="checkColors.hasBlue"
+                  v-model:selected="color.Blue"
+                  color="blue-9"
+                  text-color="white"
+                >
+                </q-chip>
+                <q-chip
+                  v-if="checkColors.hasPurple"
+                  v-model:selected="color.Purple"
+                  color="purple"
+                  text-color="white"
+                >
+                </q-chip>
+                <q-chip
+                  v-if="checkColors.hasPink"
+                  v-model:selected="color.Pink"
+                  color="pink"
+                  text-color="white"
+                >
+                </q-chip>
+                <q-chip
+                  v-if="checkColors.hasWhite"
+                  v-model:selected="color.White"
+                  outline
+                  color="grey"
+                  text-color="white"
+                >
+                </q-chip>
+                <q-chip
+                  v-if="checkColors.hasBlack"
+                  v-model:selected="color.Black"
+                  color="black"
+                  text-color="white"
+                >
+                </q-chip>
               </div>
             </div>
           </div>
@@ -157,7 +214,6 @@ const color = ref({
   Black: false
 })
 
-
 const product = computed(() => {
   return products.value.find((p) => p.id === productId.value)
 })
@@ -172,11 +228,26 @@ const currentProductInCart = computed(() =>
   cartStore.products.find((p) => p.id === productId.value)
 )
 
-const isRed = computed(() => {
-  return productVariants.value[0] === red;
-});
+const checkColors = computed(() => {
+  return {
+    hasRed: productVariants.value.some((variant) => variant.red),
+    hasGreen: productVariants.value.some((variant) => variant.green),
+    hasYellow: productVariants.value.some((variant) => variant.yellow),
+    hasOrange: productVariants.value.some((variant) => variant.orange),
+    hasLightBlue: productVariants.value.some((variant) => variant.lightBlue),
+    hasBlue: productVariants.value.some((variant) => variant.blue),
+    hasPurple: productVariants.value.some((variant) => variant.purple),
+    hasPink: productVariants.value.some((variant) => variant.pink),
+    hasWhite: productVariants.value.some((variant) => variant.white),
+    hasBlack: productVariants.value.some((variant) => variant.black)
+  }
+})
 
-console.log('result' + isRed.value); 
+// const isRed = computed(() => {
+//   return productVariants.value.some(variant => variant.red);
+// });
+
+// console.log('result: ' + JSON.stringify(productVariants.value[0]));
 
 //методы
 const onAddProduct = (event: Event) => {
@@ -224,7 +295,7 @@ onMounted(async () => {
   }
 })
 
-console.log('!!!!!!!!!END:', productVariants.value)
+// console.log('!!!!!!!!!END:', JSON.parse(JSON.stringify(productVariants.value)) )
 </script>
 
 <style module>

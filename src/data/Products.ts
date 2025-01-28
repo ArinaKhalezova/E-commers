@@ -32,26 +32,17 @@ export const products = [
         red: {
           sizes: 'small, medium, large'
         },
-        black: {
+        yellow: {
+          sizes: 'large, x-large'
+        },
+        pink: {
+          sizes: 'large, x-large'
+        },
+        white: {
           sizes: 'large, x-large'
         }
       }
     ]
-    
-    // [
-    //   {
-    //     red: [
-    //       {
-    //         sizes: 'small, medium, large'
-    //       }
-    //     ],
-    //     black: [
-    //       {
-    //         sizes: 'large, x-large'
-    //       }
-    //     ]
-    //   }
-    // ]
   },
   {
     id: 2,
@@ -69,16 +60,24 @@ export const products = [
     quantity: 1,
     variants: [
       {
-        red: [
-          {
-            sizes: 'small, medium, large'
-          }
-        ],
-        black: [
-          {
-            sizes: 'large, x-large'
-          }
-        ]
+        green: {
+          sizes: 'small, medium, large'
+        },
+        orange: {
+          sizes: 'large, x-large'
+        },
+        lightBlue: {
+          sizes: 'large, x-large'
+        },
+        purple: {
+          sizes: 'large, x-large'
+        },
+        pink: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
       }
     ]
   },
