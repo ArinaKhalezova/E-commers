@@ -94,7 +94,23 @@ export const products = [
     gender: 'Men',
     size: 'Large',
     color: 'Red',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 4,
@@ -109,7 +125,23 @@ export const products = [
     gender: 'Men',
     size: 'X-Large',
     color: 'Orange',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        yellow: {
+          sizes: 'large, x-large'
+        },
+        pink: {
+          sizes: 'large, x-large'
+        },
+        white: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 5,
@@ -124,7 +156,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'Green',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        pink: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 6,
@@ -139,7 +187,17 @@ export const products = [
     gender: 'Men',
     size: 'Small',
     color: 'Orange',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 7,
@@ -154,7 +212,17 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'Black',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+      }
+    ]
   },
   {
     id: 8,
@@ -169,7 +237,14 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        pink: {
+          sizes: 'large, x-large'
+        },
+      }
+    ]
   },
   {
     id: 9,
@@ -184,7 +259,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 10,
@@ -199,7 +290,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 11,
@@ -214,7 +321,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 12,
@@ -229,7 +352,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 13,
@@ -244,7 +383,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 14,
@@ -259,7 +414,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 15,
@@ -274,7 +445,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 16,
@@ -289,7 +476,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 17,
@@ -304,7 +507,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 18,
@@ -319,7 +538,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 19,
@@ -334,7 +569,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 20,
@@ -349,7 +600,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 21,
@@ -364,7 +631,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 22,
@@ -379,7 +662,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 23,
@@ -394,7 +693,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   },
   {
     id: 24,
@@ -409,7 +724,23 @@ export const products = [
     gender: 'Men',
     size: 'Medium',
     color: 'White',
-    quantity: 1
+    quantity: 1,
+    variants: [
+      {
+        red: {
+          sizes: 'small, medium, large'
+        },
+        green: {
+          sizes: 'large, x-large'
+        },
+        blue: {
+          sizes: 'large, x-large'
+        },
+        black: {
+          sizes: 'large, x-large'
+        }
+      }
+    ]
   }
 ]
 

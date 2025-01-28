@@ -107,9 +107,10 @@ const cartStore = useCartStore()
   font-family: 'Satoshi';
   background-color: var(--placeholder);
   border-radius: 20px;
-  padding: 13px 48px;
+  padding: 13px 28px;
   border: none;
   outline: none;
+
 }
 .order_promocode {
   display: grid;
@@ -117,7 +118,9 @@ const cartStore = useCartStore()
   gap: 10px;
   align-items: center;
 }
-
+.promocode_btn {
+  min-width: 100px;
+}
 .order_btn {
   margin-top: 16px;
   width: auto;
