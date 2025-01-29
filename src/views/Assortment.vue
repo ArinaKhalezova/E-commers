@@ -2,8 +2,8 @@
   <div :class="$style.assortment_container" v-if="!loading">
     <Breadcrumbs :breadcrumbs="breadcrumbs" />
     <div :class="$style.assortment">
-      <Filters :class="$style.assortment_filters" />
-      <Assortment />
+      <!-- <Filters :class="$style.assortment_filters" /> -->
+      <Catalog />
     </div>
   </div>
   <q-inner-loading :showing="loading" color="orange" />
@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import Breadcrumbs from '@/components/Catalog/Breadcrumbs.vue'
-import Assortment from '@/components/Catalog/Assortment.vue'
+import Catalog from '@/components/Catalog/Catalog.vue'
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { generateBreadcrumbs } from '@/data/breadcrumbs'
@@ -37,7 +37,7 @@ onMounted(async () => {
 </script>
 
 <style module>
-.assortment_filters {
+/* .assortment_filters {
   display: none;
 }
 @media (min-width: 1024px) {
@@ -50,5 +50,5 @@ onMounted(async () => {
   .assortment_filters {
     display: block;
   }
-}
+} */
 </style>

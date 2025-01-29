@@ -5,12 +5,13 @@
       <div :class="$style.product_img">
         <div id="q-app">
           <div>
-            <h4>{{ productVariants }}</h4>
-            <p>{{ JSON.stringify(productVariants).indexOf('red') }}</p>
+            <h4>{{ productVariants[0] }}</h4>
+            <br />
+            <!-- <h5>{{ JSON.stringify(productVariants)}}</h5>
+            <p>{{ JSON.stringify(productVariants).indexOf('') }}</p> -->
             <hr />
             <br />
             <q-splitter v-model="splitterModel">
-              <!-- style="height: 250px" -->
               <template v-slot:before>
                 <q-tabs v-model="tab" vertical class="text-teal">
                   <q-tab name="first">
@@ -68,71 +69,81 @@
               <div class="q-gutter-xs" :class="$style.colors_items">
                 <q-chip
                   v-if="checkColors.hasGreen"
-                  v-model:selected="color.Green"
+                  :selected="selectedColor === 'green'"
+                  @click="selectedColorMethod('green')"
                   color="green"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
                   v-if="checkColors.hasRed"
-                  v-model:selected="color.Red"
+                  :selected="selectedColor === 'red'"
+                  @click="selectedColorMethod('red')"
                   color="red"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
                   v-if="checkColors.hasYellow"
-                  v-model:selected="color.Yellow"
+                  :selected="selectedColor === 'yellow'"
+                  @click="selectedColorMethod('yellow')"
                   color="yellow"
-                  text-color="white"
+                  text-color="black"
                 >
                 </q-chip>
                 <q-chip
                   v-if="checkColors.hasOrange"
-                  v-model:selected="color.Orange"
+                  :selected="selectedColor === 'orange'"
+                  @click="selectedColorMethod('orange')"
                   color="orange"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
                   v-if="checkColors.hasLightBlue"
-                  v-model:selected="color.Blue_light"
+                  :selected="selectedColor === 'lightBlue'"
+                  @click="selectedColorMethod('lightBlue')"
                   color="blue-4"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
                   v-if="checkColors.hasBlue"
-                  v-model:selected="color.Blue"
+                  :selected="selectedColor === 'blue'"
+                  @click="selectedColorMethod('blue')"
                   color="blue-9"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
                   v-if="checkColors.hasPurple"
-                  v-model:selected="color.Purple"
+                  :selected="selectedColor === 'purple'"
+                  @click="selectedColorMethod('purple')"
                   color="purple"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
                   v-if="checkColors.hasPink"
-                  v-model:selected="color.Pink"
+                  :selected="selectedColor === 'pink'"
+                  @click="selectedColorMethod('pink')"
                   color="pink"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
                   v-if="checkColors.hasWhite"
-                  v-model:selected="color.White"
+                  :selected="selectedColor === 'white'"
+                  @click="selectedColorMethod('white')"
                   outline
                   color="grey"
-                  text-color="white"
+                  text-color="black"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="checkColors.hasBlack"
-                  v-model:selected="color.Black"
+                  v-if="isRed"
+                  :selected="selectedColor === 'black'"
+                  @click="selectedColorMethod('black')"
                   color="black"
                   text-color="white"
                 >
@@ -143,14 +154,53 @@
         </div>
         <div :class="$style.product_syze">
           <p>Choose Size</p>
-          <div class="q-gutter-xs">
-            <q-chip v-model:selected="size.Small" color="gray" text-color="black"> Small </q-chip>
-            <q-chip v-model:selected="size.Medium" color="gray" text-color="black"> Medium </q-chip>
-            <q-chip v-model:selected="size.Large" color="gray" text-color="black"> Large </q-chip>
-            <q-chip v-model:selected="size.X_Large" color="gray" text-color="black">
+          <!-- <div class="q-gutter-xs">
+            <q-chip
+              v-if="checkSizes?.hasXSmall"
+              :selected="selectedSize === 'xsmall'"
+              @click="selectedSizeMethod('xsmall')"
+              color="gray"
+              text-color="black"
+            >
+              X-Small
+            </q-chip>
+            <q-chip
+              v-if="checkSizes?.hasSmall"
+              :selected="selectedSize === 'small'"
+              @click="selectedSizeMethod('small')"
+              color="gray"
+              text-color="black"
+            >
+              Small
+            </q-chip>
+            <q-chip
+              v-if="checkSizes?.hasMedium"
+              :selected="selectedSize === 'medium'"
+              @click="selectedSizeMethod('medium')"
+              color="gray"
+              text-color="black"
+            >
+              Medium
+            </q-chip>
+            <q-chip
+              v-if="checkSizes?.hasLarge"
+              :selected="selectedSize === 'large'"
+              @click="selectedSizeMethod('large')"
+              color="gray"
+              text-color="black"
+            >
+              Large
+            </q-chip>
+            <q-chip
+              v-if="checkSizes?.hasXLarge"
+              :selected="selectedSize === 'xlarge'"
+              @click="selectedSizeMethod('xlarge')"
+              color="gray"
+              text-color="black"
+            >
               X-Large
             </q-chip>
-          </div>
+          </div> -->
         </div>
         <div :class="$style.product_add">
           <Counter
@@ -187,7 +237,7 @@ const cartStore = useCartStore()
 const route = useRoute()
 const router = useRouter()
 
-const productVariants = ref<Variant[]>([])
+const productVariants = ref(<Variant[]>[])
 const products = ref(<TProduct[]>[])
 const productId = computed(() => Number(route.params.id))
 
@@ -199,19 +249,6 @@ const size = ref({
   Medium: false,
   Large: false,
   X_Large: false
-})
-
-const color = ref({
-  Green: false,
-  Red: false,
-  Yellow: false,
-  Orange: false,
-  Blue_light: false,
-  Blue: false,
-  Purple: false,
-  Pink: false,
-  White: false,
-  Black: false
 })
 
 const product = computed(() => {
@@ -227,6 +264,13 @@ const breadcrumbs = computed(() => {
 const currentProductInCart = computed(() =>
   cartStore.products.find((p) => p.id === productId.value)
 )
+// const isRed = computed(() => {
+//   for (let i = 0; i <= productVariants.value.length; i++) {
+//     if (productVariants.value[i].color === 'red') {
+//       return true
+//     }
+//   }
+// })
 
 const checkColors = computed(() => {
   return {
@@ -243,13 +287,55 @@ const checkColors = computed(() => {
   }
 })
 
-// const isRed = computed(() => {
-//   return productVariants.value.some(variant => variant.red);
-// });
+const selectedColor = ref<
+  | 'red'
+  | 'green'
+  | 'yellow'
+  | 'orange'
+  | 'lightBlue'
+  | 'blue'
+  | 'purple'
+  | 'pink'
+  | 'white'
+  | 'black'
+>()
 
-// console.log('result: ' + JSON.stringify(productVariants.value[0]));
+const selectedColorMethod = (
+  color:
+    | 'red'
+    | 'green'
+    | 'yellow'
+    | 'orange'
+    | 'lightBlue'
+    | 'blue'
+    | 'purple'
+    | 'pink'
+    | 'white'
+    | 'black'
+) => {
+  selectedColor.value = color
+}
 
-//методы
+const selectedSize = ref<'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'>()
+
+const selectedSizeMethod = (size: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge') => {
+  selectedSize.value = size
+}
+
+// const checkSizes = computed((...selectedColor) => {
+//   for (let i = 0; i <= productVariants.value.length; i++) {
+//     if (productVariants.value[i].color === selectedColor.value) {
+//       return {
+//         hasXSmall: productVariants.value[i].color === 'xsmall',
+//         hasSmall: productVariants.value[i].color.some((variant) => variant.small),
+//         hasMedium: productVariants.value[i].color.some((variant) => variant.medium),
+//         hasLarge: productVariants.value[i].color.some((variant) => variant.large),
+//         hasXLarge: productVariants.value[i].color.some((variant) => variant.xlarge)
+//       }
+//     }
+//   }
+// })
+
 const onAddProduct = (event: Event) => {
   if (!currentProductInCart.value && product.value) {
     event.preventDefault()
@@ -264,6 +350,16 @@ const updateProductQuantity = (quantity: number) => {
     cartStore.updateProductQuantity(currentProductInCart.value.id, quantity)
   }
 }
+
+// const checkSizes = (COLOR) => {
+//   for (let i = 0; i <= productVariants.value.length; i++) {
+//     if (productVariants.value[i].color === selectedColor.value) {
+//       return console.log(productVariants.value[i].sizes)
+//     }
+//   }
+// }
+
+// checkSizes()
 
 onMounted(async () => {
   try {
@@ -289,13 +385,11 @@ onMounted(async () => {
 
     console.log('Product:', product.value)
     console.log('Variants:', product.value?.variants)
-    console.log('END:', productVariants.value)
+    console.log('END:', productVariants.value[0].color)
   } catch (error) {
     console.error('Error fetching products:', error)
   }
 })
-
-// console.log('!!!!!!!!!END:', JSON.parse(JSON.stringify(productVariants.value)) )
 </script>
 
 <style module>

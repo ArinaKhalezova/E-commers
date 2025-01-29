@@ -5,11 +5,46 @@
         <h2 :class="$style.filter_header">Filters</h2>
         <div class="q-pa-md" :class="$style.filters_category">
           <div class="q-gutter-sm" :class="$style.category_items">
-            <q-checkbox dense v-model="t_shirts" label="T-shirts" color="black" />
-            <q-checkbox dense v-model="shorts" label="Shorts" color="black" />
-            <q-checkbox dense v-model="shirts" label="Shirts" color="black" />
-            <q-checkbox dense v-model="hoodie" label="Polo" color="black" />
-            <q-checkbox dense v-model="jeans" label="Jeans" color="black" />
+            <q-checkbox
+              dense
+              v-model="category.t_shirts"
+              :selected="selectedCategory === 'T-shirts'"
+              @click="selectedCategoryMethod('T-shirts')"
+              label="T-shirts"
+              color="black"
+            />
+            <q-checkbox
+              dense
+              v-model="category.shorts"
+              :selected="selectedCategory === 'T-shirts'"
+              @click="selectedCategoryMethod('Shorts')"
+              label="Shorts"
+              color="black"
+            />
+            <q-checkbox
+              dense
+              v-model="category.shirts"
+              :selected="selectedCategory === 'Shirts'"
+              @click="selectedCategoryMethod('Shirts')"
+              label="Shirts"
+              color="black"
+            />
+            <q-checkbox
+              dense
+              v-model="category.hoodie"
+              :selected="selectedCategory === 'Polo'"
+              @click="selectedCategoryMethod('Polo')"
+              label="Polo"
+              color="black"
+            />
+            <q-checkbox
+              dense
+              v-model="category.jeans"
+              :selected="selectedCategory === 'Jeans'"
+              @click="selectedCategoryMethod('Jeans')"
+              label="Jeans"
+              color="black"
+            />
           </div>
         </div>
         <q-expansion-item
@@ -84,15 +119,11 @@
           <q-card>
             <q-card-section>
               <div class="q-gutter-xs" :class="$style.size_items">
-                <q-chip v-model:selected="syze.XX_Small" color="gray"> XX-Small </q-chip>
                 <q-chip v-model:selected="syze.X_Small" color="gray"> X-Small </q-chip>
                 <q-chip v-model:selected="syze.Small" color="gray"> Small </q-chip>
                 <q-chip v-model:selected="syze.Medium" color="gray"> Medium </q-chip>
                 <q-chip v-model:selected="syze.Large" color="gray"> Large </q-chip>
                 <q-chip v-model:selected="syze.X_Large" color="gray"> X-Large </q-chip>
-                <q-chip v-model:selected="syze.XX_Large" color="gray"> XX-Large </q-chip>
-                <q-chip v-model:selected="syze.XXX_Large" color="gray"> 3X-Large </q-chip>
-                <q-chip v-model:selected="syze.XXXX_Large" color="gray"> 4X-Large </q-chip>
               </div>
             </q-card-section>
           </q-card>
@@ -133,22 +164,20 @@ const step = ref({
 })
 
 const syze = ref({
-  XX_Small: false,
   X_Small: false,
   Small: false,
   Medium: false,
   Large: false,
-  X_Large: false,
-  XX_Large: false,
-  XXX_Large: false,
-  XXXX_Large: false
+  X_Large: false
 })
 
-const t_shirts = ref(false)
-const shorts = ref(false)
-const shirts = ref(false)
-const hoodie = ref(false)
-const jeans = ref(false)
+const category = ref({
+  t_shirts: false,
+  shorts: false,
+  shirts: false,
+  hoodie: false,
+  jeans: false
+})
 
 const casual = ref(false)
 const formal = ref(false)
@@ -167,6 +196,16 @@ const color = ref({
   White: false,
   Black: false
 })
+
+const selectedCategory = ref<'T-shirts' | 'Shorts' | 'Shirts' | 'Polo' | 'Jeans'>()
+
+const selectedCategoryMethod = (category: 'T-shirts' | 'Shorts' | 'Shirts' | 'Polo' | 'Jeans') => {
+  selectedCategory.value = category
+}
+
+// const filteredProductsByCategory = products.filter(
+//   (product) => product.category === "T-shirt"
+// )
 </script>
 
 <style module>
