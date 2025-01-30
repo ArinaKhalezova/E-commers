@@ -5,12 +5,12 @@
       <div :class="$style.product_img">
         <div id="q-app">
           <div>
-            <h4>{{ productVariants[0] }}</h4>
+            <!-- <h4>{{ productVariants[0] }}</h4>
             <br />
-            <!-- <h5>{{ JSON.stringify(productVariants)}}</h5>
-            <p>{{ JSON.stringify(productVariants).indexOf('') }}</p> -->
+            <h5>{{ JSON.stringify(productVariants)}}</h5>
+            <p>{{ JSON.stringify(productVariants).indexOf('') }}</p>
             <hr />
-            <br />
+            <br /> -->
             <q-splitter v-model="splitterModel">
               <template v-slot:before>
                 <q-tabs v-model="tab" vertical class="text-teal">
@@ -84,49 +84,56 @@
                 >
                 </q-chip>
                 <q-chip
-                  v-if="isColor('yellow', productVariants)"                  :selected="selectedColor === 'yellow'"
+                  v-if="isColor('yellow', productVariants)"
+                  :selected="selectedColor === 'yellow'"
                   @click="selectedColorMethod('yellow')"
                   color="yellow"
                   text-color="black"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="isColor('orange', productVariants)"                  :selected="selectedColor === 'orange'"
+                  v-if="isColor('orange', productVariants)"
+                  :selected="selectedColor === 'orange'"
                   @click="selectedColorMethod('orange')"
                   color="orange"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="isColor('lightBlue', productVariants)"                  :selected="selectedColor === 'lightBlue'"
+                  v-if="isColor('lightBlue', productVariants)"
+                  :selected="selectedColor === 'lightBlue'"
                   @click="selectedColorMethod('lightBlue')"
                   color="blue-4"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="isColor('blue', productVariants)"                  :selected="selectedColor === 'blue'"
+                  v-if="isColor('blue', productVariants)"
+                  :selected="selectedColor === 'blue'"
                   @click="selectedColorMethod('blue')"
                   color="blue-9"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="isColor('purple', productVariants)"                  :selected="selectedColor === 'purple'"
+                  v-if="isColor('purple', productVariants)"
+                  :selected="selectedColor === 'purple'"
                   @click="selectedColorMethod('purple')"
                   color="purple"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="isColor('pink', productVariants)"                  :selected="selectedColor === 'pink'"
+                  v-if="isColor('pink', productVariants)"
+                  :selected="selectedColor === 'pink'"
                   @click="selectedColorMethod('pink')"
                   color="pink"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="isColor('white', productVariants)"                  :selected="selectedColor === 'white'"
+                  v-if="isColor('white', productVariants)"
+                  :selected="selectedColor === 'white'"
                   @click="selectedColorMethod('white')"
                   outline
                   color="grey"
@@ -134,7 +141,8 @@
                 >
                 </q-chip>
                 <q-chip
-                  v-if="isColor('black', productVariants)"                  :selected="selectedColor === 'black'"
+                  v-if="isColor('black', productVariants)"
+                  :selected="selectedColor === 'black'"
                   @click="selectedColorMethod('black')"
                   color="black"
                   text-color="white"
@@ -146,9 +154,9 @@
         </div>
         <div :class="$style.product_syze">
           <p>Choose Size</p>
-          <!-- <div class="q-gutter-xs">
+          <div class="q-gutter-xs">
             <q-chip
-              v-if="checkSizes?.hasXSmall"
+              v-if="isSize(selectedColor, 'xsmall', productVariants)"
               :selected="selectedSize === 'xsmall'"
               @click="selectedSizeMethod('xsmall')"
               color="gray"
@@ -157,7 +165,7 @@
               X-Small
             </q-chip>
             <q-chip
-              v-if="checkSizes?.hasSmall"
+              v-if="isSize(selectedColor, 'small', productVariants)"
               :selected="selectedSize === 'small'"
               @click="selectedSizeMethod('small')"
               color="gray"
@@ -166,7 +174,7 @@
               Small
             </q-chip>
             <q-chip
-              v-if="checkSizes?.hasMedium"
+              v-if="isSize(selectedColor, 'medium', productVariants)"
               :selected="selectedSize === 'medium'"
               @click="selectedSizeMethod('medium')"
               color="gray"
@@ -175,7 +183,7 @@
               Medium
             </q-chip>
             <q-chip
-              v-if="checkSizes?.hasLarge"
+              v-if="isSize(selectedColor, 'large', productVariants)"
               :selected="selectedSize === 'large'"
               @click="selectedSizeMethod('large')"
               color="gray"
@@ -184,7 +192,7 @@
               Large
             </q-chip>
             <q-chip
-              v-if="checkSizes?.hasXLarge"
+              v-if="isSize(selectedColor, 'xlarge', productVariants)"
               :selected="selectedSize === 'xlarge'"
               @click="selectedSizeMethod('xlarge')"
               color="gray"
@@ -192,7 +200,7 @@
             >
               X-Large
             </q-chip>
-          </div> -->
+          </div>
         </div>
         <div :class="$style.product_add">
           <Counter
@@ -284,8 +292,9 @@ const selectedColorMethod = (
     | 'black'
 ) => {
   selectedColor.value = color
+  console.log('Выбран цвет:', color)
 }
-
+console.log('!!!Выбран цвет:', selectedColor)
 // const isColor = (color: string, obj: Variant) => {
 //   const arrColors = []
 //   for (const key in obj) {
@@ -297,8 +306,9 @@ const selectedColorMethod = (
 //   }
 // }
 const isColor = (color: string, obj: Variant[]) => {
-  return obj.some(variant => variant.color === color);
-};
+  console.log('ОБЪЕКТ1 ', obj)
+  return Object.values(obj).some((variant) => variant.color === color)
+}
 
 const selectedSize = ref<'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'>()
 
@@ -306,6 +316,25 @@ const selectedSizeMethod = (size: 'xsmall' | 'small' | 'medium' | 'large' | 'xla
   selectedSize.value = size
 }
 
+const isSize = (color: string | null | undefined, size: string, obj: Variant[]) => {
+  if (!color) {
+    console.log('Цвет не выбран')
+    return false
+  }
+
+  const findObj = obj.find((item) => item.color === color)
+  if (!findObj) {
+    console.log('Цвет не найден')
+    return false
+  }
+  const sizesArray = findObj.sizes.split(',').map((s) => s.trim())
+  return sizesArray.includes(size, 0)
+
+  // const index = obj.findIndex((obj) => obj.color === color)
+  // console.log('ОБЪЕКТ2 ', obj[index]) Ошибка что он видел как underfind, но если я комментила
+  // const massIndex = Object.values(obj[index])
+  // return Object.values(obj[index]).some((variant) => variant.size === size) эту строку, то все было бы норм (выводил правильно)
+}
 
 const onAddProduct = (event: Event) => {
   if (!currentProductInCart.value && product.value) {
@@ -346,7 +375,6 @@ onMounted(async () => {
 
     console.log('Product:', product.value)
     console.log('Variants:', product.value?.variants)
-    console.log('END:', productVariants.value[0].color)
   } catch (error) {
     console.error('Error fetching products:', error)
   }

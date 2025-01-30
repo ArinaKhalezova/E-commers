@@ -1,8 +1,10 @@
 export type Variant = {
-  [color: string]: {
-    sizes: string;
-  };
-};
+  // [color: string]: {
+  //   sizes: string
+  // }
+  color: string
+  sizes: string
+}
 
 export type TProduct = {
   id: number
