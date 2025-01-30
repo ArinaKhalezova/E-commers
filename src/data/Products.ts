@@ -27,35 +27,35 @@ export const products = [
     // color: 'Black',
     quantity: 1,
     var: 0,
-    variants: [
-      {
-        red: {
-          sizes: 'xsmall, medium, large'
-        }
-      },
-      {
-        yellow: {
-          sizes: 'x-large'
-        }
-      },
-      {
-        pink: {
-          sizes: 'large'
-        }
-      },
-      {
-        white: {
-          sizes: 'medium, x-large'
-        }
-      }
-    ]
-
     // variants: [
-    //   {color: 'red', sizes: 'xsmall, medium, large'},
-    //   {color: 'yellow', sizes: 'x-large'},
-    //   {color: 'pink', sizes: 'large'},
-    //   {color: 'white', sizes: 'medium, x-large'}
+    //   {
+    //     red: {
+    //       sizes: 'xsmall, medium, large'
+    //     }
+    //   },
+    //   {
+    //     yellow: {
+    //       sizes: 'x-large'
+    //     }
+    //   },
+    //   {
+    //     pink: {
+    //       sizes: 'large'
+    //     }
+    //   },
+    //   {
+    //     white: {
+    //       sizes: 'medium, x-large'
+    //     }
+    //   }
     // ]
+
+    variants: [
+      { color: 'red', sizes: 'xsmall, medium, large' },
+      { color: 'yellow', sizes: 'x-large' },
+      { color: 'pink', sizes: 'large' },
+      { color: 'white', sizes: 'medium, x-large' }
+    ]
   },
   {
     id: 2,
@@ -72,26 +72,14 @@ export const products = [
     // color: 'Blue',
     quantity: 1,
     variants: [
-      {
-        green: {
-          sizes: 'small, medium, large'
-        },
-        orange: {
-          sizes: 'large, x-large'
-        },
-        lightBlue: {
-          sizes: 'large, x-large'
-        },
-        purple: {
-          sizes: 'large, x-large'
-        },
-        pink: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'red', sizes: 'xsmall, medium, large' },
+      { color: 'yellow', sizes: 'x-large' },
+      { color: 'pink', sizes: 'large' },
+      { color: 'white', sizes: 'medium, x-large' },
+      { color: 'green', sizes: 'small, medium' },
+      { color: 'blue', sizes: 'xsmall' },
+      { color: 'orange', sizes: 'large, xlarge' },
+      { color: 'purple', sizes: 'medium' }
     ]
   },
   {
@@ -109,20 +97,8 @@ export const products = [
     color: 'Red',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'lightBlue', sizes: 'xsmall, small' },
+      { color: 'black', sizes: 'small' }
     ]
   },
   {
@@ -140,20 +116,10 @@ export const products = [
     color: 'Orange',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        yellow: {
-          sizes: 'large, x-large'
-        },
-        pink: {
-          sizes: 'large, x-large'
-        },
-        white: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'pink', sizes: 'xlarge' },
+      { color: 'orange', sizes: 'small, medium' },
+      { color: 'green', sizes: 'large' },
+      { color: 'blue', sizes: 'xsmall, large' }
     ]
   },
   {
@@ -171,20 +137,10 @@ export const products = [
     color: 'Green',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        pink: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'purple', sizes: 'medium, xlarge' },
+      { color: 'red', sizes: 'small' },
+      { color: 'white', sizes: 'xsmall, large' },
+      { color: 'lightBlue', sizes: 'medium' }
     ]
   },
   {
@@ -202,14 +158,10 @@ export const products = [
     color: 'Orange',
     quantity: 1,
     variants: [
-      {
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'black', sizes: 'large, xlarge' },
+      { color: 'yellow', sizes: 'small, medium' },
+      { color: 'pink', sizes: 'xsmall' },
+      { color: 'green', sizes: 'large' }
     ]
   },
   {
@@ -227,14 +179,8 @@ export const products = [
     color: 'Black',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'orange', sizes: 'medium, large' },
+      { color: 'lightBlue', sizes: 'medium' }
     ]
   },
   {
@@ -252,11 +198,12 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        pink: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'purple', sizes: 'large' },
+      { color: 'yellow', sizes: 'xsmall, medium' },
+      { color: 'orange', sizes: 'medium, large' },
+      { color: 'lightBlue', sizes: 'medium' },
+      { color: 'white', sizes: 'large, xlarge' },
+      { color: 'pink', sizes: 'small' }
     ]
   },
   {
@@ -274,20 +221,10 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'green', sizes: 'medium' },
+      { color: 'red', sizes: 'small, large' },
+      { color: 'black', sizes: 'xlarge' },
+      { color: 'lightBlue', sizes: 'xsmall, medium' }
     ]
   },
   {
@@ -305,20 +242,10 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'green', sizes: 'medium' },
+      { color: 'red', sizes: 'small, large' },
+      { color: 'black', sizes: 'xlarge' },
+      { color: 'lightBlue', sizes: 'xsmall, medium' }
     ]
   },
   {
@@ -336,20 +263,10 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'orange', sizes: 'xsmall' },
+      { color: 'blue', sizes: 'medium, large' },
+      { color: 'purple', sizes: 'small, xlarge' },
+      { color: 'yellow', sizes: 'large' }
     ]
   },
   {
@@ -366,22 +283,7 @@ export const products = [
     size: 'Medium',
     color: 'White',
     quantity: 1,
-    variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
-    ]
+    variants: [{ color: 'lightBlue', sizes: 'xsmall, medium' }]
   },
   {
     id: 13,
@@ -398,20 +300,8 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'purple', sizes: 'large' },
+      { color: 'yellow', sizes: 'xsmall, medium' }
     ]
   },
   {
@@ -429,20 +319,8 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'orange', sizes: 'medium, large' },
+      { color: 'blue', sizes: 'xsmall, small' }
     ]
   },
   {
@@ -460,20 +338,10 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'black', sizes: 'large, xlarge' },
+      { color: 'yellow', sizes: 'small, medium' },
+      { color: 'pink', sizes: 'xsmall' },
+      { color: 'green', sizes: 'large' }
     ]
   },
   {
@@ -491,20 +359,10 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'black', sizes: 'large, xlarge' },
+      { color: 'yellow', sizes: 'small, medium' },
+      { color: 'pink', sizes: 'xsmall' },
+      { color: 'green', sizes: 'large' }
     ]
   },
   {
@@ -522,20 +380,8 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'black', sizes: 'large, xlarge' },
+      { color: 'green', sizes: 'large' }
     ]
   },
   {
@@ -552,22 +398,7 @@ export const products = [
     size: 'Medium',
     color: 'White',
     quantity: 1,
-    variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
-    ]
+    variants: [{ color: 'pink', sizes: 'xlarge' }]
   },
   {
     id: 19,
@@ -583,22 +414,7 @@ export const products = [
     size: 'Medium',
     color: 'White',
     quantity: 1,
-    variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
-    ]
+    variants: [{ color: 'blue', sizes: 'xsmall, large' }]
   },
   {
     id: 20,
@@ -615,20 +431,10 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'pink', sizes: 'xlarge' },
+      { color: 'orange', sizes: 'small, medium' },
+      { color: 'green', sizes: 'large' },
+      { color: 'blue', sizes: 'xsmall, large' }
     ]
   },
   {
@@ -646,20 +452,9 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'pink', sizes: 'xlarge' },
+      { color: 'orange', sizes: 'small, medium' },
+      { color: 'green', sizes: 'large' }
     ]
   },
   {
@@ -677,20 +472,10 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'pink', sizes: 'xlarge' },
+      { color: 'orange', sizes: 'small, medium' },
+      { color: 'green', sizes: 'large' },
+      { color: 'blue', sizes: 'xsmall, large' }
     ]
   },
   {
@@ -708,20 +493,8 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'pink', sizes: 'xlarge' },
+      { color: 'blue', sizes: 'xsmall, large' }
     ]
   },
   {
@@ -739,20 +512,10 @@ export const products = [
     color: 'White',
     quantity: 1,
     variants: [
-      {
-        red: {
-          sizes: 'small, medium, large'
-        },
-        green: {
-          sizes: 'large, x-large'
-        },
-        blue: {
-          sizes: 'large, x-large'
-        },
-        black: {
-          sizes: 'large, x-large'
-        }
-      }
+      { color: 'pink', sizes: 'xlarge' },
+      { color: 'orange', sizes: 'small, medium' },
+      { color: 'green', sizes: 'large' },
+      { color: 'blue', sizes: 'xsmall, large' }
     ]
   }
 ]

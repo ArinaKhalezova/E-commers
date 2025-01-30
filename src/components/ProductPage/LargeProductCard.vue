@@ -68,7 +68,7 @@
             <div class="q-pa-md">
               <div class="q-gutter-xs" :class="$style.colors_items">
                 <q-chip
-                  v-if="checkColors.hasGreen"
+                  v-if="isColor('green', productVariants)"
                   :selected="selectedColor === 'green'"
                   @click="selectedColorMethod('green')"
                   color="green"
@@ -76,7 +76,7 @@
                 >
                 </q-chip>
                 <q-chip
-                  v-if="checkColors.hasRed"
+                  v-if="isColor('red', productVariants)"
                   :selected="selectedColor === 'red'"
                   @click="selectedColorMethod('red')"
                   color="red"
@@ -84,56 +84,49 @@
                 >
                 </q-chip>
                 <q-chip
-                  v-if="checkColors.hasYellow"
-                  :selected="selectedColor === 'yellow'"
+                  v-if="isColor('yellow', productVariants)"                  :selected="selectedColor === 'yellow'"
                   @click="selectedColorMethod('yellow')"
                   color="yellow"
                   text-color="black"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="checkColors.hasOrange"
-                  :selected="selectedColor === 'orange'"
+                  v-if="isColor('orange', productVariants)"                  :selected="selectedColor === 'orange'"
                   @click="selectedColorMethod('orange')"
                   color="orange"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="checkColors.hasLightBlue"
-                  :selected="selectedColor === 'lightBlue'"
+                  v-if="isColor('lightBlue', productVariants)"                  :selected="selectedColor === 'lightBlue'"
                   @click="selectedColorMethod('lightBlue')"
                   color="blue-4"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="checkColors.hasBlue"
-                  :selected="selectedColor === 'blue'"
+                  v-if="isColor('blue', productVariants)"                  :selected="selectedColor === 'blue'"
                   @click="selectedColorMethod('blue')"
                   color="blue-9"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="checkColors.hasPurple"
-                  :selected="selectedColor === 'purple'"
+                  v-if="isColor('purple', productVariants)"                  :selected="selectedColor === 'purple'"
                   @click="selectedColorMethod('purple')"
                   color="purple"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="checkColors.hasPink"
-                  :selected="selectedColor === 'pink'"
+                  v-if="isColor('pink', productVariants)"                  :selected="selectedColor === 'pink'"
                   @click="selectedColorMethod('pink')"
                   color="pink"
                   text-color="white"
                 >
                 </q-chip>
                 <q-chip
-                  v-if="checkColors.hasWhite"
-                  :selected="selectedColor === 'white'"
+                  v-if="isColor('white', productVariants)"                  :selected="selectedColor === 'white'"
                   @click="selectedColorMethod('white')"
                   outline
                   color="grey"
@@ -141,8 +134,7 @@
                 >
                 </q-chip>
                 <q-chip
-                  v-if="isRed"
-                  :selected="selectedColor === 'black'"
+                  v-if="isColor('black', productVariants)"                  :selected="selectedColor === 'black'"
                   @click="selectedColorMethod('black')"
                   color="black"
                   text-color="white"
@@ -264,28 +256,6 @@ const breadcrumbs = computed(() => {
 const currentProductInCart = computed(() =>
   cartStore.products.find((p) => p.id === productId.value)
 )
-// const isRed = computed(() => {
-//   for (let i = 0; i <= productVariants.value.length; i++) {
-//     if (productVariants.value[i].color === 'red') {
-//       return true
-//     }
-//   }
-// })
-
-const checkColors = computed(() => {
-  return {
-    hasRed: productVariants.value.some((variant) => variant.red),
-    hasGreen: productVariants.value.some((variant) => variant.green),
-    hasYellow: productVariants.value.some((variant) => variant.yellow),
-    hasOrange: productVariants.value.some((variant) => variant.orange),
-    hasLightBlue: productVariants.value.some((variant) => variant.lightBlue),
-    hasBlue: productVariants.value.some((variant) => variant.blue),
-    hasPurple: productVariants.value.some((variant) => variant.purple),
-    hasPink: productVariants.value.some((variant) => variant.pink),
-    hasWhite: productVariants.value.some((variant) => variant.white),
-    hasBlack: productVariants.value.some((variant) => variant.black)
-  }
-})
 
 const selectedColor = ref<
   | 'red'
@@ -316,25 +286,26 @@ const selectedColorMethod = (
   selectedColor.value = color
 }
 
+// const isColor = (color: string, obj: Variant) => {
+//   const arrColors = []
+//   for (const key in obj) {
+//     console.log('res' + obj[key])
+//     arrColors.push(obj[key])
+//   }
+//   if (arrColors.indexOf(color, 0) >= 0) {
+//     return true
+//   }
+// }
+const isColor = (color: string, obj: Variant[]) => {
+  return obj.some(variant => variant.color === color);
+};
+
 const selectedSize = ref<'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'>()
 
 const selectedSizeMethod = (size: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge') => {
   selectedSize.value = size
 }
 
-// const checkSizes = computed((...selectedColor) => {
-//   for (let i = 0; i <= productVariants.value.length; i++) {
-//     if (productVariants.value[i].color === selectedColor.value) {
-//       return {
-//         hasXSmall: productVariants.value[i].color === 'xsmall',
-//         hasSmall: productVariants.value[i].color.some((variant) => variant.small),
-//         hasMedium: productVariants.value[i].color.some((variant) => variant.medium),
-//         hasLarge: productVariants.value[i].color.some((variant) => variant.large),
-//         hasXLarge: productVariants.value[i].color.some((variant) => variant.xlarge)
-//       }
-//     }
-//   }
-// })
 
 const onAddProduct = (event: Event) => {
   if (!currentProductInCart.value && product.value) {
@@ -350,16 +321,6 @@ const updateProductQuantity = (quantity: number) => {
     cartStore.updateProductQuantity(currentProductInCart.value.id, quantity)
   }
 }
-
-// const checkSizes = (COLOR) => {
-//   for (let i = 0; i <= productVariants.value.length; i++) {
-//     if (productVariants.value[i].color === selectedColor.value) {
-//       return console.log(productVariants.value[i].sizes)
-//     }
-//   }
-// }
-
-// checkSizes()
 
 onMounted(async () => {
   try {
