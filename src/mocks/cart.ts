@@ -42,7 +42,11 @@ export const cart = [
     const product = mockCart.find((p) => p.id === id)
 
     if (product) {
-      product.quantity = quantity
+      if (quantity > 0) {
+        product.quantity = quantity
+      } else {
+        mockCart = mockCart.filter((p) => p.id !== id)
+      }
     }
 
     return HttpResponse.json({ success: true })
