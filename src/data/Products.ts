@@ -35,7 +35,7 @@ export const products = [
     //   },
     //   {
     //     yellow: {
-    //       sizes: 'x-large'
+    //       sizes: 'xlarge'
     //     }
     //   },
     //   {
@@ -45,16 +45,33 @@ export const products = [
     //   },
     //   {
     //     white: {
-    //       sizes: 'medium, x-large'
+    //       sizes: 'medium, xlarge'
     //     }
     //   }
     // ]
 
+    // variants: [
+    //   { color: 'red', sizes: [{
+    //       size: 'xsmall',
+    //       quantity: 10
+    //     }, {
+    //       size: 'medium',
+    //       quantity: 10
+    //     }, {
+    //       size: 'large',
+    //       quantity: 10
+    //     },
+    //   ]},
+    //   { color: 'yellow', sizes: 'xlarge' },
+    //   { color: 'pink', sizes: 'large' },
+    //   { color: 'white', sizes: 'medium, xlarge' }
+    // ],
+
     variants: [
       { color: 'red', sizes: 'xsmall, medium, large' },
-      { color: 'yellow', sizes: 'x-large' },
+      { color: 'yellow', sizes: 'xlarge' },
       { color: 'pink', sizes: 'large' },
-      { color: 'white', sizes: 'medium, x-large' }
+      { color: 'white', sizes: 'medium, xlarge' }
     ]
   },
   {
@@ -73,9 +90,10 @@ export const products = [
     quantity: 1,
     variants: [
       { color: 'red', sizes: 'xsmall, medium, large' },
-      { color: 'yellow', sizes: 'x-large' },
+      { color: 'yellow', sizes: 'xlarge' },
+      { color: 'black', sizes: '' },
       { color: 'pink', sizes: 'large' },
-      { color: 'white', sizes: 'medium, x-large' },
+      { color: 'white', sizes: 'medium, xlarge' },
       { color: 'green', sizes: 'small, medium' },
       { color: 'blue', sizes: 'xsmall' },
       { color: 'orange', sizes: 'large, xlarge' },
@@ -112,7 +130,7 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'T-shirt',
     gender: 'Men',
-    size: 'X-Large',
+    size: 'xlarge',
     color: 'Orange',
     quantity: 1,
     variants: [

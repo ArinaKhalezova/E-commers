@@ -67,87 +67,12 @@
           <div id="q-app">
             <div class="q-pa-md">
               <div class="q-gutter-xs" :class="$style.colors_items">
-                <q-chip
-                  v-if="isColor('green', productVariants)"
-                  :selected="selectedColor === 'green'"
-                  @click="selectedColorMethod('green')"
-                  color="green"
-                  text-color="white"
-                >
-                </q-chip>
-                <q-chip
-                  v-if="isColor('red', productVariants)"
-                  :selected="selectedColor === 'red'"
-                  @click="selectedColorMethod('red')"
-                  color="red"
-                  text-color="white"
-                >
-                </q-chip>
-                <q-chip
-                  v-if="isColor('yellow', productVariants)"
-                  :selected="selectedColor === 'yellow'"
-                  @click="selectedColorMethod('yellow')"
-                  color="yellow"
-                  text-color="black"
-                >
-                </q-chip>
-                <q-chip
-                  v-if="isColor('orange', productVariants)"
-                  :selected="selectedColor === 'orange'"
-                  @click="selectedColorMethod('orange')"
-                  color="orange"
-                  text-color="white"
-                >
-                </q-chip>
-                <q-chip
-                  v-if="isColor('lightBlue', productVariants)"
-                  :selected="selectedColor === 'lightBlue'"
-                  @click="selectedColorMethod('lightBlue')"
-                  color="blue-4"
-                  text-color="white"
-                >
-                </q-chip>
-                <q-chip
-                  v-if="isColor('blue', productVariants)"
-                  :selected="selectedColor === 'blue'"
-                  @click="selectedColorMethod('blue')"
-                  color="blue-9"
-                  text-color="white"
-                >
-                </q-chip>
-                <q-chip
-                  v-if="isColor('purple', productVariants)"
-                  :selected="selectedColor === 'purple'"
-                  @click="selectedColorMethod('purple')"
-                  color="purple"
-                  text-color="white"
-                >
-                </q-chip>
-                <q-chip
-                  v-if="isColor('pink', productVariants)"
-                  :selected="selectedColor === 'pink'"
-                  @click="selectedColorMethod('pink')"
-                  color="pink"
-                  text-color="white"
-                >
-                </q-chip>
-                <q-chip
-                  v-if="isColor('white', productVariants)"
-                  :selected="selectedColor === 'white'"
-                  @click="selectedColorMethod('white')"
-                  outline
-                  color="grey"
-                  text-color="black"
-                >
-                </q-chip>
-                <q-chip
-                  v-if="isColor('black', productVariants)"
-                  :selected="selectedColor === 'black'"
-                  @click="selectedColorMethod('black')"
-                  color="black"
-                  text-color="white"
-                >
-                </q-chip>
+                <ProductPageColor 
+                  v-for="color in availableColors" 
+                  :key="color" 
+                  :color="color"
+                  v-model:model-value="selectedColor"
+                />
               </div>
             </div>
           </div>
@@ -232,13 +157,14 @@ import type { TProduct, Variant } from '@/data/products.types'
 import { generateBreadcrumbs } from '@/data/breadcrumbs'
 import Counter from './Counter.vue'
 import ButtonDark from '../Home/ButtonDark.vue'
+import ProductPageColor from './Color.vue'
 
 const cartStore = useCartStore()
 const route = useRoute()
 const router = useRouter()
 
-const productVariants = ref(<Variant[]>[])
-const products = ref(<TProduct[]>[])
+const productVariants = ref<Variant[]>([])
+const products = ref<TProduct[]>([])
 const productId = computed(() => Number(route.params.id))
 
 const tab = ref('first')
@@ -265,7 +191,7 @@ const currentProductInCart = computed(() =>
   cartStore.products.find((p) => p.id === productId.value)
 )
 
-const selectedColor = ref<
+type TColor = 
   | 'red'
   | 'green'
   | 'yellow'
@@ -276,24 +202,8 @@ const selectedColor = ref<
   | 'pink'
   | 'white'
   | 'black'
->()
+const selectedColor = ref<TColor>('red')
 
-const selectedColorMethod = (
-  color:
-    | 'red'
-    | 'green'
-    | 'yellow'
-    | 'orange'
-    | 'lightBlue'
-    | 'blue'
-    | 'purple'
-    | 'pink'
-    | 'white'
-    | 'black'
-) => {
-  selectedColor.value = color
-  console.log('Выбран цвет:', color)
-}
 console.log('!!!Выбран цвет:', selectedColor)
 // const isColor = (color: string, obj: Variant) => {
 //   const arrColors = []
@@ -305,10 +215,20 @@ console.log('!!!Выбран цвет:', selectedColor)
 //     return true
 //   }
 // }
-const isColor = (color: string, obj: Variant[]) => {
-  console.log('ОБЪЕКТ1 ', obj)
-  return Object.values(obj).some((variant) => variant.color === color)
-}
+// const isColor = (color: string, arr: Variant[]) => {
+//   console.log('ОБЪЕКТ1 ', color, arr)
+//   // return arr.some((variant) => variant.color === color)
+//   return arr.map(v => v.color).includes(color)
+// }
+
+// { length: number, 0: value, 1: value }
+// Array.from({ length: number, 0: 'value 1', 1: 'value 2' })
+
+const availableColors = computed(() => {
+ const allColors = productVariants.value.map((variant) => variant.color)
+
+ return COLORS_SORTING.filter((color) => allColors.includes(color))
+})
 
 const selectedSize = ref<'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'>()
 
@@ -350,6 +270,20 @@ const updateProductQuantity = (quantity: number) => {
     cartStore.updateProductQuantity(currentProductInCart.value.id, quantity)
   }
 }
+
+const COLORS_SORTING = [
+  'green',
+  'red',
+  'yellow',
+  'orange',
+  'lightBlue',
+  'blue',
+  'purple',
+  'pink',
+  'white',
+  'black',
+]
+
 
 onMounted(async () => {
   try {
