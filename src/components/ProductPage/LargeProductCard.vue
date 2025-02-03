@@ -67,9 +67,9 @@
           <div id="q-app">
             <div class="q-pa-md">
               <div class="q-gutter-xs" :class="$style.colors_items">
-                <ProductPageColor 
-                  v-for="color in availableColors" 
-                  :key="color" 
+                <ProductPageColor
+                  v-for="color in availableColors"
+                  :key="color"
                   :color="color"
                   v-model:model-value="selectedColor"
                 />
@@ -80,51 +80,12 @@
         <div :class="$style.product_syze">
           <p>Choose Size</p>
           <div class="q-gutter-xs">
-            <q-chip
-              v-if="isSize(selectedColor, 'xsmall', productVariants)"
-              :selected="selectedSize === 'xsmall'"
-              @click="selectedSizeMethod('xsmall')"
-              color="gray"
-              text-color="black"
-            >
-              X-Small
-            </q-chip>
-            <q-chip
-              v-if="isSize(selectedColor, 'small', productVariants)"
-              :selected="selectedSize === 'small'"
-              @click="selectedSizeMethod('small')"
-              color="gray"
-              text-color="black"
-            >
-              Small
-            </q-chip>
-            <q-chip
-              v-if="isSize(selectedColor, 'medium', productVariants)"
-              :selected="selectedSize === 'medium'"
-              @click="selectedSizeMethod('medium')"
-              color="gray"
-              text-color="black"
-            >
-              Medium
-            </q-chip>
-            <q-chip
-              v-if="isSize(selectedColor, 'large', productVariants)"
-              :selected="selectedSize === 'large'"
-              @click="selectedSizeMethod('large')"
-              color="gray"
-              text-color="black"
-            >
-              Large
-            </q-chip>
-            <q-chip
-              v-if="isSize(selectedColor, 'xlarge', productVariants)"
-              :selected="selectedSize === 'xlarge'"
-              @click="selectedSizeMethod('xlarge')"
-              color="gray"
-              text-color="black"
-            >
-              X-Large
-            </q-chip>
+            <ProductPageSize
+              v-for="size in availableSizes"
+              :key="size"
+              :size="size"
+              v-model:model-value="selectedSize"
+            />
           </div>
         </div>
         <div :class="$style.product_add">
@@ -153,11 +114,12 @@ import { useRoute, useRouter } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
 import { useCartStore } from '@/stores/cartStore'
 import type { TProduct, Variant } from '@/data/products.types'
-// import { products } from '@/data/products'
 import { generateBreadcrumbs } from '@/data/breadcrumbs'
 import Counter from './Counter.vue'
 import ButtonDark from '../Home/ButtonDark.vue'
 import ProductPageColor from './Color.vue'
+import ProductPageSize from './Size.vue'
+import { size } from '@vee-validate/rules'
 
 const cartStore = useCartStore()
 const route = useRoute()
@@ -169,13 +131,6 @@ const productId = computed(() => Number(route.params.id))
 
 const tab = ref('first')
 const splitterModel = ref(20)
-
-const size = ref({
-  Small: false,
-  Medium: false,
-  Large: false,
-  X_Large: false
-})
 
 const product = computed(() => {
   return products.value.find((p) => p.id === productId.value)
@@ -191,7 +146,8 @@ const currentProductInCart = computed(() =>
   cartStore.products.find((p) => p.id === productId.value)
 )
 
-type TColor = 
+//выбор цвета
+type TColor =
   | 'red'
   | 'green'
   | 'yellow'
@@ -203,58 +159,50 @@ type TColor =
   | 'white'
   | 'black'
 const selectedColor = ref<TColor>('red')
-
 console.log('!!!Выбран цвет:', selectedColor)
-// const isColor = (color: string, obj: Variant) => {
-//   const arrColors = []
-//   for (const key in obj) {
-//     console.log('res' + obj[key])
-//     arrColors.push(obj[key])
-//   }
-//   if (arrColors.indexOf(color, 0) >= 0) {
-//     return true
-//   }
-// }
-// const isColor = (color: string, arr: Variant[]) => {
-//   console.log('ОБЪЕКТ1 ', color, arr)
-//   // return arr.some((variant) => variant.color === color)
-//   return arr.map(v => v.color).includes(color)
-// }
-
-// { length: number, 0: value, 1: value }
-// Array.from({ length: number, 0: 'value 1', 1: 'value 2' })
-
+const COLORS_SORTING = [
+  'green',
+  'red',
+  'yellow',
+  'orange',
+  'lightBlue',
+  'blue',
+  'purple',
+  'pink',
+  'white',
+  'black'
+]
 const availableColors = computed(() => {
- const allColors = productVariants.value.map((variant) => variant.color)
-
- return COLORS_SORTING.filter((color) => allColors.includes(color))
+  const allColors = productVariants.value.map((variant) => variant.color)
+  return COLORS_SORTING.filter((color) => allColors.includes(color))
 })
 
-const selectedSize = ref<'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'>()
+//выбор размера
+type TSize = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
+const selectedSize = ref<TSize>('xsmall')
+console.log('!!!Выбран размер:', selectedSize)
+const SIZES_SORTING = ['xsmall', 'small', 'medium', 'large', 'xlarge']
 
-const selectedSizeMethod = (size: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge') => {
-  selectedSize.value = size
-}
+// const found = productVariants.value.find((obj: Variant) => {
+//   return obj.color === 'red'
+// })
+// console.log(productVariants)
+// console.log(Array.isArray(productVariants.value))
 
-const isSize = (color: string | null | undefined, size: string, obj: Variant[]) => {
-  if (!color) {
-    console.log('Цвет не выбран')
-    return false
+const availableSizes = computed(() => {
+  const found = productVariants.value.find((obj: Variant) => {
+    return obj.color === selectedColor.value
+  })
+
+  if (!found) {
+    return []
   }
 
-  const findObj = obj.find((item) => item.color === color)
-  if (!findObj) {
-    console.log('Цвет не найден')
-    return false
-  }
-  const sizesArray = findObj.sizes.split(',').map((s) => s.trim())
-  return sizesArray.includes(size, 0)
+  const allSizes = found.sizes.map((size) => size.trim())
+  return SIZES_SORTING.filter((size) => allSizes.includes(size))
+})
 
-  // const index = obj.findIndex((obj) => obj.color === color)
-  // console.log('ОБЪЕКТ2 ', obj[index]) Ошибка что он видел как underfind, но если я комментила
-  // const massIndex = Object.values(obj[index])
-  // return Object.values(obj[index]).some((variant) => variant.size === size) эту строку, то все было бы норм (выводил правильно)
-}
+console.log('dddddddddddd', availableSizes, availableColors)
 
 const onAddProduct = (event: Event) => {
   if (!currentProductInCart.value && product.value) {
@@ -270,20 +218,6 @@ const updateProductQuantity = (quantity: number) => {
     cartStore.updateProductQuantity(currentProductInCart.value.id, quantity)
   }
 }
-
-const COLORS_SORTING = [
-  'green',
-  'red',
-  'yellow',
-  'orange',
-  'lightBlue',
-  'blue',
-  'purple',
-  'pink',
-  'white',
-  'black',
-]
-
 
 onMounted(async () => {
   try {

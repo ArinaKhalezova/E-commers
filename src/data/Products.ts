@@ -28,29 +28,6 @@ export const products = [
     quantity: 1,
     var: 0,
     // variants: [
-    //   {
-    //     red: {
-    //       sizes: 'xsmall, medium, large'
-    //     }
-    //   },
-    //   {
-    //     yellow: {
-    //       sizes: 'xlarge'
-    //     }
-    //   },
-    //   {
-    //     pink: {
-    //       sizes: 'large'
-    //     }
-    //   },
-    //   {
-    //     white: {
-    //       sizes: 'medium, xlarge'
-    //     }
-    //   }
-    // ]
-
-    // variants: [
     //   { color: 'red', sizes: [{
     //       size: 'xsmall',
     //       quantity: 10
@@ -68,10 +45,10 @@ export const products = [
     // ],
 
     variants: [
-      { color: 'red', sizes: 'xsmall, medium, large' },
-      { color: 'yellow', sizes: 'xlarge' },
-      { color: 'pink', sizes: 'large' },
-      { color: 'white', sizes: 'medium, xlarge' }
+      { color: 'red', sizes: ['xsmall', 'medium', 'large'] },
+      { color: 'yellow', sizes: ['xlarge'] },
+      { color: 'pink', sizes: ['large'] },
+      { color: 'white', sizes: ['medium', 'xlarge'] }
     ]
   },
   {
