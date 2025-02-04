@@ -81,11 +81,17 @@
           <p>Choose Size</p>
           <div class="q-gutter-xs">
             <ProductPageSize
-              v-for="size in availableSizes"
+              :arr="allSizes"
               :key="size"
               :size="size"
               v-model:model-value="selectedSize"
             />
+            <!-- <ProductPageSize
+              v-for="size in availableSizes"
+              :key="size"
+              :size="size"
+              v-model:model-value="selectedSize"
+            /> -->
           </div>
         </div>
         <div :class="$style.product_add">
@@ -119,7 +125,6 @@ import Counter from './Counter.vue'
 import ButtonDark from '../Home/ButtonDark.vue'
 import ProductPageColor from './Color.vue'
 import ProductPageSize from './Size.vue'
-import { size } from '@vee-validate/rules'
 
 const cartStore = useCartStore()
 const route = useRoute()
@@ -146,7 +151,7 @@ const currentProductInCart = computed(() =>
   cartStore.products.find((p) => p.id === productId.value)
 )
 
-//выбор цвета
+//ВЫБОР ЦВЕТА
 type TColor =
   | 'red'
   | 'green'
@@ -177,18 +182,19 @@ const availableColors = computed(() => {
   return COLORS_SORTING.filter((color) => allColors.includes(color))
 })
 
-//выбор размера
+//ВЫБОР РАЗМЕРА
 type TSize = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
 const selectedSize = ref<TSize>('xsmall')
 console.log('!!!Выбран размер:', selectedSize)
 const SIZES_SORTING = ['xsmall', 'small', 'medium', 'large', 'xlarge']
 
-// const found = productVariants.value.find((obj: Variant) => {
-//   return obj.color === 'red'
-// })
-// console.log(productVariants)
-// console.log(Array.isArray(productVariants.value))
-
+const allSizes = computed(() => {
+  const allSizes = []
+  allSizes.push(availableSizes)
+  allSizes.push(unavailableSizes)
+  return allSizes
+})
+//доступные размеры
 const availableSizes = computed(() => {
   const found = productVariants.value.find((obj: Variant) => {
     return obj.color === selectedColor.value
@@ -201,9 +207,21 @@ const availableSizes = computed(() => {
   const allSizes = found.sizes.map((size) => size.trim())
   return SIZES_SORTING.filter((size) => allSizes.includes(size))
 })
+//недоступные размеры
+const unavailableSizes = computed(() => {
+  const missingInAvailable = SIZES_SORTING.filter(
+    (size: string) => !availableSizes.value.includes(size)
+  )
+  const missingInSorting = availableSizes.value.filter(
+    (size: string) => !SIZES_SORTING.includes(size)
+  )
+  return [...missingInAvailable, ...missingInSorting]
+})
+console.log('!', typeof availableSizes)
+console.log('?', allSizes.value)
+console.log('dddddddddddd', unavailableSizes.value)
 
-console.log('dddddddddddd', availableSizes, availableColors)
-
+//методы
 const onAddProduct = (event: Event) => {
   if (!currentProductInCart.value && product.value) {
     event.preventDefault()

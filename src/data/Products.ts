@@ -45,7 +45,7 @@ export const products = [
     // ],
 
     variants: [
-      { color: 'red', sizes: ['xsmall', 'medium', 'large'] },
+      { color: 'red', sizes: ['xsmall','large','medium'] },
       { color: 'yellow', sizes: ['xlarge'] },
       { color: 'pink', sizes: ['large'] },
       { color: 'white', sizes: ['medium', 'xlarge'] }
@@ -66,15 +66,15 @@ export const products = [
     // color: 'Blue',
     quantity: 1,
     variants: [
-      { color: 'red', sizes: 'xsmall, medium, large' },
-      { color: 'yellow', sizes: 'xlarge' },
-      { color: 'black', sizes: '' },
-      { color: 'pink', sizes: 'large' },
-      { color: 'white', sizes: 'medium, xlarge' },
-      { color: 'green', sizes: 'small, medium' },
-      { color: 'blue', sizes: 'xsmall' },
-      { color: 'orange', sizes: 'large, xlarge' },
-      { color: 'purple', sizes: 'medium' }
+      { color: 'red', sizes: ['xsmall', 'medium', 'large'] },
+      { color: 'yellow', sizes: ['xlarge'] },
+      { color: 'black', sizes: [''] },
+      { color: 'pink', sizes: ['large'] },
+      { color: 'white', sizes: ['medium', 'xlarge'] },
+      { color: 'green', sizes: ['small', 'medium'] },
+      { color: 'blue', sizes: ['xsmall'] },
+      { color: 'orange', sizes: ['large', 'xlarge'] },
+      { color: 'purple', sizes: ['medium'] }
     ]
   },
   {
