@@ -184,8 +184,7 @@ const availableColors = computed(() => {
 
 //ВЫБОР РАЗМЕРА
 type TSize = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
-const selectedSize = ref<TSize>('xsmall')
-console.log('!!!Выбран размер:', selectedSize)
+
 const SIZES_SORTING = ['xsmall', 'small', 'medium', 'large', 'xlarge']
 
 const allSizes = computed(() => {
@@ -207,6 +206,11 @@ const availableSizes = computed(() => {
   const allSizes = found.sizes.map((size) => size.trim())
   return SIZES_SORTING.filter((size) => allSizes.includes(size))
 })
+const getFirstSize = computed(() => {
+  return availableSizes.value[0]
+})
+const selectedSize = ref<TSize>(getFirstSize)
+console.log('!!!Выбран размер:', selectedSize)
 //недоступные размеры
 const unavailableSizes = computed(() => {
   const missingInAvailable = SIZES_SORTING.filter(

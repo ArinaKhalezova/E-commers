@@ -92,8 +92,9 @@ export const products = [
     color: 'Red',
     quantity: 1,
     variants: [
-      { color: 'lightBlue', sizes: 'xsmall, small' },
-      { color: 'black', sizes: 'small' }
+      { color: 'lightBlue', sizes: ['xsmall', 'small'] },
+      { color: 'black', sizes: ['small'] },
+      { color: 'pink', sizes: [''] }
     ]
   },
   {
@@ -111,10 +112,10 @@ export const products = [
     color: 'Orange',
     quantity: 1,
     variants: [
-      { color: 'pink', sizes: 'xlarge' },
-      { color: 'orange', sizes: 'small, medium' },
-      { color: 'green', sizes: 'large' },
-      { color: 'blue', sizes: 'xsmall, large' }
+      { color: 'pink', sizes: ['xlarge'] },
+      { color: 'orange', sizes: ['small', 'medium'] },
+      { color: 'green', sizes: ['large'] },
+      { color: 'blue', sizes: ['xsmall', 'large'] }
     ]
   },
   {
@@ -132,10 +133,10 @@ export const products = [
     color: 'Green',
     quantity: 1,
     variants: [
-      { color: 'purple', sizes: 'medium, xlarge' },
-      { color: 'red', sizes: 'small' },
-      { color: 'white', sizes: 'xsmall, large' },
-      { color: 'lightBlue', sizes: 'medium' }
+      { color: 'purple', sizes: ['medium', 'xlarge']},
+      { color: 'red', sizes: ['small'] },
+      { color: 'white', sizes: ['xsmall', 'large'] },
+      { color: 'lightBlue', sizes: ['medium'] }
     ]
   },
   {
@@ -153,10 +154,10 @@ export const products = [
     color: 'Orange',
     quantity: 1,
     variants: [
-      { color: 'black', sizes: 'large, xlarge' },
-      { color: 'yellow', sizes: 'small, medium' },
-      { color: 'pink', sizes: 'xsmall' },
-      { color: 'green', sizes: 'large' }
+      { color: 'black', sizes: ['large', 'xlarge'] },
+      { color: 'yellow', sizes: ['small', 'medium'] },
+      { color: 'pink', sizes: ['xsmall'] },
+      { color: 'green', sizes: ['large'] }
     ]
   },
   {
@@ -174,8 +175,8 @@ export const products = [
     color: 'Black',
     quantity: 1,
     variants: [
-      { color: 'orange', sizes: 'medium, large' },
-      { color: 'lightBlue', sizes: 'medium' }
+      { color: 'orange', sizes: ['medium', 'large'] },
+      { color: 'lightBlue', sizes: ['medium'] }
     ]
   },
   {
