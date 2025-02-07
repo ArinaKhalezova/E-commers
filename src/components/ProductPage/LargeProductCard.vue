@@ -115,7 +115,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Breadcrumbs from '../Catalog/Breadcrumbs.vue'
 import { useCartStore } from '@/stores/cartStore'
@@ -206,11 +206,19 @@ const availableSizes = computed(() => {
   const allSizes = found.sizes.map((size) => size.trim())
   return SIZES_SORTING.filter((size) => allSizes.includes(size))
 })
-const getFirstSize = computed(() => {
-  return availableSizes.value[0]
+
+const selectedSize = ref<TSize>(availableSizes.value[0])
+
+watch(availableSizes, (newSizes) => {
+  if (newSizes.length > 0 && !newSizes.includes(selectedSize.value)) {
+    selectedSize.value = newSizes[0]
+  } else {
+    selectedSize.value = ''
+  }
 })
-const selectedSize = ref<TSize>(getFirstSize)
+
 console.log('!!!Выбран размер:', selectedSize)
+
 //недоступные размеры
 const unavailableSizes = computed(() => {
   const missingInAvailable = SIZES_SORTING.filter(

@@ -89,6 +89,7 @@ export const useCartStore = defineStore('cartStore', () => {
     await fetchProducts()
   }
 
+
   return {
     products,
     totalCountProducts,

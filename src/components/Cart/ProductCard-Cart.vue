@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import type { TProduct } from '@/data/products.types'
 import Counter from '../ProductPage/Counter.vue'
@@ -64,6 +64,18 @@ const deleteProduct = async () => {
 const goToProduct = (id: number) => {
   router.push({ name: 'productPage', params: { id } })
 }
+
+onMounted(async () => {
+  try {
+    const cartResponce = await fetch('/api/products')
+    if (!cartResponce.ok) {
+      throw new Error('Failed to fetch product data')
+    }
+    cartStore.value = await cartResponce.json()
+  } catch (error) {
+    console.error('Error fetching cart:', error)
+  }
+})
 </script>
 
 <style module>
