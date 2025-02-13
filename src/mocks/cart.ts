@@ -1,4 +1,5 @@
 import { http, HttpResponse } from 'msw'
+import { urls } from './baseUrls'
 
 type TCartItem = {
   id: number
@@ -23,13 +24,13 @@ const saveCartToLocalStorage = (cart: TCartItem[]) => {
 let mockCart: TCartItem[] = loadCartFromLocalStorage()
 
 export const cart = [
-  http.get('/api/products', () => {
+  http.get(urls.serverUrl + urls.products, () => {
     const mockCart = loadCartFromLocalStorage()
 
     return HttpResponse.json(mockCart)
   }),
 
-  http.post('/api/products', async ({ request }) => {
+  http.post(urls.serverUrl + urls.products, async ({ request }) => {
     const mockCart = loadCartFromLocalStorage()
     const newProduct = (await request.json()) as {
       id: number
@@ -50,7 +51,7 @@ export const cart = [
     return HttpResponse.json({ success: true })
   }),
 
-  http.delete('/api/products/:id', ({ params }) => {
+  http.delete(urls.serverUrl + urls.products + urls.id, ({ params }) => {
     const mockCart = loadCartFromLocalStorage()
     const id = Number(params.id)
     const updatedCart = mockCart.filter((p) => p.id !== id)
@@ -58,7 +59,7 @@ export const cart = [
     return HttpResponse.json({ success: true })
   }),
 
-  http.patch('/api/products/:id', async ({ params, request }) => {
+  http.patch(urls.serverUrl + urls.products + urls.id, async ({ params, request }) => {
     const mockCart = loadCartFromLocalStorage()
     const id = Number(params.id)
     const { quantity } = (await request.json()) as { quantity: number }
