@@ -1,30 +1,18 @@
 <template>
   <div :class="$style.cart_items">
     <div :class="$style.cart_product">
-      <ProductCardCart v-for="product in cartStore" :key="product.id" :product="product" />
-      <!-- {{ productStore.products }} -->
+      <ProductCardCart v-for="product in cartStore.products" :key="product.id" :product="product" />
       <p :class="$style.cart_total_products">Total products: {{ cartStore.totalCountProducts }}</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// import { mockedStore } from '@/mocks/cart';
-import { onMounted, ref } from 'vue';
 import ProductCardCart from './ProductCard-Cart.vue'
+import { useCartStore } from '@/stores/cartStore'
 
-const cartStore = ref([])
-onMounted(async () => {
-  try {
-    const cartResponce = await fetch('/api/products')
-    if (!cartResponce.ok) {
-      throw new Error('Failed to fetch product data')
-    }
-    cartStore.value = await cartResponce.json()
-  } catch (error) {
-    console.error('Error fetching cart:', error)
-  }
-})
+const cartStore = useCartStore()
+cartStore.fetchProducts()
 </script>
 
 <style module>

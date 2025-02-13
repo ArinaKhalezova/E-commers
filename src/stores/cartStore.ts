@@ -104,7 +104,8 @@ export const useCartStore = defineStore('cartStore', () => {
     discount,
     getSale,
     applyPromoCode,
-    saleCost
+    saleCost,
+    fetchProducts
   }
 })
 
