@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw'
 
-type TCartItem  = {
+type TCartItem = {
   id: number
   name: string
   cost: number
@@ -35,6 +35,7 @@ export const cart = [
       id: number
       name: string
       cost: number
+      color: string
       quantity: number
     }
     const existingProduct = mockCart.find((p) => p.id === newProduct.id)
@@ -44,7 +45,7 @@ export const cart = [
     } else {
       mockCart.push({ ...newProduct, quantity: 1 })
     }
-    
+
     saveCartToLocalStorage(mockCart)
     return HttpResponse.json({ success: true })
   }),

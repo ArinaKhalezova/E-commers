@@ -54,10 +54,10 @@
     </div>
     <div :class="$style.menu">
       <a href="/cart">
-        <img alt="Search button" src="/public/assets/images/cart.png" width="24" height="24" />
+        <img alt="cart" src="/public/assets/images/cart.png" width="24" height="24" />
       </a>
       <a href="/account">
-        <img alt="Search button" src="/public/assets/images/account.png" width="24" height="24" />
+        <img alt="account" src="/public/assets/images/account.png" width="24" height="24" />
       </a>
     </div>
   </div>
@@ -106,6 +106,10 @@ const toggleLeftDrawer = () => {
 
 .burger_menu {
   display: none;
+}
+.menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 @media (max-width: 1024px) {

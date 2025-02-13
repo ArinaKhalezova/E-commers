@@ -1,8 +1,12 @@
 <template>
   <div :class="$style.counter_container">
-    <button @click="decrement" :class="$style.counter_button"><img src="/public/assets/images/minus.png" alt="minus"></button>
-    <p :class="$style.counter_count"> {{ count }} </p>
-    <button @click="increment" :class="$style.counter_button"><img src="/public/assets/images/plus.png" alt="plus"></button>
+    <button @click="decrement" :class="$style.counter_button">
+      <img src="/public/assets/images/minus.png" alt="minus" />
+    </button>
+    <p :class="$style.counter_count">{{ count }}</p>
+    <button @click="increment" :class="$style.counter_button">
+      <img src="/public/assets/images/plus.png" alt="plus" />
+    </button>
   </div>
 </template>
 
@@ -17,21 +21,11 @@ const emit = defineEmits<{
   (e: 'update:count', value: number): void
 }>()
 
-// const count = ref(props.count !== undefined ? props.count : 1)
-
-// watch(() => props.count, (newCount) => {
-//   count.value = newCount
-// })
-
 function decrement() {
-  // if (count.value > 1) {
-    // count.value--
-    emit('update:count', props.count - 1)
-  // }
+  emit('update:count', props.count - 1)
 }
 
 function increment() {
-  // count.value++
   emit('update:count', props.count + 1)
 }
 </script>
@@ -46,7 +40,6 @@ function increment() {
   align-items: center;
   padding: 12px 16px;
   width: auto;
-
 }
 .counter_button {
   cursor: pointer;

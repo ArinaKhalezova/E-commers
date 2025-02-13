@@ -15,10 +15,8 @@
           </div>
         </div>
         <div :class="$style.product_characteristics">
-          <p>{{ 'Size: ' + product.size }}</p>
           <p>{{ 'Color: ' + product.color }}</p>
-          <!-- <p>Size: Medium</p>
-          <p>Color: White</p> -->
+          <p>{{ 'Size: ' + product.size }}</p>
         </div>
         <div :class="$style.product_footer">
           <div :class="$style.product_price">
@@ -44,6 +42,7 @@ import { useRouter } from 'vue-router'
 import type { TProduct } from '@/data/products.types'
 import Counter from '../ProductPage/Counter.vue'
 import { useCartStore } from '@/stores/cartStore'
+import { products } from '@/data/products'
 
 const cartStore = useCartStore()
 
@@ -52,7 +51,7 @@ const props = defineProps<{
 }>()
 
 const updateQuantity = async (quantity: number) => {
-   await cartStore.updateProductQuantity(props.product.id, quantity)
+  await cartStore.updateProductQuantity(props.product.id, quantity)
   // cartStore.updateProductQuantity(props.product.id, quantity)
 }
 const router = useRouter()

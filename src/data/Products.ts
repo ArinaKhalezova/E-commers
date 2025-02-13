@@ -23,10 +23,10 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'T-shirt',
     gender: 'Men',
-    // size: 'Medium',
-    // color: 'Black',
+    size: '',
+    color: '',
     quantity: 1,
-    var: 0,
+    // var: 0,
     // variants: [
     //   { color: 'red', sizes: [{
     //       size: 'xsmall',
@@ -45,7 +45,7 @@ export const products = [
     // ],
 
     variants: [
-      { color: 'red', sizes: ['xsmall','large','medium'] },
+      { color: 'red', sizes: ['xsmall', 'large', 'medium'] },
       { color: 'yellow', sizes: ['xlarge'] },
       { color: 'pink', sizes: ['large'] },
       { color: 'white', sizes: ['medium', 'xlarge'] }
@@ -62,8 +62,8 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'Jeans',
     gender: 'Men',
-    // size: 'Small',
-    // color: 'Blue',
+    size: '',
+    color: '',
     quantity: 1,
     variants: [
       { color: 'red', sizes: ['xsmall', 'medium', 'large'] },
@@ -88,8 +88,8 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'Shirt',
     gender: 'Men',
-    size: 'Large',
-    color: 'Red',
+    size: '',
+    color: '',
     quantity: 1,
     variants: [
       { color: 'lightBlue', sizes: ['xsmall', 'small'] },
@@ -108,8 +108,8 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'T-shirt',
     gender: 'Men',
-    size: 'xlarge',
-    color: 'Orange',
+    size: '',
+    color: '',
     quantity: 1,
     variants: [
       { color: 'pink', sizes: ['xlarge'] },
@@ -129,11 +129,11 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'Shirt',
     gender: 'Men',
-    size: 'Medium',
-    color: 'Green',
+    size: '',
+    color: '',
     quantity: 1,
     variants: [
-      { color: 'purple', sizes: ['medium', 'xlarge']},
+      { color: 'purple', sizes: ['medium', 'xlarge'] },
       { color: 'red', sizes: ['small'] },
       { color: 'white', sizes: ['xsmall', 'large'] },
       { color: 'lightBlue', sizes: ['medium'] }
@@ -150,8 +150,8 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'T-shirt',
     gender: 'Men',
-    size: 'Small',
-    color: 'Orange',
+    size: '',
+    color: '',
     quantity: 1,
     variants: [
       { color: 'black', sizes: ['large', 'xlarge'] },
@@ -171,8 +171,8 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'Shorts',
     gender: 'Men',
-    size: 'Medium',
-    color: 'Black',
+    size: '',
+    color: '',
     quantity: 1,
     variants: [
       { color: 'orange', sizes: ['medium', 'large'] },

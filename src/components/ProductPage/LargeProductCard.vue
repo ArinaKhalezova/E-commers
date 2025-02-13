@@ -5,12 +5,6 @@
       <div :class="$style.product_img">
         <div id="q-app">
           <div>
-            <!-- <h4>{{ productVariants[0] }}</h4>
-            <br />
-            <h5>{{ JSON.stringify(productVariants)}}</h5>
-            <p>{{ JSON.stringify(productVariants).indexOf('') }}</p>
-            <hr />
-            <br /> -->
             <q-splitter v-model="splitterModel">
               <template v-slot:before>
                 <q-tabs v-model="tab" vertical class="text-teal">
@@ -86,12 +80,6 @@
               :size="size"
               v-model:model-value="selectedSize"
             />
-            <!-- <ProductPageSize
-              v-for="size in availableSizes"
-              :key="size"
-              :size="size"
-              v-model:model-value="selectedSize"
-            /> -->
           </div>
         </div>
         <div :class="$style.product_add">
@@ -163,8 +151,8 @@ type TColor =
   | 'pink'
   | 'white'
   | 'black'
-const selectedColor = ref<TColor>('red')
-console.log('!!!Выбран цвет:', selectedColor)
+// const selectedColor = ref<TColor>('red')
+
 const COLORS_SORTING = [
   'green',
   'red',
@@ -181,12 +169,21 @@ const availableColors = computed(() => {
   const allColors = productVariants.value.map((variant) => variant.color)
   return COLORS_SORTING.filter((color) => allColors.includes(color))
 })
+const selectedColor = ref<TColor>(availableColors.value[0])
+console.log('!!!Выбран цвет:', availableColors.value)
+
+watch(availableColors, (newColor) => {
+  if (newColor.length > 0 && !newColor.includes(selectedColor.value)) {
+    selectedColor.value = newColor[0]
+  } else {
+    selectedColor.value = ''
+  }
+})
 
 //ВЫБОР РАЗМЕРА
 type TSize = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
-
 const SIZES_SORTING = ['xsmall', 'small', 'medium', 'large', 'xlarge']
-
+//все размеры
 const allSizes = computed(() => {
   const allSizes = []
   allSizes.push(availableSizes)
@@ -208,6 +205,7 @@ const availableSizes = computed(() => {
 })
 
 const selectedSize = ref<TSize>(availableSizes.value[0])
+console.log('!!!Выбран размер:', selectedSize)
 
 watch(availableSizes, (newSizes) => {
   if (newSizes.length > 0 && !newSizes.includes(selectedSize.value)) {
@@ -216,8 +214,6 @@ watch(availableSizes, (newSizes) => {
     selectedSize.value = ''
   }
 })
-
-console.log('!!!Выбран размер:', selectedSize)
 
 //недоступные размеры
 const unavailableSizes = computed(() => {
@@ -237,7 +233,7 @@ console.log('dddddddddddd', unavailableSizes.value)
 const onAddProduct = (event: Event) => {
   if (!currentProductInCart.value && product.value) {
     event.preventDefault()
-    cartStore.addProduct(product.value)
+    cartStore.addProduct(product.value, selectedColor.value, selectedSize.value)
   } else {
     router.push('/cart')
   }

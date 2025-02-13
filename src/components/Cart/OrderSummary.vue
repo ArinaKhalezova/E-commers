@@ -29,12 +29,16 @@
         v-model="cartStore.promo"
         :class="$style.promocode_input"
       />
+
       <ButtonDark
         text="Apply"
         :class="$style.promocode_btn"
         light
         @click="cartStore.applyPromoCode"
       />
+      <p v-if="cartStore.getSale(cartStore.promo)">Successfully!</p>
+      <p v-else-if="cartStore.promo === ''">Enter the promo code</p>
+      <p v-else>Promo code not found :(</p>
     </div>
     <ButtonDark link="/ordering" text="Go to Checkout" :class="$style.order_btn" />
   </div>
@@ -110,7 +114,6 @@ const cartStore = useCartStore()
   padding: 13px 28px;
   border: none;
   outline: none;
-
 }
 .order_promocode {
   display: grid;

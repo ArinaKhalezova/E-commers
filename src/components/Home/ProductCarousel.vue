@@ -1,8 +1,5 @@
 <template>
-  <Carousel
-    :items-to-show="itemsToShow"
-    :items-to-scroll="2"
-  >
+  <Carousel :items-to-show="itemsToShow" :items-to-scroll="2">
     <Slide v-for="slide in slides" :key="slide.id" class="slide">
       <ProductCard :product="slide" />
     </Slide>
@@ -25,14 +22,11 @@ const itemsToShow = ref(2)
 const updateItemsToShow = () => {
   if (window.innerWidth >= 1260) {
     itemsToShow.value = 4
-  } 
-  else if (window.innerWidth >= 620 && window.innerWidth < 1260) {
+  } else if (window.innerWidth >= 620 && window.innerWidth < 1260) {
     itemsToShow.value = 3
-  }
-  else if (window.innerWidth > 460 && window.innerWidth < 620) {
+  } else if (window.innerWidth > 460 && window.innerWidth < 620) {
     itemsToShow.value = 2
-  }
-  else {
+  } else {
     itemsToShow.value = 1
   }
 }
@@ -56,6 +50,5 @@ onBeforeUnmount(() => {
   element.style {
     width: 50%;
   }
-  
 }
 </style>

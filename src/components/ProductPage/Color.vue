@@ -11,15 +11,16 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  color: string;
-  modelValue: string;
+  color: string
+  modelValue: string
 }>()
+
 const emit = defineEmits<{
-  (event: "update:modelValue", value: string): void;
+  (event: 'update:modelValue', value: string): void
 }>()
 
 const getOutline = (color: string): boolean => {
-  switch(color) {
+  switch (color) {
     case 'white':
       return true
     default:
@@ -27,34 +28,31 @@ const getOutline = (color: string): boolean => {
   }
 }
 const getColor = (color: string): string => {
-  switch(color) {
+  switch (color) {
     case 'lightBlue':
-      return "blue-4";
+      return 'blue-4'
     case 'blue':
-      return "blue-9";
+      return 'blue-9'
     case 'white':
-      return "grey"
+      return 'grey'
     default:
       return color
   }
 }
 const getTextColor = (color: string): string => {
-  switch(color) {
+  switch (color) {
     case 'white':
     case 'yellow':
-      return "black";
+      return 'black'
     default:
       return 'white'
   }
 }
-
-
-
 </script>
 
 <script lang="ts">
 export default {
- name: "ProductPageColor"
+  name: 'ProductPageColor'
 }
 </script>
 

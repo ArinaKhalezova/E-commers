@@ -66,11 +66,11 @@ export const useCartStore = defineStore('cartStore', () => {
     return products.value.find((product) => product.id === productId)
   }
 
-  const addProduct = async (product: Omit<TProduct, 'quantity'>) => {
+  const addProduct = async (product: Omit<TProduct, 'quantity'>, color: string, size: string) => {
     await fetch('/api/products', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(product)
+      body: JSON.stringify({ ...product, color, size })
     })
     await fetchProducts()
   }
@@ -89,14 +89,24 @@ export const useCartStore = defineStore('cartStore', () => {
     await fetchProducts()
   }
 
+  const updateProductColor = async (id: number, color: string) => {
+    await fetch(`/api/products/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ color })
+    })
+    await fetchProducts()
+  }
 
   return {
+    PROMOCODES,
     products,
     totalCountProducts,
     addProduct,
     getProductById,
     deleteProduct,
     updateProductQuantity,
+    updateProductColor,
     subtotalCostProducts,
     deliveryCostProducts,
     totalCostProducts,
