@@ -173,7 +173,7 @@ const selectedColor = ref<TColor>(availableColors.value[0])
 console.log('!!!Выбран цвет:', availableColors.value)
 
 watch(availableColors, (newColor) => {
-  if (newColor.length > 0 && !newColor.includes(selectedColor.value)) {
+  if (newColor.length > 0) {
     selectedColor.value = newColor[0]
   } else {
     selectedColor.value = ''
@@ -208,7 +208,7 @@ const selectedSize = ref<TSize>(availableSizes.value[0])
 console.log('!!!Выбран размер:', selectedSize)
 
 watch(availableSizes, (newSizes) => {
-  if (newSizes.length > 0 && !newSizes.includes(selectedSize.value)) {
+  if (newSizes.length > 0) {
     selectedSize.value = newSizes[0]
   } else {
     selectedSize.value = ''

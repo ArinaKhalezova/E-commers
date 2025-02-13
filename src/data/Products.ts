@@ -190,16 +190,16 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'Jeans',
     gender: 'Men',
-    size: 'Medium',
-    color: 'White',
+    size: '',
+    color: '',
     quantity: 1,
     variants: [
-      { color: 'purple', sizes: 'large' },
-      { color: 'yellow', sizes: 'xsmall, medium' },
-      { color: 'orange', sizes: 'medium, large' },
-      { color: 'lightBlue', sizes: 'medium' },
-      { color: 'white', sizes: 'large, xlarge' },
-      { color: 'pink', sizes: 'small' }
+      { color: 'purple', sizes: ['large'] },
+      { color: 'yellow', sizes: ['xsmall', 'medium'] },
+      { color: 'orange', sizes: ['medium', 'large'] },
+      { color: 'lightBlue', sizes: ['medium'] },
+      { color: 'white', sizes: ['large', 'xlarge'] },
+      { color: 'pink', sizes: ['small'] }
     ]
   },
   {
@@ -213,14 +213,14 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'T-shirt',
     gender: 'Men',
-    size: 'Medium',
-    color: 'White',
+    size: '',
+    color: '',
     quantity: 1,
     variants: [
-      { color: 'green', sizes: 'medium' },
-      { color: 'red', sizes: 'small, large' },
-      { color: 'black', sizes: 'xlarge' },
-      { color: 'lightBlue', sizes: 'xsmall, medium' }
+      { color: 'green', sizes: ['medium'] },
+      { color: 'red', sizes: ['small', 'large'] },
+      { color: 'black', sizes: ['xlarge'] },
+      { color: 'lightBlue', sizes: ['xsmall', 'medium'] }
     ]
   },
   {
@@ -234,14 +234,14 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'Polo',
     gender: 'Men',
-    size: 'Medium',
-    color: 'White',
+    size: '',
+    color: '',
     quantity: 1,
     variants: [
-      { color: 'green', sizes: 'medium' },
-      { color: 'red', sizes: 'small, large' },
-      { color: 'black', sizes: 'xlarge' },
-      { color: 'lightBlue', sizes: 'xsmall, medium' }
+      { color: 'green', sizes: ['medium'] },
+      { color: 'red', sizes: ['small', 'large'] },
+      { color: 'black', sizes: ['xlarge'] },
+      { color: 'lightBlue', sizes: ['xsmall', 'medium'] }
     ]
   },
   {
@@ -255,14 +255,14 @@ export const products = [
       'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'T-shirt',
     gender: 'Men',
-    size: 'Medium',
-    color: 'White',
+    size: '',
+    color: '',
     quantity: 1,
     variants: [
-      { color: 'orange', sizes: 'xsmall' },
-      { color: 'blue', sizes: 'medium, large' },
-      { color: 'purple', sizes: 'small, xlarge' },
-      { color: 'yellow', sizes: 'large' }
+      { color: 'orange', sizes: ['xsmall'] },
+      { color: 'blue', sizes: ['medium', 'large'] },
+      { color: 'purple', sizes: ['small', 'xlarge'] },
+      { color: 'yellow', sizes: ['large'] }
     ]
   },
   {
@@ -363,7 +363,7 @@ export const products = [
   },
   {
     id: 17,
-    product_img: product5,
+    product_img: product9,
     title: 'Vertical Striped Shirt',
     rating: 5,
     cost: 212,
@@ -378,140 +378,6 @@ export const products = [
     variants: [
       { color: 'black', sizes: 'large, xlarge' },
       { color: 'green', sizes: 'large' }
-    ]
-  },
-  {
-    id: 18,
-    product_img: product6,
-    title: 'Courage Graphic T-shirt',
-    rating: 4,
-    cost: 145,
-    ratingModel: 4,
-    description:
-      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'T-shirt',
-    gender: 'Men',
-    size: 'Medium',
-    color: 'White',
-    quantity: 1,
-    variants: [{ color: 'pink', sizes: 'xlarge' }]
-  },
-  {
-    id: 19,
-    product_img: product7,
-    title: 'Loose Fit Bermuda Shorts',
-    rating: 3,
-    cost: 80,
-    ratingModel: 3,
-    description:
-      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'Shorts',
-    gender: 'Men',
-    size: 'Medium',
-    color: 'White',
-    quantity: 1,
-    variants: [{ color: 'blue', sizes: 'xsmall, large' }]
-  },
-  {
-    id: 20,
-    product_img: product1,
-    title: 'T-shirt with Tape Details',
-    rating: 4.5,
-    cost: 120,
-    ratingModel: 4,
-    description:
-      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'T-shirt',
-    gender: 'Men',
-    size: 'Medium',
-    color: 'White',
-    quantity: 1,
-    variants: [
-      { color: 'pink', sizes: 'xlarge' },
-      { color: 'orange', sizes: 'small, medium' },
-      { color: 'green', sizes: 'large' },
-      { color: 'blue', sizes: 'xsmall, large' }
-    ]
-  },
-  {
-    id: 21,
-    product_img: product2,
-    title: 'Skinny Fit Jeans',
-    rating: 3.5,
-    cost: 240,
-    ratingModel: 3,
-    description:
-      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'Jeans',
-    gender: 'Men',
-    size: 'Medium',
-    color: 'White',
-    quantity: 1,
-    variants: [
-      { color: 'pink', sizes: 'xlarge' },
-      { color: 'orange', sizes: 'small, medium' },
-      { color: 'green', sizes: 'large' }
-    ]
-  },
-  {
-    id: 22,
-    product_img: product3,
-    title: 'Checkered Shirt',
-    rating: 4.5,
-    cost: 180,
-    ratingModel: 4,
-    description:
-      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'Shirt',
-    gender: 'Men',
-    size: 'Medium',
-    color: 'White',
-    quantity: 1,
-    variants: [
-      { color: 'pink', sizes: 'xlarge' },
-      { color: 'orange', sizes: 'small, medium' },
-      { color: 'green', sizes: 'large' },
-      { color: 'blue', sizes: 'xsmall, large' }
-    ]
-  },
-  {
-    id: 23,
-    product_img: product8,
-    title: 'Faded Skinny Jeans',
-    rating: 4.5,
-    cost: 210,
-    ratingModel: 4,
-    description:
-      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'Jeans',
-    gender: 'Men',
-    size: 'Medium',
-    color: 'White',
-    quantity: 1,
-    variants: [
-      { color: 'pink', sizes: 'xlarge' },
-      { color: 'blue', sizes: 'xsmall, large' }
-    ]
-  },
-  {
-    id: 24,
-    product_img: product9,
-    title: 'Gradient Graphic T-shirt',
-    rating: 3.5,
-    cost: 145,
-    ratingModel: 3,
-    description:
-      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-    category: 'T-shirt',
-    gender: 'Men',
-    size: 'Medium',
-    color: 'White',
-    quantity: 1,
-    variants: [
-      { color: 'pink', sizes: 'xlarge' },
-      { color: 'orange', sizes: 'small, medium' },
-      { color: 'green', sizes: 'large' },
-      { color: 'blue', sizes: 'xsmall, large' }
     ]
   }
 ]
