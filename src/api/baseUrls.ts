@@ -1,5 +1,3 @@
-import type { products } from '@/data/products'
-
 export const urls = {
   serverUrl: '/api',
   //home

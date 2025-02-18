@@ -35,10 +35,10 @@
         :class="$style.promocode_btn"
         light
         @click="cartStore.applyPromoCode"
-      />
-      <p v-if="cartStore.getSale(cartStore.promo)">Successfully!</p>
-      <p v-else-if="cartStore.promo === ''">Enter the promo code</p>
-      <p v-else>Promo code not found :(</p>
+        />
+      <p v-if="cartStore.promoCodeMessage === 1">Successfully!</p>
+      <p v-else-if="cartStore.promoCodeMessage === 2">Enter the promo code</p>
+      <p v-else-if="cartStore.promoCodeMessage === 3">Promo code not found :(</p>
     </div>
     <ButtonDark link="/ordering" text="Go to Checkout" :class="$style.order_btn" />
   </div>
