@@ -79,6 +79,7 @@ const cartStore = useCartStore()
   font-family: 'Satoshi';
   font-size: 16px;
   font-weight: 100;
+  line-height: normal;
 }
 .order_summary p {
   font-family: 'Satoshi';

@@ -15,9 +15,14 @@
           </div>
         </div>
         <div :class="$style.product_characteristics">
+          <q-chip :color="getColor(product.color)"> </q-chip>
+          <q-chip color="gray" text-color="black"> {{ product.size }} </q-chip>
+        </div>
+
+        <!-- <div :class="$style.product_characteristics">
           <p>{{ 'Color: ' + product.color }}</p>
           <p>{{ 'Size: ' + product.size }}</p>
-        </div>
+        </div> -->
         <div :class="$style.product_footer">
           <div :class="$style.product_price">
             <h3>{{ '$' + product.cost }}</h3>
@@ -64,6 +69,19 @@ const goToProduct = (id: number) => {
   router.push({ name: 'productPage', params: { id } })
 }
 
+const getColor = (color: string): string => {
+  switch (color) {
+    case 'lightBlue':
+      return 'blue-4'
+    case 'blue':
+      return 'blue-9'
+    case 'white':
+      return 'grey'
+    default:
+      return color
+  }
+}
+
 onMounted(async () => {
   try {
     const cartResponce = await fetch('/api/products')
@@ -105,6 +123,8 @@ onMounted(async () => {
   font-family: 'Satoshi';
   font-size: 16px;
   font-weight: 900;
+  line-height: normal;
+  padding-bottom: 14px;
 }
 .product_delete {
   cursor: pointer;
@@ -113,14 +133,20 @@ onMounted(async () => {
   width: 20px;
 }
 .product_characteristics {
+  display: flex;
+}
+/* .product_characteristics {
   justify-content: start;
   font-family: 'Satoshi';
   font-size: 12px;
   padding: 4px 0;
-}
+} */
 .product_characteristics > * {
-  padding: 2px 0;
+
 }
+/* .product_characteristics > * {
+  padding: 2px 0;
+} */
 .product_footer {
   display: flex;
   justify-content: space-between;
