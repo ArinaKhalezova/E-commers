@@ -121,6 +121,8 @@ const router = useRouter()
 const productVariants = ref<Variant[]>([])
 const products = ref<TProduct[]>([])
 const productId = computed(() => Number(route.params.id))
+const productColor = computed(() => String(route.params.color))
+const productSize = computed(() => String(route.params.size))
 
 const tab = ref('first')
 const splitterModel = ref(20)
@@ -136,7 +138,7 @@ const breadcrumbs = computed(() => {
 })
 
 const currentProductInCart = computed(() =>
-  cartStore.products.find((p) => p.id === productId.value)
+  cartStore.products.find((p) => p.id === productId.value) && (cartStore.products.find((p) => p.color === productColor.value) && cartStore.products.find((p) => p.size === productSize.value))
 )
 
 //ВЫБОР ЦВЕТА

@@ -5,6 +5,8 @@ type TCartItem = {
   id: number
   name: string
   cost: number
+  color: string
+  size: string
   quantity: number
 }
 
@@ -37,10 +39,15 @@ export const cart = [
       name: string
       cost: number
       color: string
+      size: string
       quantity: number
     }
-    const existingProduct = mockCart.find((p) => p.id === newProduct.id)
+    const existingProduct =
+      mockCart.find((p) => p.id === newProduct.id) &&
+      (mockCart.find((k) => k.color === newProduct.color) &&
+      mockCart.find((m) => m.size === newProduct.size))
 
+    const localId = 0
     if (existingProduct) {
       existingProduct.quantity += 1
     } else {
