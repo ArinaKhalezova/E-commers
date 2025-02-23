@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw'
 import { products } from '@/data/products'
 import { reviewsData } from '@/data/reviews'
 import { newArrivalsSlides } from '@/data/products'
-import { urls } from './baseUrls'
+import { urls } from '../api/baseUrls'
 
 export const productPage = [
   http.get(urls.serverUrl + urls.productPage + urls.id, (req) => {

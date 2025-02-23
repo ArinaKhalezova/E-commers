@@ -1,3 +1,4 @@
+import { urls } from '@/api/baseUrls'
 import type { TProduct } from '@/data/products.types'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
@@ -13,7 +14,7 @@ export const useCartStore = defineStore('cartStore', () => {
   const products = ref<TProduct[]>([])
   const promo = ref('')
   const discount = ref(0)
-
+  const promoCodeMessage = ref(0)
   // Getters
   const totalCountProducts = computed(() => products.value.length)
 
@@ -50,7 +51,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
   // Actions
   const fetchProducts = async () => {
-    const response = await fetch('/api/products')
+    const response = await fetch(urls.serverUrl + urls.products)
     products.value = await response.json()
   }
 
@@ -59,7 +60,14 @@ export const useCartStore = defineStore('cartStore', () => {
   }
 
   const applyPromoCode = () => {
-    discount.value = getSale(promo.value)
+    if (getSale(promo.value)) {
+      discount.value = getSale(promo.value)
+      promoCodeMessage.value = 1
+    } else if (promo.value === '') {
+      promoCodeMessage.value = 2
+    } else {
+      promoCodeMessage.value = 3
+    }
   }
 
   const getProductById = (productId: number) => {
@@ -67,7 +75,7 @@ export const useCartStore = defineStore('cartStore', () => {
   }
 
   const addProduct = async (product: Omit<TProduct, 'quantity'>, color: string, size: string) => {
-    await fetch('/api/products', {
+    await fetch(urls.serverUrl + urls.products, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...product, color, size })
@@ -76,24 +84,15 @@ export const useCartStore = defineStore('cartStore', () => {
   }
 
   const deleteProduct = async (id: number) => {
-    await fetch(`/api/products/${id}`, { method: 'DELETE' })
+    await fetch(urls.serverUrl + urls.products + '/' + id, { method: 'DELETE' })
     await fetchProducts()
   }
 
   const updateProductQuantity = async (id: number, quantity: number) => {
-    await fetch(`/api/products/${id}`, {
+    await fetch(urls.serverUrl + urls.products + '/' + id, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ quantity })
-    })
-    await fetchProducts()
-  }
-
-  const updateProductColor = async (id: number, color: string) => {
-    await fetch(`/api/products/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ color })
     })
     await fetchProducts()
   }
@@ -102,11 +101,11 @@ export const useCartStore = defineStore('cartStore', () => {
     PROMOCODES,
     products,
     totalCountProducts,
+    promoCodeMessage,
     addProduct,
     getProductById,
     deleteProduct,
     updateProductQuantity,
-    updateProductColor,
     subtotalCostProducts,
     deliveryCostProducts,
     totalCostProducts,
