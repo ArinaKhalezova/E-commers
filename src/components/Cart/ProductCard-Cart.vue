@@ -15,7 +15,8 @@
           </div>
         </div>
         <div :class="$style.product_characteristics">
-          <q-chip :color="getColor(product.color)"> </q-chip>
+          <q-chip     :outline="getOutline(product.color)"
+          :color="getColor(product.color)"> </q-chip>
           <q-chip color="gray" text-color="black"> {{ product.size }} </q-chip>
         </div>
 
@@ -69,6 +70,14 @@ const goToProduct = (id: number) => {
   router.push({ name: 'productPage', params: { id } })
 }
 
+const getOutline = (color: string): boolean => {
+  switch (color) {
+    case 'white':
+      return true
+    default:
+      return false
+  }
+}
 const getColor = (color: string): string => {
   switch (color) {
     case 'lightBlue':

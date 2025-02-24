@@ -64,8 +64,10 @@ export const useCartStore = defineStore('cartStore', () => {
       discount.value = getSale(promo.value)
       promoCodeMessage.value = 1
     } else if (promo.value === '') {
+      discount.value = getSale(promo.value)
       promoCodeMessage.value = 2
     } else {
+      discount.value = getSale(promo.value)
       promoCodeMessage.value = 3
     }
   }
