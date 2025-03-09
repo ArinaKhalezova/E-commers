@@ -15,8 +15,7 @@
           </div>
         </div>
         <div :class="$style.product_characteristics">
-          <q-chip     :outline="getOutline(product.color)"
-          :color="getColor(product.color)"> </q-chip>
+          <q-chip :outline="getOutline(product.color)" :color="getColor(product.color)"> </q-chip>
           <q-chip color="gray" text-color="black"> {{ product.size }} </q-chip>
         </div>
 
@@ -57,13 +56,12 @@ const props = defineProps<{
 }>()
 
 const updateQuantity = async (quantity: number) => {
-  await cartStore.updateProductQuantity(props.product.id, quantity)
-  // cartStore.updateProductQuantity(props.product.id, quantity)
+  await cartStore.updateProductQuantity(props.product.sku, quantity)
 }
 const router = useRouter()
 
 const deleteProduct = async () => {
-  await cartStore.deleteProduct(props.product.id)
+  await cartStore.deleteProduct(props.product.sku)
 }
 
 const goToProduct = (id: number) => {
@@ -151,7 +149,6 @@ onMounted(async () => {
   padding: 4px 0;
 } */
 .product_characteristics > * {
-
 }
 /* .product_characteristics > * {
   padding: 2px 0;

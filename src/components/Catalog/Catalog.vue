@@ -47,11 +47,15 @@ onMounted(async () => {
   display: none;
 }
 .assortment_container {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+  /* display: grid; */
+  /* grid-template-columns: 1fr; */
   justify-items: center;
 }
 @media (min-width: 1024px) {
+  .assortment_container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
   .assortment {
     margin: 0 100px;
     display: grid;

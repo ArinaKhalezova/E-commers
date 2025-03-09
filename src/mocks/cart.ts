@@ -1,8 +1,10 @@
 import { http, HttpResponse } from 'msw'
 import { urls } from '../api/baseUrls'
+import { products } from '@/data/products'
 
 type TCartItem = {
   id: number
+  sku: string
   name: string
   cost: number
   color: string
@@ -36,6 +38,7 @@ export const cart = [
     const mockCart = loadCartFromLocalStorage()
     const newProduct = (await request.json()) as {
       id: number
+      sku: string
       name: string
       cost: number
       color: string
@@ -43,11 +46,10 @@ export const cart = [
       quantity: number
     }
     const existingProduct =
-      mockCart.find((p) => p.id === newProduct.id) &&
-      (mockCart.find((k) => k.color === newProduct.color) &&
-      mockCart.find((m) => m.size === newProduct.size))
+      mockCart.find((p) => p.sku === newProduct.sku) &&
+      mockCart.find((k) => k.color === newProduct.color) &&
+      mockCart.find((m) => m.size === newProduct.size)
 
-    const localId = 0
     if (existingProduct) {
       existingProduct.quantity += 1
     } else {
@@ -58,29 +60,31 @@ export const cart = [
     return HttpResponse.json({ success: true })
   }),
 
-  http.delete(urls.serverUrl + urls.products + urls.id, ({ params }) => {
+  http.delete(urls.serverUrl + urls.products + '/:sku', ({ params }) => {
     const mockCart = loadCartFromLocalStorage()
-    const id = Number(params.id)
-    const updatedCart = mockCart.filter((p) => p.id !== id)
+    const sku = params.sku
+    const updatedCart = mockCart.filter((p) => p.sku !== sku)
     saveCartToLocalStorage(updatedCart)
     return HttpResponse.json({ success: true })
   }),
 
-  http.patch(urls.serverUrl + urls.products + urls.id, async ({ params, request }) => {
+  http.patch(urls.serverUrl + urls.products + '/:sku', async ({ params, request }) => {
     const mockCart = loadCartFromLocalStorage()
-    const id = Number(params.id)
+    const sku = params.sku
     const { quantity } = (await request.json()) as { quantity: number }
-    const product = mockCart.find((p) => p.id === id)
+    const product = mockCart.find((p) => p.sku === sku)
 
     if (product) {
       if (quantity > 0) {
         product.quantity = quantity
+        saveCartToLocalStorage(mockCart)
       } else {
-        mockCart = mockCart.filter((p) => p.id !== id)
+        const updatedCart = mockCart.filter((p) => p.sku !== sku)
+        saveCartToLocalStorage(updatedCart)
       }
     }
 
-    saveCartToLocalStorage(mockCart)
+
     return HttpResponse.json({ success: true })
   })
 ]

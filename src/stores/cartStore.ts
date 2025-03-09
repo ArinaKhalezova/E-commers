@@ -72,26 +72,26 @@ export const useCartStore = defineStore('cartStore', () => {
     }
   }
 
-  const getProductById = (productId: number) => {
-    return products.value.find((product) => product.id === productId)
+  const getProductBySku = (sku: string) => {
+    return products.value.find((product) => product.sku === sku)
   }
 
-  const addProduct = async (product: Omit<TProduct, 'quantity'>, color: string, size: string) => {
+  const addProduct = async (product: TProduct, sku: string) => {
     await fetch(urls.serverUrl + urls.products, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...product, color, size })
+      body: JSON.stringify({ ...product, sku })
     })
     await fetchProducts()
   }
 
-  const deleteProduct = async (id: number) => {
-    await fetch(urls.serverUrl + urls.products + '/' + id, { method: 'DELETE' })
+  const deleteProduct = async (sku: string) => {
+    await fetch(urls.serverUrl + urls.products + '/' + sku, { method: 'DELETE' })
     await fetchProducts()
   }
 
-  const updateProductQuantity = async (id: number, quantity: number) => {
-    await fetch(urls.serverUrl + urls.products + '/' + id, {
+  const updateProductQuantity = async (sku: string, quantity: number) => {
+    await fetch(urls.serverUrl + urls.products + '/' + sku, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ quantity })
@@ -105,7 +105,7 @@ export const useCartStore = defineStore('cartStore', () => {
     totalCountProducts,
     promoCodeMessage,
     addProduct,
-    getProductById,
+    getProductBySku,
     deleteProduct,
     updateProductQuantity,
     subtotalCostProducts,

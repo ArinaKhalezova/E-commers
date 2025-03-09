@@ -137,9 +137,27 @@ const breadcrumbs = computed(() => {
   return generateBreadcrumbs(route)
 })
 
-const currentProductInCart = computed(() =>
-  cartStore.products.find((p) => p.id === productId.value) && (cartStore.products.find((p) => p.color === productColor.value) && cartStore.products.find((p) => p.size === productSize.value))
-)
+const currentProductInCart = computed(() => {
+  if (!product.value || !selectedColor.value || !selectedSize.value) {
+    return null
+  }
+
+  const selectedVariant = product.value.aspects[0].variants.find(
+    (variant) => variant.color === selectedColor.value
+  )
+
+  if (!selectedVariant) {
+    return null
+  }
+
+  const selectedSizeVariant = selectedVariant.sizes.find((size) => size.size === selectedSize.value)
+
+  if (!selectedSizeVariant) {
+    return null
+  }
+
+  return cartStore.products.find((p) => p.sku === selectedSizeVariant.sku)
+})
 
 //ВЫБОР ЦВЕТА
 type TColor =
@@ -168,8 +186,11 @@ const COLORS_SORTING = [
   'black'
 ]
 const availableColors = computed(() => {
-  const allColors = productVariants.value.map((variant) => variant.color)
-  return COLORS_SORTING.filter((color) => allColors.includes(color))
+  if (!product.value || !product.value.aspects || product.value.aspects.length === 0) {
+    return []
+  }
+  const colors = product.value.aspects[0].variants.map((variant) => variant.color)
+  return COLORS_SORTING.filter((color) => colors.includes(color))
 })
 const selectedColor = ref<TColor>(availableColors.value[0])
 console.log('!!!Выбран цвет:', availableColors.value)
@@ -194,15 +215,17 @@ const allSizes = computed(() => {
 })
 //доступные размеры
 const availableSizes = computed(() => {
-  const found = productVariants.value.find((obj: Variant) => {
-    return obj.color === selectedColor.value
-  })
-
-  if (!found) {
+  if (!product.value || !product.value.aspects || product.value.aspects.length === 0) {
     return []
   }
 
-  const allSizes = found.sizes.map((size) => size.trim())
+  const found = product.value.aspects[0].variants.find(
+    (variant) => variant.color === selectedColor.value
+  )
+  if (!found) {
+    return []
+  }
+  const allSizes = found.sizes.map((size) => size.size)
   return SIZES_SORTING.filter((size) => allSizes.includes(size))
 })
 
@@ -233,17 +256,44 @@ console.log('dddddddddddd', unavailableSizes.value)
 
 //методы
 const onAddProduct = (event: Event) => {
-  if (!currentProductInCart.value && product.value) {
+  if (!product.value || !selectedColor.value || !selectedSize.value) {
+    return
+  }
+
+  const selectedVariant = product.value.aspects[0].variants.find(
+    (variant) => variant.color === selectedColor.value
+  )
+  if (!selectedVariant) {
+    return
+  }
+
+  const selectedSizeVariant = selectedVariant.sizes.find((size) => size.size === selectedSize.value)
+
+  if (!selectedSizeVariant) {
+    return
+  }
+
+  const productToAdd = {
+    ...product.value, // Копируем все свойства товара
+    sku: selectedSizeVariant.sku, // Добавляем sku
+    color: selectedColor.value,
+    size: selectedSize.value
+  }
+
+  // Добавляем товар в корзину
+  if (!currentProductInCart.value) {
     event.preventDefault()
-    cartStore.addProduct(product.value, selectedColor.value, selectedSize.value)
+    cartStore.addProduct(productToAdd, selectedSizeVariant.sku)
   } else {
     router.push('/cart')
   }
 }
 
 const updateProductQuantity = (quantity: number) => {
-  if (currentProductInCart.value) {
-    cartStore.updateProductQuantity(currentProductInCart.value.id, quantity)
+  if (currentProductInCart.value && currentProductInCart.value.sku) {
+    cartStore.updateProductQuantity(currentProductInCart.value.sku, quantity)
+  } else {
+    console.error('SKU не найден для текущего товара в корзине')
   }
 }
 
@@ -255,12 +305,18 @@ onMounted(async () => {
       throw new Error('Failed to fetch product data')
     }
     const data = await productsResponce.json()
+
     const productIndex = products.value.findIndex((p) => p.id === productId.value)
 
-    if (data.product && data.product.variants) {
-      productVariants.value = data.product.variants
+    if (data.aspects && data.aspects.length > 0) {
+      const firstAspect = data.aspects[0]
+      if (firstAspect.variants) {
+        productVariants.value = firstAspect.variants
+      } else {
+        console.error('Variants missing in the first aspect')
+      }
     } else {
-      console.error('Variants missing in response')
+      console.error('Aspects missing in response')
     }
 
     if (productIndex !== -1) {
@@ -269,8 +325,8 @@ onMounted(async () => {
       products.value.push(data.product)
     }
 
-    console.log('Product:', product.value)
-    console.log('Variants:', product.value?.variants)
+    console.log('Product:', product.value?.aspects)
+    console.log('Variants:', productVariants.value)
   } catch (error) {
     console.error('Error fetching products:', error)
   }
