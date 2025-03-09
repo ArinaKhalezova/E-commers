@@ -3,7 +3,7 @@
     <Breadcrumbs :breadcrumbs="breadcrumbs" />
     <div :class="$style.assortment">
       <!-- <Filters :class="$style.assortment_filters" /> -->
-      <Catalog />
+      <Assortment />
     </div>
   </div>
   <q-inner-loading :showing="loading" color="orange" />
@@ -11,11 +11,10 @@
 
 <script setup lang="ts">
 import Breadcrumbs from '@/components/Catalog/Breadcrumbs.vue'
-import Catalog from '@/components/Catalog/Catalog.vue'
+import Assortment from '@/components/Catalog/Assortment.vue'
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { generateBreadcrumbs } from '@/data/breadcrumbs'
-import Filters from '@/components/Catalog/Filters.vue'
 const route = useRoute()
 const breadcrumbs = computed(() => {
   return generateBreadcrumbs(route)

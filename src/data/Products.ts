@@ -416,6 +416,27 @@ export const products = [
       { color: 'black', sizes: 'large, xlarge' },
       { color: 'green', sizes: 'large' }
     ]
+  },
+  {
+    id: 18,
+    product_img: product12,
+    title: 'One Life Graphic T-shirt',
+    rating: 4.5,
+    cost: 260,
+    ratingModel: 4,
+    description:
+      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
+    category: 'T-shirt',
+    gender: 'Men',
+    size: 'Medium',
+    color: 'White',
+    quantity: 1,
+    variants: [
+      { color: 'black', sizes: 'large, xlarge' },
+      { color: 'yellow', sizes: 'small, medium' },
+      { color: 'pink', sizes: 'xsmall' },
+      { color: 'green', sizes: 'large' }
+    ]
   }
 ]
 

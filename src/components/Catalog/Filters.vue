@@ -7,44 +7,13 @@
           <div class="q-gutter-sm" :class="$style.category_items">
             <q-checkbox
               dense
-              v-model="category.t_shirts"
-              :selected="selectedCategory === 'T-shirts'"
-              @click="selectedCategoryMethod('T-shirts')"
+              v-model="localFilters.category.t_shirts"
               label="T-shirts"
               color="black"
             />
-            <q-checkbox
-              dense
-              v-model="category.shorts"
-              :selected="selectedCategory === 'T-shirts'"
-              @click="selectedCategoryMethod('Shorts')"
-              label="Shorts"
-              color="black"
-            />
-            <q-checkbox
-              dense
-              v-model="category.shirts"
-              :selected="selectedCategory === 'Shirts'"
-              @click="selectedCategoryMethod('Shirts')"
-              label="Shirts"
-              color="black"
-            />
-            <q-checkbox
-              dense
-              v-model="category.hoodie"
-              :selected="selectedCategory === 'Polo'"
-              @click="selectedCategoryMethod('Polo')"
-              label="Polo"
-              color="black"
-            />
-            <q-checkbox
-              dense
-              v-model="category.jeans"
-              :selected="selectedCategory === 'Jeans'"
-              @click="selectedCategoryMethod('Jeans')"
-              label="Jeans"
-              color="black"
-            />
+            <q-checkbox dense v-model="localFilters.category.shorts" label="Shorts" color="black" />
+            <q-checkbox dense v-model="localFilters.category.shirts" label="Shirts" color="black" />
+            <q-checkbox dense v-model="localFilters.category.jeans" label="Jeans" color="black" />
           </div>
         </div>
         <q-expansion-item
@@ -58,14 +27,14 @@
             <q-card-section>
               <div class="q-pa-md">
                 <q-range
-                  v-model="step"
+                  v-model="localFilters.price"
                   :min="10"
                   :max="300"
                   label
                   color="black"
                   label-always
-                  :left-label-value="step.min + '$'"
-                  :right-label-value="step.max + '$'"
+                  :left-label-value="localFilters.price.min + '$'"
+                  :right-label-value="localFilters.price.max + '$'"
                 />
               </div>
             </q-card-section>
@@ -149,7 +118,7 @@
           </q-card>
         </q-expansion-item>
 
-        <ButtonDark text="Apply" :class="$style.filters_button" />
+        <ButtonDark text="Apply" :class="$style.filters_button" @click="applyFilters" />
       </q-list>
     </div>
   </div>
@@ -158,10 +127,49 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import ButtonDark from '../Home/ButtonDark.vue'
-const step = ref({
-  min: 10,
-  max: 300
+
+const localFilters = ref({
+  price: { min: 10, max: 300 },
+  category: {
+    t_shirts: false,
+    shorts: false,
+    shirts: false,
+    jeans: false
+  },
+  color: {
+    Green: false,
+    Red: false,
+    Yellow: false,
+    Orange: false,
+    Blue_light: false,
+    Blue: false,
+    Purple: false,
+    Pink: false,
+    White: false,
+    Black: false
+  },
+  size: {
+    X_Small: false,
+    Small: false,
+    Medium: false,
+    Large: false,
+    X_Large: false
+  },
+  style: {
+    casual: false,
+    formal: false,
+    party: false,
+    gym: false
+  }
 })
+
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: typeof localFilters.value): void
+}>()
+
+const applyFilters = () => {
+  emit('update:modelValue', localFilters.value)
+}
 
 const syze = ref({
   X_Small: false,
@@ -170,19 +178,6 @@ const syze = ref({
   Large: false,
   X_Large: false
 })
-
-const category = ref({
-  t_shirts: false,
-  shorts: false,
-  shirts: false,
-  hoodie: false,
-  jeans: false
-})
-
-const casual = ref(false)
-const formal = ref(false)
-const party = ref(false)
-const gym = ref(false)
 
 const color = ref({
   Green: false,
@@ -196,16 +191,6 @@ const color = ref({
   White: false,
   Black: false
 })
-
-const selectedCategory = ref<'T-shirts' | 'Shorts' | 'Shirts' | 'Polo' | 'Jeans'>()
-
-const selectedCategoryMethod = (category: 'T-shirts' | 'Shorts' | 'Shirts' | 'Polo' | 'Jeans') => {
-  selectedCategory.value = category
-}
-
-// const filteredProductsByCategory = products.filter(
-//   (product) => product.category === "T-shirt"
-// )
 </script>
 
 <style module>
