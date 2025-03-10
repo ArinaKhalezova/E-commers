@@ -121,8 +121,6 @@ const router = useRouter()
 const productVariants = ref<Variant[]>([])
 const products = ref<TProduct[]>([])
 const productId = computed(() => Number(route.params.id))
-const productColor = computed(() => String(route.params.color))
-const productSize = computed(() => String(route.params.size))
 
 const tab = ref('first')
 const splitterModel = ref(20)
@@ -185,6 +183,7 @@ const COLORS_SORTING = [
   'white',
   'black'
 ]
+//доступные цвета
 const availableColors = computed(() => {
   if (!product.value || !product.value.aspects || product.value.aspects.length === 0) {
     return []
@@ -192,6 +191,7 @@ const availableColors = computed(() => {
   const colors = product.value.aspects[0].variants.map((variant) => variant.color)
   return COLORS_SORTING.filter((color) => colors.includes(color))
 })
+
 const selectedColor = ref<TColor>(availableColors.value[0])
 console.log('!!!Выбран цвет:', availableColors.value)
 
@@ -276,11 +276,10 @@ const onAddProduct = (event: Event) => {
   const productToAdd = {
     ...product.value, // Копируем все свойства товара
     sku: selectedSizeVariant.sku, // Добавляем sku
-    color: selectedColor.value,
-    size: selectedSize.value
+    color: selectedColor.value, // Добавляем цвет
+    size: selectedSize.value // Добавляем размер
   }
 
-  // Добавляем товар в корзину
   if (!currentProductInCart.value) {
     event.preventDefault()
     cartStore.addProduct(productToAdd, selectedSizeVariant.sku)

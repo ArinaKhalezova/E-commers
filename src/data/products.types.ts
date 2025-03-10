@@ -23,6 +23,11 @@ export type TProduct = {
   sku: string
 }
 
+export type Variant = {
+  color: string
+  sizes: string
+}
+
 // export type TAspect = {
 //   type: 'colorsMix' | 'textBar'
 //   description: string
@@ -57,7 +62,3 @@ export type TProduct = {
 //   variants: Variant[]
 // }
 
-// export type Variant = {
-//   color: string
-//   sizes: string
-// }
