@@ -36,15 +36,7 @@ export const cart = [
 
   http.post(urls.serverUrl + urls.products, async ({ request }) => {
     const mockCart = loadCartFromLocalStorage()
-    const newProduct = (await request.json()) as {
-      id: number
-      sku: string
-      name: string
-      cost: number
-      color: string
-      size: string
-      quantity: number
-    }
+    const newProduct = (await request.json()) as TCartItem
     const existingProduct =
       mockCart.find((p) => p.sku === newProduct.sku) &&
       mockCart.find((k) => k.color === newProduct.color) &&

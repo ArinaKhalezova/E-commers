@@ -2,7 +2,7 @@
   <div :class="$style.product_container">
     <div :class="$style.product_content">
       <div :class="$style.product_img" @click="goToProduct(product.id)">
-        <img :src="product.product_img" :alt="product.title" />
+        <img :src="product.aspects[0]?.variants?.coverImage || product.product_img" :alt="product.title" />
         <!-- <img :src="product.product_img" alt="Product Image" /> -->
       </div>
       <div :class="$style.product_info">
@@ -42,12 +42,11 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted } from 'vue'
+import { defineProps, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import type { TProduct } from '@/data/products.types'
 import Counter from '../ProductPage/Counter.vue'
 import { useCartStore } from '@/stores/cartStore'
-import { products } from '@/data/products'
 
 const cartStore = useCartStore()
 

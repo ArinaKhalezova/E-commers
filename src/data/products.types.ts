@@ -12,6 +12,7 @@ export type TProduct = {
   quantity: number
   aspects: {
     variants: {
+      coverImage?: string
       color: string
       sku: string
       sizes: {

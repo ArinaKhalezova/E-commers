@@ -1,7 +1,11 @@
-const product1 = '/assets/images/product1.png'
-const product2 = '/assets/images/product2.png'
+const product1_red = '/assets/images/product1_red.jpg'
+const product1_green = '/assets/images/product1_green.jpg'
+const product1_black = '/assets/images/product1_black.jpg'
+const product2_blue = '/assets/images/product2_blue.jpg'
+const product2_black = '/assets/images/product2_black.jpg'
 const product3 = '/assets/images/product3.png'
-const product4 = '/assets/images/product4.png'
+const product4_orange = '/assets/images/product4_orange.jpg'
+const product4_blue = '/assets/images/product4_blue.jpg'
 const product5 = '/assets/images/product5.png'
 const product6 = '/assets/images/product6.png'
 const product7 = '/assets/images/product7.png'
@@ -14,7 +18,7 @@ const product12 = '/assets/images/product12.png'
 export const products = [
   {
     id: 1,
-    product_img: product1,
+    product_img: product1_black,
     title: 'T-shirt with Tape Details',
     rating: 4.5,
     cost: 120,
@@ -29,6 +33,7 @@ export const products = [
       {
         variants: [
           {
+            coverImage: product1_red,
             color: 'red',
             sku: 'TSHIRT-RED',
             sizes: [
@@ -39,16 +44,18 @@ export const products = [
             ]
           },
           {
-            color: 'pink',
-            sku: 'TSHIRT-PINK',
-            sizes: [{ size: 'small', sku: 'TSHIRT-PINK-S', availability: 'inStock' }]
+            coverImage: product1_green,
+            color: 'green',
+            sku: 'TSHIRT-GREEN',
+            sizes: [{ size: 'small', sku: 'TSHIRT-GREEN-S', availability: 'inStock' }]
           },
           {
-            color: 'white',
-            sku: 'TSHIRT-WHITE',
+            coverImage: product1_black,
+            color: 'black',
+            sku: 'TSHIRT-BLACK',
             sizes: [
-              { size: 'xsmall', sku: 'TSHIRT-WHITE-XS', availability: 'inStock' },
-              { size: 'xlarge', sku: 'TSHIRT-RED-XL', availability: 'inStock' }
+              { size: 'xsmall', sku: 'TSHIRT-BLACK-XS', availability: 'inStock' },
+              { size: 'xlarge', sku: 'TSHIRT-BLACK-XL', availability: 'inStock' }
             ]
           }
         ]
@@ -57,7 +64,7 @@ export const products = [
   },
   {
     id: 2,
-    product_img: product2,
+    product_img: product2_blue,
     title: 'Skinny Fit Jeans',
     rating: 3.5,
     cost: 240,
@@ -72,20 +79,13 @@ export const products = [
       {
         variants: [
           {
-            color: 'red',
-            sku: 'JEANS-RED',
-            sizes: [
-              { size: 'xsmall', sku: 'JEANS-RED-XS', availability: 'inStock' },
-              { size: 'medium', sku: 'JEANS-RED-M', availability: 'inStock' },
-              { size: 'large', sku: 'JEANS-RED-L', availability: 'inStock' }
-            ]
+            coverImage: product2_blue,
+            color: 'blue',
+            sku: 'JEANS-BLUE',
+            sizes: [{ size: 'xlarge', sku: 'JEANS-BLUE-XL', availability: 'inStock' }]
           },
           {
-            color: 'yellow',
-            sku: 'JEANS-YELLOW',
-            sizes: [{ size: 'xlarge', sku: 'JEANS-YELLOW-XL', availability: 'inStock' }]
-          },
-          {
+            coverImage: product2_black,
             color: 'black',
             sku: 'JEANS-BLACK',
             sizes: [{ size: 'oneSize', sku: 'JEANS-BLACK-OS', availability: 'inStock' }]
@@ -110,6 +110,7 @@ export const products = [
       {
         variants: [
           {
+            coverImage: product3,
             color: 'lightBlue',
             sku: 'SHIRT-LIGHTBLUE',
             sizes: [
@@ -118,11 +119,13 @@ export const products = [
             ]
           },
           {
+            coverImage: product3,
             color: 'black',
             sku: 'SHIRT-BLACK',
             sizes: [{ size: 'small', sku: 'SHIRT-BLACK-S', availability: 'inStock' }]
           },
           {
+            coverImage: product3,
             color: 'pink',
             sku: 'SHIRT-PINK',
             sizes: [{ size: 'oneSize', sku: 'SHIRT-PINK-OS', availability: 'inStock' }]
@@ -133,7 +136,7 @@ export const products = [
   },
   {
     id: 4,
-    product_img: product4,
+    product_img: product4_orange,
     title: 'Sleeve Striped T-Shirt',
     rating: 4.5,
     cost: 130,
@@ -148,6 +151,7 @@ export const products = [
       {
         variants: [
           {
+            coverImage: product4_orange,
             color: 'orange',
             sku: 'SHORTS-ORANGE',
             sizes: [
@@ -156,6 +160,7 @@ export const products = [
             ]
           },
           {
+            coverImage: product4_blue,
             color: 'lightBlue',
             sku: 'SHORTS-LIGHTBLUE',
             sizes: [{ size: 'medium', sku: 'SHORTS-LIGHTBLUE-M', availability: 'inStock' }]
@@ -181,6 +186,7 @@ export const products = [
       {
         variants: [
           {
+            coverImage: product5,
             color: 'purple',
             sku: 'SHIRT-PURPLE',
             sizes: [
@@ -189,11 +195,13 @@ export const products = [
             ]
           },
           {
+            coverImage: product5,
             color: 'red',
             sku: 'SHIRT-RED',
             sizes: [{ size: 'small', sku: 'SHIRT-RED-S', availability: 'inStock' }]
           },
           {
+            coverImage: product5,
             color: 'white',
             sku: 'SHIRT-WHITE',
             sizes: [
@@ -202,6 +210,7 @@ export const products = [
             ]
           },
           {
+            coverImage: product5,
             color: 'lightBlue',
             sku: 'SHIRT-LIGHTBLUE',
             sizes: [{ size: 'medium', sku: 'SHIRT-LIGHTBLUE-M', availability: 'inStock' }]
@@ -631,7 +640,7 @@ export const products = [
   },
   {
     id: 16,
-    product_img: product4,
+    product_img: product4_orange,
     title: 'Sleeve Striped T-Shirt',
     rating: 4.5,
     cost: 130,
@@ -733,7 +742,7 @@ export const products = [
 export const newArrivalsSlides = [
   {
     id: 1,
-    product_img: product1,
+    product_img: product1_black,
     title: 'T-shirt with Tape Details',
     rating: 4.5,
     cost: 120,
@@ -741,7 +750,7 @@ export const newArrivalsSlides = [
   },
   {
     id: 2,
-    product_img: product2,
+    product_img: product2_black,
     title: 'Skinny Fit Jeans',
     rating: 3.5,
     cost: 240,
@@ -757,7 +766,7 @@ export const newArrivalsSlides = [
   },
   {
     id: 4,
-    product_img: product4,
+    product_img: product4_orange,
     title: 'Sleeve Striped T-Shirt',
     rating: 4.5,
     cost: 130,

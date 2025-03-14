@@ -9,13 +9,13 @@
               <template v-slot:before>
                 <q-tabs v-model="tab" vertical class="text-teal">
                   <q-tab name="first">
-                    <q-img :src="product.product_img"></q-img>
+                    <q-img :src="getImgByColor"></q-img>
                   </q-tab>
                   <q-tab name="second">
-                    <q-img :src="product.product_img"></q-img>
+                    <q-img :src="getImgByColor"></q-img>
                   </q-tab>
                   <q-tab name="third">
-                    <q-img :src="product.product_img"></q-img>
+                    <q-img :src="getImgByColor"></q-img>
                   </q-tab>
                 </q-tabs>
               </template>
@@ -30,15 +30,15 @@
                   transition-next="jump-up"
                 >
                   <q-tab-panel name="first">
-                    <q-img :src="product.product_img"></q-img>
+                    <q-img :src="getImgByColor"></q-img>
                   </q-tab-panel>
 
                   <q-tab-panel name="second">
-                    <q-img :src="product.product_img"></q-img>
+                    <q-img :src="getImgByColor"></q-img>
                   </q-tab-panel>
 
                   <q-tab-panel name="third">
-                    <q-img :src="product.product_img"></q-img>
+                    <q-img :src="getImgByColor"></q-img>
                   </q-tab-panel>
                 </q-tab-panels>
               </template>
@@ -253,6 +253,19 @@ const unavailableSizes = computed(() => {
 console.log('!', typeof availableSizes)
 console.log('?', allSizes.value)
 console.log('dddddddddddd', unavailableSizes.value)
+
+//получение изображения по цвету
+const getImgByColor = computed(() => {
+  if (!product.value || !selectedColor.value) {
+    return ''
+  }
+
+  const selectedVariant = product.value.aspects[0].variants.find(
+    (variant) => variant.color === selectedColor.value
+  )
+
+  return selectedVariant.coverImage || ''
+})
 
 //методы
 const onAddProduct = (event: Event) => {
