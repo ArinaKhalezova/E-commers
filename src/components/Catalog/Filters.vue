@@ -10,10 +10,11 @@
               v-model="localFilters.category.t_shirts"
               label="T-shirts"
               color="black"
+              @click="applyFilters"
             />
-            <q-checkbox dense v-model="localFilters.category.shorts" label="Shorts" color="black" />
-            <q-checkbox dense v-model="localFilters.category.shirts" label="Shirts" color="black" />
-            <q-checkbox dense v-model="localFilters.category.jeans" label="Jeans" color="black" />
+            <q-checkbox dense v-model="localFilters.category.shorts" label="Shorts" color="black" @click="applyFilters"/>
+            <q-checkbox dense v-model="localFilters.category.shirts" label="Shirts" color="black" @click="applyFilters"/>
+            <q-checkbox dense v-model="localFilters.category.jeans" label="Jeans" color="black" @click="applyFilters"/>
           </div>
         </div>
         <q-expansion-item
@@ -35,6 +36,7 @@
                   label-always
                   :left-label-value="localFilters.price.min + '$'"
                   :right-label-value="localFilters.price.max + '$'"
+                  @update:model-value="applyFilters"
                 />
               </div>
             </q-card-section>
@@ -52,7 +54,7 @@
             <q-card-section>
               <div id="q-app">
                 <div class="q-pa-md">
-                  <div class="q-gutter-xs" :class="$style.colors_items">
+                  <div class="q-gutter-xs" :class="$style.colors_items" @click="applyFilters">
                     <q-chip
                       v-for="(value, color) in localFilters.color"
                       :key="color"
@@ -60,7 +62,7 @@
                       :outline="getOutline(color)"
                       :text-color="getTextColor(color)"
                       :selected="value"
-                      @click="localFilters.color[color] = !localFilters.color[color]"
+                      @click="localFilters.color[color] = !localFilters.color[color]; applyFilters()"
                     >
                     </q-chip>
                   </div>
@@ -86,7 +88,7 @@
                   :size="size"
                   :selected="value"
                   color="gray"
-                  @click="localFilters.size[size] = !localFilters.size[size]"
+                  @click="localFilters.size[size] = !localFilters.size[size]; applyFilters()"
                 >
                   {{ size }}
                 </q-chip>
@@ -110,27 +112,30 @@
                     v-model="localFilters.style.casual"
                     label="Casual"
                     color="black"
+                    @click="applyFilters"
                   />
                   <q-checkbox
                     dense
                     v-model="localFilters.style.formal"
                     label="Formal"
                     color="black"
+                    @click="applyFilters"
                   />
                   <q-checkbox
                     dense
                     v-model="localFilters.style.party"
                     label="Party"
                     color="black"
+                    @click="applyFilters"
                   />
-                  <q-checkbox dense v-model="localFilters.style.gym" label="Gym" color="black" />
+                  <q-checkbox dense v-model="localFilters.style.gym" label="Gym" color="black" @click="applyFilters"/>
                 </div>
               </div>
             </q-card-section>
           </q-card>
         </q-expansion-item>
 
-        <ButtonDark text="Apply" :class="$style.filters_button" @click="applyFilters" />
+        <!-- <ButtonDark text="Apply" :class="$style.filters_button" @click="applyFilters" /> -->
       </q-list>
     </div>
   </div>
@@ -138,7 +143,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import ButtonDark from '../Home/ButtonDark.vue'
+// import ButtonDark from '../Home/ButtonDark.vue'
 
 const localFilters = ref({
   category: {
