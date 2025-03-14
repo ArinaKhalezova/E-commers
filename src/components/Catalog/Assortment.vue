@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.assortment_container">
     <Filters :class="$style.assortment_filters" @update:modelValue="handleFilterUpdate" />
-    <Catalog :products="products" :size="pageSize" v-if="!loading" :filters="filtersData" />
+    <Catalog :products="products" :sizeNumb="pageSize" v-if="!loading" :filters="filtersData" />
   </div>
 </template>
 
@@ -11,12 +11,37 @@ import Catalog from './Catalog.vue'
 import Filters from '@/components/Catalog/Filters.vue'
 
 const products = ref([])
-const pageSize = 12
+const pageSize = 9
 const loading = ref(true)
 
 const filtersData = ref({
   category: { t_shirts: false, shorts: false, shirts: false, jeans: false },
-  price: { min: 10, max: 300 }
+  price: { min: 10, max: 300 },
+  color: {
+    green: false,
+    red: false,
+    yellow: false,
+    orange: false,
+    lightBlue: false,
+    blue: false,
+    purple: false,
+    pink: false,
+    white: false,
+    black: false
+  },
+  size: {
+    xsmall: false,
+    small: false,
+    medium: false,
+    large: false,
+    xlarge: false
+  },
+  style: {
+    casual: false,
+    formal: false,
+    party: false,
+    gym: false
+  }
 })
 
 const handleFilterUpdate = (value: any) => {
@@ -44,8 +69,6 @@ onMounted(async () => {
   display: none;
 }
 .assortment_container {
-  /* display: grid; */
-  /* grid-template-columns: 1fr; */
   justify-items: center;
 }
 @media (min-width: 1024px) {

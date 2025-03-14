@@ -8,6 +8,7 @@ export type TProduct = {
   description?: string
   category?: string
   gender?: string
+  style?: string
   quantity: number
   aspects: {
     variants: {

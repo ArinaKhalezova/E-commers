@@ -53,23 +53,15 @@
               <div id="q-app">
                 <div class="q-pa-md">
                   <div class="q-gutter-xs" :class="$style.colors_items">
-                    <q-chip v-model:selected="color.Green" color="green" text-color="white">
-                    </q-chip>
-                    <q-chip v-model:selected="color.Red" color="red" text-color="white"> </q-chip>
-                    <q-chip v-model:selected="color.Yellow" color="yellow" text-color="white">
-                    </q-chip>
-                    <q-chip v-model:selected="color.Orange" color="orange" text-color="white">
-                    </q-chip>
-                    <q-chip v-model:selected="color.Blue_light" color="blue-4" text-color="white">
-                    </q-chip>
-                    <q-chip v-model:selected="color.Blue" color="blue-9" text-color="white">
-                    </q-chip>
-                    <q-chip v-model:selected="color.Purple" color="purple" text-color="white">
-                    </q-chip>
-                    <q-chip v-model:selected="color.Pink" color="pink" text-color="white"> </q-chip>
-                    <q-chip v-model:selected="color.White" outline color="grey" text-color="white">
-                    </q-chip>
-                    <q-chip v-model:selected="color.Black" color="black" text-color="white">
+                    <q-chip
+                      v-for="(value, color) in localFilters.color"
+                      :key="color"
+                      :color="getColor(color)"
+                      :outline="getOutline(color)"
+                      :text-color="getTextColor(color)"
+                      :selected="value"
+                      @click="localFilters.color[color] = !localFilters.color[color]"
+                    >
                     </q-chip>
                   </div>
                 </div>
@@ -88,11 +80,16 @@
           <q-card>
             <q-card-section>
               <div class="q-gutter-xs" :class="$style.size_items">
-                <q-chip v-model:selected="syze.X_Small" color="gray"> X-Small </q-chip>
-                <q-chip v-model:selected="syze.Small" color="gray"> Small </q-chip>
-                <q-chip v-model:selected="syze.Medium" color="gray"> Medium </q-chip>
-                <q-chip v-model:selected="syze.Large" color="gray"> Large </q-chip>
-                <q-chip v-model:selected="syze.X_Large" color="gray"> X-Large </q-chip>
+                <q-chip
+                  v-for="(value, size) in localFilters.size"
+                  :key="size"
+                  :size="size"
+                  :selected="value"
+                  color="gray"
+                  @click="localFilters.size[size] = !localFilters.size[size]"
+                >
+                  {{ size }}
+                </q-chip>
               </div>
             </q-card-section>
           </q-card>
@@ -108,10 +105,25 @@
             <q-card-section>
               <div class="q-pa-md">
                 <div class="q-gutter-sm" :class="$style.style_items">
-                  <q-checkbox dense v-model="casual" label="Casual" color="black" />
-                  <q-checkbox dense v-model="formal" label="Formal" color="black" />
-                  <q-checkbox dense v-model="party" label="Party" color="black" />
-                  <q-checkbox dense v-model="gym" label="Gym" color="black" />
+                  <q-checkbox
+                    dense
+                    v-model="localFilters.style.casual"
+                    label="Casual"
+                    color="black"
+                  />
+                  <q-checkbox
+                    dense
+                    v-model="localFilters.style.formal"
+                    label="Formal"
+                    color="black"
+                  />
+                  <q-checkbox
+                    dense
+                    v-model="localFilters.style.party"
+                    label="Party"
+                    color="black"
+                  />
+                  <q-checkbox dense v-model="localFilters.style.gym" label="Gym" color="black" />
                 </div>
               </div>
             </q-card-section>
@@ -129,31 +141,31 @@ import { ref } from 'vue'
 import ButtonDark from '../Home/ButtonDark.vue'
 
 const localFilters = ref({
-  price: { min: 10, max: 300 },
   category: {
     t_shirts: false,
     shorts: false,
     shirts: false,
     jeans: false
   },
+  price: { min: 10, max: 300 },
   color: {
-    Green: false,
-    Red: false,
-    Yellow: false,
-    Orange: false,
-    Blue_light: false,
-    Blue: false,
-    Purple: false,
-    Pink: false,
-    White: false,
-    Black: false
+    green: false,
+    red: false,
+    yellow: false,
+    orange: false,
+    lightBlue: false,
+    blue: false,
+    purple: false,
+    pink: false,
+    white: false,
+    black: false
   },
   size: {
-    X_Small: false,
-    Small: false,
-    Medium: false,
-    Large: false,
-    X_Large: false
+    xsmall: false,
+    small: false,
+    medium: false,
+    large: false,
+    xlarge: false
   },
   style: {
     casual: false,
@@ -171,26 +183,35 @@ const applyFilters = () => {
   emit('update:modelValue', localFilters.value)
 }
 
-const syze = ref({
-  X_Small: false,
-  Small: false,
-  Medium: false,
-  Large: false,
-  X_Large: false
-})
-
-const color = ref({
-  Green: false,
-  Red: false,
-  Yellow: false,
-  Orange: false,
-  Blue_light: false,
-  Blue: false,
-  Purple: false,
-  Pink: false,
-  White: false,
-  Black: false
-})
+const getColor = (color: string): string => {
+  switch (color) {
+    case 'lightBlue':
+      return 'blue-4'
+    case 'blue':
+      return 'blue-9'
+    case 'white':
+      return 'grey'
+    default:
+      return color
+  }
+}
+const getTextColor = (color: string): string => {
+  switch (color) {
+    case 'white':
+    case 'yellow':
+      return 'black'
+    default:
+      return 'white'
+  }
+}
+const getOutline = (color: string): boolean => {
+  switch (color) {
+    case 'white':
+      return true
+    default:
+      return false
+  }
+}
 </script>
 
 <style module>
@@ -201,6 +222,7 @@ const color = ref({
   font-weight: 900;
   color: var(--title-color);
 }
+
 .category_items {
   display: flex;
   flex-direction: column;
@@ -213,10 +235,12 @@ const color = ref({
   border-radius: 50px;
   border: 1px solid var(--subtitle-color);
 }
+
 .size_items {
   display: flex;
   flex-wrap: wrap;
 }
+
 .size_items > * {
   width: auto;
   height: 39px;
@@ -226,10 +250,12 @@ const color = ref({
   font-size: 14px;
   font-family: 'Satoshi';
 }
+
 .style_items {
   display: flex;
   flex-direction: column;
 }
+
 .filters_button {
   margin: 10px auto;
   line-height: 1;

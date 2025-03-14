@@ -1,9 +1,12 @@
 <template>
   <div :class="$style.container">
     <div>
-      <h2>Фильтры:</h2>
-      <p>Цена: от {{ filters.price.min }} до {{ filters.price.max }}</p>
+      <!-- <h2>Фильтры:</h2>
       <p>Категории: {{ filters.category }}</p>
+      <p>Цена: от {{ filters.price.min }} до {{ filters.price.max }}</p>
+      <p>Цвета: {{ filters.color }}</p>
+      <p>Размеры: {{ filters.size }}</p>
+      <p>Стиль: {{ filters.style }}</p> -->
     </div>
     <div :class="$style.pagination_container">
       <div :class="$style.product_list">
@@ -33,27 +36,46 @@
 <script setup lang="ts">
 import { ref, computed, defineProps } from 'vue'
 import ProductCard from '../Home/ProductCard.vue'
-
-interface Product {
-  id: string
-  product_img: string
-  title: string
-  rating: string
-  cost: string
-  ratingModel: number
-  category: string
-  color: string
-  size: string
-  style: string
-}
+import { TProduct } from '@/data/products.types'
 
 const props = defineProps<{
-  products: Product[]
+  products: TProduct[]
   filters: {
     category: { t_shirts: false; shorts: false; shirts: false; jeans: false } | undefined
     price: { min: number; max: number } | undefined
+    color:
+      | {
+          green: false
+          red: false
+          yellow: false
+          orange: false
+          lightBlue: false
+          blue: false
+          purple: false
+          pink: false
+          white: false
+          black: false
+        }
+      | undefined
+    size:
+      | {
+          xsmall: false
+          small: false
+          medium: false
+          large: false
+          xlarge: false
+        }
+      | undefined
+    style:
+      | {
+          casual: false
+          formal: false
+          party: false
+          gym: false
+        }
+      | undefined
   }
-  size: number
+  sizeNumb: number
 }>()
 
 const pageNumber = ref(1)
@@ -62,30 +84,55 @@ const isAnyCategorySelected = computed(() => {
   return props.filters?.category && Object.values(props.filters.category).some(Boolean)
 })
 
+const isAnyColorSelected = computed(() => {
+  return props.filters?.color && Object.values(props.filters.color).some(Boolean)
+})
+
+const isAnySizeSelected = computed(() => {
+  return props.filters?.size && Object.values(props.filters.size).some(Boolean)
+})
+
+const isAnyStyleSelected = computed(() => {
+  return props.filters?.style && Object.values(props.filters.style).some(Boolean)
+})
+
 const filteredProducts = computed(() => {
-  const { price, category } = props.filters || {}
+  const { category, price, color, size, style } = props.filters || {}
 
   return props.products.filter((product) => {
     // Фильтрация по категории
-    const categoryKey = product.category.toLowerCase() as keyof typeof category
+    const categoryKey = product.category?.toLowerCase() as keyof typeof category
     const isCategoryMatch = !isAnyCategorySelected.value || (category && category[categoryKey])
+
     // Фильтрация по цене
-    const productPrice = parseFloat(product.cost)
+    const productPrice = product.cost
     const isPriceInRange = !price || (productPrice >= price.min && productPrice <= price.max)
 
-    return isCategoryMatch && isPriceInRange
+    // Фильтрация по цвету
+    const colors = product.aspects[0].variants.map((variant) => variant.color.toLowerCase())
+    const isColorMatch = !isAnyColorSelected.value || colors.some(color => props.filters.color?.[color as keyof typeof props.filters.color])
+
+    // Фильтрация по размеру
+    const sizes = product.aspects[0].variants.flatMap(variant => variant.sizes.map(size => size.size.toLowerCase()))
+    const isSizeMatch = !isAnySizeSelected.value || sizes.some(size => props.filters.size?.[size as keyof typeof props.filters.size])
+
+    // Фильтрация по стилям
+    const styleKey = product.style?.toLowerCase() as keyof typeof style
+    const isStyleMatch = !isAnyStyleSelected.value || (style && style[styleKey])
+
+    return isCategoryMatch && isPriceInRange && isColorMatch && isSizeMatch && isStyleMatch
   })
 })
 
 const pageCount = computed(() => {
   const length = props.products.length
-  const size = props.size ?? 10
-  return Math.ceil(length / size)
+  const sizeNumb = props.sizeNumb ?? 10
+  return Math.ceil(length / sizeNumb)
 })
 
 const paginatedData = computed(() => {
-  const start = (pageNumber.value - 1) * (props.size ?? 10)
-  const end = start + (props.size ?? 10)
+  const start = (pageNumber.value - 1) * (props.sizeNumb ?? 10)
+  const end = start + (props.sizeNumb ?? 10)
   return filteredProducts.value.slice(start, end)
 })
 </script>
@@ -98,6 +145,7 @@ const paginatedData = computed(() => {
 .filters_container {
   display: none;
 }
+
 .pagination_container {
   display: flex;
   flex-direction: column;
@@ -108,6 +156,7 @@ const paginatedData = computed(() => {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
 .navigation {
   display: flex;
   justify-content: center;
@@ -121,6 +170,7 @@ const paginatedData = computed(() => {
   .customProductCard img {
     width: 210px;
   }
+
   .product_list {
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -130,10 +180,12 @@ const paginatedData = computed(() => {
   .customProductCard img {
     width: 20vw;
   }
+
   .filters_container {
     display: block;
     background-color: var(--light-background-color);
   }
+
   .product_list {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
