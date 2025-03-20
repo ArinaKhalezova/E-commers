@@ -9,6 +9,7 @@ type TCartItem = {
   cost: number
   color: string
   size: string
+  coverImage: string
   quantity: number
 }
 
@@ -30,7 +31,6 @@ let mockCart: TCartItem[] = loadCartFromLocalStorage()
 export const cart = [
   http.get(urls.serverUrl + urls.products, () => {
     const mockCart = loadCartFromLocalStorage()
-
     return HttpResponse.json(mockCart)
   }),
 
@@ -40,8 +40,7 @@ export const cart = [
     const existingProduct =
       mockCart.find((p) => p.sku === newProduct.sku) &&
       mockCart.find((k) => k.color === newProduct.color) &&
-      mockCart.find((m) => m.size === newProduct.size)
-
+      mockCart.find((m) => m.size === newProduct.size) 
     if (existingProduct) {
       existingProduct.quantity += 1
     } else {

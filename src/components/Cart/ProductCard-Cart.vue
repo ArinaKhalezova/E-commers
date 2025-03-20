@@ -2,8 +2,7 @@
   <div :class="$style.product_container">
     <div :class="$style.product_content">
       <div :class="$style.product_img" @click="goToProduct(product.id)">
-        <img :src="product.aspects[0]?.variants?.coverImage || product.product_img" :alt="product.title" />
-        <!-- <img :src="product.product_img" alt="Product Image" /> -->
+        <img :src="getImgByColor || product.product_img" :alt="product.title" />
       </div>
       <div :class="$style.product_info">
         <div :class="$style.product_header">
@@ -18,11 +17,6 @@
           <q-chip :outline="getOutline(product.color)" :color="getColor(product.color)"> </q-chip>
           <q-chip color="gray" text-color="black"> {{ product.size }} </q-chip>
         </div>
-
-        <!-- <div :class="$style.product_characteristics">
-          <p>{{ 'Color: ' + product.color }}</p>
-          <p>{{ 'Size: ' + product.size }}</p>
-        </div> -->
         <div :class="$style.product_footer">
           <div :class="$style.product_price">
             <h3>{{ '$' + product.cost }}</h3>
@@ -66,6 +60,17 @@ const deleteProduct = async () => {
 const goToProduct = (id: number) => {
   router.push({ name: 'productPage', params: { id } })
 }
+const getImgByColor = computed(() => {
+  if (!props.product) {
+    return ''
+  }
+
+  const selectedVariant = props.product.aspects[0].variants.find(
+    (variant) => variant.color === props.product.color
+  )
+  
+  return selectedVariant.coverImage || ''
+})
 
 const getOutline = (color: string): boolean => {
   switch (color) {
