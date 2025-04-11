@@ -1,5 +1,6 @@
 import { urls } from '@/api/baseUrls'
 import type { TProduct } from '@/data/products.types'
+import { watch } from 'vue'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
@@ -15,6 +16,24 @@ export const useCartStore = defineStore('cartStore', () => {
   const promo = ref('')
   const discount = ref(0)
   const promoCodeMessage = ref(0)
+
+  const loadCartFromLocalStorage = () => {
+    const savedCart = localStorage.getItem('cart')
+    if (savedCart) {
+      products.value = JSON.parse(savedCart)
+    }
+  }
+
+  const saveCartToLocalStorage = () => {
+    localStorage.setItem('cart', JSON.stringify(products.value))
+  }
+
+  loadCartFromLocalStorage()
+
+  watch(products, (newProducts) => {
+    saveCartToLocalStorage()
+  }, {deep: true})
+
   // Getters
   const totalCountProducts = computed(() => products.value.length)
 
@@ -82,6 +101,7 @@ export const useCartStore = defineStore('cartStore', () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...product, sku })
     })
+    products.value.push({ ...product, sku })
     await fetchProducts()
   }
 
