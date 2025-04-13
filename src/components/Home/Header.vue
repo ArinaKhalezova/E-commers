@@ -56,10 +56,15 @@
       <a href="/cart">
         <img alt="cart" src="/public/assets/images/cart.png" width="24" height="24" />
       </a>
-      <a href="/account">
+      <a href="#" @click.prevent="handleAccountClick">
         <img alt="account" src="/public/assets/images/account.png" width="24" height="24" />
       </a>
     </div>
+
+    <AuthModal
+      :model-value="authStore.showAuthModal"
+      @update:model-value="authStore.showAuthModal = $event"
+    />
   </div>
 </template>
 
@@ -67,10 +72,25 @@
 import { ref } from 'vue'
 import SearchBar from './SearchBar.vue'
 import BurgerMenu from './BurgerMenu.vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '../../stores/auth'
+import AuthModal from './AuthModal.vue'
+
 const leftDrawerOpen = ref(false)
+
+const router = useRouter()
+const authStore = useAuthStore()
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
+const handleAccountClick = () => {
+  if (authStore.isAuthenticated) {
+    router.push('/account')
+  } else {
+    authStore.showAuthModal = true
+  }
 }
 </script>
 

@@ -8,6 +8,8 @@ import Account from '@/views/Account.vue'
 import Ordering from '@/views/Ordering.vue'
 import OrderInformation from '@/components/SuccessPage/OrderInformation.vue'
 
+import { useAuthStore } from '@/stores/auth'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -35,7 +37,8 @@ const router = createRouter({
     {
       path: '/account',
       name: 'account',
-      component: Account
+      component: Account,
+      meta: { requiresAuth: true }
     },
     {
       path: '/ordering',
@@ -51,6 +54,17 @@ const router = createRouter({
 
   scrollBehavior() {
     return { top: 0 }
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    authStore.showAuthModal = true
+    next({ path: '/', query: { redirect: to.fullPath } })
+  } else {
+    next()
   }
 })
 

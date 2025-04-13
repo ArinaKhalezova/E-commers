@@ -9,9 +9,10 @@ import { createPinia } from 'pinia'
 import { Quasar, type QuasarPluginOptions } from 'quasar'
 
 import App from './App.vue'
-import router from './router'
+import router from './router/index'
 import VueScrollTo from 'vue-scrollto'
 import VueCookies from 'vue-cookies'
+import { useAuthStore } from '@/stores/auth'
 
 const app = createApp(App)
 
@@ -27,6 +28,9 @@ app.use(Quasar, quasarOptions)
 app.use(VueScrollTo)
 
 app.use(VueCookies)
+
+const authStore = useAuthStore()
+authStore.initAuth()
 
 async function prepareApp() {
   if (import.meta.env.MODE === 'development' || import.meta.env.MODE === 'test') {
