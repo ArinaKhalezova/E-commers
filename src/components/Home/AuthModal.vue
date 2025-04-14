@@ -1,7 +1,7 @@
 <template>
   <q-dialog :model-value="modelValue" @update:model-value="handleModalUpdate">
     <q-card class="auth-modal">
-      <!-- Шаг 1: Выбор действия -->
+      <!-- Выбор действия -->
       <div v-if="currentStep === 'choice'" class="auth-choice">
         <q-btn unelevated class="auth-btn" color="black" @click="currentStep = 'login'">
           Login to your account →
@@ -13,14 +13,14 @@
         </q-btn>
       </div>
 
-      <!-- Шаг 2: Форма входа -->
+      <!-- Форма входа -->
       <div v-if="currentStep === 'login'" class="auth-form">
         <h2 class="modal-title">Login to your account</h2>
 
         <q-form @submit.prevent="handleLogin">
           <q-input
             v-model="loginForm.email"
-            label="Phone number/Email address"
+            label="Email address"
             outlined
             class="auth-input"
             :rules="[(val) => !!val || 'Field is required']"
@@ -42,7 +42,7 @@
         </q-form>
       </div>
 
-      <!-- Шаг 3: Форма регистрации -->
+      <!-- Форма регистрации -->
       <div v-if="currentStep === 'register'" class="auth-form">
         <h2 class="modal-title">Create your account</h2>
 
@@ -143,7 +143,6 @@ const handleRegister = async () => {
 
     await authStore.register({
       email: registerForm.value.email,
-      phone: registerForm.value.phone,
       password: registerForm.value.password
     })
 

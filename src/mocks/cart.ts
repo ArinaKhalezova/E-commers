@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw'
-import { urls } from '../api/baseUrls'
+import { urls } from '../services/baseUrls'
 import { products } from '@/data/products'
 
 type TCartItem = {
