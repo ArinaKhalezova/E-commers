@@ -65,12 +65,14 @@ onMounted(async () => {
 </script>
 
 <style module>
-.assortment_filters {
-  display: none;
-}
 .assortment_container {
   justify-items: center;
 }
+
+.assortment_filters {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   .assortment_container {
     display: grid;

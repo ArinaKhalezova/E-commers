@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cartStore'
+import { urls } from '@/services/baseUrls'
 import type { DeliveryAddress, DeliveryRecipient } from './orderingStore'
+import { ref } from 'vue'
 
 export interface OrderItem {
   sku: string
@@ -18,7 +20,6 @@ export interface Order {
   date: Date
   items: OrderItem[]
   total: number
-  status: 'pending' | 'completed' | 'cancelled'
   deliveryAddress?: DeliveryAddress
   recipient?: DeliveryRecipient
   paymentMethod?: string
@@ -29,15 +30,25 @@ export interface Order {
 export const useOrderStore = defineStore('orderStore', () => {
   const authStore = useAuthStore()
   const cartStore = useCartStore()
+  const orders = ref<Order[]>([])
 
   const generateOrderId = () => {
-    const timestamp = Date.now().toString(36)
-    const random = Math.random().toString(36).substr(2, 5)
-    return `${timestamp}-${random}`.toUpperCase()
+    const now = new Date()
+    const datePart = [
+      now.getFullYear().toString().slice(-2),
+      (now.getMonth() + 1).toString().padStart(2, '0'),
+      now.getDate().toString().padStart(2, '0')
+    ].join('')
+    
+    const todayOrders = orders.value.filter(order => 
+      new Date(order.date).toDateString() === now.toDateString()
+    )
+    
+    const orderNumber = todayOrders.length + 1
+    return `${datePart}-${orderNumber.toString().padStart(3, '0')}`
   }
 
-  const saveOrder = (deliveryData: any) => {
-    console.log('Saving order with items:', cartStore.products)
+  const saveOrder = async (deliveryData: any) => {
     const newOrder: Order = {
       id: generateOrderId(),
       date: new Date(),
@@ -48,51 +59,51 @@ export const useOrderStore = defineStore('orderStore', () => {
         size: p.size,
         quantity: p.quantity,
         cost: p.cost,
-        coverImage: p.coverImage
+        coverImage: p.coverImage || ''
       })),
-      total: cartStore.products.reduce((sum, item) => sum + item.cost * item.quantity, 0),
-      status: 'pending',
+      total: cartStore.totalCostProducts,
       ...deliveryData
     }
 
-    // Для авторизованных пользователей
-    if (authStore.isAuthenticated && authStore.user) {
-      const users = JSON.parse(localStorage.getItem('users')) || []
-      const userIndex = users.findIndex((u) => u.email === authStore.user.email)
+    // Отправляем заказ на сервер
+    await fetch(urls.serverUrl + urls.orders, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newOrder)
+    })
 
-      if (userIndex !== -1) {
-        users[userIndex].orders = [...(users[userIndex].orders || []), newOrder]
-        localStorage.setItem('users', JSON.stringify(users))
-        authStore.user.orders = users[userIndex].orders
-      }
-    } else {
-      // Для гостей
-      const guestOrders = JSON.parse(localStorage.getItem('guestOrders')) || []
-      localStorage.setItem('guestOrders', JSON.stringify([...guestOrders, newOrder]))
-    }
-
-    // Очищаем корзину после сохранения заказа
+    // Очищаем корзину
     cartStore.products = []
     localStorage.setItem('cart', '[]')
 
     return newOrder
   }
 
-  const getOrders = () => {
-    if (authStore.isAuthenticated && authStore.user) {
-      return authStore.user.orders || []
+  const fetchOrders = async () => {
+    try {
+      const response = await fetch(urls.serverUrl + urls.orders)
+      if (!response.ok) throw new Error('Failed to fetch orders')
+      orders.value = await response.json()
+    } catch (error) {
+      console.error('Error fetching orders:', error)
     }
-    return JSON.parse(localStorage.getItem('guestOrders') || '[]')
+  }
+
+  const getOrders = () => {
+    return orders.value
   }
 
   const getLastOrder = () => {
-    const orders = getOrders()
-    return orders.length > 0 ? orders[orders.length - 1] : null
+    return orders.value.length > 0 ? orders.value[orders.value.length - 1] : null
   }
+
+  // Загружаем заказы при инициализации
+  fetchOrders()
 
   return {
     saveOrder,
     getOrders,
-    getLastOrder
+    getLastOrder,
+    fetchOrders
   }
 })

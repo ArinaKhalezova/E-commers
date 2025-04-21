@@ -11,5 +11,7 @@ export const urls = {
   reviews: '/reviews',
   id: '/:id',
   //cart
-  products: '/products'
+  products: '/products',
+  //orders
+  orders: '/orders'
 }

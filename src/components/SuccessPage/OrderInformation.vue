@@ -9,10 +9,7 @@
       <h1 style="font-size: 40px">Your order information</h1>
       <div>
         <h2>
-          Order ID: <span style="color: green; font-weight: 900">{{ lastOrder?.id || 'N/A' }}</span>
-        </h2>
-        <h2>
-          Tracking number: <span style="color: green; font-weight: 900">{{ trackingNumber }}</span>
+          Tracking number: <span style="color: green; font-weight: 900">{{ lastOrder?.id || 'N/A' }}</span>
         </h2>
         <p>
           <span style="color: red">Please remember</span> the
@@ -20,6 +17,7 @@
         </p>
       </div>
       <div :class="$style.order_products">
+        <h3 style="font-size: 24px">Your order</h3>
         <div v-for="product in cartStore.products" :key="product.id" :class="$style.products_items">
           <div :class="$style.products_img">
             <img :src="product.product_img" :alt="product.title" />
@@ -61,7 +59,7 @@
       <h2>
         Total cost:
         <span style="color: green; font-weight: 900">
-          {{ lastOrder ? `$${lastOrder.total.toFixed(2)}` : 'N/A' }}
+          {{ lastOrder ? `$${lastOrder.total}` : 'N/A' }}
         </span>
       </h2>
     </div>
@@ -72,22 +70,19 @@
 import { useCartStore } from '@/stores/cartStore'
 import { useOrderingStore } from '@/stores/orderingStore'
 import { useOrderStore } from '@/stores/orderStore'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 
 const cartStore = useCartStore()
 const orderingStore = useOrderingStore()
-const orderStore = useOrderStore()
+const orderStore = useOrderStore() 
 
-// Получаем последний заказ
 const lastOrder = computed(() => {
-  const orders = orderStore.getOrders()
+  const orders = orderStore.getOrders() 
   return orders.length > 0 ? orders[orders.length - 1] : null
 })
 
-// Генерируем tracking number на основе ID заказа
-const trackingNumber = computed(() => {
-  if (!lastOrder.value) return '0039762F' // fallback
-  return lastOrder.value.id.slice(0, 8).toUpperCase()
+onMounted(async () => {
+  await orderStore.fetchOrders() 
 })
 </script>
 
