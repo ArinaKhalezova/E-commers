@@ -1,5 +1,6 @@
 <template>
   <q-dialog :model-value="modelValue" @update:model-value="handleModalUpdate">
+    <div :class="$style.auth_modal">
       <div v-if="currentStep === 'choice'" :class="$style.auth_choice">
         <q-btn
           unelevated
