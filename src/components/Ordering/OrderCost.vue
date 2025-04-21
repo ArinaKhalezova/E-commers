@@ -20,48 +20,13 @@
       <h2>Total</h2>
       <p>{{ '$' + cartStore.totalCostProducts }}</p>
     </div>
-    <!-- <ButtonDark link="#" text="Create an order" :class="$style.order_btn" @click="handleOrderClick" />
-
-    <q-dialog v-model="dialog" :backdrop-filter="backdropFilter">
-      <q-card>
-        <q-card-section class="row items-center q-pb-none text-h6">
-          Thanks for the order!
-        </q-card-section>
-        <q-card-section>
-          You will be redirected to the order information page in {{ countdown }} seconds...
-        </q-card-section>
-      </q-card>
-    </q-dialog> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import ButtonDark from '../Home/ButtonDark.vue'
 import { useCartStore } from '@/stores/cartStore'
 
 const cartStore = useCartStore()
-
-const dialog = ref(false)
-const backdropFilter = ref('blur(5px)')
-const countdown = ref(5)
-let intervalId: number | null = null
-
-const handleOrderClick = () => {
-  dialog.value = true
-
-  console.log('Order button clicked')
-
-  countdown.value = 5
-  intervalId = setInterval(() => {
-    countdown.value--
-
-    if (countdown.value <= 0) {
-      clearInterval(intervalId!)
-      window.location.href = 'successPage'
-    }
-  }, 1000)
-}
 </script>
 
 <style module>

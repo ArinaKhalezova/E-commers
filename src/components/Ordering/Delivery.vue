@@ -182,21 +182,29 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useOrderingStore } from '@/stores/orderingStore'
-// import { useRouter } from 'vue-router'
+import { useOrderStore } from '@/stores/orderStore'
+import { useCartStore } from '@/stores/cartStore'
+import { useRouter } from 'vue-router'
 import PlaceholderItem from './PlaceholderItem.vue'
 import ButtonDark from '../Home/ButtonDark.vue'
-import { ref } from 'vue'
 
 const props = defineProps<{
-  deliveryMethod: 'pickup' | 'courier';
-}>();
+  deliveryMethod: 'pickup' | 'courier'
+}>()
 
-const date = ref('2025/12/20')
+// Инициализация хранилищ
+const orderingStore = useOrderingStore()
+const orderStore = useOrderStore()
+const cartStore = useCartStore()
+const router = useRouter()
 
-const model = ref<string | null>('9:00 - 13:00')
 const options = ['9:00 - 13:00', '11:00 - 15:00', '13:00 - 17:00', '15:00 - 19:00', '17:00 - 21:00']
 
+// Данные формы
+const date = ref('')
+const model = ref<string | null>('9:00 - 13:00')
 const street = ref('')
 const apartament = ref('')
 const entrance = ref('')
@@ -206,55 +214,108 @@ const surname = ref('')
 const name = ref('')
 const phone = ref('')
 const email = ref('')
-
 const selectedMethod = ref<'cash' | 'card'>('cash')
 
 const selectedPaymentMethod = (method: 'cash' | 'card') => {
   selectedMethod.value = method
 }
 
-const orderingStore = useOrderingStore()
-
+// Диалоговое окно
 const dialog = ref(false)
-const backdropFilter = ref('blur(5px)')
-const countdown = ref(10)
+const countdown = ref(5)
 let intervalId: number | null = null
+const backdropFilter = ref('blur(5px)')
 
-// const router = useRouter()
+const validateForm = () => {
+  const errors = []
 
-const handleOrderClick = (event: Event) => {
-  const newAddress = {
-    street: street.value,
-    apartament: Number(apartament.value),
-    entace: Number(entrance.value),
-    floor: Number(floor.value),
-    comment: comment.value
+  if (props.deliveryMethod === 'courier') {
+    if (!street.value) errors.push('Street is required')
+    if (!apartament.value) errors.push('Apartment is required')
   }
 
-  const newRecipient = {
-    surname: surname.value,
-    name: name.value,
-    phone: Number(phone.value),
-    email: email.value
+  if (!phone.value.match(/^\+?[1-9]\d{9,14}$/)) {
+    errors.push('Invalid phone number format')
   }
 
-  orderingStore.saveAddress(newAddress)
-  orderingStore.saveRecipient(newRecipient)
+  if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    errors.push('Invalid email format')
+  }
 
-  console.log('Saved address:', orderingStore.deliveryAddress)
-  console.log('Saved recipient:', orderingStore.deliveryRecipient)
+  if (errors.length > 0) {
+    throw new Error(errors.join('\n'))
+  }
+}
 
+const resetForm = () => {
+  street.value = ''
+  apartament.value = ''
+  entrance.value = ''
+  floor.value = ''
+  comment.value = ''
+  surname.value = ''
+  name.value = ''
+  phone.value = ''
+  email.value = ''
+}
+
+const handleOrderClick = async (event: Event) => {
   event.preventDefault()
-  dialog.value = true
-  countdown.value = 5
-  intervalId = setInterval(() => {
-    countdown.value--
-    if (countdown.value <= 0) {
-      clearInterval(intervalId!)
-      // router.push('/successPage')
-      window.location.href = 'successPage'
+
+  try {
+    // Валидация данных
+    validateForm()
+
+    const deliveryData: any = {
+      recipient: {
+        surname: surname.value,
+        name: name.value,
+        phone: Number(phone.value),
+        email: email.value
+      },
+      paymentMethod: selectedMethod.value,
+      deliveryDate: date.value,
+      deliveryTime: model.value
     }
-  }, 1000)
+
+    if (props.deliveryMethod === 'courier') {
+      deliveryData.deliveryAddress = {
+        street: street.value,
+        apartament: Number(apartament.value),
+        entace: Number(entrance.value),
+        floor: Number(floor.value),
+        comment: comment.value
+      }
+      orderingStore.saveAddress(deliveryData.deliveryAddress)
+    }
+
+    orderingStore.saveRecipient(deliveryData.recipient)
+
+    // Сохранение заказа
+    await orderStore.saveOrder(deliveryData)
+    
+    // Очистка корзины
+    cartStore.products = []
+
+    // Показ диалога
+    dialog.value = true
+
+    // Таймер перенаправления
+    countdown.value = 5
+    intervalId = setInterval(() => {
+      countdown.value--
+      if (countdown.value <= 0) {
+        clearInterval(intervalId!)
+        router.push('/successPage')
+      }
+    }, 1000)
+
+    // Сброс формы
+    resetForm()
+  } catch (error) {
+    alert(error.message)
+    console.error('Ошибка оформления заказа:', error)
+  }
 }
 </script>
 

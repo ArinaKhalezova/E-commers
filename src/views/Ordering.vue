@@ -11,6 +11,7 @@
 <script setup lang="ts">
 import OrderCost from '@/components/Ordering/OrderCost.vue';
 import OrderingInfo from '@/components/Ordering/OrderingInfo.vue'
+
 </script>
 
 <style module>
@@ -23,7 +24,7 @@ import OrderingInfo from '@/components/Ordering/OrderingInfo.vue'
 .ordering_title {
   margin: 20px 0;
 }
-.ordering_item_1 order_promocode{
+.ordering_item_1 .order_promocode{
   display: none;
 }
 @media (min-width: 1024px) {

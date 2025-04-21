@@ -1,28 +1,34 @@
 <template>
   <q-dialog :model-value="modelValue" @update:model-value="handleModalUpdate">
-    <q-card class="auth-modal">
+    <div :class="$style.auth_modal">
       <!-- Шаг 1: Выбор действия -->
-      <div v-if="currentStep === 'choice'" class="auth-choice">
-        <q-btn unelevated class="auth-btn" color="black" @click="currentStep = 'login'">
+      <div v-if="currentStep === 'choice'" :class="$style.auth_choice">
+        <q-btn
+          unelevated
+          :class="$style.auth_btn"
+          outline
+          color="white"
+          text-color="black"
+          @click="currentStep = 'login'"
+        >
           Login to your account →
         </q-btn>
 
-        <div class="separator">or</div>
-        <q-btn unelevated class="auth-btn" color="black" @click="currentStep = 'register'">
+        <q-btn unelevated :class="$style.auth_btn" color="black" @click="currentStep = 'register'">
           Create new account →
         </q-btn>
       </div>
 
       <!-- Шаг 2: Форма входа -->
-      <div v-if="currentStep === 'login'" class="auth-form">
-        <h2 class="modal-title">Login to your account</h2>
+      <div v-if="currentStep === 'login'" :class="$style.auth_form">
+        <h2 :class="$style.modal_title">Login to your account</h2>
 
         <q-form @submit.prevent="handleLogin">
           <q-input
             v-model="loginForm.email"
             label="Phone number/Email address"
             outlined
-            class="auth-input"
+            :class="$style.auth_input"
             :rules="[(val) => !!val || 'Field is required']"
           />
 
@@ -31,27 +37,41 @@
             label="Password"
             type="password"
             outlined
-            class="auth-input"
+            :class="$style.auth_input"
             :rules="[(val) => !!val || 'Field is required']"
           />
 
-          <div class="auth-buttons">
+          <div :class="$style.auth_buttons">
             <q-btn unelevated label="Back" color="grey-7" flat @click="currentStep = 'choice'" />
-            <q-btn unelevated label="Login →" type="submit" color="black" class="auth-submit-btn" />
+            <q-btn
+              unelevated
+              label="Login →"
+              type="submit"
+              color="black"
+              :class="$style.auth_submit_btn"
+            />
           </div>
         </q-form>
       </div>
 
       <!-- Шаг 3: Форма регистрации -->
-      <div v-if="currentStep === 'register'" class="auth-form">
-        <h2 class="modal-title">Create your account</h2>
+      <div v-if="currentStep === 'register'" :class="$style.auth_form">
+        <h2 :class="$style.modal_title">Create your account</h2>
 
         <q-form @submit.prevent="handleRegister">
           <q-input
             v-model="registerForm.email"
             label="Email address"
             outlined
-            class="auth-input"
+            :class="$style.auth_input"
+            :rules="[(val) => !!val || 'Field is required']"
+          />
+
+          <q-input
+            v-model="registerForm.phone"
+            label="Phone number"
+            outlined
+            :class="$style.auth_input"
             :rules="[(val) => !!val || 'Field is required']"
           />
 
@@ -60,7 +80,7 @@
             label="Password"
             type="password"
             outlined
-            class="auth-input"
+            :class="$style.auth_input"
             :rules="[(val) => !!val || 'Field is required']"
           />
 
@@ -69,23 +89,23 @@
             label="Confirm Password"
             type="password"
             outlined
-            class="auth-input"
+            :class="$style.auth_input"
             :rules="[(val) => !!val || 'Field is required']"
           />
-          
-          <div class="auth-buttons">
+
+          <div :class="$style.auth_buttons">
             <q-btn unelevated label="Back" color="grey-7" flat @click="currentStep = 'choice'" />
             <q-btn
               unelevated
               label="Create →"
               type="submit"
               color="black"
-              class="auth-submit-btn"
+              :class="$style.auth_submit_btn"
             />
           </div>
         </q-form>
       </div>
-    </q-card>
+    </div>
   </q-dialog>
 </template>
 
@@ -110,6 +130,7 @@ const loginForm = ref({
 
 const registerForm = ref({
   email: '',
+  phone: '',
   password: '',
   passwordConfirm: ''
 })
@@ -121,6 +142,10 @@ const handleModalUpdate = (value: boolean) => {
 
 const handleLogin = async () => {
   try {
+    if (!loginForm.value.email || !loginForm.value.password) {
+      throw new Error('Заполните все поля')
+    }
+
     await authStore.login({
       email: loginForm.value.email,
       password: loginForm.value.password
@@ -130,6 +155,7 @@ const handleLogin = async () => {
     router.push(redirect?.toString() || '/account')
   } catch (error) {
     alert(error.message)
+    console.error('Ошибка входа:', error)
   } finally {
     loginForm.value.password = ''
   }
@@ -137,6 +163,12 @@ const handleLogin = async () => {
 
 const handleRegister = async () => {
   try {
+    if (!registerForm.value.email.includes('@')) {
+      throw new Error('Некорректный email')
+    }
+    if (registerForm.value.password.length < 6) {
+      throw new Error('Пароль должен содержать минимум 6 символов')
+    }
     if (registerForm.value.password !== registerForm.value.passwordConfirm) {
       throw new Error('Пароли не совпадают')
     }
@@ -152,6 +184,7 @@ const handleRegister = async () => {
     router.push(redirect?.toString() || '/account')
   } catch (error) {
     alert(error.message)
+    console.error('Ошибка регистрации:', error)
   } finally {
     registerForm.value.password = ''
     registerForm.value.passwordConfirm = ''
@@ -159,49 +192,29 @@ const handleRegister = async () => {
 }
 </script>
 
-<style>
-.auth-modal {
-  width: 400px;
-  padding: 20px;
+<style module>
+.auth_modal {
+  background-color: white;
+  min-width: 505px;
+  padding: 25px;
+  border: 1px solid none;
   border-radius: 25px;
 }
 
-.modal-title {
+.modal_title {
   font-size: 20px;
   margin: 0 0 20px;
-  text-align: center;
+  font-weight: 700;
+  text-align: left;
 }
 
-.auth-choice {
+.auth_choice {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.separator {
-  text-align: center;
-  margin: 10px 0;
-  position: relative;
-}
-
-.separator::before,
-.separator::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 45%;
-  height: 1px;
-  background: #ddd;
-}
-
-.separator::before {
-  left: 0;
-}
-.separator::after {
-  right: 0;
-}
-
-.auth-btn {
+.auth_btn {
   padding: 12px;
   font-size: 16px;
   border-radius: 25px;
@@ -213,24 +226,24 @@ const handleRegister = async () => {
   border-radius: 25px;
 }
 
-.auth-input .q-field__native {
+.auth_input .q-field__native {
   padding: 8px 16px;
 }
 
-.auth-form {
+.auth_form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.auth-buttons {
+.auth_buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 15px;
 }
 
-.auth-submit-btn {
+.auth_submit_btn {
   padding: 8px 24px;
   border-radius: 25px;
 }

@@ -8,7 +8,12 @@
     <div :class="$style.order_information">
       <h1 style="font-size: 40px">Your order information</h1>
       <div>
-        <h2>Your tracking number: <span style="color: green; font-weight: 900">0039762F</span></h2>
+        <h2>
+          Order ID: <span style="color: green; font-weight: 900">{{ lastOrder?.id || 'N/A' }}</span>
+        </h2>
+        <h2>
+          Tracking number: <span style="color: green; font-weight: 900">{{ trackingNumber }}</span>
+        </h2>
         <p>
           <span style="color: red">Please remember</span> the
           <span style="color: red">tracking number</span>, as this page will be unavailable soon.
@@ -55,33 +60,41 @@
       <br />
       <h2>
         Total cost:
-        <span style="color: green; font-weight: 900">{{ '$' + cartStore.totalCostProducts }}</span>
+        <span style="color: green; font-weight: 900">
+          {{ lastOrder ? `$${lastOrder.total.toFixed(2)}` : 'N/A' }}
+        </span>
       </h2>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { TProduct } from '@/data/products.types'
 import { useCartStore } from '@/stores/cartStore'
 import { useOrderingStore } from '@/stores/orderingStore'
+import { useOrderStore } from '@/stores/orderStore'
+import { computed } from 'vue'
 
 const cartStore = useCartStore()
 const orderingStore = useOrderingStore()
+const orderStore = useOrderStore()
 
-console.log('Address from store:', orderingStore.deliveryAddress)
-console.log('Recipient from store:', orderingStore.deliveryRecipient)
+// Получаем последний заказ
+const lastOrder = computed(() => {
+  const orders = orderStore.getOrders()
+  return orders.length > 0 ? orders[orders.length - 1] : null
+})
 
-const props = defineProps<{
-  product: TProduct
-}>()
+// Генерируем tracking number на основе ID заказа
+const trackingNumber = computed(() => {
+  if (!lastOrder.value) return '0039762F' // fallback
+  return lastOrder.value.id.slice(0, 8).toUpperCase()
+})
 </script>
 
 <style module>
 .order_wrapper {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   margin: 0 20px;
 }
 .order_wrapper_text {

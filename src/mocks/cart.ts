@@ -35,16 +35,19 @@ export const cart = [
   }),
 
   http.post(urls.serverUrl + urls.products, async ({ request }) => {
-    const mockCart = loadCartFromLocalStorage()
     const newProduct = (await request.json()) as TCartItem
-    const existingProduct =
-      mockCart.find((p) => p.sku === newProduct.sku) &&
-      mockCart.find((k) => k.color === newProduct.color) &&
-      mockCart.find((m) => m.size === newProduct.size) 
+    const existingProduct = mockCart.find(
+      (p) => p.sku === newProduct.sku && p.color === newProduct.color && p.size === newProduct.size
+    )
+
     if (existingProduct) {
       existingProduct.quantity += 1
     } else {
-      mockCart.push({ ...newProduct, quantity: 1 })
+      mockCart.push({
+        ...newProduct,
+        coverImage: newProduct.coverImage || '',
+        quantity: 1
+      })
     }
 
     saveCartToLocalStorage(mockCart)
@@ -74,7 +77,6 @@ export const cart = [
         saveCartToLocalStorage(updatedCart)
       }
     }
-
 
     return HttpResponse.json({ success: true })
   })

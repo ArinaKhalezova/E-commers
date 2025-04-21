@@ -1,8 +1,11 @@
 import { defineStore } from 'pinia'
+import type { Order } from './orderStore'
 
 interface User {
   email: string
   password: string
+  phone?: string
+  orders?: Order[] 
 }
 
 export const useAuthStore = defineStore('auth', {
@@ -16,9 +19,45 @@ export const useAuthStore = defineStore('auth', {
     initAuth() {
       const user = localStorage.getItem('user')
       if (user) {
-        this.user = JSON.parse(user)
+        const parsedUser = JSON.parse(user)
+        // Ensure orders exists and is an array
+        if (!Array.isArray(parsedUser.orders)) {
+          parsedUser.orders = []
+        }
+        // Update the users list to keep data in sync
+        const users = JSON.parse(localStorage.getItem('users') || '[]')
+        const userIndex = users.findIndex((u: User) => u.email === parsedUser.email)
+        if (userIndex !== -1 && Array.isArray(users[userIndex].orders)) {
+          parsedUser.orders = users[userIndex].orders
+        }
+        this.user = parsedUser
         this.isAuthenticated = true
+        localStorage.setItem('user', JSON.stringify(parsedUser))
       }
+    },
+
+    login(credentials: { email: string; password: string }) {
+      const users = JSON.parse(localStorage.getItem('users') || '[]')
+      const user = users.find(
+        (u) => u.email === credentials.email && u.password === credentials.password
+      )
+
+      if (!user) throw new Error('Invalid credentials')
+
+      // Миграция гостевых заказов
+      const guestOrders = JSON.parse(localStorage.getItem('guestOrders') || '[]')
+      if (guestOrders.length > 0) {
+        user.orders = [...(user.orders || []), ...guestOrders]
+        localStorage.setItem(
+          'users',
+          JSON.stringify(users.map((u) => (u.email === user.email ? user : u)))
+        )
+        localStorage.removeItem('guestOrders')
+      }
+
+      this.user = user
+      this.isAuthenticated = true
+      localStorage.setItem('user', JSON.stringify(user))
     },
 
     register(userData: User) {
@@ -28,27 +67,17 @@ export const useAuthStore = defineStore('auth', {
         throw new Error('Пользователь с таким email уже существует')
       }
 
-      users.push(userData)
-      localStorage.setItem('users', JSON.stringify(users))
-
-      this.user = userData
-      this.isAuthenticated = true
-      localStorage.setItem('user', JSON.stringify(userData))
-    },
-
-    login(credentials: { email: string; password: string }) {
-      const users = JSON.parse(localStorage.getItem('users') || '[]')
-      const user = users.find(
-        (u: User) => u.email === credentials.email && u.password === credentials.password
-      )
-
-      if (!user) {
-        throw new Error('Неверный email или пароль')
+      const newUser = {
+        ...userData,
+        orders: []
       }
 
-      this.user = user
+      users.push(newUser)
+      localStorage.setItem('users', JSON.stringify(users))
+
+      this.user = newUser
       this.isAuthenticated = true
-      localStorage.setItem('user', JSON.stringify(user))
+      localStorage.setItem('user', JSON.stringify(newUser))
     },
 
     logout() {

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-interface DeliveryAddress {
+export interface DeliveryAddress {
   street: string
   apartament: number
   entace: number
@@ -9,10 +9,10 @@ interface DeliveryAddress {
   comment: string
 }
 
-interface DeliveryRecipient {
+export interface DeliveryRecipient {
   surname: string
   name: string
-  phone: number
+  phone: string
   email: string
 }
 

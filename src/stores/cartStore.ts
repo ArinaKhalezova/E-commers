@@ -30,9 +30,13 @@ export const useCartStore = defineStore('cartStore', () => {
 
   loadCartFromLocalStorage()
 
-  watch(products, (newProducts) => {
-    saveCartToLocalStorage()
-  }, {deep: true})
+  watch(
+    products,
+    (newProducts) => {
+      saveCartToLocalStorage()
+    },
+    { deep: true }
+  )
 
   // Getters
   const totalCountProducts = computed(() => products.value.length)
@@ -99,9 +103,17 @@ export const useCartStore = defineStore('cartStore', () => {
     await fetch(urls.serverUrl + urls.products, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...product, sku })
+      body: JSON.stringify({
+        ...product,
+        sku,
+        coverImage: product.coverImage || ''
+      })
     })
-    products.value.push({ ...product, sku })
+    products.value.push({
+      ...product,
+      sku,
+      coverImage: product.coverImage || ''
+    })
     await fetchProducts()
   }
 
@@ -139,35 +151,3 @@ export const useCartStore = defineStore('cartStore', () => {
     fetchProducts
   }
 })
-
-// Options API
-// export const useCartStore = defineStore('cartStore', {
-//   state: () => ({
-//     products: JSON.parse(localStorage.getItem('products') || '[]')
-//   }),
-
-//   getters: {
-//     totalCountProducts(): number {
-//       return this.products.length
-//     }
-//   },
-
-//   actions: {
-//     deleteProduct(id: number) {
-//       this.products = this.products.filter((el) => el.id !== id)
-//       this.saveProducts()
-//     },
-
-//     addProduct(object: any) {
-//       this.products.push({ ...object })
-//       this.saveProducts()
-
-//       console.log('Товар добавлен:', object)
-//       console.log('Все товары в корзине:', this.products)
-//     },
-
-//     saveProducts() {
-//       localStorage.setItem('products', JSON.stringify(this.products))
-//     }
-//   }
-// })

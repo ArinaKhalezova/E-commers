@@ -17,8 +17,12 @@
           <span :class="$style.info_value">{{ authStore.user.phone }}</span>
         </div>
       </div>
+      <!-- 
+      <div :class="$style.user_card"><AccountEmails /></div> -->
+    </div>
 
-      <div :class="$style.user_card"><AccountEmails /></div>
+    <div :class="$style.cart_card">
+      <OrderHistory />
     </div>
   </div>
 </template>
@@ -26,7 +30,7 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
-import AccountEmails from '@/components/Account/AccountEmails.vue'
+import OrderHistory from '@/components/Account/OrderHistory.vue'
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -48,6 +52,7 @@ const handleLogout = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
   margin-bottom: 28px;
   padding: 0 24px;
 }
@@ -64,7 +69,12 @@ const handleLogout = () => {
   background-color: var(--light-background-color);
   border-radius: 20px;
   padding: 24px;
-  margin-bottom: 20px;
+  margin: 20px 0;
+}
+.cart_card {
+  border-radius: 20px;
+  padding: 24px;
+  margin: 20px 0;
 }
 
 .card_title {
@@ -114,12 +124,6 @@ const handleLogout = () => {
 
   .account_header h1 {
     font-size: 48px;
-  }
-
-  .account_content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
   }
 
   .user_card {
