@@ -1,4 +1,4 @@
-import { urls } from '@/api/baseUrls'
+import { urls } from '@/services/baseUrls'
 import type { TProduct } from '@/data/products.types'
 import { watch } from 'vue'
 import { defineStore } from 'pinia'

@@ -69,21 +69,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import SearchBar from './SearchBar.vue'
 import BurgerMenu from './BurgerMenu.vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../stores/auth'
 import AuthModal from './AuthModal.vue'
 
-const leftDrawerOpen = ref(false)
-
 const router = useRouter()
 const authStore = useAuthStore()
-
-const toggleLeftDrawer = () => {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
 
 const handleAccountClick = () => {
   if (authStore.isAuthenticated) {
