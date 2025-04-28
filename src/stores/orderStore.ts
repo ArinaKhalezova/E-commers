@@ -7,7 +7,7 @@ import { ref } from 'vue'
 
 export interface OrderItem {
   sku: string
-  name: string
+  title: string
   color: string
   size: string
   quantity: number
@@ -39,49 +39,76 @@ export const useOrderStore = defineStore('orderStore', () => {
       (now.getMonth() + 1).toString().padStart(2, '0'),
       now.getDate().toString().padStart(2, '0')
     ].join('')
-    
-    const todayOrders = orders.value.filter(order => 
-      new Date(order.date).toDateString() === now.toDateString()
+
+    const todayOrders = orders.value.filter(
+      (order) => new Date(order.date).toDateString() === now.toDateString()
     )
-    
+
     const orderNumber = todayOrders.length + 1
     return `${datePart}-${orderNumber.toString().padStart(3, '0')}`
   }
 
   const saveOrder = async (deliveryData: any) => {
-    const newOrder: Order = {
-      id: generateOrderId(),
-      date: new Date(),
-      items: cartStore.products.map((p) => ({
-        sku: p.sku,
-        name: p.name,
-        color: p.color,
-        size: p.size,
-        quantity: p.quantity,
-        cost: p.cost,
-        coverImage: p.coverImage || ''
-      })),
-      total: cartStore.totalCostProducts,
-      ...deliveryData
+    try {
+      const newOrder: Order = {
+        id: generateOrderId(),
+        date: new Date(),
+        items: cartStore.products.map((product) => {
+          const variant = product.aspects?.[0]?.variants?.find(
+            (v) => v.sku === product.sku || v.sizes?.some((s) => s.sku === product.sku)
+          )
+
+          // Находим размер, если есть
+          const sizeVariant = variant?.sizes?.find((s) => s.sku === product.sku)
+
+          return {
+            sku: product.sku,
+            title: product.title,
+            color: product.color || variant?.color || '',
+            size: product.size || sizeVariant?.size || '',
+            quantity: product.quantity,
+            cost: product.cost,
+            coverImage: variant?.coverImage || product.coverImage || product.product_img || ''
+          }
+        }),
+        total: cartStore.totalCostProducts,
+        ...deliveryData
+      }
+
+      // Сохраняем заказ в общее хранилище
+      orders.value.push(newOrder)
+      localStorage.setItem('orders', JSON.stringify(orders.value))
+
+      // Для авторизованных пользователей
+      if (authStore.isAuthenticated && authStore.user) {
+        const updatedOrders = [...(authStore.user.orders || []), newOrder]
+        authStore.updateUserOrders(updatedOrders)
+      }
+      // Для гостей
+      else {
+        const guestOrders = JSON.parse(localStorage.getItem('guestOrders') || '[]')
+        guestOrders.push(newOrder)
+        localStorage.setItem('guestOrders', JSON.stringify(guestOrders))
+      }
+
+      // Очистка корзины
+      cartStore.products = []
+      localStorage.setItem('cart', '[]')
+
+      return newOrder
+    } catch (error) {
+      console.error('Error saving order:', error)
+      throw error
     }
-
-    // Отправляем заказ на сервер
-    await fetch(urls.serverUrl + urls.orders, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newOrder)
-    })
-
-    // Очищаем корзину
-    cartStore.products = []
-    localStorage.setItem('cart', '[]')
-
-    return newOrder
   }
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch(urls.serverUrl + urls.orders)
+      const response = await fetch(urls.serverUrl + urls.orders, {
+        headers: {
+          Authorization: `Bearer ${authStore.token}`
+        }
+      })
       if (!response.ok) throw new Error('Failed to fetch orders')
       orders.value = await response.json()
     } catch (error) {

@@ -7,58 +7,58 @@
       <p>No orders found</p>
     </div>
 
-    <div v-else class="q-gutter-y-md">
-      <q-card v-for="order in sortedOrders" :key="order.id" :class="$style.order_card">
-        <q-card-section>
-          <div :class="$style.order_header">
-            <div :class="$style.order_meta">
-              <div class="text-h6">Order #{{ order.id }}</div>
-              <div class="text-caption text-grey-7">
-                {{ formatDate(order.date) }}
+    <div v-else :class="$style.orders_list">
+      <div v-for="order in sortedOrders" :key="order.id" :class="$style.order_card">
+        <div :class="$style.order_header">
+          <div :class="$style.order_meta">
+            <h3 :class="$style.order_number">Order #{{ order.id }}</h3>
+            <p :class="$style.order_date">{{ formatDate(order.date) }}</p>
+          </div>
+          <div :class="$style.order_total">${{ order.total || 0 }}</div>
+        </div>
+
+        <hr :class="$style.order_separator" />
+
+        <div :class="$style.order_items">
+          <div v-for="item in order.items" :key="item.sku" :class="$style.order_item">
+            <div :class="$style.item_image_wrapper">
+              <img
+                :src="getImageUrl(item.coverImage)"
+                :class="$style.item_image"
+                :alt="item.title"
+              />
+            </div>
+            <div :class="$style.item_info">
+              <h4 :class="$style.item_title">{{ item.title }}</h4>
+              <div :class="$style.item_characteristics">
+                <q-chip :outline="getOutline(item.color)" :color="getColor(item.color)"></q-chip>
+                <q-chip color="gray" text-color="black">{{ item.size }}</q-chip>
+              </div>
+              <div :class="$style.item_details">
+                <span>Cost: ${{ item.cost.toFixed(2) }}</span>
+                <span>Quantity: {{ item.quantity }}</span>
               </div>
             </div>
-            <div class="text-h6">${{ order.total || 0 }}</div>
           </div>
-
-          <q-separator class="q-my-md" />
-
-          <div class="row q-col-gutter-md">
-            <div v-for="item in order.items" :key="item.sku" class="col-12 col-md-6">
-              <div class="row items-center q-gutter-sm">
-                <q-img
-                  :src="getImageUrl(item?.coverImage)"
-                  width="80px"
-                  height="80px"
-                  :class="$style.item_image"
-                />
-                <div>
-                  <div class="text-weight-bold">{{ item.name }}</div>
-                  <div class="text-caption">Color: {{ item.color }} | Size: {{ item.size }}</div>
-                  <div class="text-caption">
-                    Qty: {{ item.quantity }} × ${{ item.cost.toFixed(2) }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </q-card-section>
-      </q-card>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useOrderStore } from '@/stores/orderStore'
 import { useAuthStore } from '@/stores/auth'
-const authStore = useAuthStore()
 
+const authStore = useAuthStore()
 const orderStore = useOrderStore()
+
 const orders = computed(() => {
   if (authStore.isAuthenticated) {
     return authStore.user?.orders || []
   }
-  return orderStore.getOrders()
+  return JSON.parse(localStorage.getItem('guestOrders') || '[]')
 })
 
 const sortedOrders = computed(() =>
@@ -71,8 +71,30 @@ const sortedOrders = computed(() =>
 
 const getImageUrl = (path?: string) => {
   if (!path) return ''
-  if (path.startsWith('http')) return path
-  return new URL(`/src/assets/${path}`, import.meta.url).href
+  if (path.startsWith('http') || path.startsWith('/')) return path
+  return path
+}
+
+const getOutline = (color: string): boolean => {
+  switch (color) {
+    case 'white':
+      return true
+    default:
+      return false
+  }
+}
+
+const getColor = (color: string): string => {
+  switch (color) {
+    case 'lightBlue':
+      return 'blue-4'
+    case 'blue':
+      return 'blue-9'
+    case 'white':
+      return 'grey'
+    default:
+      return color
+  }
 }
 
 const formatDate = (date: Date | string) => {
@@ -83,24 +105,53 @@ const formatDate = (date: Date | string) => {
     day: 'numeric'
   })
 }
+
+onMounted(async () => {
+  if (authStore.isAuthenticated) {
+    await orderStore.fetchOrders()
+  }
+})
 </script>
 
 <style module>
 .order_history {
-  margin-top: 40px;
+  padding: 20px;
+  margin: 0 auto;
 }
 
 .section_title {
+  font-family: 'Satoshi', sans-serif;
   font-size: 24px;
-  margin-bottom: 20px;
+  font-weight: 900;
+  margin-bottom: 30px;
   color: var(--title-color);
+}
+
+.empty_state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--subtitle-color);
+}
+
+.empty_state p {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.orders_list {
+  display: grid;
+  gap: 20px;
 }
 
 .order_card {
   background: var(--light-background-color);
   border-radius: 16px;
-  margin-bottom: 20px;
   padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .order_header {
@@ -108,52 +159,80 @@ const formatDate = (date: Date | string) => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border-color);
 }
 
 .order_meta {
   display: flex;
-  gap: 12px;
-  align-items: center;
-  font-size: 14px;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.order_number {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  margin: 0;
 }
 
 .order_date {
+  font-size: 14px;
   color: var(--subtitle-color);
+  margin: 0;
 }
 
 .order_total {
-  font-weight: 700;
-  font-size: 16px;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.order_separator {
+  border: none;
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 16px 0;
 }
 
 .order_items {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  gap: 20px;
 }
 
 .order_item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 80px 1fr;
   gap: 16px;
-  padding: 12px 0;
+  align-items: center;
+}
+
+.item_image_wrapper {
+  width: 80px;
+  height: 80px;
 }
 
 .item_image {
-  width: 80px;
-  height: 80px;
-  border-radius: 10px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  border-radius: 8px;
 }
 
 .item_info {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.item_name {
-  margin: 0 0 8px;
+.item_title {
+  font-family: 'Satoshi', sans-serif;
   font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.item_characteristics {
+  display: flex;
+  gap: 8px;
 }
 
 .item_details {
@@ -163,9 +242,18 @@ const formatDate = (date: Date | string) => {
   color: var(--subtitle-color);
 }
 
-.empty_state {
-  padding: 40px;
-  text-align: center;
-  color: var(--subtitle-color);
+@media (min-width: 768px) {
+  .order_items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .order_item {
+    grid-template-columns: 100px 1fr;
+  }
+
+  .item_image_wrapper {
+    width: 100px;
+    height: 100px;
+  }
 }
 </style>

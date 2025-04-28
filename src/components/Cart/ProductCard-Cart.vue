@@ -60,6 +60,7 @@ const deleteProduct = async () => {
 const goToProduct = (id: number) => {
   router.push({ name: 'productPage', params: { id } })
 }
+
 const getImgByColor = computed(() => {
   if (!props.product) {
     return ''

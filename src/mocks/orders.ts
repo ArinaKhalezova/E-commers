@@ -2,13 +2,14 @@ import { http, HttpResponse } from 'msw'
 import { urls } from '../services/baseUrls'
 
 type TOrderItem = {
+  id: number
   sku: string
-  name: string
+  title: string
+  cost: number
   color: string
   size: string
-  quantity: number
-  cost: number
   coverImage: string
+  quantity: number
 }
 
 type TOrder = {

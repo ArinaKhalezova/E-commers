@@ -5,7 +5,7 @@ import { products } from '@/data/products'
 type TCartItem = {
   id: number
   sku: string
-  name: string
+  title: string
   cost: number
   color: string
   size: string

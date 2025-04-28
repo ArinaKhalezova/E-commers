@@ -9,7 +9,8 @@
       <h1 style="font-size: 40px">Your order information</h1>
       <div>
         <h2>
-          Tracking number: <span style="color: green; font-weight: 900">{{ lastOrder?.id || 'N/A' }}</span>
+          Tracking number:
+          <span style="color: green; font-weight: 900">{{ lastOrder?.id || 'N/A' }}</span>
         </h2>
         <p>
           <span style="color: red">Please remember</span> the
@@ -18,15 +19,16 @@
       </div>
       <div :class="$style.order_products">
         <h3 style="font-size: 24px">Your order</h3>
-        <div v-for="product in cartStore.products" :key="product.id" :class="$style.products_items">
+        <div v-for="item in lastOrder?.items" :key="item.sku" :class="$style.products_items">
           <div :class="$style.products_img">
-            <img :src="product.product_img" :alt="product.title" />
+            <img :src="getImageUrl(item.coverImage)" :alt="item.title" />
           </div>
           <div :class="$style.products_info">
-            <h2>{{ product.title }}</h2>
-            <p>{{ 'Size: ' + product.size }}</p>
-            <p>{{ 'Color: ' + product.color }}</p>
-            <p>{{ 'Quantity: ' + product.quantity }}</p>
+            <h2>{{ item.title }}</h2>
+            <p>Size: {{ item.size }}</p>
+            <p>Color: {{ item.color }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Price: ${{ item.cost.toFixed(2) }}</p>
           </div>
         </div>
       </div>
@@ -74,15 +76,21 @@ import { computed, onMounted } from 'vue'
 
 const cartStore = useCartStore()
 const orderingStore = useOrderingStore()
-const orderStore = useOrderStore() 
+const orderStore = useOrderStore()
 
 const lastOrder = computed(() => {
-  const orders = orderStore.getOrders() 
+  const orders = orderStore.getOrders()
   return orders.length > 0 ? orders[orders.length - 1] : null
 })
 
+const getImageUrl = (path?: string) => {
+  if (!path) return ''
+  if (path.startsWith('http') || path.startsWith('/')) return path
+  return path
+}
+
 onMounted(async () => {
-  await orderStore.fetchOrders() 
+  await orderStore.fetchOrders()
 })
 </script>
 

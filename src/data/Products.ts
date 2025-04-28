@@ -236,6 +236,7 @@ export const products = [
       {
         variants: [
           {
+            coverImage: product6,
             color: 'black',
             sku: 'TSHIRT-BLACK',
             sizes: [
@@ -244,6 +245,7 @@ export const products = [
             ]
           },
           {
+            coverImage: product6,
             color: 'yellow',
             sku: 'TSHIRT-YELLOW',
             sizes: [
@@ -252,11 +254,13 @@ export const products = [
             ]
           },
           {
+            coverImage: product6,
             color: 'pink',
             sku: 'TSHIRT-PINK',
             sizes: [{ size: 'xsmall', sku: 'TSHIRT-PINK-XS', availability: 'inStock' }]
           },
           {
+            coverImage: product6,
             color: 'green',
             sku: 'TSHIRT-GREEN',
             sizes: [{ size: 'large', sku: 'TSHIRT-GREEN-L', availability: 'inStock' }]
@@ -265,6 +269,7 @@ export const products = [
       }
     ]
   },
+  //так как далее не прописаны coverImage, то фотки не отображаются в большой карточке
   {
     id: 7,
     product_img: product7,

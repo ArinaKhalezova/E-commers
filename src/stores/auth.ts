@@ -80,6 +80,21 @@ export const useAuthStore = defineStore('auth', {
       localStorage.setItem('user', JSON.stringify(newUser))
     },
 
+     updateUserOrders(orders: Order[]) {
+      if (!this.user) return
+      
+      this.user.orders = orders
+      localStorage.setItem('user', JSON.stringify(this.user))
+      
+      // Обновляем в общем списке users
+      const users = JSON.parse(localStorage.getItem('users') || '[]')
+      const userIndex = users.findIndex((u: User) => u.email === this.user?.email)
+      if (userIndex !== -1) {
+        users[userIndex].orders = orders
+        localStorage.setItem('users', JSON.stringify(users))
+      }
+    },
+
     logout() {
       this.user = null
       this.isAuthenticated = false

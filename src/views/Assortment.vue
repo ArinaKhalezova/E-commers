@@ -1,7 +1,7 @@
 <template>
-  <div :class="$style.assortment_container" v-if="!loading">
+  <div v-if="!loading">
     <Breadcrumbs :breadcrumbs="breadcrumbs" />
-    <div :class="$style.assortment">
+    <div>
       <Assortment />
     </div>
   </div>
@@ -25,14 +25,11 @@ onMounted(async () => {
   try {
     loading.value = true
   } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-  finally {
+    console.error('Error fetching data:', error)
+  } finally {
     loading.value = false
   }
 })
 </script>
 
-<style module>
-
-</style>
+<style module></style>
