@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import OrderCost from '@/components/Ordering/OrderCost.vue';
-import OrderingInfo from '@/components/Ordering/OrderingInfo.vue'
+import OrderingInfo from '@/components/Ordering/OrderingHeader.vue'
 
 </script>
 

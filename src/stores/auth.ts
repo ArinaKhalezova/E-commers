@@ -1,11 +1,21 @@
 import { defineStore } from 'pinia'
 import type { Order } from './orderStore'
 
+interface UserAddress {
+  street?: string
+  apartament?: number
+  entace?: number
+  floor?: number
+}
+
 interface User {
   email: string
   password: string
+  surname?: string
+  name?: string
   phone?: string
-  orders?: Order[] 
+  orders?: Order[]
+  address?: UserAddress[]
 }
 
 export const useAuthStore = defineStore('auth', {
@@ -20,11 +30,10 @@ export const useAuthStore = defineStore('auth', {
       const user = localStorage.getItem('user')
       if (user) {
         const parsedUser = JSON.parse(user)
-        // Ensure orders exists and is an array
         if (!Array.isArray(parsedUser.orders)) {
           parsedUser.orders = []
         }
-        // Update the users list to keep data in sync
+        
         const users = JSON.parse(localStorage.getItem('users') || '[]')
         const userIndex = users.findIndex((u: User) => u.email === parsedUser.email)
         if (userIndex !== -1 && Array.isArray(users[userIndex].orders)) {
@@ -80,12 +89,34 @@ export const useAuthStore = defineStore('auth', {
       localStorage.setItem('user', JSON.stringify(newUser))
     },
 
-     updateUserOrders(orders: Order[]) {
+    editUserAccount(userData: User) {
       if (!this.user) return
-      
+
+      const users = JSON.parse(localStorage.getItem('users') || '[]')
+      const userIndex = users.findIndex((u: User) => u.email === this.user?.email)
+
+      if (userIndex === -1) {
+        throw new Error('User not found')
+      }
+
+      const updatedUser = {
+        ...this.user,
+        ...userData
+      }
+
+      this.user = updatedUser
+      localStorage.setItem('user', JSON.stringify(updatedUser))
+
+      users[userIndex] = updatedUser
+      localStorage.setItem('users', JSON.stringify(users))
+    },
+
+    updateUserOrders(orders: Order[]) {
+      if (!this.user) return
+
       this.user.orders = orders
       localStorage.setItem('user', JSON.stringify(this.user))
-      
+
       // Обновляем в общем списке users
       const users = JSON.parse(localStorage.getItem('users') || '[]')
       const userIndex = users.findIndex((u: User) => u.email === this.user?.email)

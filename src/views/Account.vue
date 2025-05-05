@@ -1,27 +1,7 @@
 <template>
   <div :class="$style.account_container">
-    <div :class="$style.account_header">
-      <h1>Account</h1>
-      <q-btn label="Sign Out" color="negative" @click="handleLogout" :class="$style.logout_btn" />
-    </div>
-
-    <div :class="$style.account_content">
-      <div :class="$style.user_card">
-        <h2 :class="$style.card_title">Profile Information</h2>
-        <div :class="$style.info_row">
-          <span :class="$style.info_label">Email:</span>
-          <span :class="$style.info_value">{{ authStore.user?.email }}</span>
-        </div>
-        <div :class="$style.info_row" v-if="authStore.user?.phone">
-          <span :class="$style.info_label">Phone:</span>
-          <span :class="$style.info_value">{{ authStore.user.phone }}</span>
-        </div>
-      </div>
-      <!-- 
-      <div :class="$style.user_card"><AccountEmails /></div> -->
-    </div>
-
     <div :class="$style.cart_card">
+      <AccountCard />
       <OrderHistory />
     </div>
   </div>
@@ -31,7 +11,7 @@
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
 import OrderHistory from '@/components/Account/OrderHistory.vue'
-
+import AccountCard from '@/components/Account/AccountCard.vue'
 const authStore = useAuthStore()
 const router = useRouter()
 
@@ -116,34 +96,5 @@ const handleLogout = () => {
   padding: 0 24px;
 }
 
-@media (min-width: 1024px) {
-  .account_container {
-    margin: 50px 100px;
-    padding: 40px 0;
-  }
 
-  .account_header h1 {
-    font-size: 48px;
-  }
-
-  .user_card {
-    margin-bottom: 0;
-    padding: 32px;
-  }
-
-  .card_title {
-    font-size: 36px;
-    margin-bottom: 28px;
-  }
-
-  .info_row {
-    margin: 20px 0;
-    padding: 16px 0;
-  }
-
-  .info_label,
-  .info_value {
-    font-size: 18px;
-  }
-}
 </style>
