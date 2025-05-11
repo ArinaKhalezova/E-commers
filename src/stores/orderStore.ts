@@ -6,6 +6,7 @@ import type { DeliveryAddress, DeliveryRecipient } from './orderingStore'
 import { ref } from 'vue'
 
 export interface OrderItem {
+  id: number
   sku: string
   title: string
   color: string
@@ -62,6 +63,7 @@ export const useOrderStore = defineStore('orderStore', () => {
           const sizeVariant = variant?.sizes?.find((s) => s.sku === product.sku)
 
           return {
+            id: product.id,
             sku: product.sku,
             title: product.title,
             color: product.color || variant?.color || '',

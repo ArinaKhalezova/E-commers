@@ -20,7 +20,12 @@
         <hr :class="$style.order_separator" />
 
         <div :class="$style.order_items">
-          <div v-for="item in order.items" :key="item.sku" :class="$style.order_item">
+          <div
+            v-for="item in order.items"
+            :key="item.sku"
+            :class="$style.order_item"
+            @click="goToProduct(item.id)"
+          >
             <div :class="$style.item_image_wrapper">
               <img
                 :src="getImageUrl(item.coverImage)"
@@ -47,12 +52,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useOrderStore } from '@/stores/orderStore'
 import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const authStore = useAuthStore()
 const orderStore = useOrderStore()
+
+const products = ref([])
 
 const orders = computed(() => {
   if (authStore.isAuthenticated) {
@@ -68,6 +78,35 @@ const sortedOrders = computed(() =>
     return dateB.getTime() - dateA.getTime()
   })
 )
+
+const goToProduct = (id: number) => {
+  router.push({ name: 'productPage', params: { id } })
+}
+// const getSku = computed(() => {
+//   const skuArr: string[] = []
+//   sortedOrders.value.forEach((order) => {
+//     order.items.forEach((item) => {
+//       skuArr.push(item.sku)
+//     })
+//   })
+//   return skuArr
+// })
+
+// const getId = computed(() => {
+//   const productIds: number[] = []
+
+//   getSku.value.forEach((sku) => {
+//     const product = products.value.find((p) => p.sku === sku)
+//     if (product) {
+//       productIds.push(product.id)
+//     }
+//   })
+
+//   return productIds
+// })
+
+// console.log('ID' + products.value)
+// console.log('ID' + getId.value)
 
 const getImageUrl = (path?: string) => {
   if (!path) return ''
@@ -107,8 +146,18 @@ const formatDate = (date: Date | string) => {
 }
 
 onMounted(async () => {
-  if (authStore.isAuthenticated) {
-    await orderStore.fetchOrders()
+  try {
+    const response = await fetch('http://localhost:5173/assortment')
+    if (!response.ok) {
+      throw new Error('Failed to fetch products')
+    }
+    products.value = await response.json()
+
+    if (authStore.isAuthenticated) {
+      await orderStore.fetchOrders()
+    }
+  } catch (error) {
+    console.error('Error fetching products:', error)
   }
 })
 </script>
@@ -199,6 +248,7 @@ onMounted(async () => {
 }
 
 .order_item {
+  cursor: pointer;
   display: grid;
   grid-template-columns: 80px 1fr;
   gap: 16px;
