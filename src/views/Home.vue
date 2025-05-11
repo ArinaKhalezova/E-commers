@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <Heading />
-    <Products id="products" />
+    <Products id="products" class="products"/>
     <Style></Style>
     <Reviews id="reviews" />
   </div>
@@ -21,9 +21,4 @@ import Reviews from '@/components/Home/Reviews.vue'
   width: auto;
 }
 
-@media (min-width: 1024px) {
-  /* .wrapper {
-    padding: 0 100px;
-  } */
-}
 </style>

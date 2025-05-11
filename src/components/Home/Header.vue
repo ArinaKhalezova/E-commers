@@ -8,7 +8,7 @@
         <img
           alt="SHOP.CO logo"
           :class="$style.logo"
-          src="@/assets/img/logo.png"
+          src="/public/assets/images/logo.png"
           width="126"
           height="18"
         />
@@ -54,23 +54,36 @@
     </div>
     <div :class="$style.menu">
       <a href="/cart">
-        <img alt="Search button" src="@/assets/img/cart.png" width="24" height="24" />
+        <img alt="cart" src="/public/assets/images/cart.png" width="24" height="24" />
       </a>
-      <a href="/account">
-        <img alt="Search button" src="@/assets/img/account.png" width="24" height="24" />
+      <a href="#" @click.prevent="handleAccountClick">
+        <img alt="account" src="/public/assets/images/account.png" width="24" height="24" />
       </a>
     </div>
+
+    <AuthModal
+      :model-value="authStore.showAuthModal"
+      @update:model-value="authStore.showAuthModal = $event"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import SearchBar from './SearchBar.vue'
 import BurgerMenu from './BurgerMenu.vue'
-const leftDrawerOpen = ref(false)
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '../../stores/auth'
+import AuthModal from './AuthModal.vue'
 
-const toggleLeftDrawer = () => {
-  leftDrawerOpen.value = !leftDrawerOpen.value
+const router = useRouter()
+const authStore = useAuthStore()
+
+const handleAccountClick = () => {
+  if (authStore.isAuthenticated) {
+    router.push('/account')
+  } else {
+    authStore.showAuthModal = true
+  }
 }
 </script>
 
@@ -106,6 +119,10 @@ const toggleLeftDrawer = () => {
 
 .burger_menu {
   display: none;
+}
+.menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 @media (max-width: 1024px) {

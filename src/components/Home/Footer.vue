@@ -2,22 +2,22 @@
   <Offer id="offer" />
   <div :class="$style.footer">
     <div :class="$style.footer_media">
-      <img src="/src/assets/img/logo.png" alt="" />
+      <img src="/public/assets/images/logo.png" alt="" />
       <h2>
         We have clothes that suits your style and which you’re proud to wear. From women to men.
       </h2>
       <div :class="$style.media">
         <a href="/" :class="$style.media">
-          <img src="/src/assets/img/twitter.png" alt="" />
+          <img src="/public/assets/images/twitter.png" alt="" />
         </a>
         <a href="/" :class="$style.media">
-          <img src="/src/assets/img/facebook.png" alt="" />
+          <img src="/public/assets/images/facebook.png" alt="" />
         </a>
         <a href="/" :class="$style.media">
-          <img src="/src/assets/img/instagram.png" alt="" />
+          <img src="/public/assets/images/instagram.png" alt="" />
         </a>
         <a href="/" :class="$style.media">
-          <img src="/src/assets/img/github.png" alt="" />
+          <img src="/public/assets/images/github.png" alt="" />
         </a>
       </div>
     </div>

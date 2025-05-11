@@ -2,14 +2,15 @@
   <div :class="$style.breadcrumbs_container">
     <q-breadcrumbs class="text-black" active-color="grey-6">
       <template v-slot:separator>
-        <q-icon
-          size="20px"
-          name="chevron_right"
-          color="grey-6"
-        />
+        <q-icon size="20px" name="chevron_right" color="grey-6" />
       </template>
 
-      <q-breadcrumbs-el v-for="breadcrumb in breadcrumbs" :key="breadcrumb.to" :label="breadcrumb.label" :to="breadcrumb.to" />
+      <q-breadcrumbs-el
+        v-for="breadcrumb in breadcrumbs"
+        :key="breadcrumb.to"
+        :label="breadcrumb.label"
+        :to="breadcrumb.to"
+      />
     </q-breadcrumbs>
   </div>
 </template>
@@ -24,17 +25,15 @@ const props = defineProps({
 </script>
 
 <style module>
-  .breadcrumbs_container {
-    margin: 0 16px 20px 16px;
-    font-size: 14px;
-    font-family: 'Satoshi';
-  }
+.breadcrumbs_container {
+  margin: 0 16px 20px 16px;
+  font-size: 14px;
+  font-family: 'Satoshi';
+}
 
 @media (min-width: 1024px) {
   .breadcrumbs_container {
-    margin: 0 0 36px 100px
+    margin: 0 0 36px 100px;
   }
-
 }
-
 </style>

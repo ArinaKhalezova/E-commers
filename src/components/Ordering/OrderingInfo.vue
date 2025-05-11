@@ -1,0 +1,439 @@
+<template>
+  <div :class="$style.delivery_wrap">
+    <div :class="$style.delivery_address">
+      <h1>Delivery address</h1>
+      <div v-if="deliveryMethod === 'pickup'">
+        <p>Select the receiving address - we will show the date and cost of delivery</p>
+        <ButtonDark text="To choose" style="width: 100%" />
+      </div>
+      <div v-else>
+        <p>Select the delivery address and we'll show you the date and cost of delivery</p>
+
+        <div :class="$style.address_recipient">
+          <div :class="$style.address_items">
+            <div :class="$style.address_item_1">
+              <input
+                type="text"
+                placeholder="Enter your street, house"
+                name="street"
+                required
+                :class="$style.recipient_input"
+                v-model="street"
+              />
+            </div>
+            <div :class="$style.address_item_2">
+              <input
+                type="text"
+                placeholder="Enter your apartment/office"
+                name="apartament"
+                required
+                :class="$style.recipient_input"
+                v-model="apartament"
+              />
+              <input
+                type="text"
+                placeholder="Enter your entrance"
+                name="entrance"
+                required
+                :class="$style.recipient_input"
+                v-model="entrance"
+              />
+            </div>
+            <div :class="$style.address_item_3">
+              <input
+                type="text"
+                placeholder="Enter your floor"
+                name="floor"
+                required
+                :class="$style.recipient_input"
+                v-model="floor"
+              />
+              <input
+                type="text"
+                placeholder="Enter your the apartment number"
+                name="apartment number"
+                required
+                :class="$style.recipient_input"
+                v-model="apartament"
+              />
+            </div>
+            <div :class="$style.address_item_4">
+              <input
+                type="text"
+                placeholder="Enter your comment"
+                name="comment"
+                required
+                :class="$style.recipient_input"
+                v-model="comment"
+              />
+            </div>
+          </div>
+          <div>
+            <p>For example, where exactly to bring the order, the nearest address or landmark</p>
+          </div>
+          <h1>Delivery date and time</h1>
+          <div :class="$style.delivery_date">
+            <div class="q-pa-md">
+              <q-input rounded outlined v-model="date" mask="date" :rules="['date']">
+                <template v-slot:append>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                      <q-date v-model="date">
+                        <div class="row items-center justify-end">
+                          <q-btn v-close-popup label="Save" color="black" flat />
+                        </div>
+                      </q-date>
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+            </div>
+            <q-select rounded outlined v-model="model" :options="options" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div :class="$style.delivery_recipient">
+      <div :class="$style.recipient_header">
+        <h1>Recipient of the order</h1>
+        <q-checkbox
+          v-model="profileMode"
+          label="Use data from my profile"
+          color="black"
+          @click="useProfileData"
+        />
+      </div>
+      <input
+        type="text"
+        placeholder="Enter your surname"
+        name="name"
+        required
+        :class="$style.recipient_input"
+        v-model="surname"
+      />
+      <input
+        type="text"
+        placeholder="Enter your name"
+        name="name"
+        required
+        :class="$style.recipient_input"
+        v-model="name"
+      />
+    </div>
+    <div>
+      <p>
+        We will send a notification about the status of the order to the phone number and email you
+        specified.
+      </p>
+      <p>The courier will contact you by phone to clarify the delivery time.</p>
+      <input
+        type="text"
+        placeholder="Enter your phone"
+        name="phone"
+        required
+        :class="$style.recipient_input"
+        v-model="phone"
+      />
+      <input
+        type="text"
+        placeholder="Enter your email"
+        name="email"
+        required
+        :class="$style.recipient_input"
+        v-model="email"
+      />
+    </div>
+    <div>
+      <p>
+        Subscribe to our news and promotions. You will be among the first to learn about new
+        discounts, promotions and sales
+      </p>
+    </div>
+    <div :class="$style.delivery_payment">
+      <h1>Payment method</h1>
+      <div :class="$style.payment_items">
+        <PlaceholderItem
+          title="Payment in cash"
+          text="Upon receipt of the goods, payment will be made in cash"
+          :selected="selectedMethod === 'cash'"
+          @click="selectedPaymentMethod('cash')"
+        />
+        <PlaceholderItem
+          title="Payment by card or SBP"
+          text="Upon receipt of the goods, payment will be made by card or quick payment system"
+          :selected="selectedMethod === 'card'"
+          @click="selectedPaymentMethod('card')"
+        />
+        <p>At the moment, payment is available only upon receipt of the order</p>
+      </div>
+    </div>
+    <div>
+      <ButtonDark
+        link="#"
+        text="Create an order"
+        :class="$style.order_btn"
+        @click="handleOrderClick"
+      />
+
+      <!-- Диалоговое окно -->
+      <q-dialog v-model="dialog" :backdrop-filter="backdropFilter">
+        <q-card>
+          <q-card-section class="row items-center q-pb-none text-h6">
+            Thanks for the order!
+          </q-card-section>
+          <q-card-section>
+            You will be redirected to the order information page in {{ countdown }} seconds...
+          </q-card-section>
+        </q-card>
+      </q-dialog>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useOrderingStore } from '@/stores/orderingStore'
+import { useOrderStore } from '@/stores/orderStore'
+import { useCartStore } from '@/stores/cartStore'
+import { useRouter } from 'vue-router'
+import PlaceholderItem from './PlaceholderItem.vue'
+import ButtonDark from '../Home/ButtonDark.vue'
+import { useAuthStore } from '@/stores/auth'
+
+const authStore = useAuthStore()
+const props = defineProps<{
+  deliveryMethod: 'pickup' | 'courier'
+}>()
+
+// Инициализация хранилищ
+const orderingStore = useOrderingStore()
+const orderStore = useOrderStore()
+const cartStore = useCartStore()
+const router = useRouter()
+
+const options = ['9:00 - 13:00', '11:00 - 15:00', '13:00 - 17:00', '15:00 - 19:00', '17:00 - 21:00']
+
+// Данные доставки
+const date = ref('')
+const model = ref<string | null>('9:00 - 13:00')
+const street = ref('')
+const apartament = ref('')
+const entrance = ref('')
+const floor = ref('')
+const comment = ref('')
+
+const profileMode = ref(false)
+// Данные покупателя
+const surname = ref('')
+const name = ref('')
+const phone = ref('')
+const email = ref('')
+
+const selectedMethod = ref<'cash' | 'card'>('cash')
+
+const selectedPaymentMethod = (method: 'cash' | 'card') => {
+  selectedMethod.value = method
+}
+
+watch(
+  [surname, name, phone, email],
+  ([newSurname, newName, newPhone, newEmail]) => {
+    if (profileMode.value) {
+      const profileSurname = authStore.user?.surname || ''
+      const profileName = authStore.user?.name || ''
+      const profilePhone = authStore.user?.phone || ''
+      const profileEmail = authStore.user?.email || ''
+
+      if (
+        newSurname !== profileSurname ||
+        newName !== profileName ||
+        newPhone !== profilePhone ||
+        newEmail !== profileEmail
+      ) {
+        profileMode.value = false
+      }
+    }
+  },
+  { deep: true }
+)
+
+// Диалоговое окно
+const dialog = ref(false)
+const countdown = ref(5)
+let intervalId: number | null = null
+const backdropFilter = ref('blur(5px)')
+
+const validateForm = () => {
+  const errors = []
+
+  if (props.deliveryMethod === 'courier') {
+    if (!street.value) errors.push('Street is required')
+    if (!apartament.value) errors.push('Apartment is required')
+  }
+
+  if (!phone.value.match(/^\+?[1-9]\d{9,14}$/)) {
+    errors.push('Invalid phone number format')
+  }
+
+  if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    errors.push('Invalid email format')
+  }
+
+  if (errors.length > 0) {
+    throw new Error(errors.join('\n'))
+  }
+}
+
+const resetForm = () => {
+  street.value = ''
+  apartament.value = ''
+  entrance.value = ''
+  floor.value = ''
+  comment.value = ''
+  surname.value = ''
+  name.value = ''
+  phone.value = ''
+  email.value = ''
+}
+
+const useProfileData = () => {
+  if (surname.value === authStore.user?.surname) {
+    surname.value = ''
+    name.value = ''
+    phone.value = ''
+    email.value = ''
+    profileMode.value = false
+  } else {
+    surname.value = authStore.user?.surname || ''
+    name.value = authStore.user?.name || ''
+    phone.value = authStore.user?.phone || ''
+    email.value = authStore.user?.email || ''
+
+    profileMode.value = true
+  }
+}
+
+const handleOrderClick = async (event: Event) => {
+  event.preventDefault()
+  try {
+    // Валидация данных
+    validateForm()
+
+    const deliveryData: any = {
+      recipient: {
+        surname: surname.value,
+        name: name.value,
+        phone: Number(phone.value),
+        email: email.value
+      },
+      paymentMethod: selectedMethod.value,
+      deliveryDate: date.value,
+      deliveryTime: model.value
+    }
+
+    if (props.deliveryMethod === 'courier') {
+      deliveryData.deliveryAddress = {
+        street: street.value,
+        apartament: Number(apartament.value),
+        entace: Number(entrance.value),
+        floor: Number(floor.value),
+        comment: comment.value
+      }
+      orderingStore.saveAddress(deliveryData.deliveryAddress)
+    }
+
+    orderingStore.saveRecipient(deliveryData.recipient)
+
+    // Сохранение заказа
+    await orderStore.saveOrder(deliveryData)
+
+    // Очистка корзины
+    cartStore.products = []
+
+    // Показ диалога
+    dialog.value = true
+
+    // Таймер перенаправления
+    countdown.value = 5
+    intervalId = setInterval(() => {
+      countdown.value--
+      if (countdown.value <= 0) {
+        clearInterval(intervalId!)
+        router.push('/successPage')
+      }
+    }, 1000)
+
+    // Сброс формы
+    resetForm()
+  } catch (error) {
+    alert(error.message)
+    console.error('Ошибка оформления заказа:', error)
+  }
+}
+</script>
+
+<style module>
+.delivery_wrap {
+  margin: 20px 0;
+  border: 1px solid var(--placeholder-color);
+  border-radius: 20px;
+  padding: 0px 20px 20px;
+}
+.delivery_wrap p {
+  margin-bottom: 8px;
+  font-family: 'Satoshi';
+  font-size: 14px;
+  color: var(--subtitle-color);
+}
+.address_items {
+  display: flex;
+  flex-direction: column;
+}
+.address_item_2,
+.address_item_3 {
+  display: flex;
+  justify-content: space-between;
+}
+.delivery_date {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+.delivery_date > * {
+  padding: 0;
+}
+
+.recipient_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.recipient_input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid var(--placeholder-color);
+  border-radius: 20px;
+  padding: 20px;
+  outline: none;
+  margin-bottom: 10px;
+  font-family: 'Satoshi';
+  font-size: 14px;
+}
+.payment_items {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}
+
+.order_btn {
+  margin-top: 16px;
+  width: auto;
+}
+
+@media (min-width: 1024px) {
+  .delivery_date {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 20px;
+  }
+}
+</style>

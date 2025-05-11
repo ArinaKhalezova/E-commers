@@ -1,8 +1,5 @@
 <template>
-  <Carousel
-    :items-to-show="itemsToShow"
-    :items-to-scroll="2"
-  >
+  <Carousel :items-to-show="itemsToShow" :items-to-scroll="2">
     <Slide v-for="slide in slides" :key="slide.id" class="slide">
       <ProductCard :product="slide" />
     </Slide>
@@ -14,7 +11,7 @@ import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide } from 'vue3-carousel'
 import ProductCard from './ProductCard.vue'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import type { TProduct } from '@/data/products'
+import type { TProduct } from '@/data/products.types'
 
 defineProps<{
   slides: TProduct[]
@@ -25,17 +22,11 @@ const itemsToShow = ref(2)
 const updateItemsToShow = () => {
   if (window.innerWidth >= 1260) {
     itemsToShow.value = 4
-  } 
-  else if (window.innerWidth >= 1024 && window.innerWidth < 1260) {
+  } else if (window.innerWidth >= 620 && window.innerWidth < 1260) {
     itemsToShow.value = 3
-  }
-  else if (window.innerWidth >= 620 && window.innerWidth < 1024) {
-    itemsToShow.value = 3
-  } 
-  else if (window.innerWidth > 460 && window.innerWidth < 620) {
+  } else if (window.innerWidth > 460 && window.innerWidth < 620) {
     itemsToShow.value = 2
-  }
-  else {
+  } else {
     itemsToShow.value = 1
   }
 }
@@ -52,13 +43,12 @@ onBeforeUnmount(() => {
 
 <style module>
 .slide {
-  margin: 0 15px;
+  margin: auto;
 }
 
 @media (min-width: 1024px) {
   element.style {
     width: 50%;
   }
-  
 }
 </style>
