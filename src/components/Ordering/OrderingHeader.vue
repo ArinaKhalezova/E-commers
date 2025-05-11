@@ -3,40 +3,42 @@
     <div :class="$style.ordering_delivery">
       <div :class="$style.delivery_city">
         <h1>City of delivery</h1>
-        <q-select rounded outlined v-model="model" :options="options" :class="$style.city_select" />
+        <q-select
+          rounded
+          outlined
+          v-model="orderingStore.deliveryCity"
+          :options="cityOptions"
+          :class="$style.city_select"
+        />
       </div>
       <div :class="$style.delivery_obtaining">
         <h1>Method of obtaining</h1>
         <div :class="$style.obtaining_items">
-          <!-- Bind selection to a reactive variable -->
           <PlaceholderItem
             title="Pick-up points and post offices"
             text="The pick-up points is not selected, free of charge"
-            :selected="selectedMethod === 'pickup'"
-            @click="selectDeliveryMethod('pickup')"
+            :selected="orderingStore.deliveryMethod === 'pickup'"
+            @click="orderingStore.deliveryMethod = 'pickup'"
           />
           <PlaceholderItem
             title="By courier to the door"
             text="We will deliver today, from 2$"
-            :selected="selectedMethod === 'courier'"
-            @click="selectDeliveryMethod('courier')"
+            :selected="orderingStore.deliveryMethod === 'courier'"
+            @click="orderingStore.deliveryMethod = 'courier'"
           />
         </div>
-      </div>
-      <div :class="$style.delivery_obtaining">
-        <DeliveryCourier :deliveryMethod="selectedMethod" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import DeliveryCourier from './OrderingInfo.vue'
+import { useOrderingStore } from '@/stores/orderingStore'
 import PlaceholderItem from './PlaceholderItem.vue'
 
-const model = ref<string | null>('Samara')
-const options = [
+const orderingStore = useOrderingStore()
+
+const cityOptions = [
   'Samara',
   'Moscow',
   'Saint Petersburg',
@@ -46,12 +48,6 @@ const options = [
   'Nizhny Novgorod',
   'Chelyabinsk'
 ]
-
-const selectedMethod = ref<'pickup' | 'courier'>('pickup')
-
-const selectDeliveryMethod = (method: 'pickup' | 'courier') => {
-  selectedMethod.value = method
-}
 </script>
 
 <style module>
