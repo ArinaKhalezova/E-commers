@@ -21,6 +21,7 @@ export interface Order {
   date: Date
   items: OrderItem[]
   total: number
+  delivery: number
   deliveryAddress?: DeliveryAddress
   recipient?: DeliveryRecipient
   paymentMethod?: string
@@ -74,6 +75,7 @@ export const useOrderStore = defineStore('orderStore', () => {
           }
         }),
         total: cartStore.totalCostProducts,
+        delivery: cartStore.deliveryCostProducts,
         ...deliveryData
       }
 

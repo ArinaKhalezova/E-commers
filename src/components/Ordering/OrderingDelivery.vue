@@ -9,6 +9,27 @@
       <div v-else>
         <p>Select the delivery address and we'll show you the date and cost of delivery</p>
 
+        <div v-if="userAddresses.length > 0" :class="$style.address_selector">
+          <q-checkbox
+            v-model="useCustomAddress"
+            label="Different address"
+            color="black"
+            @update:model-value="handleCustomAddressToggle"
+          />
+
+          <q-select
+            v-if="!useCustomAddress"
+            v-model="selectedAddress"
+            :options="userAddresses"
+            option-label="street"
+            label="Select the delivery address"
+            emit-value
+            map-options
+            @update:model-value="handleAddressSelect"
+            :class="$style.address_select"
+          />
+        </div>
+
         <div :class="$style.address_recipient">
           <div :class="$style.address_items">
             <div :class="$style.address_item_1">
@@ -18,7 +39,7 @@
                 name="street"
                 required
                 :class="$style.recipient_input"
-                v-model="address.street"
+                v-model="addressFields.street"
               />
             </div>
             <div :class="$style.address_item_2">
@@ -28,14 +49,14 @@
                 name="apartment"
                 required
                 :class="$style.recipient_input"
-                v-model.number="address.apartment"
+                v-model.number="addressFields.apartment"
               />
               <input
                 type="number"
                 placeholder="Enter your entrance"
                 name="entrance"
                 :class="$style.recipient_input"
-                v-model.number="address.entrance"
+                v-model.number="addressFields.entrance"
               />
             </div>
             <div :class="$style.address_item_3">
@@ -44,20 +65,26 @@
                 placeholder="Enter your floor"
                 name="floor"
                 :class="$style.recipient_input"
-                v-model.number="address.floor"
-              />
-              <input
-                type="text"
-                placeholder="Enter your comment"
-                name="comment"
-                :class="$style.recipient_input"
-                v-model="address.comment"
+                v-model.number="addressFields.floor"
               />
             </div>
           </div>
           <div>
             <p>For example, where exactly to bring the order, the nearest address or landmark</p>
           </div>
+
+          <!-- Добавлен блок для комментария к доставке -->
+          <div :class="$style.delivery_comment">
+            <h3>Delivery comment</h3>
+            <q-input
+              type="textarea"
+              placeholder="Any special instructions for delivery"
+              v-model="deliveryComment"
+              outlined
+              :class="$style.comment_input"
+            />
+          </div>
+
           <h2>Delivery date and time</h2>
           <div :class="$style.delivery_date">
             <div class="q-pa-md">
@@ -95,11 +122,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
-import { useOrderingStore } from '@/stores/OrderingStore'
+import { ref, watch, onMounted, computed } from 'vue'
+import { useOrderingStore } from '@/stores/orderingStore'
+import { useAuthStore } from '@/stores/auth'
+import type { DeliveryAddress, DeliveryAdditionalInfo } from '@/stores/orderingStore'
 import ButtonDark from '../Home/ButtonDark.vue'
 
 const orderingStore = useOrderingStore()
+const authStore = useAuthStore()
 
 const timeOptions = [
   '9:00 - 13:00',
@@ -109,31 +139,92 @@ const timeOptions = [
   '17:00 - 21:00'
 ]
 
-const address = ref({
-  street: orderingStore.deliveryAddress?.street || '',
-  apartment: orderingStore.deliveryAddress?.apartment || null,
-  entrance: orderingStore.deliveryAddress?.entrance || null,
-  floor: orderingStore.deliveryAddress?.floor || null,
-  comment: orderingStore.deliveryAddress?.comment || ''
+const selectedAddress = ref<DeliveryAddress | null>(null)
+const useCustomAddress = ref(false)
+
+const deliveryComment = computed({
+  get: () => orderingStore.deliveryAdditionalInfo?.comment || '',
+  set: (value) => {
+    orderingStore.deliveryAdditionalInfo = {
+      ...orderingStore.deliveryAdditionalInfo,
+      comment: value
+    }
+  }
+})
+
+const userAddresses = computed(() => {
+  return (
+    authStore.user?.address?.map((addr) => ({
+      street: addr.street || '',
+      apartment: addr.apartment || 0,
+      entrance: addr.entrance || 0,
+      floor: addr.floor || 0
+    })) || []
+  )
+})
+
+const handleAddressSelect = (address: DeliveryAddress) => {
+  addressFields.value = {
+    street: address.street,
+    apartment: address.apartment,
+    entrance: address.entrance,
+    floor: address.floor
+  }
+  orderingStore.deliveryAddress = {
+    ...addressFields.value
+  }
+}
+
+const handleCustomAddressToggle = (value: boolean) => {
+  if (value) {
+    // Очищаем поля при выборе "Другой адрес"
+    addressFields.value = {
+      street: '',
+      apartment: 0,
+      entrance: 0,
+      floor: 0
+    }
+    orderingStore.deliveryAddress = null
+  } else {
+    // Возвращаем первый адрес из списка
+    if (userAddresses.value.length > 0) {
+      selectedAddress.value = userAddresses.value[0]
+      handleAddressSelect(userAddresses.value[0])
+    }
+  }
+}
+
+const addressFields = ref({
+  street: '',
+  apartment: 0,
+  entrance: 0,
+  floor: 0
 })
 
 watch(
-  address,
-  (newValue) => {
+  [addressFields, () => orderingStore.deliveryAdditionalInfo],
+  ([newAddress, newAdditionalInfo]) => {
     if (orderingStore.deliveryMethod === 'courier') {
       orderingStore.saveAddress({
-        street: newValue.street,
-        apartment: Number(newValue.apartment),
-        entrance: Number(newValue.entrance),
-        floor: Number(newValue.floor),
-        comment: newValue.comment
+        street: newAddress.street,
+        apartment: newAddress.apartment,
+        entrance: newAddress.entrance,
+        floor: newAddress.floor
       })
+      if (newAdditionalInfo) {
+        orderingStore.saveAdditionalInfo(newAdditionalInfo)
+      }
     }
   },
   { deep: true }
 )
 
 onMounted(() => {
+  if (userAddresses.value.length > 0) {
+    selectedAddress.value = userAddresses.value[0]
+    handleAddressSelect(userAddresses.value[0])
+  }
+
   if (!orderingStore.deliveryMethod) {
     orderingStore.deliveryMethod = 'pickup'
   }
@@ -153,6 +244,12 @@ onMounted(() => {
   font-size: 14px;
   color: var(--subtitle-color);
 }
+.address_selector {
+  margin-bottom: 20px;
+}
+.address_select {
+  margin-top: 10px;
+}
 .address_items {
   display: flex;
   flex-direction: column;
@@ -169,7 +266,12 @@ onMounted(() => {
 .delivery_date > * {
   padding: 0;
 }
-
+.delivery_comment {
+  margin: 20px 0;
+}
+.comment_input {
+  margin-top: 10px;
+}
 .recipient_header {
   display: flex;
   justify-content: space-between;

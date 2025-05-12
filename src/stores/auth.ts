@@ -3,8 +3,8 @@ import type { Order } from './orderStore'
 
 interface UserAddress {
   street?: string
-  apartament?: number
-  entace?: number
+  apartment?: number
+  entrance?: number
   floor?: number
 }
 

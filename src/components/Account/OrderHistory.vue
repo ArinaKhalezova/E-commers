@@ -14,7 +14,20 @@
             <h3 :class="$style.order_number">Order #{{ order.id }}</h3>
             <p :class="$style.order_date">{{ formatDate(order.date) }}</p>
           </div>
-          <div :class="$style.order_total">${{ order.total || 0 }}</div>
+          <div :class="$style.order_prices">
+            <div :class="$style.order_price_item">
+              <span>Subtotal:</span>
+              <span>${{ order.total - order.delivery }}</span>
+            </div>
+            <div :class="$style.order_price_item">
+              <span>Delivery:</span>
+              <span>${{ order.delivery }}</span>
+            </div>
+            <div :class="$style.order_price_item">
+              <span>Total:</span>
+              <span>${{ order.total }}</span>
+            </div>
+          </div>
         </div>
 
         <hr :class="$style.order_separator" />
@@ -28,7 +41,7 @@
           >
             <div :class="$style.item_image_wrapper">
               <img
-                :src="getImageUrl(item.coverImage)"
+                :src="getImageUrl(item.coverImage || item.img)"
                 :class="$style.item_image"
                 :alt="item.title"
               />
@@ -79,9 +92,6 @@ const sortedOrders = computed(() =>
   })
 )
 
-const goToProduct = (id: number) => {
-  router.push({ name: 'productPage', params: { id } })
-}
 // const getSku = computed(() => {
 //   const skuArr: string[] = []
 //   sortedOrders.value.forEach((order) => {
@@ -112,6 +122,10 @@ const getImageUrl = (path?: string) => {
   if (!path) return ''
   if (path.startsWith('http') || path.startsWith('/')) return path
   return path
+}
+
+const goToProduct = (id: number) => {
+  router.push({ name: 'productPage', params: { id } })
 }
 
 const getOutline = (color: string): boolean => {
@@ -166,6 +180,29 @@ onMounted(async () => {
 .order_history {
   padding: 20px;
   margin: 0 auto;
+}
+
+.order_prices {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+}
+
+.order_price_item {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.order_price_item span:first-child {
+  color: var(--subtitle-color);
+}
+
+.order_price_item span:last-child {
+  font-weight: 700;
+  min-width: 60px;
+  text-align: right;
 }
 
 .section_title {

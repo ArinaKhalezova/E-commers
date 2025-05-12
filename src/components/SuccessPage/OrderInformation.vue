@@ -36,10 +36,10 @@
         <h2>Your adress</h2>
         <div v-if="orderingStore.deliveryAddress" :class="$style.address_items">
           <p>Street: {{ orderingStore.deliveryAddress.street }}</p>
-          <p>Apartament: {{ orderingStore.deliveryAddress.apartament }}</p>
-          <p>Entrance: {{ orderingStore.deliveryAddress.entace }}</p>
+          <p>Apartament: {{ orderingStore.deliveryAddress.apartment }}</p>
+          <p>Entrance: {{ orderingStore.deliveryAddress.entrance }}</p>
           <p>Floor: {{ orderingStore.deliveryAddress.floor }}</p>
-          <p>Comment: {{ orderingStore.deliveryAddress.comment }}</p>
+          <p>Comment: {{ orderingStore.deliveryAdditionalInfo?.comment }}</p>
         </div>
         <div v-else>
           <p>No address saved yet.</p>

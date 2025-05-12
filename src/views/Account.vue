@@ -24,8 +24,8 @@ const handleLogout = () => {
 <style module>
 .account_container {
   font-family: 'Satoshi';
-  margin: 50px 16px;
-  padding: 27px 0;
+  padding: 0 100px;
+  margin-bottom: 20px;
 }
 
 .account_header {
@@ -95,6 +95,4 @@ const handleLogout = () => {
 .account_content {
   padding: 0 24px;
 }
-
-
 </style>

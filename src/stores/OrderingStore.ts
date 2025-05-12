@@ -6,7 +6,6 @@ export interface DeliveryAddress {
   apartment: number
   entrance: number
   floor: number
-  comment: string
 }
 
 export interface DeliveryRecipient {
@@ -14,6 +13,10 @@ export interface DeliveryRecipient {
   name: string
   phone: string
   email: string
+}
+
+export interface DeliveryAdditionalInfo {
+  comment: string
 }
 
 export const useOrderingStore = defineStore('orderingStore', () => {
@@ -24,6 +27,7 @@ export const useOrderingStore = defineStore('orderingStore', () => {
   // Delivery details
   const deliveryAddress = ref<DeliveryAddress | null>(null)
   const deliveryRecipient = ref<DeliveryRecipient | null>(null)
+  const deliveryAdditionalInfo = ref<DeliveryAdditionalInfo>({ comment: '' })
   const deliveryDate = ref('')
   const deliveryTime = ref('9:00 - 13:00')
 
@@ -40,6 +44,11 @@ export const useOrderingStore = defineStore('orderingStore', () => {
     localStorage.setItem('deliveryRecipient', JSON.stringify(newRecipient))
   }
 
+  const saveAdditionalInfo = (newAdditionalInfo: DeliveryAdditionalInfo) => {
+    deliveryAdditionalInfo.value = newAdditionalInfo
+    localStorage.setItem('deliveryAdditionalInfo', JSON.stringify(newAdditionalInfo))
+  }
+
   const loadStoredData = () => {
     const storedAddress = localStorage.getItem('deliveryAddress')
     if (storedAddress) {
@@ -50,6 +59,11 @@ export const useOrderingStore = defineStore('orderingStore', () => {
     if (storedRecipient) {
       deliveryRecipient.value = JSON.parse(storedRecipient)
     }
+
+    const storedAdditionalInfo = localStorage.getItem('deliveryAdditionalInfo')
+    if (storedAdditionalInfo) {
+      deliveryAdditionalInfo.value = JSON.parse(storedAdditionalInfo)
+    }
   }
 
   loadStoredData()
@@ -59,11 +73,13 @@ export const useOrderingStore = defineStore('orderingStore', () => {
     deliveryCity,
     deliveryAddress,
     deliveryRecipient,
+    deliveryAdditionalInfo,
     deliveryDate,
     deliveryTime,
     paymentMethod,
     saveAddress,
     saveRecipient,
+    saveAdditionalInfo,
     loadStoredData
   }
 })

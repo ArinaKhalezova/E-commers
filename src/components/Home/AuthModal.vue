@@ -20,7 +20,7 @@
 
       <!-- Шаг 2: Форма входа -->
       <div v-if="currentStep === 'login'" class="auth-form">
-        <h2 class="modal-title">Login to your account</h2>
+        <h2 :class="$style.modal_title">Login to your account</h2>
 
         <q-form @submit.prevent="handleLogin">
           <q-input
@@ -55,7 +55,7 @@
 
       <!-- Шаг 3: Форма регистрации -->
       <div v-if="currentStep === 'register'" class="auth-form">
-        <h2 class="modal-title">Create your account</h2>
+        <h2 :class="$style.modal_title">Create your account</h2>
 
         <q-form @submit.prevent="handleRegister">
           <q-input

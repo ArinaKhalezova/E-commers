@@ -1,99 +1,155 @@
 <template>
-  <div>
+  <div :class="$style.account_container">
     <div :class="$style.account_header">
-      <h1>Account</h1>
-      <q-btn label="Sign Out" color="negative" @click="handleLogout" :class="$style.logout_btn" />
+      <h1>My Account</h1>
+      <q-btn
+        label="Sign Out"
+        color="negative"
+        @click="handleLogout"
+        :class="$style.logout_btn"
+        icon="logout"
+        flat
+      />
     </div>
 
     <div :class="$style.account_content">
       <div :class="$style.user_card">
-        <div :class="$style.user_card_header">
-          <h2 :class="$style.card_title">Profile Information</h2>
-          <div :class="$style.user_card_header">
+        <div :class="$style.card_header">
+          <h2 :class="$style.card_title">
+            <q-icon name="person" size="sm" />
+            Profile Information
+          </h2>
+          <div :class="$style.actions">
             <q-toggle
               v-model="editMode"
               checked-icon="edit"
-              color="green"
-              unchecked-icon="clear"
-              label="Edit"
+              color="black"
+              unchecked-icon="lock"
+              :label="editMode ? 'Editing' : 'Edit'"
             />
-            <q-btn v-if="editMode" color="green" @click="saveChanges" label="Save" />
+            <q-btn
+              v-if="editMode"
+              color="black"
+              @click="saveChanges"
+              label="Save Changes"
+              :class="$style.save_btn"
+              icon="save"
+              unelevated
+            />
           </div>
         </div>
-        <div>
+
+        <div :class="$style.form_grid">
           <q-input
             v-model="userData.surname"
             :disable="!editMode"
-            color="black"
+            color="primary"
             label="Surname"
-          ></q-input>
+            outlined
+            :class="$style.form_input"
+          />
           <q-input
             v-model="userData.name"
             :disable="!editMode"
-            color="black"
+            color="primary"
             label="Name"
-          ></q-input>
+            outlined
+            :class="$style.form_input"
+          />
           <q-input
             v-model="userData.phone"
             :disable="!editMode"
-            color="black"
+            color="primary"
             label="Phone"
-          ></q-input>
+            outlined
+            :class="$style.form_input"
+          />
           <q-input
             v-model="userData.email"
             :disable="!editMode"
-            color="black"
+            color="primary"
             label="Email"
-          ></q-input>
-        </div>
-
-        <h3>Addresses</h3>
-        <div v-for="(address, index) in userData.address" :key="index" :class="$style.address_card">
-          <p>Address {{ index + 1 }}</p>
-          <q-input
-            v-model="address.street"
-            :disable="!editMode"
-            color="black"
-            label="Street"
-          ></q-input>
-          <q-input
-            v-model="address.apartament"
-            :disable="!editMode"
-            color="black"
-            label="Apartment"
-            type="number"
-          ></q-input>
-          <q-input
-            v-model="address.entace"
-            :disable="!editMode"
-            color="black"
-            label="Entrance"
-            type="number"
-          ></q-input>
-          <q-input
-            v-model="address.floor"
-            :disable="!editMode"
-            color="black"
-            label="Floor"
-            type="number"
-          ></q-input>
-
-          <q-btn
-            v-if="editMode && userData.address.length > 1"
-            color="negative"
-            label="Remove"
-            @click="removeAddress(index)"
-            :class="$style.remove_btn"
+            outlined
+            :class="$style.form_input"
           />
         </div>
 
-        <q-btn
-          v-if="editMode"
-          color="primary"
-          label="Add Address"
-          @click="addAddress"
-          :class="$style.add_btn"
-        />
+        <div :class="$style.section_header">
+          <h3 :class="$style.section_title">
+            <q-icon name="home" size="sm" />
+            Addresses
+          </h3>
+          <q-btn
+            v-if="editMode"
+            color="black"
+            label="Add Address"
+            @click="addAddress"
+            :class="$style.add_btn"
+            icon="add"
+            outline
+          />
+        </div>
+
+        <div :class="$style.addresses_grid">
+          <div
+            v-for="(address, index) in userData.address"
+            :key="index"
+            :class="[$style.address_card, editMode && $style.editable]"
+          >
+            <div :class="$style.address_header">
+              <h4 :class="$style.address_title">Address {{ index + 1 }}</h4>
+              <q-btn
+                v-if="editMode && userData.address.length > 1"
+                color="negative"
+                label="Remove"
+                @click="removeAddress(index)"
+                :class="$style.remove_btn"
+                icon="delete"
+                flat
+                dense
+              />
+            </div>
+            <div :class="$style.address_form">
+              <q-input
+                v-model="address.street"
+                :disable="!editMode"
+                color="primary"
+                label="Street"
+                outlined
+                :class="$style.address_input"
+              />
+              <div :class="$style.address_row">
+                <q-input
+                  v-model="address.apartment"
+                  :disable="!editMode"
+                  color="primary"
+                  label="Apartment"
+                  type="number"
+                  outlined
+                  :class="$style.address_input_small"
+                />
+                <q-input
+                  v-model="address.entrance"
+                  :disable="!editMode"
+                  color="primary"
+                  label="Entrance"
+                  type="number"
+                  outlined
+                  :class="$style.address_input_small"
+                />
+                <q-input
+                  v-model="address.floor"
+                  :disable="!editMode"
+                  color="primary"
+                  label="Floor"
+                  type="number"
+                  outlined
+                  :class="$style.address_input_small"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -118,8 +174,8 @@ const userData = ref({
     : [
         {
           street: '',
-          apartament: 0,
-          entace: 0,
+          apartment: 0,
+          entrance: 0,
           floor: 0
         }
       ]
@@ -128,8 +184,8 @@ const userData = ref({
 const addAddress = () => {
   userData.value.address.push({
     street: '',
-    apartament: 0,
-    entace: 0,
+    apartment: 0,
+    entrance: 0,
     floor: 0
   })
 }
@@ -154,117 +210,190 @@ const handleLogout = () => {
 </script>
 
 <style module>
+.account_container {
+}
+
 .account_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  margin-bottom: 28px;
-  padding: 0 24px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .account_header h1 {
-  font-family: 'IntegralCF';
+  font-family: 'Satoshi', sans-serif;
   font-weight: 900;
   font-size: 32px;
   color: var(--title-color);
   margin: 0;
-}
-
-.user_card {
-  background-color: var(--light-background-color);
-  border-radius: 20px;
-  padding: 24px;
-  margin: 20px 0;
-}
-
-.user_card_header {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
   align-items: center;
-}
-.cart_card {
-  border-radius: 20px;
-  padding: 24px;
-  margin: 20px 0;
-}
-
-.card_title {
-  font-size: 24px;
-  color: var(--title-color);
-  margin: 0 0 20px;
-  font-weight: 700;
-}
-
-.info_row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 16px 0;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.info_label {
-  font-size: 16px;
-  color: var(--subtitle-color);
-  font-weight: 500;
-}
-
-.info_value {
-  font-size: 16px;
-  color: var(--title-color);
-  font-weight: 700;
+  gap: 12px;
 }
 
 .logout_btn {
-  padding: 12px 24px;
-  border-radius: 25px;
   font-weight: 700;
-  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .account_content {
-  padding: 0 24px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.user_card {
+  padding: 20px;
+}
+
+.card_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.card_title {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--title-color);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.save_btn {
+  font-weight: 700;
+  padding: 8px 20px;
+}
+
+.form_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.form_input {
+  font-size: 16px;
+}
+
+.section_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 32px 0 16px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.section_title {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--title-color);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .add_btn {
-  margin-top: 16px;
+  font-weight: 500;
+}
+
+.addresses_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.address_card {
+  background: var(--light-background-color);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.address_card.editable {
+  border: 1px dashed var(--primary-color);
+  background: rgba(var(--primary-color-rgb), 0.05);
+}
+
+.address_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.address_title {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--title-color);
+  margin: 0;
 }
 
 .remove_btn {
-  margin-top: 10px;
+  font-size: 13px;
 }
 
-@media (min-width: 1024px) {
-  .account_container {
-    margin: 50px 100px;
-    padding: 40px 0;
-  }
+.address_form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-  .account_header h1 {
-    font-size: 48px;
+.address_row {
+  display: flex;
+  gap: 12px;
+}
+
+.address_input {
+  width: 100%;
+}
+
+.address_input_small {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .account_container {
+    padding: 16px;
   }
 
   .user_card {
-    margin-bottom: 0;
-    padding: 32px;
+    padding: 24px 16px;
   }
 
-  .card_title {
-    font-size: 36px;
-    margin-bottom: 28px;
+  .form_grid {
+    grid-template-columns: 1fr;
   }
 
-  .info_row {
-    margin: 20px 0;
-    padding: 16px 0;
+  .addresses_grid {
+    grid-template-columns: 1fr;
   }
 
-  .info_label,
-  .info_value {
-    font-size: 18px;
+  .address_row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .address_input_small {
+    width: 100%;
   }
 }
 </style>
