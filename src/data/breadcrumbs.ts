@@ -1,5 +1,3 @@
-// src/utils/breadcrumbs.ts
-
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { products } from '@/data/products'
 

@@ -5,14 +5,17 @@
         <h1>OUR HAPPY CUSTOMERS</h1>
         <div :class="$style.carousel_controls_item">
           <button @click="carouselRef.prev()">
-            <img src="/src/assets/img/arrow_left.png" alt="Previous" />
+            <img src="/public/assets/images/arrow_left.png" alt="Previous" />
           </button>
           <button @click="carouselRef.next()">
-            <img src="/src/assets/img/arrow_right.png" alt="Next" />
+            <img src="/public/assets/images/arrow_right.png" alt="Next" />
           </button>
         </div>
       </div>
       <Carousel ref="carouselRef" :items-to-show="itemsToShow" :items-to-scroll="1">
+        <Slide v-if="loading">
+          <QSpinner />
+        </Slide>
         <Slide v-for="review in reviews" :key="review.id">
           <ReviewsCard :review="review" />
         </Slide>
@@ -23,27 +26,43 @@
 
 <script setup lang="ts">
 import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import { Carousel, Slide } from 'vue3-carousel'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import ReviewsCard from './ReviewsCard.vue'
-import { homeReviews as reviews } from '@/data/homeReviews'
+// import { homeReviews as reviews } from '@/data/homeReviews'
 
 const itemsToShow = ref(1)
 const carouselRef = ref<any>(null)
+const reviews = ref([])
+const loading = ref(false)
 
 const updateItemsToShow = () => {
-  if (window.innerWidth >= 1024) {
+  if (window.innerWidth >= 1124) {
     itemsToShow.value = 3
-  } else if (window.innerWidth > 768 && window.innerWidth < 1024) {
+  } else if (window.innerWidth > 768 && window.innerWidth < 1124) {
     itemsToShow.value = 2
   } else {
     itemsToShow.value = 1
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   updateItemsToShow()
   window.addEventListener('resize', updateItemsToShow)
+
+  try {
+    loading.value = true
+    const response = await fetch('http://localhost:5173/api/homeReviews')
+    if (!response.ok) {
+      throw new Error('Failed to fetch products')
+    }
+    const data = await response.json()
+    reviews.value = data.reviews
+  } catch (error) {
+    console.error('Error fetching products:', error)
+  } finally {
+    loading.value = false
+  }
 })
 
 onBeforeUnmount(() => {
@@ -53,7 +72,7 @@ onBeforeUnmount(() => {
 
 <script lang="ts">
 export default {
- name: "HomeReviews"
+  name: 'HomeReviews'
 }
 </script>
 

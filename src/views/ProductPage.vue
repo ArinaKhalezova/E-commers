@@ -8,6 +8,7 @@
 import LargeProductCard from '@/components/ProductPage/LargeProductCard.vue'
 import TabPanel from '@/components/ProductPage/TabPanel.vue'
 import RecommendProducts from '@/components/ProductPage/RecommendProducts.vue'
+
 </script>
 
 <style module></style>

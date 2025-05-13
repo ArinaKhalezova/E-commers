@@ -19,6 +19,7 @@ const props = defineProps<{
   background-color: var(--dark-button-color);
   border-radius: 62px;
   height: 52px;
+  min-width: 150px;
   cursor: pointer;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 14px;

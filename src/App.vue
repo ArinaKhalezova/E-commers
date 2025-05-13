@@ -1,15 +1,29 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <Header />
     <RouterView />
     <Footer />
   </div>
+  <q-inner-loading :showing="loading" color="orange" />
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { RouterView } from 'vue-router'
 import Header from './components/Home/Header.vue'
 import Footer from './components/Home/Footer.vue'
+
+const loading = ref(true)
+
+onMounted(async () => {
+  try {
+    loading.value = true
+    // await new Promise(resolve => setTimeout(resolve, 2000)); 
+  }
+  finally {
+    loading.value = false
+  }
+})
 </script>
 
 <style scoped>

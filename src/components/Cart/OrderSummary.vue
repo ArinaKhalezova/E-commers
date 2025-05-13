@@ -4,21 +4,21 @@
     <div :class="$style.order_summary">
       <div :class="$style.summary_subtotal">
         <h2>Subtotal</h2>
-        <p>{{ '$' + productStore.subtotalCostProducts }}</p>
+        <p>{{ '$' + cartStore.subtotalCostProducts }}</p>
       </div>
       <div :class="$style.summary_discount">
-        <h2>{{ 'Discount (' + productStore.discount + '%)' }}</h2>
-        <p>{{ '-' + productStore.saleCost + '$' }}</p>
+        <h2>{{ 'Discount (' + cartStore.discount + '%)' }}</h2>
+        <p>{{ '-' + cartStore.saleCost + '$' }}</p>
       </div>
       <div :class="$style.summary_delivery">
         <h2>Delivery Fee</h2>
-        <p>{{ '$' + productStore.deliveryCostProducts }}</p>
+        <p>{{ '$' + cartStore.deliveryCostProducts }}</p>
       </div>
     </div>
     <hr :class="$style.line" />
     <div :class="$style.order_total">
       <h2>Total</h2>
-      <p>{{ '$' + productStore.totalCostProducts }}</p>
+      <p>{{ '$' + cartStore.totalCostProducts }}</p>
     </div>
     <div :class="$style.order_promocode">
       <input
@@ -26,21 +26,29 @@
         placeholder="Add promo code"
         name="promocode"
         required
-        v-model="productStore.promo"
+        v-model="cartStore.promo"
         :class="$style.promocode_input"
       />
-      <ButtonDark text="Apply" :class="$style.promocode_btn" light @click="productStore.applyPromoCode"/>
+
+      <ButtonDark
+        text="Apply"
+        :class="$style.promocode_btn"
+        light
+        @click="cartStore.applyPromoCode"
+        />
+      <p v-if="cartStore.promoCodeMessage === 1">Successfully!</p>
+      <p v-else-if="cartStore.promoCodeMessage === 2">Enter the promo code</p>
+      <p v-else-if="cartStore.promoCodeMessage === 3">Promo code not found :(</p>
     </div>
-    <ButtonDark text="Go to Checkout" :class="$style.order_btn" />
+    <ButtonDark link="/ordering" text="Go to Checkout" :class="$style.order_btn" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import ButtonDark from '../Home/ButtonDark.vue'
-import { useProductStore } from '@/stores/productStore'
+import { useCartStore } from '@/stores/cartStore'
 
-const productStore = useProductStore()
+const cartStore = useCartStore()
 </script>
 
 <style module>
@@ -71,6 +79,7 @@ const productStore = useProductStore()
   font-family: 'Satoshi';
   font-size: 16px;
   font-weight: 100;
+  line-height: normal;
 }
 .order_summary p {
   font-family: 'Satoshi';
@@ -103,7 +112,7 @@ const productStore = useProductStore()
   font-family: 'Satoshi';
   background-color: var(--placeholder);
   border-radius: 20px;
-  padding: 13px 48px;
+  padding: 13px 28px;
   border: none;
   outline: none;
 }
@@ -113,7 +122,9 @@ const productStore = useProductStore()
   gap: 10px;
   align-items: center;
 }
-
+.promocode_btn {
+  min-width: 100px;
+}
 .order_btn {
   margin-top: 16px;
   width: auto;

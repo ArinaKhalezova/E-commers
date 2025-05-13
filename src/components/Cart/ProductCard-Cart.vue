@@ -2,23 +2,20 @@
   <div :class="$style.product_container">
     <div :class="$style.product_content">
       <div :class="$style.product_img" @click="goToProduct(product.id)">
-        <img :src="product.product_img" :alt="product.title" />
-        <!-- <img :src="product.product_img" alt="Product Image" /> -->
+        <img :src="getImgByColor || product.product_img" :alt="product.title" />
       </div>
       <div :class="$style.product_info">
         <div :class="$style.product_header">
           <div :class="$style.product_name">
             <h2>{{ product.title }}</h2>
           </div>
-          <div :class="$style.product_delete" @click="productStore.deleteProduct(product.id)">
-            <img src="/src/assets/img/delete.png" alt="delete" />
+          <div :class="$style.product_delete" @click="deleteProduct">
+            <img src="/public/assets/images/delete.png" alt="delete" />
           </div>
         </div>
         <div :class="$style.product_characteristics">
-          <p>{{ 'Size:' + product.size }}</p>
-          <p>{{ 'Color:' + product.color }}</p>
-          <!-- <p>Size: Medium</p>
-          <p>Color: White</p> -->
+          <q-chip :outline="getOutline(product.color)" :color="getColor(product.color)"> </q-chip>
+          <q-chip color="gray" text-color="black"> {{ product.size }} </q-chip>
         </div>
         <div :class="$style.product_footer">
           <div :class="$style.product_price">
@@ -39,26 +36,75 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import type { TProduct } from '@/data/products'
+import type { TProduct } from '@/data/products.types'
 import Counter from '../ProductPage/Counter.vue'
-import { useProductStore } from '@/stores/productStore'
+import { useCartStore } from '@/stores/cartStore'
 
-const productStore = useProductStore()
+const cartStore = useCartStore()
 
 const props = defineProps<{
   product: TProduct
 }>()
 
-const updateQuantity = (quantity: number) => {
-  productStore.updateProductQuantity(props.product.id, quantity)
+const updateQuantity = async (quantity: number) => {
+  await cartStore.updateProductQuantity(props.product.sku, quantity)
 }
 const router = useRouter()
+
+const deleteProduct = async () => {
+  await cartStore.deleteProduct(props.product.sku)
+}
 
 const goToProduct = (id: number) => {
   router.push({ name: 'productPage', params: { id } })
 }
+
+const getImgByColor = computed(() => {
+  if (!props.product) {
+    return ''
+  }
+
+  const selectedVariant = props.product.aspects[0].variants.find(
+    (variant) => variant.color === props.product.color
+  )
+  
+  return selectedVariant.coverImage || ''
+})
+
+const getOutline = (color: string): boolean => {
+  switch (color) {
+    case 'white':
+      return true
+    default:
+      return false
+  }
+}
+const getColor = (color: string): string => {
+  switch (color) {
+    case 'lightBlue':
+      return 'blue-4'
+    case 'blue':
+      return 'blue-9'
+    case 'white':
+      return 'grey'
+    default:
+      return color
+  }
+}
+
+onMounted(async () => {
+  try {
+    const cartResponce = await fetch('/api/products')
+    if (!cartResponce.ok) {
+      throw new Error('Failed to fetch product data')
+    }
+    cartStore.value = await cartResponce.json()
+  } catch (error) {
+    console.error('Error fetching cart:', error)
+  }
+})
 </script>
 
 <style module>
@@ -89,6 +135,8 @@ const goToProduct = (id: number) => {
   font-family: 'Satoshi';
   font-size: 16px;
   font-weight: 900;
+  line-height: normal;
+  padding-bottom: 14px;
 }
 .product_delete {
   cursor: pointer;
@@ -97,14 +145,19 @@ const goToProduct = (id: number) => {
   width: 20px;
 }
 .product_characteristics {
+  display: flex;
+}
+/* .product_characteristics {
   justify-content: start;
   font-family: 'Satoshi';
   font-size: 12px;
   padding: 4px 0;
-}
+} */
 .product_characteristics > * {
-  padding: 2px 0;
 }
+/* .product_characteristics > * {
+  padding: 2px 0;
+} */
 .product_footer {
   display: flex;
   justify-content: space-between;

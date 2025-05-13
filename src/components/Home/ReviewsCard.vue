@@ -2,7 +2,7 @@
   <div :class="$style.slide">
     <div :class="$style.reviews_card">
       <div :class="$style.product_rating">
-        <q-rating v-model="ratingModel" size="25px" color="yellow-8" readonly />
+        <q-rating v-model="review.ratingModel" size="25px" color="yellow-8" readonly />
       </div>
       <!-- <img src="/src/assets/img/stars.png" alt="" width="138px" /> -->
       <h2>{{ review.title }}</h2>
@@ -13,8 +13,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { TReview } from '@/data/reviews.types';
-
+import type { TReview } from '@/data/reviews.types'
 
 const ratingModel = ref(5)
 
@@ -22,7 +21,6 @@ const props = defineProps<{
   review: TReview
 }>()
 </script>
-
 
 <style module>
 .slide {
