@@ -1,0 +1,200 @@
+{
+  "cellTrackingInfo": {
+    "uis": { "allVariants": "K8tZkAN7oCy9LWmkFNwvWxvhXVyENrippqov3TonnnBO" },
+    "aspects": {
+      "0_0": "28t0QxX5YCWvAMm2tM3jEnGfLG4nvMHJqV44Ji5R6x3x",
+      "0_1": "nRtrVy29EcKmWy5zfKZVVxNUDkx2q3F13DP8DtLP3nGy",
+      "1_0": "w0tgnOmljFVw1REAU1kYVLNf9nlBk2T6g45yyfDjZgxz",
+      "1_1": "6WtZJ3vLNC9KEVwwI7lBvqYC1GZP8of68XLG9uOkZA25",
+      "1_2": "DqtDZ6zY9Ixxokx3CWo141kc4YvnLKC3D4ZQKSWW4YP1",
+      "1_3": "79tnYPKGghQnMpXGcJq96rPS7KZNZyHvMn7w9f0R5XL",
+      "1_4": "RltyXK146cONnL6YtBYvDzxIR6RY80HpnwylLfpkExVW",
+      "1_5": "57tw1n7kJcqPKrmBhLj7AB9CKVjnM9T09qyP8t8qr4k3"
+    }
+  },
+  "sliceTrackingInfo": "E0ukjA247crxlNBgszZ7Y5XCyynmmAFnrP9KVfYBZ8gQ",
+  "aspects": [
+    {
+      "index": 0,
+      "type": "textBar",
+      "descriptionRs": [{ "type": "textGray", "content": "Длина, см:" }],
+      "additionalInfo": {},
+      "variants": [
+        {
+          "sku": 1632286073,
+          "link": "\u002Fproduct\u002Fvalik-dlya-spiny-mfr-roll-rolik-massazhnyy-sportivnyy-dlya-yogi-flyfit-1632286073\u002F?from_sku=1632286073\u0026oos_search=false",
+          "active": true,
+          "availability": "inStock",
+          "data": {
+            "searchableText": "45",
+            "textRs": [{ "type": "text", "content": "45" }],
+            "price": "1 280 ₽",
+            "coverImage": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-7\u002Fwc140\u002F7338540643.jpg",
+            "originalPrice": "3 969 ₽",
+            "title": "Валик для спины, мфр ролл, ролик массажный, спортивный, для йоги, FLYFIT"
+          }
+        },
+        {
+          "sku": 1594043869,
+          "link": "\u002Fproduct\u002Fvalik-dlya-spiny-mfr-roll-rolik-massazhnyy-sportivnyy-dlya-yogi-flyfit-1594043869\u002F?from_sku=1632286073\u0026oos_search=false",
+          "active": false,
+          "availability": "noSuchCombination",
+          "data": {
+            "searchableText": "47",
+            "textRs": [{ "type": "text", "content": "47" }],
+            "price": "1 226 ₽",
+            "coverImage": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-k\u002Fwc140\u002F7338538748.jpg",
+            "originalPrice": "4 139 ₽",
+            "title": "Валик для спины, мфр ролл, ролик массажный, спортивный, для йоги, FLYFIT"
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "type": "colorsMix",
+      "descriptionRs": [
+        { "type": "textGray", "content": "Цвет: " },
+        { "type": "text", "content": "черный" }
+      ],
+      "additionalInfo": {},
+      "aspectModalInfo": {
+        "link": "\u002Fmodal\u002FaspectsNew?from_sku=1632286073\u0026from_url=https%3A%2F%2Fwww.ozon.ru%2F\u0026product_id=1632286073",
+        "linkText": "Все 9 цветов"
+      },
+      "variants": [
+        {
+          "sku": 1656248124,
+          "link": "\u002Fproduct\u002Fvalik-dlya-spiny-mfr-roll-rolik-massazhnyy-sportivnyy-dlya-yogi-flyfit-1656248124\u002F?from_sku=1632286073\u0026oos_search=false",
+          "active": false,
+          "availability": "inStock",
+          "data": {
+            "searchableText": "бирюзовый",
+            "textRs": [{ "type": "text", "content": "бирюзовый" }],
+            "price": "1 270 ₽",
+            "coverImage": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-0\u002Fwc140\u002F7338551436.jpg",
+            "originalPrice": "3 939 ₽",
+            "colors": ["#30d5c8"],
+            "picture": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-7\u002Fwc140\u002F7098975079.jpg",
+            "title": "Валик для спины, мфр ролл, ролик массажный, спортивный, для йоги, FLYFIT"
+          }
+        },
+        {
+          "sku": 1632280855,
+          "link": "\u002Fproduct\u002Fvalik-dlya-spiny-mfr-roll-rolik-massazhnyy-sportivnyy-dlya-yogi-flyfit-1632280855\u002F?from_sku=1632286073\u0026oos_search=false",
+          "active": false,
+          "availability": "noSuchCombination",
+          "data": {
+            "searchableText": "лиловый",
+            "textRs": [{ "type": "text", "content": "лиловый" }],
+            "price": "1 232 ₽",
+            "coverImage": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-b\u002Fwc140\u002F7338524627.jpg",
+            "originalPrice": "4 119 ₽",
+            "colors": ["#db7093"],
+            "picture": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-o\u002Fwc140\u002F7207394676.jpg",
+            "title": "Валик для спины, мфр ролл, ролик массажный, спортивный, для йоги, FLYFIT"
+          }
+        },
+        {
+          "sku": 1656248141,
+          "link": "\u002Fproduct\u002Fvalik-dlya-spiny-mfr-roll-rolik-massazhnyy-sportivnyy-dlya-yogi-flyfit-1656248141\u002F?from_sku=1632286073\u0026oos_search=false",
+          "active": false,
+          "availability": "inStock",
+          "data": {
+            "searchableText": "пурпурный",
+            "textRs": [{ "type": "text", "content": "пурпурный" }],
+            "price": "1 275 ₽",
+            "coverImage": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-h\u002Fwc140\u002F7329036761.jpg",
+            "originalPrice": "3 959 ₽",
+            "colors": ["#c400ab"],
+            "picture": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-2\u002Fwc140\u002F7212238418.jpg",
+            "title": "Валик для спины, мфр ролл, ролик массажный, спортивный, для йоги, FLYFIT"
+          }
+        },
+        {
+          "sku": 1594043869,
+          "link": "\u002Fproduct\u002Fvalik-dlya-spiny-mfr-roll-rolik-massazhnyy-sportivnyy-dlya-yogi-flyfit-1594043869\u002F?from_sku=1632286073\u0026oos_search=false",
+          "active": false,
+          "availability": "noSuchCombination",
+          "data": {
+            "searchableText": "розовый",
+            "textRs": [{ "type": "text", "content": "розовый" }],
+            "price": "1 226 ₽",
+            "coverImage": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-k\u002Fwc140\u002F7338538748.jpg",
+            "originalPrice": "4 139 ₽",
+            "colors": ["#fd85b2"],
+            "picture": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-9\u002Fwc140\u002F7099968609.jpg",
+            "title": "Валик для спины, мфр ролл, ролик массажный, спортивный, для йоги, FLYFIT"
+          }
+        },
+        {
+          "sku": 1632296141,
+          "link": "\u002Fproduct\u002Fvalik-dlya-spiny-mfr-roll-rolik-massazhnyy-sportivnyy-dlya-yogi-flyfit-1632296141\u002F?from_sku=1632286073\u0026oos_search=false",
+          "active": false,
+          "availability": "inStock",
+          "data": {
+            "searchableText": "серый",
+            "textRs": [{ "type": "text", "content": "серый" }],
+            "price": "1 280 ₽",
+            "coverImage": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-l\u002Fwc140\u002F7338552465.jpg",
+            "originalPrice": "3 969 ₽",
+            "colors": ["#666666"],
+            "picture": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-6\u002Fwc140\u002F7140766074.jpg",
+            "title": "Валик для спины, мфр ролл, ролик массажный, спортивный, для йоги, FLYFIT"
+          }
+        },
+        {
+          "sku": 1632286073,
+          "link": "\u002Fproduct\u002Fvalik-dlya-spiny-mfr-roll-rolik-massazhnyy-sportivnyy-dlya-yogi-flyfit-1632286073\u002F?from_sku=1632286073\u0026oos_search=false",
+          "active": true,
+          "availability": "inStock",
+          "data": {
+            "searchableText": "черный",
+            "textRs": [{ "type": "text", "content": "черный" }],
+            "price": "1 280 ₽",
+            "coverImage": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-7\u002Fwc140\u002F7338540643.jpg",
+            "originalPrice": "3 969 ₽",
+            "colors": ["#000000"],
+            "picture": "https:\u002F\u002Fcdn1.ozone.ru\u002Fs3\u002Fmultimedia-1-z\u002Fwc140\u002F7212249503.jpg",
+            "title": "Валик для спины, мфр ролл, ролик массажный, спортивный, для йоги, FLYFIT"
+          }
+        }
+      ]
+    }
+  ],
+  "lexemes": {
+    "additionalText": "Еще",
+    "ariaLabel": "Подсказка",
+    "chooseRingSizeText": "Подобрать размер кольца",
+    "chooseRingSizeTitle": "Подбор размера кольца",
+    "chooseSizeText": "Выберите размер",
+    "chooseVariantText": "Выбрать",
+    "notAvailableCombinationText": "Нет в таком сочетании",
+    "notAvailableText": "Нет в наличии",
+    "ringSizeBtnText": "Показать",
+    "ringSizeCloseBtnText": "Закрыть",
+    "ringSizeLabel": "Длина в мм",
+    "ringSizePlaceHolder": "Введите значение",
+    "ringSizeTactic1": "Возьмите измерительную ленту или же любой шнурок, нитку, которую потом можно измерить по линейке.",
+    "ringSizeTactic2": "Обмотайте",
+    "ringSizeTactic3": "ленту вокруг пальца (например, безымянного, если вы подбираете обручальное или помолвочное кольцо).",
+    "ringSizeTactic4": "Измерьте длину этого отрезка в миллиметрах с помощью линейки. Введите получившееся значение.",
+    "ringSizeTactic5": "Не измеряйте замерзшие пальцы",
+    "ringSizeTactic6": "Замеры лучше делать в конце дня",
+    "ringSizeTactic7": "Если сустав шире самого пальца – измеряйте диаметр сустава",
+    "ringSizeTactic8": "Ваш размер кольца:",
+    "ringSizeTacticRs": [
+      {
+        "type": "text",
+        "content": "Возьмите измерительную ленту или же любой шнурок, нитку, которую потом можно измерить по линейке."
+      },
+      { "type": "newLine" },
+      {
+        "type": "text",
+        "content": "Обмотайте ленту вокруг пальца (например, безымянного, если вы подбираете обручальное или помолвочное кольцо)."
+      }
+    ],
+    "showAllText": "Посмотреть все",
+    "showMoreText": "Показать еще"
+  }
+}
