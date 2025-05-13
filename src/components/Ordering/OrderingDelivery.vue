@@ -73,9 +73,8 @@
             <p>For example, where exactly to bring the order, the nearest address or landmark</p>
           </div>
 
-          <!-- Добавлен блок для комментария к доставке -->
           <div :class="$style.delivery_comment">
-            <h3>Delivery comment</h3>
+            <h2>Delivery comment</h2>
             <q-input
               type="textarea"
               placeholder="Any special instructions for delivery"
@@ -177,7 +176,6 @@ const handleAddressSelect = (address: DeliveryAddress) => {
 
 const handleCustomAddressToggle = (value: boolean) => {
   if (value) {
-    // Очищаем поля при выборе "Другой адрес"
     addressFields.value = {
       street: '',
       apartment: 0,
@@ -186,7 +184,6 @@ const handleCustomAddressToggle = (value: boolean) => {
     }
     orderingStore.deliveryAddress = null
   } else {
-    // Возвращаем первый адрес из списка
     if (userAddresses.value.length > 0) {
       selectedAddress.value = userAddresses.value[0]
       handleAddressSelect(userAddresses.value[0])
@@ -243,6 +240,10 @@ onMounted(() => {
   font-family: 'Satoshi';
   font-size: 14px;
   color: var(--subtitle-color);
+}
+
+.delivery_wrap h2 {
+  font-size: 20px;
 }
 .address_selector {
   margin-bottom: 20px;
