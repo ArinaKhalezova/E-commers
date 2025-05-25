@@ -135,6 +135,9 @@ const handleOrderClick = async (event: Event) => {
   font-size: 14px;
   color: var(--subtitle-color);
 }
+.delivery_wrap h2 {
+  font-size: 20px;
+}
 .address_items {
   display: flex;
   flex-direction: column;

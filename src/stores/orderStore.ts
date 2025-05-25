@@ -81,16 +81,13 @@ export const useOrderStore = defineStore('orderStore', () => {
         saleCost: cartStore.saleCost
       }
 
-      // Сохраняем заказ в общее хранилище
       orders.value.push(newOrder)
       localStorage.setItem('orders', JSON.stringify(orders.value))
 
-      // Для авторизованных пользователей
       if (authStore.isAuthenticated && authStore.user) {
         const updatedOrders = [...(authStore.user.orders || []), newOrder]
         authStore.updateUserOrders(updatedOrders)
       }
-      // Для гостей
       else {
         const guestOrders = JSON.parse(localStorage.getItem('guestOrders') || '[]')
         guestOrders.push(newOrder)
