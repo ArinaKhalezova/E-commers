@@ -6,20 +6,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted, } from 'vue'
+import { ref, onMounted } from 'vue'
 import ProductCarousel from '../Home/ProductCarousel.vue'
 
-// Состояние компонента
-const newArrivalsSlides = ref([])
+const newArrivalsSlides = ref()
 
 onMounted(async () => {
   try {
-    const newArrivalsResponse = await fetch('/api/newArrivalsSlides')
-    if (!newArrivalsResponse.ok) {
+    const newArrivalsSlidesResponse = await fetch('http://localhost:5173/api/newArrivalsSlides')
+    if (!newArrivalsSlidesResponse.ok) {
       throw new Error('Failed to fetch new arrivals data')
     }
-    const newArrivalsData = await newArrivalsResponse.json()
-    newArrivalsSlides.value = newArrivalsData.newArrivalsSlides
+    const newArrivalsSlidesData = await newArrivalsSlidesResponse.json()
+    newArrivalsSlides.value = newArrivalsSlidesData.newArrivalsSlides
   } catch (error) {
     console.error('Error fetching data:', error)
   }

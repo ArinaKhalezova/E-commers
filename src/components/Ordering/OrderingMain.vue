@@ -33,14 +33,12 @@
       />
 
       <q-dialog v-model="dialog" :backdrop-filter="backdropFilter">
-        <q-card>
-          <q-card-section class="row items-center q-pb-none text-h6">
-            Thanks for the order!
-          </q-card-section>
+        <div :class="$style.order_modal">
+          <q-card-section :class="$style.modal_header"> Thanks for the order! </q-card-section>
           <q-card-section>
             You will be redirected to the order information page in {{ countdown }} seconds...
           </q-card-section>
-        </q-card>
+        </div>
       </q-dialog>
     </div>
   </div>
@@ -179,6 +177,20 @@ const handleOrderClick = async (event: Event) => {
 .order_btn {
   margin-top: 16px;
   width: auto;
+}
+
+.order_modal {
+  background-color: white;
+  padding: 10px;
+  font-family: 'Satoshi';
+  border: 2px solid var(--placeholder-color) !important;
+  border-radius: 20px !important;
+}
+
+.modal_header {
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 600;
 }
 
 @media (min-width: 1024px) {

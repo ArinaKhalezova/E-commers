@@ -101,7 +101,8 @@ export const products = [
     rating: 4.5,
     cost: 180,
     ratingModel: 4,
-    description: 'This graphic t-shirt...',
+    description:
+      'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
     category: 'shirts',
     gender: 'Men',
     style: 'formal',
@@ -744,72 +745,6 @@ export const products = [
   }
 ]
 
-export const newArrivalsSlides = [
-  {
-    id: 1,
-    product_img: product1_black,
-    title: 'T-shirt with Tape Details',
-    rating: 4.5,
-    cost: 120,
-    ratingModel: 4
-  },
-  {
-    id: 2,
-    product_img: product2_black,
-    title: 'Skinny Fit Jeans',
-    rating: 3.5,
-    cost: 240,
-    ratingModel: 3
-  },
-  {
-    id: 3,
-    product_img: product3,
-    title: 'Checkered Shirt',
-    rating: 4.5,
-    cost: 180,
-    ratingModel: 4
-  },
-  {
-    id: 4,
-    product_img: product4_orange,
-    title: 'Sleeve Striped T-Shirt',
-    rating: 4.5,
-    cost: 130,
-    ratingModel: 4
-  }
-]
+export const newArrivalsSlides = products.slice(0, 4)
 
-export const topSellingSlides = [
-  {
-    id: 5,
-    product_img: product5,
-    title: 'Vertical Striped Shirt',
-    rating: 5,
-    cost: 212,
-    ratingModel: 5
-  },
-  {
-    id: 6,
-    product_img: product6,
-    title: 'Courage Graphic T-shirt',
-    rating: 4,
-    cost: 145,
-    ratingModel: 4
-  },
-  {
-    id: 7,
-    product_img: product7,
-    title: 'Loose Fit Bermuda Shorts',
-    rating: 3,
-    cost: 80,
-    ratingModel: 3
-  },
-  {
-    id: 8,
-    product_img: product8,
-    title: 'Faded Skinny Jeans',
-    rating: 4.5,
-    cost: 210,
-    ratingModel: 4
-  }
-]
+export const topSellingSlides = products.slice(4, 8)

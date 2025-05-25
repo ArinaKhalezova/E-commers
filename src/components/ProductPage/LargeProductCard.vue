@@ -1,5 +1,5 @@
 <template>
-  <div v-if="product">
+  <div>
     <Breadcrumbs :breadcrumbs="breadcrumbs" />
     <div :class="$style.product_container">
       <div :class="$style.product_img">
@@ -48,13 +48,13 @@
       </div>
       <div :class="$style.product_info_container">
         <div :class="$style.product_info">
-          <h1>{{ product.title }}</h1>
+          <h1>{{ product?.title }}</h1>
           <div :class="$style.product_rating">
             <q-rating v-model="ratingModel" size="18px" color="yellow-8" readonly />
-            <p>{{ product.rating + '/5' }}</p>
+            <p>{{ product?.rating + '/5' }}</p>
           </div>
-          <h2>{{ '$' + product.cost }}</h2>
-          <p>{{ product.description }}</p>
+          <h2>{{ '$' + product?.cost }}</h2>
+          <p>{{ product?.description}}</p>
         </div>
         <div :class="$style.product_color">
           <p>Select color</p>
@@ -96,9 +96,9 @@
         </div>
       </div>
     </div>
-  </div>
-  <div v-else>
-    <p>Loading...</p>
+    <!-- <div v-else>
+      <p>Loading...</p>
+    </div> -->
   </div>
 </template>
 
@@ -128,6 +128,8 @@ const splitterModel = ref(20)
 const product = computed(() => {
   return products.value.find((p) => p.id === productId.value)
 })
+
+console.log('PRODUCT', product.value)
 
 const ratingModel = ref(product.value ? product.value.ratingModel : 3)
 

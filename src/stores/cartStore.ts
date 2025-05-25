@@ -22,10 +22,25 @@ export const useCartStore = defineStore('cartStore', () => {
     if (savedCart) {
       products.value = JSON.parse(savedCart)
     }
+
+    const savedPromo = sessionStorage.getItem('cart_promo')
+    if (savedPromo) {
+      promo.value = savedPromo
+    }
+
+    const savedDiscount = sessionStorage.getItem('cart_discount')
+    if (savedDiscount) {
+      discount.value = Number(savedDiscount)
+    }
   }
 
   const saveCartToLocalStorage = () => {
     localStorage.setItem('cart', JSON.stringify(products.value))
+  }
+
+  const savePromoToSession = () => {
+    sessionStorage.setItem('cart_promo', promo.value)
+    sessionStorage.setItem('cart_discount', discount.value.toString())
   }
 
   loadCartFromLocalStorage()
@@ -49,22 +64,23 @@ export const useCartStore = defineStore('cartStore', () => {
   })
 
   const saleCost = computed(() => {
-    return (subtotalCostProducts.value * discount.value) / 100
+    let cost = subtotalCostProducts.value * discount.value
+    return cost / 100
   })
 
   const deliveryCostProducts = computed(() => {
-    let price = 0
+    let deliveryCost = 0
     if (subtotalCostProducts.value == 0 || subtotalCostProducts.value > 1000) {
-      price = 0
+      deliveryCost = 0
     } else if (subtotalCostProducts.value <= 1000 && subtotalCostProducts.value > 500) {
-      price = 9
+      deliveryCost = 9
     } else if (subtotalCostProducts.value <= 500 && subtotalCostProducts.value > 250) {
-      price = 17
+      deliveryCost = 17
     } else if (subtotalCostProducts.value <= 250) {
-      price = 24
+      deliveryCost = 24
     }
 
-    return price
+    return deliveryCost
   })
 
   const totalCostProducts = computed(() => {
@@ -90,9 +106,10 @@ export const useCartStore = defineStore('cartStore', () => {
       discount.value = getSale(promo.value)
       promoCodeMessage.value = 2
     } else {
-      discount.value = getSale(promo.value)
+      discount.value = 0
       promoCodeMessage.value = 3
     }
+    savePromoToSession()
   }
 
   const getProductBySku = (sku: string) => {
@@ -131,6 +148,16 @@ export const useCartStore = defineStore('cartStore', () => {
     await fetchProducts()
   }
 
+  const clearCart = () => {
+    products.value = []
+    promo.value = ''
+    discount.value = 0
+    promoCodeMessage.value = 0
+    localStorage.setItem('cart', '[]')
+    sessionStorage.removeItem('cart_promo')
+    sessionStorage.removeItem('cart_discount')
+  }
+
   return {
     PROMOCODES,
     products,
@@ -148,6 +175,7 @@ export const useCartStore = defineStore('cartStore', () => {
     getSale,
     applyPromoCode,
     saleCost,
-    fetchProducts
+    fetchProducts,
+    clearCart
   }
 })

@@ -17,15 +17,19 @@
           <div :class="$style.order_prices">
             <div :class="$style.order_price_item">
               <span>Subtotal:</span>
-              <span>${{ order.total - order.delivery }}</span>
+              <span>${{ order.totalCost - order.deliveryCost }}</span>
+            </div>
+            <div :class="$style.order_price_item">
+              <span>Sale:</span>
+              <span>${{ order.saleCost }}</span>
             </div>
             <div :class="$style.order_price_item">
               <span>Delivery:</span>
-              <span>${{ order.delivery }}</span>
+              <span>${{ order.deliveryCost }}</span>
             </div>
             <div :class="$style.order_price_item">
               <span>Total:</span>
-              <span>${{ order.total }}</span>
+              <span>${{ order.totalCost }}</span>
             </div>
           </div>
         </div>
@@ -183,8 +187,8 @@ onMounted(async () => {
 }
 
 .order_prices {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 4px;
   text-align: right;
 }

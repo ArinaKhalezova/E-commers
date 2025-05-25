@@ -14,7 +14,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import ProductCarousel from './ProductCarousel.vue'
-// import { newArrivalsSlides, topSellingSlides } from '@/data/products'
 import ButtonLight from './ButtonLight.vue'
 
 const newArrivalsSlides = ref()

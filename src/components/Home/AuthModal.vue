@@ -174,6 +174,7 @@ const handleRegister = async () => {
 
     await authStore.register({
       email: registerForm.value.email,
+      phone: registerForm.value.phone,
       password: registerForm.value.password
     })
 

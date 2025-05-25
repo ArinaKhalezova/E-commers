@@ -20,8 +20,9 @@ export interface Order {
   id: string
   date: Date
   items: OrderItem[]
-  total: number
-  delivery: number
+  totalCost: number
+  saleCost: number
+  deliveryCost: number
   deliveryAddress?: DeliveryAddress
   recipient?: DeliveryRecipient
   paymentMethod?: string
@@ -53,6 +54,7 @@ export const useOrderStore = defineStore('orderStore', () => {
   const saveOrder = async (deliveryData: any) => {
     try {
       const newOrder: Order = {
+        ...deliveryData,
         id: generateOrderId(),
         date: new Date(),
         items: cartStore.products.map((product) => {
@@ -74,9 +76,9 @@ export const useOrderStore = defineStore('orderStore', () => {
             coverImage: variant?.coverImage || product.coverImage || product.product_img || ''
           }
         }),
-        total: cartStore.totalCostProducts,
-        delivery: cartStore.deliveryCostProducts,
-        ...deliveryData
+        totalCost: cartStore.totalCostProducts,
+        deliveryCost: cartStore.deliveryCostProducts,
+        saleCost: cartStore.saleCost
       }
 
       // Сохраняем заказ в общее хранилище
@@ -96,8 +98,7 @@ export const useOrderStore = defineStore('orderStore', () => {
       }
 
       // Очистка корзины
-      cartStore.products = []
-      localStorage.setItem('cart', '[]')
+      cartStore.clearCart()
 
       return newOrder
     } catch (error) {
