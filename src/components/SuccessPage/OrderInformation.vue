@@ -61,7 +61,7 @@
       <h2>
         Total cost:
         <span style="color: green; font-weight: 900">
-          {{ lastOrder ? `$${lastOrder.total}` : 'N/A' }}
+          {{ lastOrder ? `$${lastOrder.totalCost}` : 'N/A' }}
         </span>
       </h2>
     </div>
