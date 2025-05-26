@@ -26,41 +26,41 @@
         </div>
       </div>
       <div :class="$style.heading_img">
-        <img src="/src/assets/img/Preview.png" alt="" :class="$style.preview" />
+        <img src="/public/assets/images/Preview.png" alt="" :class="$style.preview" />
       </div>
     </div>
 
     <div :class="$style.brands">
       <img
-        src="/src/assets/img/versace.png"
+        src="/public/assets/images/versace.png"
         alt=""
         width="116.74"
         height="23.25"
         :class="$style.brand_one"
       />
       <img
-        src="/src/assets/img/zara.png"
+        src="/public/assets/images/zara.png"
         alt=""
         width="63.81"
         height="26.65"
         :class="$style.brand_two"
       />
       <img
-        src="/src/assets/img/gucci.png"
+        src="/public/assets/images/gucci.png"
         alt=""
         width="109.39"
         height="25.24"
         :class="$style.brand_three"
       />
       <img
-        src="/src/assets/img/prada.png"
+        src="/public/assets/images/prada.png"
         alt=""
         width="127"
         height="21"
         :class="$style.brand_four"
       />
       <img
-        src="/src/assets/img/calvin_klein.png"
+        src="/public/assets/images/calvin_klein.png"
         alt=""
         width="134.84"
         height="21.75"
@@ -194,7 +194,7 @@ onMounted(() => {
   }
 
   .preview {
-    width: 527px;
+    width: auto;
   }
 
   .heading_text h1 {

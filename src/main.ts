@@ -1,31 +1,46 @@
-import './assets/main.css';
-import './assets/base.css';
+import './assets/main.css'
+import './assets/base.css'
 
-import '@quasar/extras/material-icons/material-icons.css';
+import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/dist/quasar.css'
 
-import { createApp } from 'vue';
-import { createPinia } from 'pinia';
-import { Quasar, type QuasarPluginOptions } from 'quasar';
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import { Quasar, type QuasarPluginOptions } from 'quasar'
 
-import App from './App.vue';
-import router from './router';
-import VueScrollTo from 'vue-scrollto';
-import VueCookies from 'vue-cookies';
+import App from './App.vue'
+import router from './router/index'
+import VueScrollTo from 'vue-scrollto'
+import VueCookies from 'vue-cookies'
+import { useAuthStore } from '@/stores/auth'
 
-const app = createApp(App);
+const app = createApp(App)
 
 const quasarOptions: QuasarPluginOptions = {
-  plugins: {}, // import Quasar plugins and add here
-};
+  plugins: {}
+}
 
-app.use(createPinia());
-app.use(router);
+app.use(createPinia())
+app.use(router)
 
-app.use(Quasar, quasarOptions);
+app.use(Quasar, quasarOptions)
 
-app.use(VueScrollTo);
+app.use(VueScrollTo)
 
-app.use(VueCookies);
+app.use(VueCookies)
 
-app.mount('#app');
+const authStore = useAuthStore()
+authStore.initAuth()
+
+async function prepareApp() {
+  if (import.meta.env.MODE === 'development' || import.meta.env.MODE === 'test') {
+    const { worker } = await import('./mocks/browser')
+    return worker.start()
+  }
+
+  return Promise.resolve()
+}
+
+prepareApp().then(() => {
+  app.mount('#app')
+})

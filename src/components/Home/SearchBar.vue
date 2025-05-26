@@ -13,7 +13,7 @@
         :key="product.id"
         @click="resetInput"
       >
-        <router-link :to="`/productPage/${product.id}`">{{ product.title }}</router-link>
+        <router-link :to="`/product/${product.id}`">{{ product.title }}</router-link>
       </div>
       <div class="item error" v-if="input && !filteredList.length">
         <p>No results found!</p>
@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { products } from '@/data/products' // Убедитесь, что путь к файлу с массивом products правильный
+import { products } from '@/data/products'
 import { useRoute } from 'vue-router'
 
 const input = ref<string>('')
