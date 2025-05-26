@@ -92,7 +92,7 @@ const handleAccountClick = () => {
   margin: 24px 100px;
   background-color: var(--base-background-color);
   display: grid;
-  grid-template-columns: 1fr 3fr 4fr 0.5fr;
+  grid-template-columns: 1fr 4fr 3fr 0.5fr;
   align-items: center;
   column-gap: 40px;
   position: relative;

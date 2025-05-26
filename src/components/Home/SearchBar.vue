@@ -13,7 +13,7 @@
         :key="product.id"
         @click="resetInput"
       >
-        <router-link :to="`/productPage/${product.id}`">{{ product.title }}</router-link>
+        <router-link :to="`/product/${product.id}`">{{ product.title }}</router-link>
       </div>
       <div class="item error" v-if="input && !filteredList.length">
         <p>No results found!</p>

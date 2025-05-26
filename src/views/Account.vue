@@ -95,4 +95,10 @@ const handleLogout = () => {
 .account_content {
   padding: 0 24px;
 }
+
+@media (max-width: 1024px) {
+  .account_container {
+  padding: 0 24px;
+}
+}
 </style>

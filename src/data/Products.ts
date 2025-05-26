@@ -270,7 +270,7 @@ export const products = [
       }
     ]
   },
-  //так как далее не прописаны coverImage, то фотки не отображаются в большой карточке
+
   {
     id: 7,
     product_img: product7,
@@ -288,6 +288,7 @@ export const products = [
       {
         variants: [
           {
+            coverImage: product7,
             color: 'orange',
             sku: 'SHORTS-ORANGE',
             sizes: [
@@ -296,6 +297,7 @@ export const products = [
             ]
           },
           {
+            coverImage: product7,
             color: 'lightBlue',
             sku: 'SHORTS-LIGHTBLUE',
             sizes: [{ size: 'medium', sku: 'SHORTS-LIGHTBLUE-M', availability: 'inStock' }]
@@ -321,11 +323,13 @@ export const products = [
       {
         variants: [
           {
+            coverImage: product8,
             color: 'purple',
             sku: 'JEANS-PURPLE',
             sizes: [{ size: 'large', sku: 'JEANS-PURPLE-L', availability: 'inStock' }]
           },
           {
+            coverImage: product8,
             color: 'yellow',
             sku: 'JEANS-YELLOW',
             sizes: [
@@ -380,11 +384,13 @@ export const products = [
       {
         variants: [
           {
+            coverImage: product9,
             color: 'green',
             sku: 'TSHIRT-GREEN',
             sizes: [{ size: 'medium', sku: 'TSHIRT-GREEN-M', availability: 'inStock' }]
           },
           {
+            coverImage: product9,
             color: 'red',
             sku: 'TSHIRT-RED',
             sizes: [
@@ -393,11 +399,13 @@ export const products = [
             ]
           },
           {
+            coverImage: product9,
             color: 'black',
             sku: 'TSHIRT-BLACK',
             sizes: [{ size: 'xlarge', sku: 'TSHIRT-BLACK-XL', availability: 'inStock' }]
           },
           {
+            coverImage: product9,
             color: 'lightBlue',
             sku: 'TSHIRT-LIGHTBLUE',
             sizes: [
@@ -409,6 +417,7 @@ export const products = [
       }
     ]
   },
+  //так как далее не прописаны coverImage, то фотки не отображаются в большой карточке
   {
     id: 10,
     product_img: product10,

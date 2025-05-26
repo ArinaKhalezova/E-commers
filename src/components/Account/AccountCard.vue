@@ -16,7 +16,7 @@
       <div :class="$style.user_card">
         <div :class="$style.card_header">
           <h2 :class="$style.card_title">
-            <q-icon name="person" size="sm" />
+            <!-- <q-icon name="person" size="sm" /> -->
             Profile Information
           </h2>
           <div :class="$style.actions">
@@ -33,7 +33,7 @@
               @click="saveChanges"
               label="Save Changes"
               :class="$style.save_btn"
-              icon="save"
+              rounded
               unelevated
             />
           </div>
@@ -45,6 +45,7 @@
             :disable="!editMode"
             color="primary"
             label="Surname"
+            rounded
             outlined
             :class="$style.form_input"
           />
@@ -53,6 +54,7 @@
             :disable="!editMode"
             color="primary"
             label="Name"
+            rounded
             outlined
             :class="$style.form_input"
           />
@@ -61,6 +63,7 @@
             :disable="!editMode"
             color="primary"
             label="Phone"
+            rounded
             outlined
             :class="$style.form_input"
           />
@@ -69,6 +72,7 @@
             :disable="!editMode"
             color="primary"
             label="Email"
+            rounded
             outlined
             :class="$style.form_input"
           />
@@ -76,7 +80,7 @@
 
         <div :class="$style.section_header">
           <h3 :class="$style.section_title">
-            <q-icon name="home" size="sm" />
+            <!-- <q-icon name="home" size="sm" /> -->
             Addresses
           </h3>
           <q-btn
@@ -86,6 +90,7 @@
             @click="addAddress"
             :class="$style.add_btn"
             icon="add"
+            rounded
             outline
           />
         </div>
@@ -115,6 +120,7 @@
                 :disable="!editMode"
                 color="primary"
                 label="Street"
+                rounded
                 outlined
                 :class="$style.address_input"
               />
@@ -125,6 +131,7 @@
                   color="primary"
                   label="Apartment"
                   type="number"
+                  rounded
                   outlined
                   :class="$style.address_input_small"
                 />
@@ -134,6 +141,7 @@
                   color="primary"
                   label="Entrance"
                   type="number"
+                  rounded
                   outlined
                   :class="$style.address_input_small"
                 />
@@ -143,6 +151,7 @@
                   color="primary"
                   label="Floor"
                   type="number"
+                  rounded
                   outlined
                   :class="$style.address_input_small"
                 />
