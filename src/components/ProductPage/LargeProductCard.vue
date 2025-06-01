@@ -54,7 +54,7 @@
             <p>{{ product?.rating + '/5' }}</p>
           </div>
           <h2>{{ '$' + product?.cost }}</h2>
-          <p>{{ product?.description}}</p>
+          <p>{{ product?.description }}</p>
         </div>
         <div :class="$style.product_color">
           <p>Select color</p>
@@ -96,9 +96,6 @@
         </div>
       </div>
     </div>
-    <!-- <div v-else>
-      <p>Loading...</p>
-    </div> -->
   </div>
 </template>
 
@@ -311,7 +308,8 @@ const updateProductQuantity = (quantity: number) => {
   }
 }
 
-onMounted(async () => {
+// Замените getProduct на обычный метод
+const fetchProduct = async () => {
   try {
     console.log('Fetching product with ID:', productId.value)
     const productsResponce = await fetch(`/api/productPage/${productId.value}`)
@@ -344,6 +342,14 @@ onMounted(async () => {
   } catch (error) {
     console.error('Error fetching products:', error)
   }
+}
+
+onMounted(() => {
+  fetchProduct()
+})
+
+watch(productId, () => {
+  fetchProduct()
 })
 </script>
 

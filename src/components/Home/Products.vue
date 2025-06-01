@@ -23,14 +23,14 @@ const loading = ref(true)
 onMounted(async () => {
   try {
     loading.value = true
-    const newArrivalsSlidesResponse = await fetch('http://localhost:5173/api/newArrivalsSlides')
+    const newArrivalsSlidesResponse = await fetch('/api/newArrivalsSlides')
     if (!newArrivalsSlidesResponse.ok) {
       throw new Error('Failed to fetch products')
     }
     const newArrivalsSlidesData = await newArrivalsSlidesResponse.json()
     newArrivalsSlides.value = newArrivalsSlidesData.newArrivalsSlides
 
-    const topSellingSlidesResponse = await fetch('http://localhost:5173/api/topSellingSlides')
+    const topSellingSlidesResponse = await fetch('/api/topSellingSlides')
     if (!topSellingSlidesResponse.ok) {
       throw new Error('Failed to fetch products')
     }

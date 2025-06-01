@@ -47,19 +47,19 @@ export const reviewsData: TCardReview[] = [
     review: [
       {
         id: 1,
-        title: 'Michael D.',
+        title: 'Olivia P.',
         text: '"Shop.co is range of casual and formal wear is impressive. Whether I am looking for something to wear to the office or a night out, they have it all."',
         ratingModel: 4
       },
       {
         id: 2,
-        title: 'Olivia P.',
+        title: 'Daniel S.',
         text: '"The customer service at Shop.co is top-notch. They were very helpful when I had a question about sizing, and the return process is super easy."',
         ratingModel: 5
       },
       {
         id: 3,
-        title: 'Sarah M.',
+        title: 'James T.',
         text: '"I`m blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I`ve bought has exceeded my expectations.”',
         ratingModel: 2
       },
@@ -88,7 +88,7 @@ export const reviewsData: TCardReview[] = [
     review: [
       {
         id: 1,
-        title: 'Michael D.',
+        title: 'Daniel S.',
         text: '"Shop.co is range of casual and formal wear is impressive. Whether I am looking for something to wear to the office or a night out, they have it all."',
         ratingModel: 5
       },
@@ -129,13 +129,13 @@ export const reviewsData: TCardReview[] = [
     review: [
       {
         id: 1,
-        title: 'Michael D.',
+        title: 'Daniel S.',
         text: '"Shop.co is range of casual and formal wear is impressive. Whether I am looking for something to wear to the office or a night out, they have it all."',
         ratingModel: 4
       },
       {
         id: 2,
-        title: 'Olivia P.',
+        title: 'Ava M.',
         text: '"The customer service at Shop.co is top-notch. They were very helpful when I had a question about sizing, and the return process is super easy."',
         ratingModel: 4
       },

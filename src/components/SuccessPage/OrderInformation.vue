@@ -17,46 +17,26 @@
           <span style="color: red">tracking number</span>, as this page will be unavailable soon.
         </p>
       </div>
-      <div :class="$style.order_products">
-        <h3 style="font-size: 24px">Your order</h3>
-        <div v-for="item in lastOrder?.items" :key="item.sku" :class="$style.products_items">
-          <div :class="$style.products_img">
-            <img :src="getImageUrl(item.coverImage)" :alt="item.title" />
-          </div>
-          <div :class="$style.products_info">
-            <h2>{{ item.title }}</h2>
-            <p>Size: {{ item.size }}</p>
-            <p>Color: {{ item.color }}</p>
-            <p>Quantity: {{ item.quantity }}</p>
-            <p>Price: ${{ item.cost.toFixed(2) }}</p>
-          </div>
-        </div>
-      </div>
-      <div :class="$style.order_address">
-        <h2>Your adress</h2>
-        <div v-if="orderingStore.deliveryAddress" :class="$style.address_items">
-          <p>Street: {{ orderingStore.deliveryAddress.street }}</p>
-          <p>Apartament: {{ orderingStore.deliveryAddress.apartment }}</p>
-          <p>Entrance: {{ orderingStore.deliveryAddress.entrance }}</p>
-          <p>Floor: {{ orderingStore.deliveryAddress.floor }}</p>
-          <p>Comment: {{ orderingStore.deliveryAdditionalInfo?.comment }}</p>
-        </div>
-        <div v-else>
-          <p>No address saved yet.</p>
-        </div>
-      </div>
-      <div :class="$style.order_recipient">
-        <h2>Your details</h2>
-        <div v-if="orderingStore.deliveryRecipient" :class="$style.recipient_items">
-          <p>Surname: {{ orderingStore.deliveryRecipient.surname }}</p>
-          <p>Name: {{ orderingStore.deliveryRecipient.name }}</p>
-          <p>Phone: {{ orderingStore.deliveryRecipient.phone }}</p>
-          <p>Email: {{ orderingStore.deliveryRecipient.email }}</p>
-        </div>
-        <div v-else>
-          <p>No details saved yet.</p>
-        </div>
-      </div>
+
+      <OrderCard
+        v-if="lastOrder?.items"
+        title="Your order"
+        :items="lastOrder.items"
+        type="products"
+      />
+
+      <OrderCard
+        v-if="orderingStore.deliveryAddress"
+        title="Your address"
+        :items="[orderingStore.deliveryAddress]"
+      />
+
+      <OrderCard
+        v-if="orderingStore.deliveryRecipient"
+        title="Your details"
+        :items="[orderingStore.deliveryRecipient]"
+      />
+
       <br />
       <h2>
         Total cost:
@@ -73,6 +53,7 @@ import { useCartStore } from '@/stores/cartStore'
 import { useOrderingStore } from '@/stores/orderingStore'
 import { useOrderStore } from '@/stores/orderStore'
 import { computed, onMounted } from 'vue'
+import OrderCard from './Card.vue'
 
 const cartStore = useCartStore()
 const orderingStore = useOrderingStore()
@@ -82,12 +63,6 @@ const lastOrder = computed(() => {
   const orders = orderStore.getOrders()
   return orders.length > 0 ? orders[orders.length - 1] : null
 })
-
-const getImageUrl = (path?: string) => {
-  if (!path) return ''
-  if (path.startsWith('http') || path.startsWith('/')) return path
-  return path
-}
 
 onMounted(async () => {
   await orderStore.fetchOrders()

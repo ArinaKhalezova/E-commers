@@ -219,9 +219,6 @@ const handleLogout = () => {
 </script>
 
 <style module>
-.account_container {
-}
-
 .account_header {
   display: flex;
   justify-content: space-between;

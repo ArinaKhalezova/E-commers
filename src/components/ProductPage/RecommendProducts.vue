@@ -13,7 +13,7 @@ const newArrivalsSlides = ref()
 
 onMounted(async () => {
   try {
-    const newArrivalsSlidesResponse = await fetch('http://localhost:5173/api/newArrivalsSlides')
+    const newArrivalsSlidesResponse = await fetch('/api/newArrivalsSlides')
     if (!newArrivalsSlidesResponse.ok) {
       throw new Error('Failed to fetch new arrivals data')
     }
